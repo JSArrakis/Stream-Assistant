@@ -1,0 +1,47 @@
+[
+    {
+        "Title": "Back To The Future",
+        "LoadTitle": "backtothefuture",
+        "Alias": "backtothefuture",
+        "IMDB": "https://www.imdb.com/title/tt0214341/",
+        "Tags": [
+            "scifi",
+            "80s",
+            "comedy"
+        ],
+        "MoviePath": "J:\\Movies\\Back.To.The.Future.Trilogy.1080p.H264.AC3.DD5.1.Will1869\\Back.to.the.Future.1985.1080p.BluRay.H264.AC3.DD5.1.mp4",
+        "Duration": 0,
+        "Collection": "Back To The Future",
+        "CollectionSequence": 1
+    },
+    {
+        "Title": "Back To The Future II",
+        "LoadTitle": "backtothefuture2",
+        "Alias": "backtothefuture2",
+        "IMDB": "https://www.imdb.com/title/tt0096874/",
+        "Tags": [
+            "scifi",
+            "80s",
+            "comedy"
+        ],
+        "MoviePath": "J:\\Movies\\Back.To.The.Future.Trilogy.1080p.H264.AC3.DD5.1.Will1869\\Back.To.The.Future.Part.II.1989.1080p.BluRay.H264.AC3.DD5.1.mp4",
+        "Duration": 0,
+        "Collection": "Back To The Future",
+        "CollectionSequence": 2
+    },
+    {
+        "Title": "Labyrinth",
+        "LoadTitle": "labyrinth",
+        "Alias": "labyrinth",
+        "IMDB": "https://www.imdb.com/title/tt0091369/",
+        "Tags": [
+            "fantasy",
+            "80s",
+            "adventure"
+        ],
+        "MoviePath": "J:\\Movies\\Labyrinth 1986 30th Anniversary Edition x264 D3FiL3R (bd50)\\Labyrinth 1986 30th Anniversary Edition TrueHD Atmos 1080p BluRay x264-D3FiL3R.mkv",
+        "Duration": 0,
+        "Collection": "",
+        "CollectionSequence": 0
+    }
+]

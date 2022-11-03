@@ -1,0 +1,11 @@
+{
+	"VLCLocation": "C:\\Program Files\\VideoLAN\\VLC\\",
+	"DestinationFolder": "C:\\Users\\Main\\Projects\\Stream\\ConstructedStream\\",
+	"TestFolder": "C:\\Users\\Main\\Projects\\Stream\\Test\\",
+	"PlaylistName": "Playlist",
+	"Commercials": {
+		"nineties": "C:\\Users\\Main\\Desktop\\Commercials\\90sCommercials\\",
+		"aughts": "C:\\Users\\Main\\Desktop\\Commercials\\2000sCommercials\\"
+	},
+	"CommercialDuration": 300
+}

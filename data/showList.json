@@ -1,0 +1,553 @@
+[
+	{
+		"Title": "Mobile Suit Gundam Wing",
+		"LoadTitle": "gundamwing",
+		"Alias": "gundamw",
+		"IMDB": "https://www.imdb.com/title/tt0159193/",
+		"Tags": [
+			"anime",
+			"action",
+			"mecha",
+			"scifi",
+			"military",
+			"toonami",
+			"toonami2k"
+		],
+		"CollectionBumpers": [
+			{
+				"Title": "Toonami2k",
+				"Start": "",
+				"End": ""
+			}
+		],
+		"EpisodeCount": 5,
+		"Episodes": [
+			{
+				"Season": 1,
+				"Episode": 1,
+				"EpisodeNumber": 1,
+				"EpisodePath": "I:\\tv\\[OZC] Mobile Suit Gundam Wing BD Box Complete Series [960 by 720]\\[OZC]Mobile Suit Gundam Wing Blu-ray Box E01 'The Shooting Star She Saw' [720p].mkv",
+				"EpisodeTitle": "The Shooting Star She Saw",
+				"Duration": 1439,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 2,
+				"EpisodeNumber": 2,
+				"EpisodePath": "I:\\tv\\[OZC] Mobile Suit Gundam Wing BD Box Complete Series [960 by 720]\\[OZC]Mobile Suit Gundam Wing Blu-ray Box E02 'The Gundam Deathscythe' [720p].mkv",
+				"EpisodeTitle": "The Gundam Deathscythe",
+				"Duration": 1439,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 3,
+				"EpisodeNumber": 3,
+				"EpisodePath": "I:\\tv\\[OZC] Mobile Suit Gundam Wing BD Box Complete Series [960 by 720]\\[OZC]Mobile Suit Gundam Wing Blu-ray Box E03 'Five Gundams Confirmed' [720p].mkv",
+				"EpisodeTitle": "Five Gundams Confirmed",
+				"Duration": 1439,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 4,
+				"EpisodeNumber": 4,
+				"EpisodePath": "I:\\tv\\[OZC] Mobile Suit Gundam Wing BD Box Complete Series [960 by 720]\\[OZC]Mobile Suit Gundam Wing Blu-ray Box E04 'The Victoria Nightmare' [720p].mkv",
+				"EpisodeTitle": "The Victoria Nightmare",
+				"Duration": 1439,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 5,
+				"EpisodeNumber": 5,
+				"EpisodePath": "I:\\tv\\[OZC] Mobile Suit Gundam Wing BD Box Complete Series [960 by 720]\\[OZC]Mobile Suit Gundam Wing Blu-ray Box E05 'Relena's Secret' [720p].mkv",
+				"EpisodeTitle": "Relena's Secret",
+				"Duration": 1440,
+				"EpisodeTags": []
+			}
+		]
+	},
+	{
+		"Title": "Batman The Animated Series",
+		"LoadTitle": "batmananimated",
+		"Alias": "batmanani",
+		"IMDB": "https://www.imdb.com/title/tt0103359/",
+		"Tags": [
+			"animated",
+			"action",
+			"noir",
+			"DC",
+			"Crime",
+			"Superhero",
+			"toonami",
+			"toonami2k"
+		],
+		"CollectionBumpers": [
+			{
+				"Title": "Toonami2k",
+				"Start": "",
+				"End": ""
+			}
+		],
+		"EpisodeCount": 5,
+		"Episodes": [
+			{
+				"Season": 1,
+				"Episode": 1,
+				"EpisodeNumber": 1,
+				"EpisodePath": "J:\\TV\\Batman.The.Complete.Animated.Series.DVDRip.XviD-OLLIE\\Batman.The.Complete.Animated.Series.Vol.1.DVDRip.XviD-OLLIE\\Batman.The.Animated.Series.01.On.Leather.Wings-OLLIE.avi",
+				"EpisodeTitle": "On Leather Wings",
+				"Duration": 1341,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 2,
+				"EpisodeNumber": 2,
+				"EpisodePath": "J:\\TV\\Batman.The.Complete.Animated.Series.DVDRip.XviD-OLLIE\\Batman.The.Complete.Animated.Series.Vol.1.DVDRip.XviD-OLLIE\\Batman.The.Animated.Series.02.Christmas.with.the.Joker-OLLIE.avi",
+				"EpisodeTitle": "Christmas with the Joker",
+				"Duration": 1342,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 3,
+				"EpisodeNumber": 3,
+				"EpisodePath": "J:\\TV\\Batman.The.Complete.Animated.Series.DVDRip.XviD-OLLIE\\Batman.The.Complete.Animated.Series.Vol.1.DVDRip.XviD-OLLIE\\Batman.The.Animated.Series.03.Nothing.to.Fear-OLLIE.avi",
+				"EpisodeTitle": "Nothing to Fear",
+				"Duration": 1345,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 4,
+				"EpisodeNumber": 4,
+				"EpisodePath": "J:\\TV\\Batman.The.Complete.Animated.Series.DVDRip.XviD-OLLIE\\Batman.The.Complete.Animated.Series.Vol.1.DVDRip.XviD-OLLIE\\Batman.The.Animated.Series.04.The.Last.Laugh-OLLIE.avi",
+				"EpisodeTitle": "The Last Laugh",
+				"Duration": 1338,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 5,
+				"EpisodeNumber": 5,
+				"EpisodePath": "J:\\TV\\Batman.The.Complete.Animated.Series.DVDRip.XviD-OLLIE\\Batman.The.Complete.Animated.Series.Vol.1.DVDRip.XviD-OLLIE\\Batman.The.Animated.Series.05.Pretty.Poison-OLLIE.avi",
+				"EpisodeTitle": "Pretty Poison",
+				"Duration": 1340,
+				"EpisodeTags": []
+			}
+		]
+	},
+	{
+		"Title": "Tenchi Muyo!",
+		"LoadTitle": "tenchimuyo",
+		"Alias": "tenchi",
+		"IMDB": "https://www.imdb.com/title/tt0105559/",
+		"Tags": [
+			"anime",
+			"action",
+			"comedy",
+			"harem",
+			"spaceopera",
+			"toonami",
+			"toonami2k"
+		],
+		"CollectionBumpers": [
+			{
+				"Title": "Toonami2k",
+				"Start": "",
+				"End": ""
+			}
+		],
+		"EpisodeCount": 5,
+		"Episodes": [
+			{
+				"Season": 1,
+				"Episode": 1,
+				"EpisodeNumber": 1,
+				"EpisodePath": "I:\\tv\\Tenchi Muyo! Ryo-Ohki [Dual Audio]\\[Anime-Takeover]_Tenchi_Muyo!_Ep01_(176F437E).ogm",
+				"EpisodeTitle": "Ryoko Resurrected",
+				"Duration": 1729,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 2,
+				"EpisodeNumber": 2,
+				"EpisodePath": "I:\\tv\\Tenchi Muyo! Ryo-Ohki [Dual Audio]\\[Anime-Takeover]_Tenchi_Muyo!_Ep02_(B16F818C).ogm",
+				"EpisodeTitle": "Here Comes Ayeka!",
+				"Duration": 1784,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 3,
+				"EpisodeNumber": 3,
+				"EpisodePath": "I:\\tv\\Tenchi Muyo! Ryo-Ohki [Dual Audio]\\[Anime-Takeover]_Tenchi_Muyo!_Ep03_(91CB5090).ogm",
+				"EpisodeTitle": "Hello, Ryo-Ohki!",
+				"Duration": 1779,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 4,
+				"EpisodeNumber": 4,
+				"EpisodePath": "I:\\tv\\Tenchi Muyo! Ryo-Ohki [Dual Audio]\\[Anime-Takeover]_Tenchi_Muyo!_Ep04_(722B4C97).ogm",
+				"EpisodeTitle": "Mihoshi Falls to the Land of Stars",
+				"Duration": 1778,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 5,
+				"EpisodeNumber": 5,
+				"EpisodePath": "I:\\tv\\Tenchi Muyo! Ryo-Ohki [Dual Audio]\\[Anime-Takeover]_Tenchi_Muyo!_Ep05_(39F44E80).ogm",
+				"EpisodeTitle": "Kagato Attacks!",
+				"Duration": 1778,
+				"EpisodeTags": []
+			}
+		]
+	},
+	{
+		"Title": "Dragonball Z",
+		"LoadTitle": "dragonballz",
+		"Alias": "dbz",
+		"IMDB": "https://www.imdb.com/title/tt0214341/",
+		"Tags": [
+			"anime",
+			"action",
+			"adventure",
+			"martialarts",
+			"toonami",
+			"toonami2k"
+		],
+		"CollectionBumpers": [
+			{
+				"Title": "Toonami2k",
+				"Start": "",
+				"End": ""
+			}
+		],
+		"EpisodeCount": 5,
+		"Episodes": [
+			{
+				"Season": 1,
+				"Episode": 1,
+				"EpisodeNumber": 1,
+				"EpisodePath": "I:\\tv\\Dragonball Z Seasons 1-9 Remastered\\Dragonball Z Remastered Season 1\\DBZ - 001 - The New Threat.mkv",
+				"EpisodeTitle": "The New Threat",
+				"Duration": 1244,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 2,
+				"EpisodeNumber": 2,
+				"EpisodePath": "I:\\tv\\Dragonball Z Seasons 1-9 Remastered\\Dragonball Z Remastered Season 1\\DBZ - 002 - Reunions.mkv",
+				"EpisodeTitle": "Reunions",
+				"Duration": 1165,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 3,
+				"EpisodeNumber": 3,
+				"EpisodePath": "I:\\tv\\Dragonball Z Seasons 1-9 Remastered\\Dragonball Z Remastered Season 1\\DBZ - 003 - Unlikely Alliance.mkv",
+				"EpisodeTitle": "Unlikely Alliance",
+				"Duration": 1188,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 4,
+				"EpisodeNumber": 4,
+				"EpisodePath": "I:\\tv\\Dragonball Z Seasons 1-9 Remastered\\Dragonball Z Remastered Season 1\\DBZ - 004 - Piccolo's Plan.mkv",
+				"EpisodeTitle": "Piccolo's Plan",
+				"Duration": 1166,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 5,
+				"EpisodeNumber": 5,
+				"EpisodePath": "I:\\tv\\Dragonball Z Seasons 1-9 Remastered\\Dragonball Z Remastered Season 1\\DBZ - 005 - Gohan's Rage.mkv",
+				"EpisodeTitle": "Gohan's Rage",
+				"Duration": 1187,
+				"EpisodeTags": []
+			}
+		]
+	},
+	{
+		"Title": "Sailor Moon",
+		"LoadTitle": "sailormoon",
+		"Alias": "smoon",
+		"IMDB": "https://www.imdb.com/title/tt0103369/",
+		"Tags": [
+			"anime",
+			"magicalgirl",
+			"drama",
+			"romance",
+			"toonami",
+			"toonami2k"
+		],
+		"CollectionBumpers": [
+			{
+				"Title": "Toonami2k",
+				"Start": "",
+				"End": ""
+			}
+		],
+		"EpisodeCount": 5,
+		"Episodes": [
+			{
+				"Season": 1,
+				"Episode": 1,
+				"EpisodeNumber": 1,
+				"EpisodePath": "I:\\tv\\Sailor Moon -jlw\\Sailor Moon\\Pretty Guardian Sailor Moon - 1x01 - I'm Sailor Moon.mkv",
+				"EpisodeTitle": "I'm Sailor Moon",
+				"Duration": 1448,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 2,
+				"EpisodeNumber": 2,
+				"EpisodePath": "I:\\tv\\Sailor Moon -jlw\\Sailor Moon\\Pretty Guardian Sailor Moon - 1x02 - Ami-chan Joins Up.mkv",
+				"EpisodeTitle": "Ami-chan Joins Up",
+				"Duration": 1449,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 3,
+				"EpisodeNumber": 3,
+				"EpisodePath": "I:\\tv\\Sailor Moon -jlw\\Sailor Moon\\Pretty Guardian Sailor Moon - 1x03 - The Third Senshi is Rei-chan the Priestess.mkv",
+				"EpisodeTitle": "The Third Senshi is Rei-chan the Priestess",
+				"Duration": 1448,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 4,
+				"EpisodeNumber": 4,
+				"EpisodePath": "I:\\tv\\Sailor Moon -jlw\\Sailor Moon\\Pretty Guardian Sailor Moon - 1x04 - Infiltrate the Party!.mkv",
+				"EpisodeTitle": "Infiltrate the Party!",
+				"Duration": 1449,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 5,
+				"EpisodeNumber": 5,
+				"EpisodePath": "I:\\tv\\Sailor Moon -jlw\\Sailor Moon\\Pretty Guardian Sailor Moon - 1x05 - Is Usagi-chan a Real Friend.mkv",
+				"EpisodeTitle": "Is Usagi-chan a Real Friend",
+				"Duration": 1447,
+				"EpisodeTags": []
+			}
+		]
+	},
+	{
+		"Title": "Reboot",
+		"LoadTitle": "reboot",
+		"Alias": "reboot",
+		"IMDB": "https://www.imdb.com/title/tt0103369/",
+		"Tags": [
+			"cgi",
+			"action",
+			"adventure",
+			"toonami",
+			"toonami2k"
+		],
+		"CollectionBumpers": [
+			{
+				"Title": "Toonami2k",
+				"Start": "",
+				"End": ""
+			}
+		],
+		"EpisodeCount": 5,
+		"Episodes": [
+			{
+				"Season": 1,
+				"Episode": 1,
+				"EpisodeNumber": 1,
+				"EpisodePath": "J:\\TV1\\Reboot All 4 Seasons(fierceone)\\ReBoot Season 1 HD TV Complete\\Reboot 1x01 The Tearing.avi",
+				"EpisodeTitle": "The Tearing",
+				"Duration": 1353,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 2,
+				"EpisodeNumber": 2,
+				"EpisodePath": "J:\\TV1\\Reboot All 4 Seasons(fierceone)\\ReBoot Season 1 HD TV Complete\\Reboot 1x02 Racing the Clock.avi",
+				"EpisodeTitle": "Racing the Clock",
+				"Duration": 1355,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 3,
+				"EpisodeNumber": 3,
+				"EpisodePath": "J:\\TV1\\Reboot All 4 Seasons(fierceone)\\ReBoot Season 1 HD TV Complete\\Reboot 1x03 Quick and the Fed.avi",
+				"EpisodeTitle": "Quick and the Fed",
+				"Duration": 1340,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 4,
+				"EpisodeNumber": 4,
+				"EpisodePath": "J:\\TV1\\Reboot All 4 Seasons(fierceone)\\ReBoot Season 1 HD TV Complete\\Reboot 1x04 Medusa Bug.avi",
+				"EpisodeTitle": "Medusa Bug",
+				"Duration": 1354,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 5,
+				"EpisodeNumber": 5,
+				"EpisodePath": "J:\\TV1\\Reboot All 4 Seasons(fierceone)\\ReBoot Season 1 HD TV Complete\\Reboot 1x05 In the Belly of the Beast.avi",
+				"EpisodeTitle": "In the Belly of the Beast",
+				"Duration": 1353,
+				"EpisodeTags": []
+			}
+		]
+	},
+	{
+		"Title": "Doug",
+		"LoadTitle": "doug",
+		"Alias": "doug",
+		"IMDB": "https://www.imdb.com/title/tt0101084/",
+		"Tags": [
+			"animated",
+			"morning",
+			"nickelodeon",
+			"nicktoons"
+		],
+		"CollectionBumpers": [
+			{
+				"Title": "Saturday Morning",
+				"Start": "",
+				"End": ""
+			}
+		],
+		"EpisodeCount": 5,
+		"Episodes": [
+			{
+				"Season": 1,
+				"Episode": 1,
+				"EpisodeNumber": 1,
+				"EpisodePath": "I:\\tv\\Doug.1991.S01-S02-S03-S04\\S01\\0101 Doug Bags a Neematoad.mkv",
+				"EpisodeTitle": "Doug Bags a Neematoad",
+				"Duration": 1412,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 2,
+				"EpisodeNumber": 2,
+				"EpisodePath": "I:\\tv\\Doug.1991.S01-S02-S03-S04\\S01\\0102 Doug Can't Dance.mkv",
+				"EpisodeTitle": "Doug Can't Dance",
+				"Duration": 659,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 3,
+				"EpisodeNumber": 3,
+				"EpisodePath": "I:\\tv\\Doug.1991.S01-S02-S03-S04\\S01\\0103 Doug Gets Busted.mkv",
+				"EpisodeTitle": "Doug Gets Busted",
+				"Duration": 706,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 4,
+				"EpisodeNumber": 4,
+				"EpisodePath": "I:\\tv\\Doug.1991.S01-S02-S03-S04\\S01\\0104 Doug's Dog Date.mkv",
+				"EpisodeTitle": "Doug's Dog Date",
+				"Duration": 663,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 5,
+				"EpisodeNumber": 5,
+				"EpisodePath": "I:\\tv\\Doug.1991.S01-S02-S03-S04\\S01\\0105 Doug's Big Nose.mkv",
+				"EpisodeTitle": "Doug's Big Nose",
+				"Duration": 705,
+				"EpisodeTags": []
+			}
+		]
+	},
+	{
+		"Title": "Rugrats",
+		"LoadTitle": "rugrats",
+		"Alias": "rugrats",
+		"IMDB": "https://www.imdb.com/title/tt0101188/",
+		"Tags": [
+			"animated",
+			"morning",
+			"nickelodeon",
+			"nicktoons"
+		],
+		"CollectionBumpers": [
+			{
+				"Title": "Saturday Morning",
+				"Start": "",
+				"End": ""
+			}
+		],
+		"EpisodeCount": 5,
+		"Episodes": [
+			{
+				"Season": 1,
+				"Episode": 1,
+				"EpisodeNumber": 1,
+				"EpisodePath": "I:\\tv\\Rugrats Complete 480 WEB-DL\\Rugrats.S01.480p.WEB-DL.AAC2.0.H.264-SA89\\Rugrats.S01E01.Tommy's.First.Birthday.480p.WEB-DL.AAC2.0.H.264-SA89.mkv",
+				"EpisodeTitle": "Tommy's First Birthday",
+				"Duration": 1402,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 2,
+				"EpisodeNumber": 2,
+				"EpisodePath": "I:\\tv\\Rugrats Complete 480 WEB-DL\\Rugrats.S01.480p.WEB-DL.AAC2.0.H.264-SA89\\Rugrats.S01E02.Barbeque.-.Waiter.There's.a.Baby.in.My.Soup.480p.WEB-DL.AAC2.0.H.264-SA89.mkv",
+				"EpisodeTitle": "Barbeque - Waiter There's a Baby in my Soup",
+				"Duration": 1334,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 3,
+				"EpisodeNumber": 3,
+				"EpisodePath": "I:\\tv\\Rugrats Complete 480 WEB-DL\\Rugrats.S01.480p.WEB-DL.AAC2.0.H.264-SA89\\Rugrats.S01E03.At.the.Movies.-.Slumber.Party.480p.WEB-DL.AAC2.0.H.264-SA89.mkv",
+				"EpisodeTitle": "At the Movies - Slumber Party",
+				"Duration": 1364,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 4,
+				"EpisodeNumber": 4,
+				"EpisodePath": "I:\\tv\\Rugrats Complete 480 WEB-DL\\Rugrats.S01.480p.WEB-DL.AAC2.0.H.264-SA89\\Rugrats.S01E04.Baby.Commercial.-.Little.Dude.480p.WEB-DL.AAC2.0.H.264-SA89.mkv",
+				"EpisodeTitle": "Baby Commercial - Little Dude",
+				"Duration": 1376,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 5,
+				"EpisodeNumber": 5,
+				"EpisodePath": "I:\\tv\\Rugrats Complete 480 WEB-DL\\Rugrats.S01.480p.WEB-DL.AAC2.0.H.264-SA89\\Rugrats.S01E05.Beauty.Contest.-.Baseball.480p.WEB-DL.AAC2.0.H.264-SA89.mkv",
+				"EpisodeTitle": "Beauty Contest - Baseball",
+				"Duration": 1363,
+				"EpisodeTags": []
+			}
+		]
+	}
+]

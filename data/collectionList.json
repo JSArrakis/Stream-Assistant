@@ -1,0 +1,120 @@
+[
+    {
+        "Title": "Toonami2k",
+        "Duration": 10800,
+        "StartBumper": {
+            "Duration": 60,
+            "Path": "C:\\Users\\Main\\Desktop\\Bumpers\\Toonami - 2000 Opening (TOM 1).mp4"
+        },
+        "EndBumper": {
+            "Duration": 8,
+            "Path": "C:\\Users\\Main\\Desktop\\Bumpers\\Later-Tom1-hq.m4v"
+        },
+        "Commercials": "C:\\Users\\Main\\Desktop\\Commercials\\2000sCommercials\\",
+        "Shows": [
+            {
+                "LoadTitle": "sailormoon",
+                "Sequence": 1,
+                "Subsequence": 0,
+                "DurationLimit": 30,
+                "BumperStart": [
+                    {
+                        "Duration": 30,
+                        "Path": "C:\\Users\\Main\\Desktop\\Bumpers\\SailorMoon-Tom1-Intro-v2.mp4"
+                    }
+                ],
+                "BumperEnd": [
+                    {
+                        "Duration": 9,
+                        "Path": "C:\\Users\\Main\\Desktop\\Bumpers\\SailorMoontoReboot-Tom1-Transition.m4v"
+                    }
+                ]
+            },
+            {
+                "LoadTitle": "reboot",
+                "Sequence": 2,
+                "Subsequence": 0,
+                "DurationLimit": 30,
+                "BumperStart": [
+                    {
+                        "Duration": 30,
+                        "Path": "C:\\Users\\Main\\Desktop\\Bumpers\\Reboot-Tom1-Intro.mp4"
+                    }
+                ],
+                "BumperEnd": [
+                    {
+                        "Duration": 24,
+                        "Path": "C:\\Users\\Main\\Desktop\\Bumpers\\ReboottoDBZ-Tom1-Transition.mp4"
+                    }
+                ]
+            },
+            {
+                "LoadTitle": "dragonballz",
+                "Sequence": 3,
+                "Subsequence": 0,
+                "DurationLimit": 30,
+                "BumperStart": [
+                    {
+                        "Duration": 30,
+                        "Path": "C:\\Users\\Main\\Desktop\\Bumpers\\DBZ-Tom1-Intro.mp4"
+                    }
+                ],
+                "BumperEnd": [
+                    {
+                        "Duration": 9,
+                        "Path": "C:\\Users\\Main\\Desktop\\Bumpers\\DBZtoGundam-Tom1-Transition.mp4"
+                    }
+                ]
+            },
+            {
+                "LoadTitle": "gundamwing",
+                "Sequence": 4,
+                "Subsequence": 0,
+                "DurationLimit": 30,
+                "BumperStart": [
+                    {
+                        "Duration": 30,
+                        "Path": "C:\\Users\\Main\\Desktop\\Bumpers\\GundamWing-Tom1-Intro.mp4"
+                    }
+                ],
+                "BumperEnd": [
+                    {
+                        "Duration": 9,
+                        "Path": "C:\\Users\\Main\\Desktop\\Bumpers\\GundamtoTenchi-Tom1-Transition.mp4"
+                    }
+                ]
+            },
+            {
+                "LoadTitle": "tenchimuyo",
+                "Sequence": 5,
+                "Subsequence": 1,
+                "DurationLimit": 30,
+                "BumperStart": [
+                    {
+                        "Duration": 30,
+                        "Path": "C:\\Users\\Main\\Desktop\\Bumpers\\TenchiMuyo-Tom1-Intro.mp4"
+                    }
+                ],
+                "BumperEnd": [
+                    {
+                        "Duration": 8,
+                        "Path": "C:\\Users\\Main\\Desktop\\Bumpers\\TenchitoBatman-Tom1-Transition-v2.mp4"
+                    }
+                ]
+            },
+            {
+                "LoadTitle": "batmananimated",
+                "Sequence": 6,
+                "Subsequence": 0,
+                "DurationLimit": 30,
+                "BumperStart": [
+                    {
+                        "Duration": 30,
+                        "Path": "C:\\Users\\Main\\Desktop\\Bumpers\\Batman-Tom1-Intro.mp4"
+                    }
+                ],
+                "BumperEnd": []
+            }
+        ]
+    }
+]
