@@ -10,26 +10,27 @@ const main = async () => {
 	//Create Commandline Options
 	var options = saCommander.parseCommandLineArgs();
 	let playlistFileName = config.PlaylistName;
-	let destinationDirectory = options.test ? config.TestFolder : config.DestinationFolder; //Directory in which to place all files created by Stream Assistant 
+	let destinationDirectory = options.test ? config.TestFolder : config.DestinationFolder; //Directory in which to 
+	//place all files created by Stream Assistant 
 
 	//If result comes back false, do nothing, otherwise proceed.
 	if (await dirMan.manageDestinationDirectory(config, destinationDirectory, options)) {
 
 		//TODO: Create progression option for non collection block shows
-		//TODO: Optional: I need to know what era the playlist shows represent (based on cross section of metadata stored on each show object)
-		//TODO: Optional: I need to know the weight of number of episodes of each series for proper number of episodes per stream (metadata makes this easier)
+		//TODO: Optional: I need to know what era the playlist shows represent (based on cross section of metadata 
+		//stored on each show object)
+		//TODO: Optional: I need to know the weight of number of episodes of each series for proper number of 
+		//episodes per stream(metadata makes this easier)
 		let stream = streamConstructor.constructStream(config, destinationDirectory, options);
 
 		dirMan.createStreamFile(destinationDirectory, playlistFileName, stream);
 
-		//TODO: Create output text (possibly in file) ready to copy and paste into Discord for easy stream announcements
+		//TODO: Create output text (possibly in file) ready to copy and paste into Discord for easy stream 
+		//announcements
 
 		saCommander.executeStream(config, destinationDirectory, playlistFileName);
 
-		dirMan.createProgressionFile(destinationDirectory, progression); await fs.promises.writeFile(destinationDirectory + 'progression.json', JSON.stringify(progression), (err) => {
-			if (err) throw err;
-			console.log('Progression File was created successfully.');
-		});
+		dirMan.createProgressionFile(destinationDirectory, progression);
 
 		if (options.test) {
 			console.log("Hope you meant to have testing enabled. Womp womp.");
