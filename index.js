@@ -1,5 +1,4 @@
 'use strict';
-const { dir } = require("console");
 const fs = require("fs");
 const config = require("./config.json");
 const dirMan = require("./lib/directoryManager.js");
@@ -29,8 +28,6 @@ const main = async () => {
 		//announcements
 
 		saCommander.executeStream(config, destinationDirectory, playlistFileName);
-
-		dirMan.createProgressionFile(destinationDirectory, progression);
 
 		if (options.test) {
 			console.log("Hope you meant to have testing enabled. Womp womp.");
