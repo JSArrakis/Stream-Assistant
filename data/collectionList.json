@@ -11,6 +11,11 @@
             "Path": "C:\\Users\\Main\\Desktop\\Bumpers\\Later-Tom1-hq.m4v"
         },
         "Commercials": "C:\\Users\\Main\\Desktop\\Commercials\\2000sCommercials\\",
+        "Promos": "C:\\Users\\Main\\Desktop\\Bumpers\\Toonami\\",
+        "DefaultPromo": {
+            "Path": "C:\\Users\\Main\\Desktop\\Bumpers\\Toonami\\15\\Default.mp4",
+            "Duration": 15
+        },
         "Shows": [
             {
                 "LoadTitle": "sailormoon",

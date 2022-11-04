@@ -7,5 +7,9 @@
 		"nineties": "C:\\Users\\Main\\Desktop\\Commercials\\90sCommercials\\",
 		"aughts": "C:\\Users\\Main\\Desktop\\Commercials\\2000sCommercials\\"
 	},
-	"CommercialDuration": 300
+	"CommercialDuration": 300,
+	"StreamPromo": {
+		"Path": "",
+		"Duration": 0
+	}
 }
