@@ -21,7 +21,7 @@
                 "LoadTitle": "sailormoon",
                 "Sequence": 1,
                 "Subsequence": 0,
-                "DurationLimit": 30,
+                "DurationLimit": 1800,
                 "BumperStart": [
                     {
                         "Duration": 30,
@@ -39,7 +39,7 @@
                 "LoadTitle": "reboot",
                 "Sequence": 2,
                 "Subsequence": 0,
-                "DurationLimit": 30,
+                "DurationLimit": 1800,
                 "BumperStart": [
                     {
                         "Duration": 30,
@@ -57,7 +57,7 @@
                 "LoadTitle": "dragonballz",
                 "Sequence": 3,
                 "Subsequence": 0,
-                "DurationLimit": 30,
+                "DurationLimit": 1800,
                 "BumperStart": [
                     {
                         "Duration": 30,
@@ -75,7 +75,7 @@
                 "LoadTitle": "gundamwing",
                 "Sequence": 4,
                 "Subsequence": 0,
-                "DurationLimit": 30,
+                "DurationLimit": 1800,
                 "BumperStart": [
                     {
                         "Duration": 30,
@@ -93,7 +93,7 @@
                 "LoadTitle": "tenchimuyo",
                 "Sequence": 5,
                 "Subsequence": 1,
-                "DurationLimit": 30,
+                "DurationLimit": 1800,
                 "BumperStart": [
                     {
                         "Duration": 30,
@@ -111,7 +111,7 @@
                 "LoadTitle": "batmananimated",
                 "Sequence": 6,
                 "Subsequence": 0,
-                "DurationLimit": 30,
+                "DurationLimit": 1800,
                 "BumperStart": [
                     {
                         "Duration": 30,
