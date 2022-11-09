@@ -11,6 +11,7 @@
         ],
         "MoviePath": "J:\\Movies\\Back.To.The.Future.Trilogy.1080p.H264.AC3.DD5.1.Will1869\\Back.to.the.Future.1985.1080p.BluRay.H264.AC3.DD5.1.mp4",
         "Duration": 0,
+        "Duration Limit": 0,
         "Collection": "Back To The Future",
         "CollectionSequence": 1
     },
@@ -26,6 +27,7 @@
         ],
         "MoviePath": "J:\\Movies\\Back.To.The.Future.Trilogy.1080p.H264.AC3.DD5.1.Will1869\\Back.To.The.Future.Part.II.1989.1080p.BluRay.H264.AC3.DD5.1.mp4",
         "Duration": 0,
+        "Duration Limit": 0,
         "Collection": "Back To The Future",
         "CollectionSequence": 2
     },
@@ -41,6 +43,7 @@
         ],
         "MoviePath": "J:\\Movies\\Labyrinth 1986 30th Anniversary Edition x264 D3FiL3R (bd50)\\Labyrinth 1986 30th Anniversary Edition TrueHD Atmos 1080p BluRay x264-D3FiL3R.mkv",
         "Duration": 0,
+        "Duration Limit": 0,
         "Collection": "",
         "CollectionSequence": 0
     }
