@@ -13,13 +13,6 @@
 			"toonami",
 			"toonami2k"
 		],
-		"CollectionBumpers": [
-			{
-				"Title": "Toonami2k",
-				"Start": "",
-				"End": ""
-			}
-		],
 		"EpisodeCount": 5,
 		"Episodes": [
 			{
@@ -66,6 +59,402 @@
 				"EpisodeTitle": "Relena's Secret",
 				"Duration": 1440,
 				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 6,
+				"EpisodeNumber": 6,
+				"EpisodePath": "I:\\tv\\[OZC] Mobile Suit Gundam Wing BD Box Complete Series [960 by 720]\\[OZC]Mobile Suit Gundam Wing Blu-ray Box E06 'Party Night' [720p].mkv",
+				"EpisodeTitle": "Party Night",
+				"Duration": 1440,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 7,
+				"EpisodeNumber": 7,
+				"EpisodePath": "I:\\tv\\[OZC] Mobile Suit Gundam Wing BD Box Complete Series [960 by 720]\\[OZC]Mobile Suit Gundam Wing Blu-ray Box E07 'Scenario for Bloodshed' [720p].mkv",
+				"EpisodeTitle": "Scenario for Bloodshed",
+				"Duration": 1439,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 8,
+				"EpisodeNumber": 8,
+				"EpisodePath": "I:\\tv\\[OZC] Mobile Suit Gundam Wing BD Box Complete Series [960 by 720]\\[OZC]Mobile Suit Gundam Wing Blu-ray Box E08 'The Treize Assassination' [720p].mkv",
+				"EpisodeTitle": "The Treize Assassination",
+				"Duration": 1439,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 9,
+				"EpisodeNumber": 9,
+				"EpisodePath": "I:\\tv\\[OZC] Mobile Suit Gundam Wing BD Box Complete Series [960 by 720]\\[OZC]Mobile Suit Gundam Wing Blu-ray Box E09 'Portrait of a Ruined Country' [720p].mkv",
+				"EpisodeTitle": "Portrait of a Ruined Country",
+				"Duration": 1439,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 10,
+				"EpisodeNumber": 10,
+				"EpisodePath": "I:\\tv\\[OZC] Mobile Suit Gundam Wing BD Box Complete Series [960 by 720]\\[OZC]Mobile Suit Gundam Wing Blu-ray Box E10 'Heero, Distracted by Defeat' [720p].mkv",
+				"EpisodeTitle": "Heero, Distracted by Defeat",
+				"Duration": 1439,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 11,
+				"EpisodeNumber": 11,
+				"EpisodePath": "I:\\tv\\[OZC] Mobile Suit Gundam Wing BD Box Complete Series [960 by 720]\\[OZC]Mobile Suit Gundam Wing Blu-ray Box E11 'The Whereabouts of Happiness' [720p].mkv",
+				"EpisodeTitle": "The Whereabouts of Happiness",
+				"Duration": 1439,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 12,
+				"EpisodeNumber": 12,
+				"EpisodePath": "I:\\tv\\[OZC] Mobile Suit Gundam Wing BD Box Complete Series [960 by 720]\\[OZC]Mobile Suit Gundam Wing Blu-ray Box E12 'Bewildered Warriors' [720p].mkv",
+				"EpisodeTitle": "Bewildered Warriors",
+				"Duration": 1440,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 13,
+				"EpisodeNumber": 13,
+				"EpisodePath": "I:\\tv\\[OZC] Mobile Suit Gundam Wing BD Box Complete Series [960 by 720]\\[OZC]Mobile Suit Gundam Wing Blu-ray Box E13 'Catherine's Tears' [720p].mkv",
+				"EpisodeTitle": "Catherine's Tears",
+				"Duration": 1439,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 14,
+				"EpisodeNumber": 14,
+				"EpisodePath": "I:\\tv\\[OZC] Mobile Suit Gundam Wing BD Box Complete Series [960 by 720]\\[OZC]Mobile Suit Gundam Wing Blu-ray Box E14 'The Order to Destroy 01' [720p][v2].mkv",
+				"EpisodeTitle": "The Order to Destroy 01",
+				"Duration": 1439,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 15,
+				"EpisodeNumber": 15,
+				"EpisodePath": "I:\\tv\\[OZC] Mobile Suit Gundam Wing BD Box Complete Series [960 by 720]\\[OZC]Mobile Suit Gundam Wing Blu-ray Box E15 'To the Battleground, Antarctica' [720p].mkv",
+				"EpisodeTitle": "To the Battleground, Antarctica",
+				"Duration": 1439,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 16,
+				"EpisodeNumber": 16,
+				"EpisodePath": "I:\\tv\\[OZC] Mobile Suit Gundam Wing BD Box Complete Series [960 by 720]\\[OZC]Mobile Suit Gundam Wing Blu-ray Box E16 'The Sorrowful Battle' [720p].mkv",
+				"EpisodeTitle": "The Sorrowful Battle",
+				"Duration": 1440,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 17,
+				"EpisodeNumber": 17,
+				"EpisodePath": "I:\\tv\\[OZC] Mobile Suit Gundam Wing BD Box Complete Series [960 by 720]\\[OZC]Mobile Suit Gundam Wing Blu-ray Box E17 'Betrayed by Home, Far Away' [720p].mkv",
+				"EpisodeTitle": "Betrayed by Home, Far Away",
+				"Duration": 1441,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 18,
+				"EpisodeNumber": 18,
+				"EpisodePath": "I:\\tv\\[OZC] Mobile Suit Gundam Wing BD Box Complete Series [960 by 720]\\[OZC]Mobile Suit Gundam Wing Blu-ray Box E18 'Tallgeese Destroyed' [720p].mkv",
+				"EpisodeTitle": "Tallgeese Destroyed",
+				"Duration": 1440,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 19,
+				"EpisodeNumber": 19,
+				"EpisodePath": "I:\\tv\\[OZC] Mobile Suit Gundam Wing BD Box Complete Series [960 by 720]\\[OZC]Mobile Suit Gundam Wing Blu-ray Box E19 'Assault on Barge' [720p].mkv",
+				"EpisodeTitle": "Assault on Barge",
+				"Duration": 1440,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 20,
+				"EpisodeNumber": 20,
+				"EpisodePath": "I:\\tv\\[OZC] Mobile Suit Gundam Wing BD Box Complete Series [960 by 720]\\[OZC]Mobile Suit Gundam Wing Blu-ray Box E20 'The Lunar Base Infiltration' [720p].mkv",
+				"EpisodeTitle": "The Lunar Base Infiltration",
+				"Duration": 1441,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 21,
+				"EpisodeNumber": 21,
+				"EpisodePath": "I:\\tv\\[OZC] Mobile Suit Gundam Wing BD Box Complete Series [960 by 720]\\[OZC]Mobile Suit Gundam Wing Blu-ray Box E21 'Grief Stricken Quatre' [720p].mkv",
+				"EpisodeTitle": "Grief Stricken Quatre",
+				"Duration": 1440,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 22,
+				"EpisodeNumber": 22,
+				"EpisodePath": "I:\\tv\\[OZC] Mobile Suit Gundam Wing BD Box Complete Series [960 by 720]\\[OZC]Mobile Suit Gundam Wing Blu-ray Box E22 'The Fight for Independence' [720p].mkv",
+				"EpisodeTitle": "The Fight for Independence",
+				"Duration": 1441,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 23,
+				"EpisodeNumber": 23,
+				"EpisodePath": "I:\\tv\\[OZC] Mobile Suit Gundam Wing BD Box Complete Series [960 by 720]\\[OZC]Mobile Suit Gundam Wing Blu-ray Box E23 'Duo, God of Death Once Again' [720p].mkv",
+				"EpisodeTitle": "Duo, God of Death Once Again",
+				"Duration": 1439,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 24,
+				"EpisodeNumber": 24,
+				"EpisodePath": "I:\\tv\\[OZC] Mobile Suit Gundam Wing BD Box Complete Series [960 by 720]\\[OZC]Mobile Suit Gundam Wing Blu-ray Box E24 'The Gundam They Called Zero' [720p].mkv",
+				"EpisodeTitle": "The Gundam They Called Zero",
+				"Duration": 1439,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 25,
+				"EpisodeNumber": 25,
+				"EpisodePath": "I:\\tv\\[OZC] Mobile Suit Gundam Wing BD Box Complete Series [960 by 720]\\[OZC]Mobile Suit Gundam Wing Blu-ray Box E25 'Quatre vs. Heero' [720p].mkv",
+				"EpisodeTitle": "Quatre vs. Heero",
+				"Duration": 1440,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 26,
+				"EpisodeNumber": 26,
+				"EpisodePath": "I:\\tv\\[OZC] Mobile Suit Gundam Wing BD Box Complete Series [960 by 720]\\[OZC]Mobile Suit Gundam Wing Blu-ray Box E26 'The Eternal Flame of the Shooting Stars' [720p].mkv",
+				"EpisodeTitle": "The Eternal Flame of the Shooting Stars",
+				"Duration": 1439,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 27,
+				"EpisodeNumber": 27,
+				"EpisodePath": "I:\\tv\\[OZC] Mobile Suit Gundam Wing BD Box Complete Series [960 by 720]\\[OZC]Mobile Suit Gundam Wing Blu-ray Box E27 'The Locus of Victory and Defeat' [720p].mkv",
+				"EpisodeTitle": "The Locus of Victory and Defeat",
+				"Duration": 1438,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 28,
+				"EpisodeNumber": 28,
+				"EpisodePath": "I:\\tv\\[OZC] Mobile Suit Gundam Wing BD Box Complete Series [960 by 720]\\[OZC]Mobile Suit Gundam Wing Blu-ray Box E28 'Passing Destinies' [720p].mkv",
+				"EpisodeTitle": "Passing Destinies",
+				"Duration": 1439,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 29,
+				"EpisodeNumber": 29,
+				"EpisodePath": "I:\\tv\\[OZC] Mobile Suit Gundam Wing BD Box Complete Series [960 by 720]\\[OZC]Mobile Suit Gundam Wing Blu-ray Box E29 'The Heroine of the Battlefield' [720p].mkv",
+				"EpisodeTitle": "The Heroine of the Battlefield",
+				"Duration": 1439,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 30,
+				"EpisodeNumber": 30,
+				"EpisodePath": "I:\\tv\\[OZC] Mobile Suit Gundam Wing BD Box Complete Series [960 by 720]\\[OZC]Mobile Suit Gundam Wing Blu-ray Box E30 'The Reunion with Relena' [720p].mkv",
+				"EpisodeTitle": "The Reunion with Relena",
+				"Duration": 1440,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 31,
+				"EpisodeNumber": 31,
+				"EpisodePath": "I:\\tv\\[OZC] Mobile Suit Gundam Wing BD Box Complete Series [960 by 720]\\[OZC]Mobile Suit Gundam Wing Blu-ray Box E31 'The Glass Kingdom' [720p].mkv",
+				"EpisodeTitle": "The Glass Kingdom",
+				"Duration": 1439,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 32,
+				"EpisodeNumber": 32,
+				"EpisodePath": "I:\\tv\\[OZC] Mobile Suit Gundam Wing BD Box Complete Series [960 by 720]\\[OZC]Mobile Suit Gundam Wing Blu-ray Box E32 'The God of Death Meets Zero' [720p].mkv' [720p].mkv",
+				"EpisodeTitle": "The God of Death Meets Zero",
+				"Duration": 1440,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 33,
+				"EpisodeNumber": 33,
+				"EpisodePath": "I:\\tv\\[OZC] Mobile Suit Gundam Wing BD Box Complete Series [960 by 720]\\[OZC]Mobile Suit Gundam Wing Blu-ray Box E33 'The Lonely Battlefield' [720p].mkv",
+				"EpisodeTitle": "The Lonely Battlefield",
+				"Duration": 1439,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 34,
+				"EpisodeNumber": 34,
+				"EpisodePath": "I:\\tv\\[OZC] Mobile Suit Gundam Wing BD Box Complete Series [960 by 720]\\[OZC]Mobile Suit Gundam Wing Blu-ray Box E34 'And Its Name is Epyon' [720p].mkv",
+				"EpisodeTitle": "The Lonely Battlefield",
+				"Duration": 1439,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 35,
+				"EpisodeNumber": 35,
+				"EpisodePath": "I:\\tv\\[OZC] Mobile Suit Gundam Wing BD Box Complete Series [960 by 720]\\[OZC]Mobile Suit Gundam Wing Blu-ray Box E35 'The Return of Wu Fei' [720p].mkv",
+				"EpisodeTitle": "The Return of Wu Fei",
+				"Duration": 1439,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 36,
+				"EpisodeNumber": 36,
+				"EpisodePath": "I:\\tv\\[OZC] Mobile Suit Gundam Wing BD Box Complete Series [960 by 720]\\[OZC]Mobile Suit Gundam Wing Blu-ray Box E36 'Sanc Kingdom's Collapse' [720p].mkv",
+				"EpisodeTitle": "Sanc Kingdom's Collapse",
+				"Duration": 1439,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 37,
+				"EpisodeNumber": 37,
+				"EpisodePath": "I:\\tv\\[OZC] Mobile Suit Gundam Wing BD Box Complete Series [960 by 720]\\[OZC]Mobile Suit Gundam Wing Blu-ray Box E37 'Zero vs. Epyon' [720p].mkv",
+				"EpisodeTitle": "Zero vs. Epyon",
+				"Duration": 1439,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 38,
+				"EpisodeNumber": 38,
+				"EpisodePath": "I:\\tv\\[OZC] Mobile Suit Gundam Wing BD Box Complete Series [960 by 720]\\[OZC]Mobile Suit Gundam Wing Blu-ray Box E38 'The Birth of Queen Relena' [720p].mkv",
+				"EpisodeTitle": "The Birth of Queen Relena",
+				"Duration": 1440,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 39,
+				"EpisodeNumber": 39,
+				"EpisodePath": "I:\\tv\\[OZC] Mobile Suit Gundam Wing BD Box Complete Series [960 by 720]\\[OZC]Mobile Suit Gundam Wing Blu-ray Box E39 'Trowa's Return to the Battlefield' [720p].mkv",
+				"EpisodeTitle": "Trowa's Return to the Battlefield",
+				"Duration": 1439,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 40,
+				"EpisodeNumber": 40,
+				"EpisodePath": "I:\\tv\\[OZC] Mobile Suit Gundam Wing BD Box Complete Series [960 by 720]\\[OZC]Mobile Suit Gundam Wing Blu-ray Box E40 'A New Leader' [720p].mkv",
+				"EpisodeTitle": "A New Leader",
+				"Duration": 1439,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 41,
+				"EpisodeNumber": 41,
+				"EpisodePath": "I:\\tv\\[OZC] Mobile Suit Gundam Wing BD Box Complete Series [960 by 720]\\[OZC]Mobile Suit Gundam Wing Blu-ray Box E41 'Crossfire at Barge' [720p].mkv",
+				"EpisodeTitle": "Crossfire at Barge",
+				"Duration": 1439,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 42,
+				"EpisodeNumber": 42,
+				"EpisodePath": "I:\\tv\\[OZC] Mobile Suit Gundam Wing BD Box Complete Series [960 by 720]\\[OZC]Mobile Suit Gundam Wing Blu-ray Box E42 'Battleship Libra' [720p].mkv",
+				"EpisodeTitle": "Battleship Libra",
+				"Duration": 1439,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 43,
+				"EpisodeNumber": 43,
+				"EpisodePath": "I:\\tv\\[OZC] Mobile Suit Gundam Wing BD Box Complete Series [960 by 720]\\[OZC]Mobile Suit Gundam Wing Blu-ray Box E43 'Target Earth' [720p].mkv",
+				"EpisodeTitle": "Target Earth",
+				"Duration": 1439,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 44,
+				"EpisodeNumber": 44,
+				"EpisodePath": "I:\\tv\\[OZC] Mobile Suit Gundam Wing BD Box Complete Series [960 by 720]\\[OZC]Mobile Suit Gundam Wing Blu-ray Box E44 'Go Forth, Gundam Team' [720p].mkv",
+				"EpisodeTitle": "Go Forth, Gundam Team",
+				"Duration": 1441,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 45,
+				"EpisodeNumber": 45,
+				"EpisodePath": "I:\\tv\\[OZC] Mobile Suit Gundam Wing BD Box Complete Series [960 by 720]\\[OZC]Mobile Suit Gundam Wing Blu-ray Box E45 'Signs of the Final Battle' [720p].mkv",
+				"EpisodeTitle": "Signs of the Final Battle",
+				"Duration": 1438,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 46,
+				"EpisodeNumber": 46,
+				"EpisodePath": "I:\\tv\\[OZC] Mobile Suit Gundam Wing BD Box Complete Series [960 by 720]\\[OZC]Mobile Suit Gundam Wing Blu-ray Box E46 'Milliardo's Decision' [720p].mkv",
+				"EpisodeTitle": "Milliardo's Decision",
+				"Duration": 1439,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 47,
+				"EpisodeNumber": 47,
+				"EpisodePath": "I:\\tv\\[OZC] Mobile Suit Gundam Wing BD Box Complete Series [960 by 720]\\[OZC]Mobile Suit Gundam Wing Blu-ray Box E47 'Collision in Space' [720p].mkv",
+				"EpisodeTitle": "Collision in Space",
+				"Duration": 1441,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 48,
+				"EpisodeNumber": 48,
+				"EpisodePath": "I:\\tv\\[OZC] Mobile Suit Gundam Wing BD Box Complete Series [960 by 720]\\[OZC]Mobile Suit Gundam Wing Blu-ray Box E48 'Takeoff Into Confusion' [720p].mkv",
+				"EpisodeTitle": "Takeoff Into Confusion",
+				"Duration": 1441,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 49,
+				"EpisodeNumber": 49,
+				"EpisodePath": "I:\\tv\\[OZC] Mobile Suit Gundam Wing BD Box Complete Series [960 by 720]\\[OZC]Mobile Suit Gundam Wing Blu-ray Box E49 'The Final Victor' [720p].mkv",
+				"EpisodeTitle": "The Final Victor",
+				"Duration": 1409,
+				"EpisodeTags": []
 			}
 		]
 	},
@@ -83,13 +472,6 @@
 			"Superhero",
 			"toonami",
 			"toonami2k"
-		],
-		"CollectionBumpers": [
-			{
-				"Title": "Toonami2k",
-				"Start": "",
-				"End": ""
-			}
 		],
 		"EpisodeCount": 5,
 		"Episodes": [
@@ -154,13 +536,6 @@
 			"toonami",
 			"toonami2k"
 		],
-		"CollectionBumpers": [
-			{
-				"Title": "Toonami2k",
-				"Start": "",
-				"End": ""
-			}
-		],
 		"EpisodeCount": 5,
 		"Episodes": [
 			{
@@ -207,6 +582,141 @@
 				"EpisodeTitle": "Kagato Attacks!",
 				"Duration": 1778,
 				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 6,
+				"EpisodeNumber": 6,
+				"EpisodePath": "I:\\tv\\Tenchi Muyo! Ryo-Ohki [Dual Audio]\\[Anime-Takeover]_Tenchi_Muyo!_Ep06v2_(DDF81010).ogm",
+				"EpisodeTitle": "",
+				"Duration": 1750,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 7,
+				"EpisodeNumber": 7,
+				"EpisodePath": "I:\\tv\\Tenchi Muyo! Ryo-Ohki [Dual Audio]\\[Anime-Takeover]_Tenchi_Muyo!_Ep07v2_(7F1A352F).ogm",
+				"EpisodeTitle": "",
+				"Duration": 2595,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 8,
+				"EpisodeNumber": 8,
+				"EpisodePath": "I:\\tv\\Tenchi Muyo! Ryo-Ohki [Dual Audio]\\[Anime-Takeover]_Tenchi_Muyo!_Ep08_(67F2E816).ogm",
+				"EpisodeTitle": "",
+				"Duration": 1721,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 9,
+				"EpisodeNumber": 9,
+				"EpisodePath": "I:\\tv\\Tenchi Muyo! Ryo-Ohki [Dual Audio]\\[Anime-Takeover]_Tenchi_Muyo!_Ep09_(7BF44A32).ogm",
+				"EpisodeTitle": "",
+				"Duration": 1749,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 10,
+				"EpisodeNumber": 10,
+				"EpisodePath": "I:\\tv\\Tenchi Muyo! Ryo-Ohki [Dual Audio]\\[Anime-Takeover]_Tenchi_Muyo!_Ep10_(3C50BCE6).ogm",
+				"EpisodeTitle": "",
+				"Duration": 1659,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 11,
+				"EpisodeNumber": 11,
+				"EpisodePath": "I:\\tv\\Tenchi Muyo! Ryo-Ohki [Dual Audio]\\[Anime-Takeover]_Tenchi_Muyo!_Ep11_(492668DA).ogm",
+				"EpisodeTitle": "",
+				"Duration": 1704,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 12,
+				"EpisodeNumber": 12,
+				"EpisodePath": "I:\\tv\\Tenchi Muyo! Ryo-Ohki [Dual Audio]\\[Anime-Takeover]_Tenchi_Muyo!_Ep12_(C49D39F9).ogm",
+				"EpisodeTitle": "",
+				"Duration": 1751,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 13,
+				"EpisodeNumber": 13,
+				"EpisodePath": "I:\\tv\\Tenchi Muyo! Ryo-Ohki [Dual Audio]\\[Anime-Takeover]_Tenchi_Muyo!_Ep13_(6DECE065).ogm",
+				"EpisodeTitle": "",
+				"Duration": 3077,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 14,
+				"EpisodeNumber": 14,
+				"EpisodePath": "I:\\tv\\Tenchi Muyo! Ryo-Ohki [Dual Audio]\\[Exiled-Destiny]_Tenchi_Muyo!_Ep14_(5DF63DED).mkv",
+				"EpisodeTitle": "",
+				"Duration": 2638,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 15,
+				"EpisodeNumber": 15,
+				"EpisodePath": "I:\\tv\\Tenchi Muyo! Ryo-Ohki [Dual Audio]\\[Exiled-Destiny]_Tenchi_Muyo!_Ep15_(42E46CFE).mkv",
+				"EpisodeTitle": "",
+				"Duration": 1771,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 16,
+				"EpisodeNumber": 16,
+				"EpisodePath": "I:\\tv\\Tenchi Muyo! Ryo-Ohki [Dual Audio]\\[Exiled-Destiny]_Tenchi_Muyo!_Ep16_(C56487F6).mkv",
+				"EpisodeTitle": "",
+				"Duration": 1790,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 17,
+				"EpisodeNumber": 17,
+				"EpisodePath": "I:\\tv\\Tenchi Muyo! Ryo-Ohki [Dual Audio]\\[Exiled-Destiny]_Tenchi_Muyo!_Ep17_(6EED2DE1).mkv",
+				"EpisodeTitle": "",
+				"Duration": 1795,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 18,
+				"EpisodeNumber": 18,
+				"EpisodePath": "I:\\tv\\Tenchi Muyo! Ryo-Ohki [Dual Audio]\\[Exiled-Destiny]_Tenchi_Muyo!_Ep18_(0A6DD054).mkv",
+				"EpisodeTitle": "",
+				"Duration": 1810,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 19,
+				"EpisodeNumber": 19,
+				"EpisodePath": "I:\\tv\\Tenchi Muyo! Ryo-Ohki [Dual Audio]\\[Exiled-Destiny]_Tenchi_Muyo!_Ep19_(E56CD647).mkv",
+				"EpisodeTitle": "",
+				"Duration": 1807,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 20,
+				"EpisodeNumber": 20,
+				"EpisodePath": "I:\\tv\\Tenchi Muyo! Ryo-Ohki [Dual Audio]\\[Exiled-Destiny]_Tenchi_Muyo!_Ep20_Special_(EAD113ED).mkv",
+				"EpisodeTitle": "",
+				"Duration": 1785,
+				"EpisodeTags": []
 			}
 		]
 	},
@@ -222,13 +732,6 @@
 			"martialarts",
 			"toonami",
 			"toonami2k"
-		],
-		"CollectionBumpers": [
-			{
-				"Title": "Toonami2k",
-				"Start": "",
-				"End": ""
-			}
 		],
 		"EpisodeCount": 5,
 		"Episodes": [
@@ -292,13 +795,6 @@
 			"toonami",
 			"toonami2k"
 		],
-		"CollectionBumpers": [
-			{
-				"Title": "Toonami2k",
-				"Start": "",
-				"End": ""
-			}
-		],
 		"EpisodeCount": 5,
 		"Episodes": [
 			{
@@ -360,13 +856,6 @@
 			"toonami",
 			"toonami2k"
 		],
-		"CollectionBumpers": [
-			{
-				"Title": "Toonami2k",
-				"Start": "",
-				"End": ""
-			}
-		],
 		"EpisodeCount": 5,
 		"Episodes": [
 			{
@@ -426,13 +915,6 @@
 			"morning",
 			"nickelodeon",
 			"nicktoons"
-		],
-		"CollectionBumpers": [
-			{
-				"Title": "Saturday Morning",
-				"Start": "",
-				"End": ""
-			}
 		],
 		"EpisodeCount": 5,
 		"Episodes": [
@@ -494,13 +976,6 @@
 			"nickelodeon",
 			"nicktoons"
 		],
-		"CollectionBumpers": [
-			{
-				"Title": "Saturday Morning",
-				"Start": "",
-				"End": ""
-			}
-		],
 		"EpisodeCount": 5,
 		"Episodes": [
 			{
@@ -546,6 +1021,281 @@
 				"EpisodePath": "I:\\tv\\Rugrats Complete 480 WEB-DL\\Rugrats.S01.480p.WEB-DL.AAC2.0.H.264-SA89\\Rugrats.S01E05.Beauty.Contest.-.Baseball.480p.WEB-DL.AAC2.0.H.264-SA89.mkv",
 				"EpisodeTitle": "Beauty Contest - Baseball",
 				"Duration": 1363,
+				"EpisodeTags": []
+			}
+		]
+	},
+	{
+		"Title": "Dexter's Laboratory",
+		"LoadTitle": "dexterslab",
+		"Alias": "dexterslab",
+		"IMDB": "",
+		"Tags": [
+			"animated",
+			"morning",
+			"cartoonnetwork",
+			"cartooncartoon"
+		],
+		"EpisodeCount": 13,
+		"Episodes": [
+			{
+				"Season": 1,
+				"Episode": 1,
+				"EpisodeNumber": 1,
+				"EpisodePath": "I:\\tv\\Dexters Laboratory [jlw]\\Dexters Laboratory S01 [jlw]\\Dexter's Laboratory - 1x01 - Deedeemensional.mkv",
+				"EpisodeTitle": "Deedeemensional",
+				"Duration": 1326,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 2,
+				"EpisodeNumber": 2,
+				"EpisodePath": "I:\\tv\\Dexters Laboratory [jlw]\\Dexters Laboratory S01 [jlw]\\Dexter's Laboratory - 1x02 - Dial M for Monkey Magmanamus.mkv",
+				"EpisodeTitle": "Dial M for Monkey Magmanamus",
+				"Duration": 1323,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 3,
+				"EpisodeNumber": 3,
+				"EpisodePath": "I:\\tv\\Dexters Laboratory [jlw]\\Dexters Laboratory S01 [jlw]\\Dexter's Laboratory - 1x03 - Maternal Combat.mkv",
+				"EpisodeTitle": "Maternal Combat",
+				"Duration": 1329,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 4,
+				"EpisodeNumber": 4,
+				"EpisodePath": "I:\\tv\\Dexters Laboratory [jlw]\\Dexters Laboratory S01 [jlw]\\Dexter's Laboratory - 1x04 - Dexter Dodgeball.mkv",
+				"EpisodeTitle": "Dexter Dodgeball",
+				"Duration": 1348,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 5,
+				"EpisodeNumber": 5,
+				"EpisodePath": "I:\\tv\\Dexters Laboratory [jlw]\\Dexters Laboratory S01 [jlw]\\Dexter's Laboratory - 1x05 - Dial M for Monkey Rasslor.mkv",
+				"EpisodeTitle": "Dial M for Monkey Rasslor",
+				"Duration": 1316,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 6,
+				"EpisodeNumber": 6,
+				"EpisodePath": "I:\\tv\\Dexters Laboratory [jlw]\\Dexters Laboratory S01 [jlw]\\Dexter's Laboratory - 1x06 - Dexter's Assistant.mkv",
+				"EpisodeTitle": "Dexter's Assistant",
+				"Duration": 1314,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 6,
+				"EpisodeNumber": 6,
+				"EpisodePath": "I:\\tv\\Dexters Laboratory [jlw]\\Dexters Laboratory S01 [jlw]\\Dexter's Laboratory - 1x06 - Dexter's Assistant.mkv",
+				"EpisodeTitle": "Dexter's Assistant",
+				"Duration": 1314,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 7,
+				"EpisodeNumber": 7,
+				"EpisodePath": "I:\\tv\\Dexters Laboratory [jlw]\\Dexters Laboratory S01 [jlw]\\Dexter's Laboratory - 1x07 - Dexter's Rival.mkv",
+				"EpisodeTitle": "Dexter's Rival",
+				"Duration": 1337,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 8,
+				"EpisodeNumber": 8,
+				"EpisodePath": "I:\\tv\\Dexters Laboratory [jlw]\\Dexters Laboratory S01 [jlw]\\Dexter's Laboratory - 1x08 - Dial M for Monkey Simion.mkv",
+				"EpisodeTitle": "Dial M for Monkey Simion",
+				"Duration": 1335,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 9,
+				"EpisodeNumber": 9,
+				"EpisodePath": "I:\\tv\\Dexters Laboratory [jlw]\\Dexters Laboratory S01 [jlw]\\Dexter's Laboratory - 1x09 - Old Man Dexter.mkv",
+				"EpisodeTitle": "Old Man Dexter",
+				"Duration": 1337,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 10,
+				"EpisodeNumber": 10,
+				"EpisodePath": "I:\\tv\\Dexters Laboratory [jlw]\\Dexters Laboratory S01 [jlw]\\Dexter's Laboratory - 1x10 - Double Trouble.mkv",
+				"EpisodeTitle": "Double Trouble",
+				"Duration": 1331,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 11,
+				"EpisodeNumber": 11,
+				"EpisodePath": "I:\\tv\\Dexters Laboratory [jlw]\\Dexters Laboratory S01 [jlw]\\Dexter's Laboratory - 1x11 - Dexter's Laboratory A Story.mkv",
+				"EpisodeTitle": "Dexter's Laboratory A Story",
+				"Duration": 1333,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 12,
+				"EpisodeNumber": 12,
+				"EpisodePath": "I:\\tv\\Dexters Laboratory [jlw]\\Dexters Laboratory S01 [jlw]\\Dexter's Laboratory - 1x12 - Changes.mkv",
+				"EpisodeTitle": "Changes",
+				"Duration": 1333,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 13,
+				"EpisodeNumber": 13,
+				"EpisodePath": "I:\\tv\\Dexters Laboratory [jlw]\\Dexters Laboratory S01 [jlw]\\Dexter's Laboratory - 1x13 - Jurassic Pooch.mkv",
+				"EpisodeTitle": "Jurassic Pooch",
+				"Duration": 1338,
+				"EpisodeTags": []
+			}
+		]
+	},
+	{
+		"Title": "Courage The Cowardly Dog",
+		"LoadTitle": "courage",
+		"Alias": "courage",
+		"IMDB": "",
+		"Tags": [
+			"animated",
+			"morning",
+			"cartoonnetwork",
+			"cartooncartoon"
+		],
+		"EpisodeCount": 13,
+		"Episodes": [
+			{
+				"Season": 1,
+				"Episode": 1,
+				"EpisodeNumber": 1,
+				"EpisodePath": "I:\\tv\\Courage the Cowardly Dog\\S01\\aaf-courage.the.cowardly.dog.s01e01.a.night.at.the.katz.motel-muxed.mkv",
+				"EpisodeTitle": "Night at the Katz Motel",
+				"Duration": 1353,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 2,
+				"EpisodeNumber": 2,
+				"EpisodePath": "I:\\tv\\Courage the Cowardly Dog\\S01\\aaf-courage.the.cowardly.dog.s01e02.the.shadow.of.courage-muxed.mkv",
+				"EpisodeTitle": "The Shadow of Courage",
+				"Duration": 1359,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 3,
+				"EpisodeNumber": 3,
+				"EpisodePath": "I:\\tv\\Courage the Cowardly Dog\\S01\\aaf-courage.the.cowardly.dog.s01e03.courage.meets.bigfoot-muxed.mkv",
+				"EpisodeTitle": "Courage Meets Bigfoot",
+				"Duration": 1356,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 4,
+				"EpisodeNumber": 4,
+				"EpisodePath": "I:\\tv\\Courage the Cowardly Dog\\S01\\aaf-courage.the.cowardly.dog.s01e04.the.demon.in.the.mattress-muxed.mkv",
+				"EpisodeTitle": "The Demon in the Mattress",
+				"Duration": 1349,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 5,
+				"EpisodeNumber": 5,
+				"EpisodePath": "I:\\tv\\Courage the Cowardly Dog\\S01\\aaf-courage.the.cowardly.dog.s01e05.night.of.the.weremole-muxed.mkv",
+				"EpisodeTitle": "Night of the Weremole",
+				"Duration": 1351,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 6,
+				"EpisodeNumber": 6,
+				"EpisodePath": "I:\\tv\\Courage the Cowardly Dog\\S01\\aaf-courage.the.cowardly.dog.s01e06.the.duck.brothers-muxed.mkv",
+				"EpisodeTitle": "The Duck Brothers",
+				"Duration": 1357,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 7,
+				"EpisodeNumber": 7,
+				"EpisodePath": "I:\\tv\\Courage the Cowardly Dog\\S01\\aaf-courage.the.cowardly.dog.s01e07.the.curse.of.king.ramses-muxed.mkv",
+				"EpisodeTitle": "The Curse of King Ramses",
+				"Duration": 1363,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 8,
+				"EpisodeNumber": 8,
+				"EpisodePath": "I:\\tv\\Courage the Cowardly Dog\\S01\\aaf-courage.the.cowardly.dog.s01e08.the.hunchback.of.nowhere-muxed.mkv",
+				"EpisodeTitle": "The Hunchback of Nowhere",
+				"Duration": 1338,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 9,
+				"EpisodeNumber": 9,
+				"EpisodePath": "I:\\tv\\Courage the Cowardly Dog\\S01\\aaf-courage.the.cowardly.dog.s01e09.queen.of.the.black.puddle-muxed.mkv",
+				"EpisodeTitle": "Queen of the Black Puddle",
+				"Duration": 1349,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 10,
+				"EpisodeNumber": 10,
+				"EpisodePath": "I:\\tv\\Courage the Cowardly Dog\\S01\\aaf-courage.the.cowardly.dog.s01e10.the.snowman.cometh.avi-muxed.mkv",
+				"EpisodeTitle": "The Snowman Cometh",
+				"Duration": 1340,
+				"EpisodeTags": [
+					"christmas"
+				]
+			},
+			{
+				"Season": 1,
+				"Episode": 11,
+				"EpisodeNumber": 11,
+				"EpisodePath": "I:\\tv\\Courage the Cowardly Dog\\S01\\aaf-courage.the.cowardly.dog.s01e11.heads.of.beef-muxed.mkv",
+				"EpisodeTitle": "Heads of Beef",
+				"Duration": 1331,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 12,
+				"EpisodeNumber": 12,
+				"EpisodePath": "I:\\tv\\Courage the Cowardly Dog\\S01\\aaf-courage.the.cowardly.dog.s01e12.revenge.of.the.chicken.from.outer.space-muxed.mkv",
+				"EpisodeTitle": "Revenge of the Chicken from Outer Space",
+				"Duration": 1355,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 13,
+				"EpisodeNumber": 13,
+				"EpisodePath": "I:\\tv\\Courage the Cowardly Dog\\S01\\aaf-courage.the.cowardly.dog.s01e13.little.muriel-muxed.mkv",
+				"EpisodeTitle": "Little Muriel",
+				"Duration": 1358,
 				"EpisodeTags": []
 			}
 		]
