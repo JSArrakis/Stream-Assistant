@@ -491,7 +491,7 @@
 				"EpisodePath": "J:\\TV\\Batman.The.Complete.Animated.Series.DVDRip.XviD-OLLIE\\Batman.The.Complete.Animated.Series.Vol.1.DVDRip.XviD-OLLIE\\Batman.The.Animated.Series.02.Christmas.with.the.Joker-OLLIE.avi",
 				"EpisodeTitle": "Christmas with the Joker",
 				"Duration": 1342,
-				"EpisodeTags": []
+				"EpisodeTags": ["christmas"]
 			},
 			{
 				"Season": 1,
@@ -518,6 +518,213 @@
 				"EpisodePath": "J:\\TV\\Batman.The.Complete.Animated.Series.DVDRip.XviD-OLLIE\\Batman.The.Complete.Animated.Series.Vol.1.DVDRip.XviD-OLLIE\\Batman.The.Animated.Series.05.Pretty.Poison-OLLIE.avi",
 				"EpisodeTitle": "Pretty Poison",
 				"Duration": 1340,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 6,
+				"EpisodeNumber": 6,
+				"EpisodePath": "J:\\TV\\Batman.The.Complete.Animated.Series.DVDRip.XviD-OLLIE\\Batman.The.Complete.Animated.Series.Vol.1.DVDRip.XviD-OLLIE\\Batman.The.Animated.Series.06.The.Underdwellers-OLLIE.avi",
+				"EpisodeTitle": "The Underdewellers",
+				"Duration": 1345,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 7,
+				"EpisodeNumber": 7,
+				"EpisodePath": "J:\\TV\\Batman.The.Complete.Animated.Series.DVDRip.XviD-OLLIE\\Batman.The.Complete.Animated.Series.Vol.1.DVDRip.XviD-OLLIE\\Batman.The.Animated.Series.07.P.O.V.-OLLIE.avi",
+				"EpisodeTitle": "P.O.V.",
+				"Duration": 1337,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 8,
+				"EpisodeNumber": 8,
+				"EpisodePath": "J:\\TV\\Batman.The.Complete.Animated.Series.DVDRip.XviD-OLLIE\\Batman.The.Complete.Animated.Series.Vol.1.DVDRip.XviD-OLLIE\\Batman.The.Animated.Series.08.The.Forgotten-OLLIE.avi",
+				"EpisodeTitle": "The Forgotten",
+				"Duration": 1341,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 9,
+				"EpisodeNumber": 9,
+				"EpisodePath": "J:\\TV\\Batman.The.Complete.Animated.Series.DVDRip.XviD-OLLIE\\Batman.The.Complete.Animated.Series.Vol.1.DVDRip.XviD-OLLIE\\Batman.The.Animated.Series.09.Be.a.Clown-OLLIE.avi",
+				"EpisodeTitle": "Be a Clown",
+				"Duration": 1341,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 10,
+				"EpisodeNumber": 10,
+				"EpisodePath": "J:\\TV\\Batman.The.Complete.Animated.Series.DVDRip.XviD-OLLIE\\Batman.The.Complete.Animated.Series.Vol.1.DVDRip.XviD-OLLIE\\Batman.The.Animated.Series.10.Two-Face.Part.I-OLLIE.avi",
+				"EpisodeTitle": "Two-Face Part I",
+				"Duration": 1346,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 11,
+				"EpisodeNumber": 11,
+				"EpisodePath": "J:\\TV\\Batman.The.Complete.Animated.Series.DVDRip.XviD-OLLIE\\Batman.The.Complete.Animated.Series.Vol.1.DVDRip.XviD-OLLIE\\Batman.The.Animated.Series.11.Two-Face.Part.II-OLLIE.avi",
+				"EpisodeTitle": "Two-Face Part II",
+				"Duration": 1345,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 12,
+				"EpisodeNumber": 12,
+				"EpisodePath": "J:\\TV\\Batman.The.Complete.Animated.Series.DVDRip.XviD-OLLIE\\Batman.The.Complete.Animated.Series.Vol.1.DVDRip.XviD-OLLIE\\Batman.The.Animated.Series.12.It's.Never.Too.Late-OLLIE.avi",
+				"EpisodeTitle": "It's Never Too Late",
+				"Duration": 1344,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 13,
+				"EpisodeNumber": 13,
+				"EpisodePath": "J:\\TV\\Batman.The.Complete.Animated.Series.DVDRip.XviD-OLLIE\\Batman.The.Complete.Animated.Series.Vol.1.DVDRip.XviD-OLLIE\\Batman.The.Animated.Series.13.I've.Got.Batman.in.My.Basement-OLLIE.avi",
+				"EpisodeTitle": "I've Got Batman in My Basement",
+				"Duration": 1334,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 14,
+				"EpisodeNumber": 14,
+				"EpisodePath": "J:\\TV\\Batman.The.Complete.Animated.Series.DVDRip.XviD-OLLIE\\Batman.The.Complete.Animated.Series.Vol.1.DVDRip.XviD-OLLIE\\Batman.The.Animated.Series.14.Heart.of.Ice-OLLIE.avi",
+				"EpisodeTitle": "Heart of Ice",
+				"Duration": 1345,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 15,
+				"EpisodeNumber": 15,
+				"EpisodePath": "J:\\TV\\Batman.The.Complete.Animated.Series.DVDRip.XviD-OLLIE\\Batman.The.Complete.Animated.Series.Vol.1.DVDRip.XviD-OLLIE\\Batman.The.Animated.Series.15.The.Cat.and.the.Claw.Part.I-OLLIE.avi",
+				"EpisodeTitle": "The Cat and the Claw Part I",
+				"Duration": 1338,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 16,
+				"EpisodeNumber": 16,
+				"EpisodePath": "J:\\TV\\Batman.The.Complete.Animated.Series.DVDRip.XviD-OLLIE\\Batman.The.Complete.Animated.Series.Vol.1.DVDRip.XviD-OLLIE\\Batman.The.Animated.Series.16.The.Cat.and.the.Claw.Part.II-OLLIE.avi",
+				"EpisodeTitle": "The Cat and the Claw Part II",
+				"Duration": 1340,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 17,
+				"EpisodeNumber": 17,
+				"EpisodePath": "J:\\TV\\Batman.The.Complete.Animated.Series.DVDRip.XviD-OLLIE\\Batman.The.Complete.Animated.Series.Vol.1.DVDRip.XviD-OLLIE\\Batman.The.Animated.Series.17.See.No.Evil-OLLIE.avi",
+				"EpisodeTitle": "See No Evil",
+				"Duration": 1336,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 18,
+				"EpisodeNumber": 18,
+				"EpisodePath": "J:\\TV\\Batman.The.Complete.Animated.Series.DVDRip.XviD-OLLIE\\Batman.The.Complete.Animated.Series.Vol.1.DVDRip.XviD-OLLIE\\Batman.The.Animated.Series.18.Beware.the.Gray.Ghost-OLLIE.avi",
+				"EpisodeTitle": "Beware the Gray Ghost",
+				"Duration": 1337,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 19,
+				"EpisodeNumber": 19,
+				"EpisodePath": "J:\\TV\\Batman.The.Complete.Animated.Series.DVDRip.XviD-OLLIE\\Batman.The.Complete.Animated.Series.Vol.1.DVDRip.XviD-OLLIE\\Batman.The.Animated.Series.19.Prophecy.of.Doom-OLLIE.avi",
+				"EpisodeTitle": "Prophecy of Doom",
+				"Duration": 1334,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 20,
+				"EpisodeNumber": 20,
+				"EpisodePath": "J:\\TV\\Batman.The.Complete.Animated.Series.DVDRip.XviD-OLLIE\\Batman.The.Complete.Animated.Series.Vol.1.DVDRip.XviD-OLLIE\\Batman.The.Animated.Series.20.Feat.of.Clay.Part.I-OLLIE.avi",
+				"EpisodeTitle": "Feat of Clay Part I",
+				"Duration": 1310,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 21,
+				"EpisodeNumber": 21,
+				"EpisodePath": "J:\\TV\\Batman.The.Complete.Animated.Series.DVDRip.XviD-OLLIE\\Batman.The.Complete.Animated.Series.Vol.1.DVDRip.XviD-OLLIE\\Batman.The.Animated.Series.21.Feat.of.Clay.Part.II-OLLIE.avi",
+				"EpisodeTitle": "Feat of Clay Part II",
+				"Duration": 1340,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 22,
+				"EpisodeNumber": 22,
+				"EpisodePath": "J:\\TV\\Batman.The.Complete.Animated.Series.DVDRip.XviD-OLLIE\\Batman.The.Complete.Animated.Series.Vol.1.DVDRip.XviD-OLLIE\\Batman.The.Animated.Series.22.Joker's.Favor-OLLIE.avi",
+				"EpisodeTitle": "Joker's Favor",
+				"Duration": 1338,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 23,
+				"EpisodeNumber": 23,
+				"EpisodePath": "J:\\TV\\Batman.The.Complete.Animated.Series.DVDRip.XviD-OLLIE\\Batman.The.Complete.Animated.Series.Vol.1.DVDRip.XviD-OLLIE\\Batman.The.Animated.Series.23.Vendetta-OLLIE.avi",
+				"EpisodeTitle": "Vendetta",
+				"Duration": 1339,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 24,
+				"EpisodeNumber": 24,
+				"EpisodePath": "J:\\TV\\Batman.The.Complete.Animated.Series.DVDRip.XviD-OLLIE\\Batman.The.Complete.Animated.Series.Vol.1.DVDRip.XviD-OLLIE\\Batman.The.Animated.Series.24.Fear.of.Victory-OLLIE.avi",
+				"EpisodeTitle": "Fear of Victory",
+				"Duration": 1339,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 25,
+				"EpisodeNumber": 25,
+				"EpisodePath": "J:\\TV\\Batman.The.Complete.Animated.Series.DVDRip.XviD-OLLIE\\Batman.The.Complete.Animated.Series.Vol.1.DVDRip.XviD-OLLIE\\Batman.The.Animated.Series.25.The.Clock.King-OLLIE.avi",
+				"EpisodeTitle": "The Clock King",
+				"Duration": 1337,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 26,
+				"EpisodeNumber": 26,
+				"EpisodePath": "J:\\TV\\Batman.The.Complete.Animated.Series.DVDRip.XviD-OLLIE\\Batman.The.Complete.Animated.Series.Vol.1.DVDRip.XviD-OLLIE\\Batman.The.Animated.Series.26.Appointment.in.Crime.Alley-OLLIE.avi",
+				"EpisodeTitle": "Appointment in Crime Alley",
+				"Duration": 1339,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 27,
+				"EpisodeNumber": 27,
+				"EpisodePath": "J:\\TV\\Batman.The.Complete.Animated.Series.DVDRip.XviD-OLLIE\\Batman.The.Complete.Animated.Series.Vol.1.DVDRip.XviD-OLLIE\\Batman.The.Animated.Series.27.Mad.as.a.Hatter-OLLIE.avi",
+				"EpisodeTitle": "Mad as a Hatter",
+				"Duration": 1336,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 28,
+				"EpisodeNumber": 28,
+				"EpisodePath": "J:\\TV\\Batman.The.Complete.Animated.Series.DVDRip.XviD-OLLIE\\Batman.The.Complete.Animated.Series.Vol.1.DVDRip.XviD-OLLIE\\Batman.The.Animated.Series.28.Dreams.in.Darkness-OLLIE.avi",
+				"EpisodeTitle": "Dreams in Darkness",
+				"Duration": 1341,
 				"EpisodeTags": []
 			}
 		]
@@ -777,7 +984,313 @@
 				"EpisodeNumber": 5,
 				"EpisodePath": "I:\\tv\\Dragonball Z Seasons 1-9 Remastered\\Dragonball Z Remastered Season 1\\DBZ - 005 - Gohan's Rage.mkv",
 				"EpisodeTitle": "Gohan's Rage",
-				"Duration": 1187,
+				"Duration": 1189,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 6,
+				"EpisodeNumber": 6,
+				"EpisodePath": "I:\\tv\\Dragonball Z Seasons 1-9 Remastered\\Dragonball Z Remastered Season 1\\DBZ - 006 - No Time Like The Present.mkv",
+				"EpisodeTitle": "No Time Like The Present",
+				"Duration": 1177,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 7,
+				"EpisodeNumber": 7,
+				"EpisodePath": "I:\\tv\\Dragonball Z Seasons 1-9 Remastered\\Dragonball Z Remastered Season 1\\DBZ - 007 - Day 1.mkv",
+				"EpisodeTitle": "Day 1",
+				"Duration": 1175,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 8,
+				"EpisodeNumber": 8,
+				"EpisodePath": "I:\\tv\\Dragonball Z Seasons 1-9 Remastered\\Dragonball Z Remastered Season 1\\DBZ - 008 - Gohan Goes Banana's.mkv",
+				"EpisodeTitle": "Gohan Goes Banana's",
+				"Duration": 1166,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 9,
+				"EpisodeNumber": 9,
+				"EpisodePath": "I:\\tv\\Dragonball Z Seasons 1-9 Remastered\\Dragonball Z Remastered Season 1\\DBZ - 009 - The Strangest Robot.mkv",
+				"EpisodeTitle": "The Strangest Robot",
+				"Duration": 1177,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 10,
+				"EpisodeNumber": 10,
+				"EpisodePath": "I:\\tv\\Dragonball Z Seasons 1-9 Remastered\\Dragonball Z Remastered Season 1\\DBZ - 010 - A New Friend.mkv",
+				"EpisodeTitle": "A New Friend",
+				"Duration": 1186,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 11,
+				"EpisodeNumber": 11,
+				"EpisodePath": "I:\\tv\\Dragonball Z Seasons 1-9 Remastered\\Dragonball Z Remastered Season 1\\DBZ - 011 - Terror on Arlia.mkv",
+				"EpisodeTitle": "Terror on Arlia",
+				"Duration": 1181,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 12,
+				"EpisodeNumber": 12,
+				"EpisodePath": "I:\\tv\\Dragonball Z Seasons 1-9 Remastered\\Dragonball Z Remastered Season 1\\DBZ - 012 - Global Training.mkv",
+				"EpisodeTitle": "Global Training",
+				"Duration": 1188,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 13,
+				"EpisodeNumber": 13,
+				"EpisodePath": "I:\\tv\\Dragonball Z Seasons 1-9 Remastered\\Dragonball Z Remastered Season 1\\DBZ - 013 - Goz and Mez.mkv",
+				"EpisodeTitle": "Goz and Mez",
+				"Duration": 1171,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 14,
+				"EpisodeNumber": 14,
+				"EpisodePath": "I:\\tv\\Dragonball Z Seasons 1-9 Remastered\\Dragonball Z Remastered Season 1\\DBZ - 014 - Princess Snake.mkv",
+				"EpisodeTitle": "Princess Snake",
+				"Duration": 1151,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 15,
+				"EpisodeNumber": 15,
+				"EpisodePath": "I:\\tv\\Dragonball Z Seasons 1-9 Remastered\\Dragonball Z Remastered Season 1\\DBZ - 015 - Dueling Piccolos.mkv",
+				"EpisodeTitle": "Dueling Piccolos",
+				"Duration": 1174,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 16,
+				"EpisodeNumber": 16,
+				"EpisodePath": "I:\\tv\\Dragonball Z Seasons 1-9 Remastered\\Dragonball Z Remastered Season 1\\DBZ - 016 - Plight of The Children.mkv",
+				"EpisodeTitle": "Plight of The Children",
+				"Duration": 1214,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 17,
+				"EpisodeNumber": 17,
+				"EpisodePath": "I:\\tv\\Dragonball Z Seasons 1-9 Remastered\\Dragonball Z Remastered Season 1\\DBZ - 017 - Pendulum Room Peril.mkv",
+				"EpisodeTitle": "Pendulum Room Peri",
+				"Duration": 1192,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 18,
+				"EpisodeNumber": 18,
+				"EpisodePath": "I:\\tv\\Dragonball Z Seasons 1-9 Remastered\\Dragonball Z Remastered Season 1\\DBZ - 018 - The End of Snake Way.mkv",
+				"EpisodeTitle": "The End of Snake Way",
+				"Duration": 1172,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 19,
+				"EpisodeNumber": 19,
+				"EpisodePath": "I:\\tv\\Dragonball Z Seasons 1-9 Remastered\\Dragonball Z Remastered Season 1\\DBZ - 019 - Defying Gravity.mkv",
+				"EpisodeTitle": "Defying Gravity",
+				"Duration": 1175,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 20,
+				"EpisodeNumber": 20,
+				"EpisodePath": "I:\\tv\\Dragonball Z Seasons 1-9 Remastered\\Dragonball Z Remastered Season 1\\DBZ - 020 - Goku's Ancestors.mkv",
+				"EpisodeTitle": "Goku's Ancestors",
+				"Duration": 1159,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 21,
+				"EpisodeNumber": 21,
+				"EpisodePath": "I:\\tv\\Dragonball Z Seasons 1-9 Remastered\\Dragonball Z Remastered Season 1\\DBZ - 021 - Counting Down.mkv",
+				"EpisodeTitle": "Counting Down",
+				"Duration": 1155,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 22,
+				"EpisodeNumber": 22,
+				"EpisodePath": "I:\\tv\\Dragonball Z Seasons 1-9 Remastered\\Dragonball Z Remastered Season 1\\DBZ - 022 - The Darkest Day.mkv",
+				"EpisodeTitle": "The Darkest Day",
+				"Duration": 1198,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 23,
+				"EpisodeNumber": 23,
+				"EpisodePath": "I:\\tv\\Dragonball Z Seasons 1-9 Remastered\\Dragonball Z Remastered Season 1\\DBZ - 023 - Saibamen Attack!.mkv",
+				"EpisodeTitle": "Saibamen Attack!",
+				"Duration": 1185,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 24,
+				"EpisodeNumber": 24,
+				"EpisodePath": "I:\\tv\\Dragonball Z Seasons 1-9 Remastered\\Dragonball Z Remastered Season 1\\DBZ - 024 - The Power of Nappa.mkv",
+				"EpisodeTitle": "The Power of Nappa",
+				"Duration": 1173,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 25,
+				"EpisodeNumber": 25,
+				"EpisodePath": "I:\\tv\\Dragonball Z Seasons 1-9 Remastered\\Dragonball Z Remastered Season 1\\DBZ - 025 - Sacrifice.mkv",
+				"EpisodeTitle": "Sacrifice",
+				"Duration": 1168,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 26,
+				"EpisodeNumber": 26,
+				"EpisodePath": "I:\\tv\\Dragonball Z Seasons 1-9 Remastered\\Dragonball Z Remastered Season 1\\DBZ - 026 - Nappa's Rampage.mkv",
+				"EpisodeTitle": "Nappa's Rampage",
+				"Duration": 1170,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 27,
+				"EpisodeNumber": 27,
+				"EpisodePath": "I:\\tv\\Dragonball Z Seasons 1-9 Remastered\\Dragonball Z Remastered Season 1\\DBZ - 027 - Nimbus Speed.mkv",
+				"EpisodeTitle": "Nimbus Speed",
+				"Duration": 1170,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 28,
+				"EpisodeNumber": 28,
+				"EpisodePath": "I:\\tv\\Dragonball Z Seasons 1-9 Remastered\\Dragonball Z Remastered Season 1\\DBZ - 028 - Goku's Arrival.mkv",
+				"EpisodeTitle": "Goku's Arrival",
+				"Duration": 1177,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 29,
+				"EpisodeNumber": 29,
+				"EpisodePath": "I:\\tv\\Dragonball Z Seasons 1-9 Remastered\\Dragonball Z Remastered Season 1\\DBZ - 029 - Lesson Number One.mkv",
+				"EpisodeTitle": "Lesson Number One",
+				"Duration": 1186,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 30,
+				"EpisodeNumber": 30,
+				"EpisodePath": "I:\\tv\\Dragonball Z Seasons 1-9 Remastered\\Dragonball Z Remastered Season 1\\DBZ - 030 - Goku vs. Vegeta.mkv",
+				"EpisodeTitle": "Goku vs. Vegeta",
+				"Duration": 1180,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 31,
+				"EpisodeNumber": 31,
+				"EpisodePath": "I:\\tv\\Dragonball Z Seasons 1-9 Remastered\\Dragonball Z Remastered Season 1\\DBZ - 031 - Saiyan Sized Secret.mkv",
+				"EpisodeTitle": "Saiyan Sized Secret",
+				"Duration": 1188,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 32,
+				"EpisodeNumber": 32,
+				"EpisodePath": "I:\\tv\\Dragonball Z Seasons 1-9 Remastered\\Dragonball Z Remastered Season 1\\DBZ - 032 - Spirit Bomb Away!.mkv",
+				"EpisodeTitle": "Spirit Bomb Away!",
+				"Duration": 1182,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 33,
+				"EpisodeNumber": 33,
+				"EpisodePath": "I:\\tv\\Dragonball Z Seasons 1-9 Remastered\\Dragonball Z Remastered Season 1\\DBZ - 033 - Hero in the Shadows.mkv",
+				"EpisodeTitle": "Hero in the Shadows",
+				"Duration": 1158,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 34,
+				"EpisodeNumber": 34,
+				"EpisodePath": "I:\\tv\\Dragonball Z Seasons 1-9 Remastered\\Dragonball Z Remastered Season 1\\DBZ - 034 - Krillin's Offensive.mkv",
+				"EpisodeTitle": "Krillin's Offensive",
+				"Duration": 1158,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 35,
+				"EpisodeNumber": 35,
+				"EpisodePath": "I:\\tv\\Dragonball Z Seasons 1-9 Remastered\\Dragonball Z Remastered Season 1\\DBZ - 035 - Mercy.mkv",
+				"EpisodeTitle": "Mercy",
+				"Duration": 1194,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 36,
+				"EpisodeNumber": 36,
+				"EpisodePath": "I:\\tv\\Dragonball Z Seasons 1-9 Remastered\\Dragonball Z Remastered Season 1\\DBZ - 036 - Picking up the Pieces.mkv",
+				"EpisodeTitle": "Picking up the Pieces",
+				"Duration": 1203,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 37,
+				"EpisodeNumber": 37,
+				"EpisodePath": "I:\\tv\\Dragonball Z Seasons 1-9 Remastered\\Dragonball Z Remastered Season 1\\DBZ - 037 - Plans for Departure.mkv",
+				"EpisodeTitle": "Plans for Departure",
+				"Duration": 1176,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 38,
+				"EpisodeNumber": 38,
+				"EpisodePath": "I:\\tv\\Dragonball Z Seasons 1-9 Remastered\\Dragonball Z Remastered Season 1\\DBZ - 038 - Nursing Wounds.mkv",
+				"EpisodeTitle": "Nursing Wounds",
+				"Duration": 1194,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 38,
+				"EpisodeNumber": 38,
+				"EpisodePath": "I:\\tv\\Dragonball Z Seasons 1-9 Remastered\\Dragonball Z Remastered Season 1\\DBZ - 039 - Friends or Foes.mkv",
+				"EpisodeTitle": "Friends or Foes",
+				"Duration": 1156,
 				"EpisodeTags": []
 			}
 		]
@@ -841,6 +1354,375 @@
 				"EpisodeTitle": "Is Usagi-chan a Real Friend",
 				"Duration": 1447,
 				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 6,
+				"EpisodeNumber": 6,
+				"EpisodePath": "I:\\tv\\Sailor Moon -jlw\\Sailor Moon\\Pretty Guardian Sailor Moon - 1x06 - The Transfer Student is Sailor Jupiter.mkv",
+				"EpisodeTitle": "The Transfer Student is Sailor Jupiter",
+				"Duration": 1448,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 7,
+				"EpisodeNumber": 7,
+				"EpisodePath": "I:\\tv\\Sailor Moon -jlw\\Sailor Moon\\Pretty Guardian Sailor Moon - 1x07 - Someone Saw Me Transform!.mkv",
+				"EpisodeTitle": "Someone Saw Me Transform!",
+				"Duration": 1448,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 8,
+				"EpisodeNumber": 8,
+				"EpisodePath": "I:\\tv\\Sailor Moon -jlw\\Sailor Moon\\Pretty Guardian Sailor Moon - 1x08 - Rei and Her Father.mkv",
+				"EpisodeTitle": "Rei and Her Father",
+				"Duration": 1448,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 9,
+				"EpisodeNumber": 9,
+				"EpisodePath": "I:\\tv\\Sailor Moon -jlw\\Sailor Moon\\Pretty Guardian Sailor Moon - 1x09 - Protect the Silver Crystal!.mkv",
+				"EpisodeTitle": "Protect the Silver Crystal!",
+				"Duration": 1449,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 10,
+				"EpisodeNumber": 10,
+				"EpisodePath": "I:\\tv\\Sailor Moon -jlw\\Sailor Moon\\Pretty Guardian Sailor Moon - 1x10 - I am the Queen of Darkness, Queen Beryl.mkv",
+				"EpisodeTitle": "I am the Queen of Darkness, Queen Beryl",
+				"Duration": 1448,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 11,
+				"EpisodeNumber": 11,
+				"EpisodePath": "I:\\tv\\Sailor Moon -jlw\\Sailor Moon\\Pretty Guardian Sailor Moon - 1x11 - I Met the Real Minako-chan!.mkv",
+				"EpisodeTitle": "I Met the Real Minako-chan!",
+				"Duration": 1450,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 12,
+				"EpisodeNumber": 12,
+				"EpisodePath": "I:\\tv\\Sailor Moon -jlw\\Sailor Moon\\Pretty Guardian Sailor Moon - 1x12 - Sailor V is Actually the Princess!.mkv",
+				"EpisodeTitle": "Sailor V is Actually the Princess!",
+				"Duration": 1449,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 13,
+				"EpisodeNumber": 13,
+				"EpisodePath": "I:\\tv\\Sailor Moon -jlw\\Sailor Moon\\Pretty Guardian Sailor Moon - 1x13 - The Last Shitennou, Kunzite, Appears.mkv",
+				"EpisodeTitle": "The Last Shitennou, Kunzite, Appears",
+				"Duration": 1448,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 14,
+				"EpisodeNumber": 14,
+				"EpisodePath": "I:\\tv\\Sailor Moon -jlw\\Sailor Moon\\Pretty Guardian Sailor Moon - 1x14 - Usagi Has Become a Youma.mkv",
+				"EpisodeTitle": "Usagi Has Become a Youma",
+				"Duration": 1449,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 15,
+				"EpisodeNumber": 15,
+				"EpisodePath": "I:\\tv\\Sailor Moon -jlw\\Sailor Moon\\Pretty Guardian Sailor Moon - 1x15 - Punish the Burglar!.mkv",
+				"EpisodeTitle": "Punish the Burglar!",
+				"Duration": 1449,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 16,
+				"EpisodeNumber": 16,
+				"EpisodePath": "I:\\tv\\Sailor Moon -jlw\\Sailor Moon\\Pretty Guardian Sailor Moon - 1x16 - Got to Save Osaka-san!.mkv",
+				"EpisodeTitle": "Got to Save Osaka-san!",
+				"Duration": 1448,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 17,
+				"EpisodeNumber": 17,
+				"EpisodePath": "I:\\tv\\Sailor Moon -jlw\\Sailor Moon\\Pretty Guardian Sailor Moon - 1x17 - Minako Transforms Before Rei!.mkv",
+				"EpisodeTitle": "Minako Transforms Before Rei!",
+				"Duration": 1449,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 18,
+				"EpisodeNumber": 18,
+				"EpisodePath": "I:\\tv\\Sailor Moon -jlw\\Sailor Moon\\Pretty Guardian Sailor Moon - 1x18 - The Five Sailor Senshi Finally Together.mkv",
+				"EpisodeTitle": "The Five Sailor Senshi Finally Together",
+				"Duration": 1448,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 19,
+				"EpisodeNumber": 19,
+				"EpisodePath": "I:\\tv\\Sailor Moon -jlw\\Sailor Moon\\Pretty Guardian Sailor Moon - 1x19 - Usagi's Exciting Valentine.mkv",
+				"EpisodeTitle": "Usagi's Exciting Valentine",
+				"Duration": 1448,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 20,
+				"EpisodeNumber": 20,
+				"EpisodePath": "I:\\tv\\Sailor Moon -jlw\\Sailor Moon\\Pretty Guardian Sailor Moon - 1x20 - Hina-san Was Mamoru's Fiance....mkv",
+				"EpisodeTitle": "Hina-san Was Mamoru's Fiance...",
+				"Duration": 1448,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 21,
+				"EpisodeNumber": 21,
+				"EpisodePath": "I:\\tv\\Sailor Moon -jlw\\Sailor Moon\\Pretty Guardian Sailor Moon - 1x21 - What Have You Done to Ami-chan!.mkv",
+				"EpisodeTitle": "What Have You Done to Ami-chan!",
+				"Duration": 1449,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 22,
+				"EpisodeNumber": 22,
+				"EpisodePath": "I:\\tv\\Sailor Moon -jlw\\Sailor Moon\\Pretty Guardian Sailor Moon - 1x22 - Ami-chan Has Fallen Into Enemy Hands....mkv",
+				"EpisodeTitle": "Ami-chan Has Fallen Into Enemy Hands...",
+				"Duration": 1448,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 23,
+				"EpisodeNumber": 23,
+				"EpisodePath": "I:\\tv\\Sailor Moon -jlw\\Sailor Moon\\Pretty Guardian Sailor Moon - 1x23 - Rei Sings to Awaken Her Senshi Power.mkv",
+				"EpisodeTitle": "Rei Sings to Awaken Her Senshi Power",
+				"Duration": 1448,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 24,
+				"EpisodeNumber": 24,
+				"EpisodePath": "I:\\tv\\Sailor Moon -jlw\\Sailor Moon\\Pretty Guardian Sailor Moon - 1x24 - Can't Forget Chiba Mamoru.mkv",
+				"EpisodeTitle": "Can't Forget Chiba Mamoru",
+				"Duration": 1449,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 25,
+				"EpisodeNumber": 25,
+				"EpisodePath": "I:\\tv\\Sailor Moon -jlw\\Sailor Moon\\Pretty Guardian Sailor Moon - 1x25 - Shockingly, Tuxedo Mask is Chiba Mamoru....mkv",
+				"EpisodeTitle": "Shockingly, Tuxedo Mask is Chiba Mamoru...",
+				"Duration": 1449,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 26,
+				"EpisodeNumber": 26,
+				"EpisodePath": "I:\\tv\\Sailor Moon -jlw\\Sailor Moon\\Pretty Guardian Sailor Moon - 1x26 - Usagi is the Real Princess!.mkv",
+				"EpisodeTitle": "Usagi is the Real Princess!",
+				"Duration": 1448,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 27,
+				"EpisodeNumber": 27,
+				"EpisodePath": "I:\\tv\\Sailor Moon -jlw\\Sailor Moon\\Pretty Guardian Sailor Moon - 1x27 - Luna Became a Sailor Senshi!.mkv",
+				"EpisodeTitle": "Luna Became a Sailor Senshi!",
+				"Duration": 1448,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 28,
+				"EpisodeNumber": 28,
+				"EpisodePath": "I:\\tv\\Sailor Moon -jlw\\Sailor Moon\\Pretty Guardian Sailor Moon - 1x28 - Welcome Back, Ami!.mkv",
+				"EpisodeTitle": "Welcome Back, Ami!",
+				"Duration": 1449,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 29,
+				"EpisodeNumber": 29,
+				"EpisodePath": "I:\\tv\\Sailor Moon -jlw\\Sailor Moon\\Pretty Guardian Sailor Moon - 1x29 - Minako's Rival, Kuroki Mio, is a Transfer Student.mkv",
+				"EpisodeTitle": "Minako's Rival, Kuroki Mio, is a Transfer Student",
+				"Duration": 1449,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 30,
+				"EpisodeNumber": 30,
+				"EpisodePath": "I:\\tv\\Sailor Moon -jlw\\Sailor Moon\\Pretty Guardian Sailor Moon - 1x30 - Mio Deceives Usagi.mkv",
+				"EpisodeTitle": "Mio Deceives Usagi",
+				"Duration": 1448,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 31,
+				"EpisodeNumber": 31,
+				"EpisodePath": "I:\\tv\\Sailor Moon -jlw\\Sailor Moon\\Pretty Guardian Sailor Moon - 1x31 - Jupiter Awakens Her Senshi Powers!.mkv",
+				"EpisodeTitle": "Jupiter Awakens Her Senshi Powers!",
+				"Duration": 1448,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 32,
+				"EpisodeNumber": 32,
+				"EpisodePath": "I:\\tv\\Sailor Moon -jlw\\Sailor Moon\\Pretty Guardian Sailor Moon - 1x32 - Mamoru Came Back.mkv",
+				"EpisodeTitle": "Mamoru Came Back",
+				"Duration": 1448,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 33,
+				"EpisodeNumber": 33,
+				"EpisodePath": "I:\\tv\\Sailor Moon -jlw\\Sailor Moon\\Pretty Guardian Sailor Moon - 1x33 - Ami is Changing Schools.mkv",
+				"EpisodeTitle": "Ami is Changing Schools",
+				"Duration": 1448,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 34,
+				"EpisodeNumber": 34,
+				"EpisodePath": "I:\\tv\\Sailor Moon -jlw\\Sailor Moon\\Pretty Guardian Sailor Moon - 1x34 - A Mother-and-Daughter Talk.mkv",
+				"EpisodeTitle": "A Mother-and-Daughter Talk",
+				"Duration": 1448,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 35,
+				"EpisodeNumber": 35,
+				"EpisodePath": "I:\\tv\\Sailor Moon -jlw\\Sailor Moon\\Pretty Guardian Sailor Moon - 1x35 - Sailor Venus and Zoisite are Working Together.mkv",
+				"EpisodeTitle": "Sailor Venus and Zoisite are Working Together",
+				"Duration": 1448,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 36,
+				"EpisodeNumber": 36,
+				"EpisodePath": "I:\\tv\\Sailor Moon -jlw\\Sailor Moon\\Pretty Guardian Sailor Moon - 1x36 - Princess Sailor Moon Appears!.mkv",
+				"EpisodeTitle": "Princess Sailor Moon Appears!",
+				"Duration": 1448,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 37,
+				"EpisodeNumber": 37,
+				"EpisodePath": "I:\\tv\\Sailor Moon -jlw\\Sailor Moon\\Pretty Guardian Sailor Moon - 1x37 - The Princess Will Cause a Catastrophe!.mkv",
+				"EpisodeTitle": "The Princess Will Cause a Catastrophe!",
+				"Duration": 1448,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 38,
+				"EpisodeNumber": 38,
+				"EpisodePath": "I:\\tv\\Sailor Moon -jlw\\Sailor Moon\\Pretty Guardian Sailor Moon - 1x38 - Believe Me! I Definitely Won't Destroy the Planet!.mkv",
+				"EpisodeTitle": "Believe Me! I Definitely Won't Destroy the Planet!",
+				"Duration": 1448,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 39,
+				"EpisodeNumber": 39,
+				"EpisodePath": "I:\\tv\\Sailor Moon -jlw\\Sailor Moon\\Pretty Guardian Sailor Moon - 1x39 - Usagi's Mother's Challenge as a Reporter!!.mkv",
+				"EpisodeTitle": "Believe Me! I Definitely Won't Destroy the Planet!",
+				"Duration": 1448,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 40,
+				"EpisodeNumber": 40,
+				"EpisodePath": "I:\\tv\\Sailor Moon -jlw\\Sailor Moon\\Pretty Guardian Sailor Moon - 1x40 - Minako VS Rei, Where's the Battle.mkv",
+				"EpisodeTitle": "Minako VS Rei, Where's the Battle",
+				"Duration": 1448,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 41,
+				"EpisodeNumber": 41,
+				"EpisodePath": "I:\\tv\\Sailor Moon -jlw\\Sailor Moon\\Pretty Guardian Sailor Moon - 1x41 - Actually, I'm a Senshi!.mkv",
+				"EpisodeTitle": "Actually, I'm a Senshi!",
+				"Duration": 1448,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 42,
+				"EpisodeNumber": 42,
+				"EpisodePath": "I:\\tv\\Sailor Moon -jlw\\Sailor Moon\\Pretty Guardian Sailor Moon - 1x42 - I Won't Use the Power of the Illusion Silver Crystal!.mkv",
+				"EpisodeTitle": "I Won't Use the Power of the Illusion Silver Crystal!",
+				"Duration": 1449,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 43,
+				"EpisodeNumber": 43,
+				"EpisodePath": "I:\\tv\\Sailor Moon -jlw\\Sailor Moon\\Pretty Guardian Sailor Moon - 1x43 - Usagi and Mamoru's Promise.mkv",
+				"EpisodeTitle": "Usagi and Mamoru's Promise",
+				"Duration": 1448,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 44,
+				"EpisodeNumber": 44,
+				"EpisodePath": "I:\\tv\\Sailor Moon -jlw\\Sailor Moon\\Pretty Guardian Sailor Moon - 1x44 - Zoisite Turned Back into a Stone.mkv",
+				"EpisodeTitle": "Zoisite Turned Back into a Stone",
+				"Duration": 1448,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 45,
+				"EpisodeNumber": 45,
+				"EpisodePath": "I:\\tv\\Sailor Moon -jlw\\Sailor Moon\\Pretty Guardian Sailor Moon - 1x45 - Youma Metalia's Violent Attack.mkv",
+				"EpisodeTitle": "Youma Metalia's Violent Attack",
+				"Duration": 1448,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 46,
+				"EpisodeNumber": 46,
+				"EpisodePath": "I:\\tv\\Sailor Moon -jlw\\Sailor Moon\\Pretty Guardian Sailor Moon - 1x46 - Sailor Venus Awakens Her Senshi Powers.mkv",
+				"EpisodeTitle": "Sailor Venus Awakens Her Senshi Powers",
+				"Duration": 1449,
+				"EpisodeTags": []
 			}
 		]
 	},
@@ -901,6 +1783,312 @@
 				"EpisodePath": "J:\\TV1\\Reboot All 4 Seasons(fierceone)\\ReBoot Season 1 HD TV Complete\\Reboot 1x05 In the Belly of the Beast.avi",
 				"EpisodeTitle": "In the Belly of the Beast",
 				"Duration": 1353,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 6,
+				"EpisodeNumber": 6,
+				"EpisodePath": "J:\\TV1\\Reboot All 4 Seasons(fierceone)\\ReBoot Season 1 HD TV Complete\\Reboot 1x06 The Tiff.avi",
+				"EpisodeTitle": "The Tiff",
+				"Duration": 1356,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 7,
+				"EpisodeNumber": 7,
+				"EpisodePath": "J:\\TV1\\Reboot All 4 Seasons(fierceone)\\ReBoot Season 1 HD TV Complete\\Reboot 1x07 The Crimson Binome.avi",
+				"EpisodeTitle": "The Crimson Binome",
+				"Duration": 1353,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 8,
+				"EpisodeNumber": 8,
+				"EpisodePath": "J:\\TV1\\Reboot All 4 Seasons(fierceone)\\ReBoot Season 1 HD TV Complete\\Reboot 1x08 Enzo the Smart.avi",
+				"EpisodeTitle": "Enzo the Smart",
+				"Duration": 1356,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 9,
+				"EpisodeNumber": 9,
+				"EpisodePath": "J:\\TV1\\Reboot All 4 Seasons(fierceone)\\ReBoot Season 1 HD TV Complete\\Reboot 1x09 Wizards, Warriors and a Word from Our Sponsor.avi",
+				"EpisodeTitle": "Wizards, Warriors and a Word from Our Sponsor",
+				"Duration": 1353,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 10,
+				"EpisodeNumber": 10,
+				"EpisodePath": "J:\\TV1\\Reboot All 4 Seasons(fierceone)\\ReBoot Season 1 HD TV Complete\\Reboot 1x10 The Great Brain Robbery.avi",
+				"EpisodeTitle": "The Great Brain Robbery",
+				"Duration": 1339,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 11,
+				"EpisodeNumber": 11,
+				"EpisodePath": "J:\\TV1\\Reboot All 4 Seasons(fierceone)\\ReBoot Season 1 HD TV Complete\\Reboot 1x11 Talent Night.avi",
+				"EpisodeTitle": "Talent Night",
+				"Duration": 1342,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 12,
+				"EpisodeNumber": 12,
+				"EpisodePath": "J:\\TV1\\Reboot All 4 Seasons(fierceone)\\ReBoot Season 1 HD TV Complete\\Reboot 1x12 Identity Crisis (1).avi",
+				"EpisodeTitle": "Identity Crisis",
+				"Duration": 1349,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 13,
+				"EpisodeNumber": 13,
+				"EpisodePath": "J:\\TV1\\Reboot All 4 Seasons(fierceone)\\ReBoot Season 1 HD TV Complete\\Reboot 1x13 Identity Crisis (2).avi",
+				"EpisodeTitle": "Identity Crisis",
+				"Duration": 1353,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 2,
+				"Episode": 1,
+				"EpisodeNumber": 14,
+				"EpisodePath": "J:\\TV1\\Reboot All 4 Seasons(fierceone)\\ReBoot Season 2 HD TV Complete\\Reboot 2x01 Infected.avi",
+				"EpisodeTitle": "Infected",
+				"Duration": 1297,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 2,
+				"Episode": 2,
+				"EpisodeNumber": 15,
+				"EpisodePath": "J:\\TV1\\Reboot All 4 Seasons(fierceone)\\ReBoot Season 2 HD TV Complete\\Reboot 2x02 High Code.avi",
+				"EpisodeTitle": "High Code",
+				"Duration": 1328,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 2,
+				"Episode": 3,
+				"EpisodeNumber": 16,
+				"EpisodePath": "J:\\TV1\\Reboot All 4 Seasons(fierceone)\\ReBoot Season 2 HD TV Complete\\Reboot 2x03 When Games Collide.avi",
+				"EpisodeTitle": "When Games Collide",
+				"Duration": 1320,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 2,
+				"Episode": 4,
+				"EpisodeNumber": 17,
+				"EpisodePath": "J:\\TV1\\Reboot All 4 Seasons(fierceone)\\ReBoot Season 2 HD TV Complete\\Reboot 2x04 Bad Bob.avi",
+				"EpisodeTitle": "Bad Bob",
+				"Duration": 1347,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 2,
+				"Episode": 5,
+				"EpisodeNumber": 18,
+				"EpisodePath": "J:\\TV1\\Reboot All 4 Seasons(fierceone)\\ReBoot Season 2 HD TV Complete\\Reboot 2x05 Painted Windows.avi",
+				"EpisodeTitle": "Painted Windows",
+				"Duration": 1327,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 2,
+				"Episode": 6,
+				"EpisodeNumber": 19,
+				"EpisodePath": "J:\\TV1\\Reboot All 4 Seasons(fierceone)\\ReBoot Season 2 HD TV Complete\\Reboot 2x06 AndrAla.avi",
+				"EpisodeTitle": "AndrAla",
+				"Duration": 1325,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 2,
+				"Episode": 7,
+				"EpisodeNumber": 20,
+				"EpisodePath": "J:\\TV1\\Reboot All 4 Seasons(fierceone)\\ReBoot Season 2 HD TV Complete\\Reboot 2x07 Nullzilla.avi",
+				"EpisodeTitle": "Nullzilla",
+				"Duration": 1324,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 2,
+				"Episode": 8,
+				"EpisodeNumber": 21,
+				"EpisodePath": "J:\\TV1\\Reboot All 4 Seasons(fierceone)\\ReBoot Season 2 HD TV Complete\\Reboot 2x08 Gigabyte.avi",
+				"EpisodeTitle": "Gigabyte",
+				"Duration": 1326,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 2,
+				"Episode": 9,
+				"EpisodeNumber": 22,
+				"EpisodePath": "J:\\TV1\\Reboot All 4 Seasons(fierceone)\\ReBoot Season 2 HD TV Complete\\Reboot 2x09 Trust No One.avi",
+				"EpisodeTitle": "Trust No One",
+				"Duration": 1317,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 2,
+				"Episode": 10,
+				"EpisodeNumber": 23,
+				"EpisodePath": "J:\\TV1\\Reboot All 4 Seasons(fierceone)\\ReBoot Season 2 HD TV Complete\\Reboot 2x10 Web World Wars.avi",
+				"EpisodeTitle": "Web World Wars",
+				"Duration": 1320,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 3,
+				"Episode": 1,
+				"EpisodeNumber": 24,
+				"EpisodePath": "J:\\TV1\\Reboot All 4 Seasons(fierceone)\\ReBoot Season 3 DVD RIPPED Complete\\Reboot 3x01 To Mend and Defend.avi",
+				"EpisodeTitle": "To Mend and Defend",
+				"Duration": 1343,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 3,
+				"Episode": 2,
+				"EpisodeNumber": 25,
+				"EpisodePath": "J:\\TV1\\Reboot All 4 Seasons(fierceone)\\ReBoot Season 3 DVD RIPPED Complete\\Reboot 3x02 Between a Raccoon and a Hard Place.avi",
+				"EpisodeTitle": "Between a Raccoon and a Hard Place",
+				"Duration": 1335,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 3,
+				"Episode": 3,
+				"EpisodeNumber": 26,
+				"EpisodePath": "J:\\TV1\\Reboot All 4 Seasons(fierceone)\\ReBoot Season 3 DVD RIPPED Complete\\Reboot 3x03 Firewall.avi",
+				"EpisodeTitle": "Firewall",
+				"Duration": 1336,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 3,
+				"Episode": 4,
+				"EpisodeNumber": 27,
+				"EpisodePath": "J:\\TV1\\Reboot All 4 Seasons(fierceone)\\ReBoot Season 3 DVD RIPPED Complete\\Reboot 3x04 Game Over.avi",
+				"EpisodeTitle": "Game Over",
+				"Duration": 1339,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 3,
+				"Episode": 5,
+				"EpisodeNumber": 28,
+				"EpisodePath": "J:\\TV1\\Reboot All 4 Seasons(fierceone)\\ReBoot Season 3 DVD RIPPED Complete\\Reboot 3x05 Icons.avi",
+				"EpisodeTitle": "Icons",
+				"Duration": 1335,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 3,
+				"Episode": 6,
+				"EpisodeNumber": 29,
+				"EpisodePath": "J:\\TV1\\Reboot All 4 Seasons(fierceone)\\ReBoot Season 3 DVD RIPPED Complete\\Reboot 3x06 Where No Sprite Has Gone Before.avi",
+				"EpisodeTitle": "Where No Sprite Has Gone Before",
+				"Duration": 1336,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 3,
+				"Episode": 7,
+				"EpisodeNumber": 30,
+				"EpisodePath": "J:\\TV1\\Reboot All 4 Seasons(fierceone)\\ReBoot Season 3 DVD RIPPED Complete\\Reboot 3x07 Number 7.avi",
+				"EpisodeTitle": "Number 7",
+				"Duration": 1335,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 3,
+				"Episode": 8,
+				"EpisodeNumber": 31,
+				"EpisodePath": "J:\\TV1\\Reboot All 4 Seasons(fierceone)\\ReBoot Season 3 DVD RIPPED Complete\\Reboot 3x08 The Episode with No Name.avi",
+				"EpisodeTitle": "The Episode with No Name",
+				"Duration": 1338,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 3,
+				"Episode": 9,
+				"EpisodeNumber": 32,
+				"EpisodePath": "J:\\TV1\\Reboot All 4 Seasons(fierceone)\\ReBoot Season 3 DVD RIPPED Complete\\Reboot 3x09 The Return of the Crimson Binome.avi",
+				"EpisodeTitle": "The Return of the Crimson Binome",
+				"Duration": 1336,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 3,
+				"Episode": 10,
+				"EpisodeNumber": 33,
+				"EpisodePath": "J:\\TV1\\Reboot All 4 Seasons(fierceone)\\ReBoot Season 3 DVD RIPPED Complete\\Reboot 3x10 The Edge of Beyond.avi",
+				"EpisodeTitle": "The Return of the Crimson Binome",
+				"Duration": 1336,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 3,
+				"Episode": 11,
+				"EpisodeNumber": 34,
+				"EpisodePath": "J:\\TV1\\Reboot All 4 Seasons(fierceone)\\ReBoot Season 3 DVD RIPPED Complete\\Reboot 3x11 Web Riders on the Storm.avi",
+				"EpisodeTitle": "Web Riders on the Storm",
+				"Duration": 1336,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 3,
+				"Episode": 12,
+				"EpisodeNumber": 35,
+				"EpisodePath": "J:\\TV1\\Reboot All 4 Seasons(fierceone)\\ReBoot Season 3 DVD RIPPED Complete\\Reboot 3x12 Mousetrap.avi",
+				"EpisodeTitle": "Mousetrap",
+				"Duration": 1337,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 3,
+				"Episode": 13,
+				"EpisodeNumber": 36,
+				"EpisodePath": "J:\\TV1\\Reboot All 4 Seasons(fierceone)\\ReBoot Season 3 DVD RIPPED Complete\\Reboot 3x13 Megaframe.avi",
+				"EpisodeTitle": "Megaframe",
+				"Duration": 1336,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 3,
+				"Episode": 14,
+				"EpisodeNumber": 37,
+				"EpisodePath": "J:\\TV1\\Reboot All 4 Seasons(fierceone)\\ReBoot Season 3 DVD RIPPED Complete\\Reboot 3x14 Showdown.avi",
+				"EpisodeTitle": "Showdown",
+				"Duration": 1335,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 3,
+				"Episode": 15,
+				"EpisodeNumber": 38,
+				"EpisodePath": "J:\\TV1\\Reboot All 4 Seasons(fierceone)\\ReBoot Season 3 DVD RIPPED Complete\\Reboot 3x15 System Crash.avi",
+				"EpisodeTitle": "System Crash",
+				"Duration": 1335,
+				"EpisodeTags": []
+			},
+			{
+				"Season": 3,
+				"Episode": 16,
+				"EpisodeNumber": 39,
+				"EpisodePath": "J:\\TV1\\Reboot All 4 Seasons(fierceone)\\ReBoot Season 3 DVD RIPPED Complete\\Reboot 3x16 End Prog.avi",
+				"EpisodeTitle": "End Prog",
+				"Duration": 1338,
 				"EpisodeTags": []
 			}
 		]
