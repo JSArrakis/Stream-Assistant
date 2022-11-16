@@ -1,0 +1,20 @@
+[
+    {
+        "Environment": "1",
+        "DefaultPromo": {
+            "DefaultPromo": {
+                "Path": "C:\\Users\\Main\\Desktop\\Bumpers\\Toonami\\15\\Default.mp4",
+                "Duration": 15
+            }
+        }
+    },
+    {
+        "Environment": "2",
+        "DefaultPromo": {
+            "DefaultPromo": {
+                "Path": "C:\\Users\\Main\\Desktop\\Bumpers\\Toonami\\15\\Default.mp4",
+                "Duration": 15
+            }
+        }
+    }
+]
