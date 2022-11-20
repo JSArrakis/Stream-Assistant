@@ -4,6 +4,8 @@
 		"LoadTitle": "gundamwing",
 		"Alias": "gundamw",
 		"IMDB": "https://www.imdb.com/title/tt0159193/",
+		"DurationLimit": 1800,
+		"OverDuration": false,
 		"Tags": [
 			"anime",
 			"action",
@@ -463,6 +465,8 @@
 		"LoadTitle": "batmananimated",
 		"Alias": "batmanani",
 		"IMDB": "https://www.imdb.com/title/tt0103359/",
+		"DurationLimit": 1800,
+		"OverDuration": false,
 		"Tags": [
 			"animated",
 			"action",
@@ -491,7 +495,9 @@
 				"EpisodePath": "J:\\TV\\Batman.The.Complete.Animated.Series.DVDRip.XviD-OLLIE\\Batman.The.Complete.Animated.Series.Vol.1.DVDRip.XviD-OLLIE\\Batman.The.Animated.Series.02.Christmas.with.the.Joker-OLLIE.avi",
 				"EpisodeTitle": "Christmas with the Joker",
 				"Duration": 1342,
-				"EpisodeTags": ["christmas"]
+				"EpisodeTags": [
+					"christmas"
+				]
 			},
 			{
 				"Season": 1,
@@ -734,6 +740,8 @@
 		"LoadTitle": "tenchimuyo",
 		"Alias": "tenchi",
 		"IMDB": "https://www.imdb.com/title/tt0105559/",
+		"DurationLimit": 1800,
+		"OverDuration": true,
 		"Tags": [
 			"anime",
 			"action",
@@ -932,6 +940,8 @@
 		"LoadTitle": "dragonballz",
 		"Alias": "dbz",
 		"IMDB": "https://www.imdb.com/title/tt0214341/",
+		"DurationLimit": 1800,
+		"OverDuration": false,
 		"Tags": [
 			"anime",
 			"action",
@@ -1300,6 +1310,8 @@
 		"LoadTitle": "sailormoon",
 		"Alias": "smoon",
 		"IMDB": "https://www.imdb.com/title/tt0103369/",
+		"DurationLimit": 1800,
+		"OverDuration": false,
 		"Tags": [
 			"anime",
 			"magicalgirl",
@@ -1731,6 +1743,8 @@
 		"LoadTitle": "reboot",
 		"Alias": "reboot",
 		"IMDB": "https://www.imdb.com/title/tt0103369/",
+		"DurationLimit": 1800,
+		"OverDuration": false,
 		"Tags": [
 			"cgi",
 			"action",
@@ -2098,6 +2112,8 @@
 		"LoadTitle": "doug",
 		"Alias": "doug",
 		"IMDB": "https://www.imdb.com/title/tt0101084/",
+		"DurationLimit": 1800,
+		"OverDuration": false,
 		"Tags": [
 			"animated",
 			"morning",
@@ -2158,6 +2174,8 @@
 		"LoadTitle": "rugrats",
 		"Alias": "rugrats",
 		"IMDB": "https://www.imdb.com/title/tt0101188/",
+		"DurationLimit": 1800,
+		"OverDuration": false,
 		"Tags": [
 			"animated",
 			"morning",
@@ -2218,6 +2236,8 @@
 		"LoadTitle": "dexterslab",
 		"Alias": "dexterslab",
 		"IMDB": "",
+		"DurationLimit": 1800,
+		"OverDuration": false,
 		"Tags": [
 			"animated",
 			"morning",
@@ -2359,6 +2379,8 @@
 		"LoadTitle": "courage",
 		"Alias": "courage",
 		"IMDB": "",
+		"DurationLimit": 1800,
+		"OverDuration": false,
 		"Tags": [
 			"animated",
 			"morning",
