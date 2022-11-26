@@ -89,6 +89,7 @@
         "Tags": [
             "holiday",
             "christmas",
+            "comedy",
             "40s"
         ],
         "MoviePath": "J:\\Moviesold\\A Christmas Story\\A Christmas Story.mkv",
@@ -105,11 +106,1313 @@
         "Tags": [
             "holiday",
             "christmas",
+            "comedy",
             "2000s"
         ],
         "MoviePath": "J:\\Moviesold\\Elf.2003.720p.BrRip.x264.aac-se7en\\Elf.2003.720p.BrRip.x264.aac-se7en.mp4",
         "Duration": 5803,
         "Duration Limit": 7200,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "2001 A Space Odyssey",
+        "LoadTitle": "2001",
+        "Alias": "2001",
+        "IMDB": "https://www.imdb.com/title/tt0062622/",
+        "Tags": [
+            "scifi",
+            "space",
+            "horror",
+            "60s"
+        ],
+        "MoviePath": "J:\\Moviesold\\2001 A Space Odyssey\\2001 A Space Odyssey.mkv",
+        "Duration": 8566,
+        "Duration Limit": 10800,
+        "Collection": "Space Odyssey",
+        "CollectionSequence": 1
+    },
+    {
+        "Title": "2010 The Year We Make Contact",
+        "LoadTitle": "2010",
+        "Alias": "2010",
+        "IMDB": "https://www.imdb.com/title/tt0086837/",
+        "Tags": [
+            "scifi",
+            "space",
+            "80s"
+        ],
+        "MoviePath": "J:\\Moviesold\\2010 The Year We Make Contact\\2010 The Year We Make Contact.avi",
+        "Duration": 6965,
+        "Duration Limit": 7200,
+        "Collection": "Space Odyssey",
+        "CollectionSequence": 2
+    },
+    {
+        "Title": "Across The Universe",
+        "LoadTitle": "acrosstheuniverse",
+        "Alias": "acrosstheuniverse",
+        "IMDB": "https://www.imdb.com/title/tt0445922/",
+        "Tags": [
+            "drama",
+            "musical",
+            "2000s"
+        ],
+        "MoviePath": "J:\\Moviesold\\Across The Universe\\Across The Universe.mkv",
+        "Duration": 7998,
+        "Duration Limit": 9000,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "Addams Family Values",
+        "LoadTitle": "addamsfamilyvalues",
+        "Alias": "addamsfamilyvalues",
+        "IMDB": "https://www.imdb.com/title/tt0106220/",
+        "Tags": [
+            "comedy",
+            "halloween",
+            "holiday",
+            "spooky",
+            "90s",
+            "thanksgiving"
+        ],
+        "MoviePath": "J:\\Moviesold\\Adams Family Values 1993\\Addams.Family.Values.1993.720p.WEB-DL.H264-HDCL.mkv",
+        "Duration": 5652,
+        "Duration Limit": 7200,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "Aladdin",
+        "LoadTitle": "aladdin",
+        "Alias": "aladdin",
+        "IMDB": "https://www.imdb.com/title/tt0103639/",
+        "Tags": [
+            "animated",
+            "disney",
+            "musical",
+            "90s"
+        ],
+        "MoviePath": "J:\\Moviesold\\Aladdin\\Aladdin.mkv",
+        "Duration": 5423,
+        "Duration Limit": 7200,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "Alien",
+        "LoadTitle": "alien",
+        "Alias": "alien",
+        "IMDB": "https://www.imdb.com/title/tt0078748/",
+        "Tags": [
+            "horror",
+            "scifi",
+            "70s"
+        ],
+        "MoviePath": "J:\\Moviesold\\Alien\\Alien.avi",
+        "Duration": 6997,
+        "Duration Limit": 7200,
+        "Collection": "Alien",
+        "CollectionSequence": 1
+    },
+    {
+        "Title": "Aliens",
+        "LoadTitle": "aliens",
+        "Alias": "aliens",
+        "IMDB": "https://www.imdb.com/title/tt0090605/",
+        "Tags": [
+            "horror",
+            "scifi",
+            "action",
+            "80s"
+        ],
+        "MoviePath": "J:\\Moviesold\\Aliens 1986\\Aliens 1986.avi",
+        "Duration": 9267,
+        "Duration Limit": 10800,
+        "Collection": "Alien",
+        "CollectionSequence": 2
+    },
+    {
+        "Title": "Akira",
+        "LoadTitle": "akira",
+        "Alias": "akira",
+        "IMDB": "https://www.imdb.com/title/tt0094625/",
+        "Tags": [
+            "horror",
+            "scifi",
+            "action",
+            "80s",
+            "animation",
+            "anime",
+            "cyberpunk"
+        ],
+        "MoviePath": "J:\\Moviesold\\Alira\\Akira.mkv",
+        "Duration": 7528,
+        "Duration Limit": 9000,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "Avengers",
+        "LoadTitle": "avengers",
+        "Alias": "avengers",
+        "IMDB": "https://www.imdb.com/title/tt0848228//",
+        "Tags": [
+            "superhero",
+            "action",
+            "2010s",
+            "marvel",
+            "mcu"
+        ],
+        "MoviePath": "J:\\Moviesold\\Avengers(2012)\\Avengers2012DVDrip.mkv",
+        "Duration": 8575,
+        "Duration Limit": 9000,
+        "Collection": "MCU",
+        "CollectionSequence": 6
+    },
+    {
+        "Title": "Batman and Robin",
+        "LoadTitle": "batmanandrobin",
+        "Alias": "batmanandrobin",
+        "IMDB": "https://www.imdb.com/title/tt0118688/",
+        "Tags": [
+            "superhero",
+            "action",
+            "90s",
+            "dc"
+        ],
+        "MoviePath": "J:\\Moviesold\\Batman.and.robin1997\\Batman_and_Robin1997.mkv",
+        "Duration": 8575,
+        "Duration Limit": 9000,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "Beetlejuice",
+        "LoadTitle": "beetlejuice",
+        "Alias": "beetlejuice",
+        "IMDB": "https://www.imdb.com/title/tt0094721/",
+        "Tags": [
+            "comedy",
+            "halloween",
+            "holiday",
+            "spooky",
+            "80s"
+        ],
+        "MoviePath": "J:\\Moviesold\\Beetlejuice (1988) -jlw\\Beetlejuice (1988).mkv",
+        "Duration": 8575,
+        "Duration Limit": 9000,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "Blade Runner 2049",
+        "LoadTitle": "bladerunner2049",
+        "Alias": "bladerunner2049",
+        "IMDB": "https://www.imdb.com/title/tt1856101/",
+        "Tags": [
+            "scifi",
+            "action",
+            "cyberpunk",
+            "2010s"
+        ],
+        "MoviePath": "J:\\Moviesold\\Blade.Runner.2049.2017.COMPLETE.NTSC.DVD9-HONOR\\BladeRunner2049.mkv",
+        "Duration": 9807,
+        "Duration Limit": 10800,
+        "Collection": "Blade Runner",
+        "CollectionSequence": 2
+    },
+    {
+        "Title": "Breakfast At Tiffanys",
+        "LoadTitle": "breakfastattiffanys",
+        "Alias": "breakfastattiffanys",
+        "IMDB": "https://www.imdb.com/title/tt0054698/",
+        "Tags": [
+            "comedy",
+            "drama",
+            "romance",
+            "60s"
+        ],
+        "MoviePath": "J:\\Moviesold\\Breakfast.At.Tiffanys.1961.1080p.BluRay.x264-NORDiCHD\\BladeRunner2049.mkv",
+        "Duration": 6905,
+        "Duration Limit": 7200,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "Bring it On",
+        "LoadTitle": "bringiton",
+        "Alias": "bringiton",
+        "IMDB": "https://www.imdb.com/title/tt0204946/",
+        "Tags": [
+            "comedy",
+            "sport",
+            "romance",
+            "2000s"
+        ],
+        "MoviePath": "J:\\Moviesold\\Bring.It.On.2000.iNTERNAL.BDRip.x264-MARS\\Bring.It.On.2000.BDRip.x264-MARS.mkv",
+        "Duration": 5926,
+        "Duration Limit": 7200,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "Captain America: The First Avenger",
+        "LoadTitle": "captainamerica",
+        "Alias": "captainamerica",
+        "IMDB": "https://www.imdb.com/title/tt0204946/",
+        "Tags": [
+            "superhero",
+            "action",
+            "2010s",
+            "marvel",
+            "mcu"
+        ],
+        "MoviePath": "J:\\Moviesold\\Captain American - The First Avenger 2011 DVDRiP XviD AC3 - BHRG\\Captain American - The First Avenger 2011 DVDRiP XviD AC3 - BHRG.avi",
+        "Duration": 7450,
+        "Duration Limit": 9000,
+        "Collection": "MCU",
+        "CollectionSequence": 5
+    },
+    {
+        "Title": "Captain America: The Winter Soldier",
+        "LoadTitle": "wintersoldier",
+        "Alias": "wintersoldier",
+        "IMDB": "https://www.imdb.com/title/tt1843866/",
+        "Tags": [
+            "superhero",
+            "action",
+            "2010s",
+            "marvel",
+            "mcu"
+        ],
+        "MoviePath": "J:\\Moviesold\\Captain.America.The.Winter.Soldier.2014.NTSC.MULTi.DVDR-0MNiDVD\\title_t00.mkv",
+        "Duration": 8153,
+        "Duration Limit": 9000,
+        "Collection": "MCU",
+        "CollectionSequence": 9
+    },
+    {
+        "Title": "Contact",
+        "LoadTitle": "contact",
+        "Alias": "contact",
+        "IMDB": "https://www.imdb.com/title/tt0118884/",
+        "Tags": [
+            "drama",
+            "mystery",
+            "90s",
+            "scifi"
+        ],
+        "MoviePath": "J:\\Moviesold\\Contact 1997 10bit hevc-d3g\\Contact 1997 BluRay 10Bit 1080p DD5.1 H265-d3g.mkv",
+        "Duration": 8980,
+        "Duration Limit": 9000,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "Cowboy Bebop: The Movie",
+        "LoadTitle": "cowboybebopmovie",
+        "Alias": "cowboybebopmovie",
+        "IMDB": "https://www.imdb.com/title/tt0275277/",
+        "Tags": [
+            "anime",
+            "crime",
+            "noir",
+            "scifi",
+            "animated",
+            "2000s"
+        ],
+        "MoviePath": "J:\\Moviesold\\Cowboy.Bebop.The.Movie.2001.720p.BluRay.x264-x0r\\Cowboy.Bebop.The.Movie.2001.720p.BluRay.x264-x0r.mkv",
+        "Duration": 6914,
+        "Duration Limit": 7200,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "Dante's Peak",
+        "LoadTitle": "dantespeak",
+        "Alias": "dantespeak",
+        "IMDB": "https://www.imdb.com/title/tt0275277/",
+        "Tags": [
+            "anime",
+            "crime",
+            "noir",
+            "scifi",
+            "animated",
+            "2000s"
+        ],
+        "MoviePath": "J:\\Moviesold\\Dante's Peak 1997 10bit hevc-d3g\\Dante's Peak 1997 BluRay 10Bit 1080p DD5.1 H265-d3g.mkv",
+        "Duration": 6508,
+        "Duration Limit": 7200,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "Edge of Tomorrow",
+        "LoadTitle": "edgeoftomorrow",
+        "Alias": "edgeoftomorrow",
+        "IMDB": "https://www.imdb.com/title/tt1631867/",
+        "Tags": [
+            "scifi",
+            "action",
+            "thriller",
+            "2010s"
+        ],
+        "MoviePath": "J:\\Moviesold\\Edge.of.Tomorrow.2014.HEVC.1080p.BluRay.DTS.x265-LEGi0N\\Edge.of.Tomorrow.2014.HEVC.1080p.BluRay.DTS.x265-LEGi0N.mkv",
+        "Duration": 6809,
+        "Duration Limit": 7200,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "Event Horizon",
+        "LoadTitle": "eventhorizon",
+        "Alias": "eventhorizon",
+        "IMDB": "https://www.imdb.com/title/tt0119081/",
+        "Tags": [
+            "scifi",
+            "horror",
+            "space",
+            "90s"
+        ],
+        "MoviePath": "J:\\Moviesold\\Event Horizon\\EventHorizon.mkv",
+        "Duration": 5756,
+        "Duration Limit": 7200,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "The Fifth Element",
+        "LoadTitle": "fifthelement",
+        "Alias": "fifthelement",
+        "IMDB": "https://www.imdb.com/title/tt0119116/",
+        "Tags": [
+            "comedy",
+            "action",
+            "adventure",
+            "scifi",
+            "90s"
+        ],
+        "MoviePath": "J:\\Moviesold\\Fifth Element\\The Fifth Element.mkv",
+        "Duration": 7577,
+        "Duration Limit": 9000,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "Ghostbusters",
+        "LoadTitle": "ghostbusters",
+        "Alias": "ghostbusters",
+        "IMDB": "https://www.imdb.com/title/tt0087332/",
+        "Tags": [
+            "comedy",
+            "action",
+            "spooky",
+            "scifi",
+            "80s"
+        ],
+        "MoviePath": "J:\\Moviesold\\Ghostbusters 1984 REMASTERED HEVC D3FiL3R (iso)\\Ghostbusters 1984 REMASTERED BluRay 1080p DD5.1 x265-D3FiL3R.mkv",
+        "Duration": 6308,
+        "Duration Limit": 7200,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "Gladiator",
+        "LoadTitle": "gladiator",
+        "Alias": "gladiator",
+        "IMDB": "https://www.imdb.com/title/tt0172495/",
+        "Tags": [
+            "action",
+            "fantasy",
+            "drama",
+            "2000s"
+        ],
+        "MoviePath": "J:\\Moviesold\\Ghostbusters 1984 REMASTERED HEVC D3FiL3R (iso)\\Ghostbusters 1984 REMASTERED BluRay 1080p DD5.1 x265-D3FiL3R.mkv",
+        "Duration": 6308,
+        "Duration Limit": 7200,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "Guardians of the Galaxy",
+        "LoadTitle": "guardians",
+        "Alias": "guardians",
+        "IMDB": "https://www.imdb.com/title/tt2015381/",
+        "Tags": [
+            "action",
+            "marvel",
+            "mcu",
+            "comedy",
+            "2010s",
+            "superhero"
+        ],
+        "MoviePath": "J:\\Moviesold\\Guardians.of.the.Galaxy.2014.V2.RETAIL.DVDRip.XviD.AC3-EVO\\Guardians.of.the.Galaxy.2014.V2.RETAIL.DVDRip.XviD.AC3-EVO.avi",
+        "Duration": 7250,
+        "Duration Limit": 9000,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "Hook",
+        "LoadTitle": "hook",
+        "Alias": "hook",
+        "IMDB": "https://www.imdb.com/title/tt0102057/",
+        "Tags": [
+            "action",
+            "fantasy",
+            "comedy",
+            "90s",
+            "adventure",
+            "family"
+        ],
+        "MoviePath": "J:\\Moviesold\\Hook\\Hook_t00.mkv",
+        "Duration": 8507,
+        "Duration Limit": 9000,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "Indiana Jones and the Kingdom of the Crystal Skull",
+        "LoadTitle": "crystalskull",
+        "Alias": "crystalskull",
+        "IMDB": "https://www.imdb.com/title/tt0367882/",
+        "Tags": [
+            "action",
+            "2000s",
+            "adventure"
+        ],
+        "MoviePath": "J:\\Moviesold\\Indiana.Jones.Collection.1080p.BluRay.H264.AC3.DD5.1.Will1869\\Indiana.Jones.And.The.Kingdom.Of.The.Crystal.Skull.2008.1080p.BluRay.H264.AAC3.DD5.1.mp4",
+        "Duration": 7352,
+        "Duration Limit": 9000,
+        "Collection": "Indiana Jones",
+        "CollectionSequence": 4
+    },
+    {
+        "Title": "Indiana Jones and the Last Crusade",
+        "LoadTitle": "lastcrusade",
+        "Alias": "lastcrusade",
+        "IMDB": "https://www.imdb.com/title/tt0097576/",
+        "Tags": [
+            "action",
+            "80s",
+            "adventure"
+        ],
+        "MoviePath": "J:\\Moviesold\\Indiana.Jones.Collection.1080p.BluRay.H264.AC3.DD5.1.Will1869\\Indiana.Jones.and.the.Last.Crusade.1989.1080p.BluRay.H264.AC3.DD5.1.mp4",
+        "Duration": 7623,
+        "Duration Limit": 9000,
+        "Collection": "Indiana Jones",
+        "CollectionSequence": 3
+    },
+    {
+        "Title": "Indiana Jones and the Temple of Doom",
+        "LoadTitle": "templeofdoom",
+        "Alias": "templeofdoom",
+        "IMDB": "https://www.imdb.com/title/tt0087469/",
+        "Tags": [
+            "action",
+            "80s",
+            "adventure"
+        ],
+        "MoviePath": "J:\\Moviesold\\Indiana.Jones.Collection.1080p.BluRay.H264.AC3.DD5.1.Will1869\\Indiana.Jones.And.The.Temple.Of.Doom.1984.1080p.BluRay.H264.AC3.DD5.1.mp4",
+        "Duration": 7108,
+        "Duration Limit": 7200,
+        "Collection": "Indiana Jones",
+        "CollectionSequence": 2
+    },
+    {
+        "Title": "Indiana Jones and the Raiders of the Lost Ark",
+        "LoadTitle": "raiders",
+        "Alias": "raiders",
+        "IMDB": "https://www.imdb.com/title/tt0082971/",
+        "Tags": [
+            "action",
+            "80s",
+            "adventure"
+        ],
+        "MoviePath": "J:\\Moviesold\\Indiana.Jones.Collection.1080p.BluRay.H264.AC3.DD5.1.Will1869\\Raiders.Of.The.Lost.Ark.1981.1080p.BluRay.H264.AC3.DD5.1.mp4",
+        "Duration": 6918,
+        "Duration Limit": 7200,
+        "Collection": "Indiana Jones",
+        "CollectionSequence": 1
+    },
+    {
+        "Title": "Iron Man 2",
+        "LoadTitle": "ironman2",
+        "Alias": "ironman2",
+        "IMDB": "https://www.imdb.com/title/tt1228705/",
+        "Tags": [
+            "superhero",
+            "action",
+            "2010s",
+            "marvel",
+            "mcu"
+        ],
+        "MoviePath": "J:\\Moviesold\\Iron.Man.2.2010.720p.BluRay.x264-x0r\\Iron.Man.2.2010.720p.BluRay.x264-x0r.mkv",
+        "Duration": 7479,
+        "Duration Limit": 9000,
+        "Collection": "MCU",
+        "CollectionSequence": 3
+    },
+    {
+        "Title": "Jurassic Park",
+        "LoadTitle": "jurassicpark",
+        "Alias": "jurassicpark",
+        "IMDB": "https://www.imdb.com/title/tt0107290/",
+        "Tags": [
+            "action",
+            "horror",
+            "scifi",
+            "adventure",
+            "90s"
+        ],
+        "MoviePath": "J:\\Moviesold\\Jurassic.Park.1993.iNTERNAL.BDRip.x264-REGRET\\regret-jp.mkv",
+        "Duration": 7596,
+        "Duration Limit": 9000,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "Krull",
+        "LoadTitle": "krull",
+        "Alias": "krull",
+        "IMDB": "https://www.imdb.com/title/tt0085811/",
+        "Tags": [
+            "action",
+            "fantasy",
+            "adventure",
+            "80s"
+        ],
+        "MoviePath": "J:\\Moviesold\\Krull\\Krull.mkv",
+        "Duration": 7243,
+        "Duration Limit": 9000,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "Ant-Man",
+        "LoadTitle": "antman",
+        "Alias": "antman",
+        "IMDB": "https://www.imdb.com/title/tt0478970/",
+        "Tags": [
+            "superhero",
+            "action",
+            "2010s",
+            "marvel",
+            "mcu"
+        ],
+        "MoviePath": "J:\\Moviesold\\Marvel Cinematic Universe - Phase 1&2 - Fighter\\Ant-Man (2015).mp4",
+        "Duration": 7026,
+        "Duration Limit": 7200,
+        "Collection": "MCU",
+        "CollectionSequence": 12
+    },
+    {
+        "Title": "Avengers: Age of Ultron",
+        "LoadTitle": "ageofultron",
+        "Alias": "ageofultron",
+        "IMDB": "https://www.imdb.com/title/tt2395427/",
+        "Tags": [
+            "superhero",
+            "action",
+            "2010s",
+            "marvel",
+            "mcu"
+        ],
+        "MoviePath": "J:\\Moviesold\\Marvel Cinematic Universe - Phase 1&2 - Fighter\\Avengers_ Age of Ultron (2015).mp4",
+        "Duration": 8478,
+        "Duration Limit": 9000,
+        "Collection": "MCU",
+        "CollectionSequence": 11
+    },
+    {
+        "Title": "Iron Man 3",
+        "LoadTitle": "ironman3",
+        "Alias": "ironman3",
+        "IMDB": "https://www.imdb.com/title/tt1300854/",
+        "Tags": [
+            "superhero",
+            "action",
+            "2010s",
+            "marvel",
+            "mcu"
+        ],
+        "MoviePath": "J:\\Moviesold\\Marvel Cinematic Universe - Phase 1&2 - Fighter\\Iron Man 3 (2013).mp4",
+        "Duration": 7832,
+        "Duration Limit": 9000,
+        "Collection": "MCU",
+        "CollectionSequence": 7
+    },
+    {
+        "Title": "Thor",
+        "LoadTitle": "thor",
+        "Alias": "thor",
+        "IMDB": "https://www.imdb.com/title/tt0800369/",
+        "Tags": [
+            "superhero",
+            "action",
+            "2010s",
+            "marvel",
+            "mcu"
+        ],
+        "MoviePath": "J:\\Moviesold\\Marvel Cinematic Universe - Phase 1&2 - Fighter\\Thor (2011).mp4",
+        "Duration": 6890,
+        "Duration Limit": 7200,
+        "Collection": "MCU",
+        "CollectionSequence": 4
+    },
+    {
+        "Title": "Thor: The Dark World",
+        "LoadTitle": "thorthedarkworld",
+        "Alias": "thorthedarkworld",
+        "IMDB": "https://www.imdb.com/title/tt1981115/",
+        "Tags": [
+            "superhero",
+            "action",
+            "2010s",
+            "marvel",
+            "mcu"
+        ],
+        "MoviePath": "J:\\Moviesold\\Marvel Cinematic Universe - Phase 1&2 - Fighter\\Thor_ The Dark World (2013).mp4",
+        "Duration": 6723,
+        "Duration Limit": 7200,
+        "Collection": "MCU",
+        "CollectionSequence": 8
+    },
+    {
+        "Title": "Men in Black",
+        "LoadTitle": "mib",
+        "Alias": "mib",
+        "IMDB": "https://www.imdb.com/title/tt0119654/",
+        "Tags": [
+            "scifi",
+            "action",
+            "90s",
+            "adventure",
+            "comedy"
+        ],
+        "MoviePath": "J:\\Moviesold\\Men.In.Black.1997.1080p.BRRip.x265.AC3-Freebee\\Men.In.Black.1997.1080p.BRRip.x265.AC3-Freebee.mkv",
+        "Duration": 5878,
+        "Duration Limit": 7200,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "Muppet Christmas Carol",
+        "LoadTitle": "muppetchristmascarol",
+        "Alias": "muppetchristmascarol",
+        "IMDB": "https://www.imdb.com/title/tt0104940/",
+        "Tags": [
+            "comedy",
+            "drama",
+            "90s",
+            "christmas",
+            "family",
+            "holiday"
+        ],
+        "MoviePath": "J:\\Moviesold\\Muppet Christmad Carol\\Muppet Christmas Carol.mkv",
+        "Duration": 5152,
+        "Duration Limit": 5400,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "National Lampoon's Christmas Vacation",
+        "LoadTitle": "christmasvacation",
+        "Alias": "christmasvacation",
+        "IMDB": "https://www.imdb.com/title/tt0097958/",
+        "Tags": [
+            "comedy",
+            "80s",
+            "christmas",
+            "holiday"
+        ],
+        "MoviePath": "J:\\Moviesold\\Muppet Christmad Carol\\Muppet Christmas Carol.mkv",
+        "Duration": 5822,
+        "Duration Limit": 7200,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "The Neverending Story",
+        "LoadTitle": "neverendingstory",
+        "Alias": "neverendingstory",
+        "IMDB": "https://www.imdb.com/title/tt0088323/",
+        "Tags": [
+            "adventure",
+            "80s",
+            "family",
+            "fantasy",
+            "drama"
+        ],
+        "MoviePath": "J:\\Moviesold\\Never Ending Story\\THE NEVERENDING STORY.mkv",
+        "Duration": 5642,
+        "Duration Limit": 7200,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "One Magic Christmas",
+        "LoadTitle": "onemagicchristmas",
+        "Alias": "onemagicchristmas",
+        "IMDB": "https://www.imdb.com/title/tt0088323/",
+        "Tags": [
+            "christmas",
+            "80s",
+            "family",
+            "drama",
+            "holiday"
+        ],
+        "MoviePath": "J:\\Moviesold\\onemagicchristmas\\One Magic Christmas.mkv",
+        "Duration": 5332,
+        "Duration Limit": 5400,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "Patlabor",
+        "LoadTitle": "patlabor",
+        "Alias": "patlabor",
+        "IMDB": "https://www.imdb.com/title/tt0100339/",
+        "Tags": [
+            "anime",
+            "animated",
+            "action",
+            "scifi",
+            "crime",
+            "mecha"
+        ],
+        "MoviePath": "J:\\Moviesold\\PatLabor\\Patlabor.mp4",
+        "Duration": 7102,
+        "Duration Limit": 7200,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "Poltergeist",
+        "LoadTitle": "poltergeist",
+        "Alias": "poltergeist",
+        "IMDB": "https://www.imdb.com/title/tt0084516/",
+        "Tags": [
+            "horror",
+            "80s"
+        ],
+        "MoviePath": "J:\\Moviesold\\Poltergeist.2015.EXTENDED.CUT.1080p.BluRay.x264.DTS-HD MA 5.1-NoHaTE\\Poltergeist.2015.EXTENDED.CUT.1080p.BluRay.x264.DTS-HD MA 5.1-NoHaTE.mkv",
+        "Duration": 6053,
+        "Duration Limit": 7200,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "Return to Oz",
+        "LoadTitle": "returntooz",
+        "Alias": "returntooz",
+        "IMDB": "https://www.imdb.com/title/tt0084516/",
+        "Tags": [
+            "horror",
+            "fantasy",
+            "spooky",
+            "adventure",
+            "family",
+            "80s"
+        ],
+        "MoviePath": "J:\\Moviesold\\Return to Oz\\Return to Oz.mkv",
+        "Duration": 6598,
+        "Duration Limit": 7200,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "Rogue One: A Star Wars Story",
+        "LoadTitle": "rougueone",
+        "Alias": "rogueone",
+        "IMDB": "https://www.imdb.com/title/tt3748528/",
+        "Tags": [
+            "action",
+            "scifi",
+            "starwars",
+            "adventure",
+            "2010s"
+        ],
+        "MoviePath": "J:\\Moviesold\\Rogue One (2016) -jlw\\Rogue One (2016).mkv",
+        "Duration": 8037,
+        "Duration Limit": 9000,
+        "Collection": "Star Wars",
+        "CollectionSequence": 8
+    },
+    {
+        "Title": "Rudolph the Red-Nosed Reindeer",
+        "LoadTitle": "rudolph",
+        "Alias": "rudolph",
+        "IMDB": "https://www.imdb.com/title/tt0058536/",
+        "Tags": [
+            "animated",
+            "christmas",
+            "holiday",
+            "family",
+            "60s"
+        ],
+        "MoviePath": "J:\\Moviesold\\Rudolph.the.Red-Nosed.Reindeer.1964.720p.BluRay.x264-x0r\\Rudolph.the.Red-Nosed.Reindeer.1964.720p.BluRay.x264-x0r.mkv",
+        "Duration": 3105,
+        "Duration Limit": 3600,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "Skyfall",
+        "LoadTitle": "skyfall",
+        "Alias": "skyfall",
+        "IMDB": "https://www.imdb.com/title/tt1074638/",
+        "Tags": [
+            "action",
+            "adventure",
+            "spy",
+            "2010s"
+        ],
+        "MoviePath": "J:\\Moviesold\\Skyfall 2012 DVDRip XviD AC3 iNT iTCH\\skyfall.dvdrip.xvid-itch.avi",
+        "Duration": 8590,
+        "Duration Limit": 9000,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "Star Wars: A New Hope",
+        "LoadTitle": "anewhope",
+        "Alias": "anewhope",
+        "IMDB": "https://www.imdb.com/title/tt0076759/",
+        "Tags": [
+            "action",
+            "adventure",
+            "scifi",
+            "70s",
+            "starwars"
+        ],
+        "MoviePath": "J:\\Moviesold\\Star Wars A New Hope\\title_t00.mkv",
+        "Duration": 7483,
+        "Duration Limit": 9000,
+        "Collection": "Star Wars",
+        "CollectionSequence": 1
+    },
+    {
+        "Title": "Star Wars: Attack of the Clones",
+        "LoadTitle": "attackoftheclones",
+        "Alias": "attackoftheclones",
+        "IMDB": "https://www.imdb.com/title/tt0121765/",
+        "Tags": [
+            "action",
+            "adventure",
+            "scifi",
+            "2000s",
+            "starwars"
+        ],
+        "MoviePath": "J:\\Moviesold\\Star Wars Attack Of The Clones\\title_t00.mkv",
+        "Duration": 8547,
+        "Duration Limit": 9000,
+        "Collection": "Star Wars",
+        "CollectionSequence": 5
+    },
+    {
+        "Title": "Star Wars: Empire Strikes Back",
+        "LoadTitle": "empirestrikesback",
+        "Alias": "empirestrikesback",
+        "IMDB": "https://www.imdb.com/title/tt0080684/",
+        "Tags": [
+            "action",
+            "adventure",
+            "scifi",
+            "80s",
+            "starwars"
+        ],
+        "MoviePath": "J:\\Moviesold\\Star Wars Empire Strikes Back\\title_t00.mkv",
+        "Duration": 7641,
+        "Duration Limit": 9000,
+        "Collection": "Star Wars",
+        "CollectionSequence": 2
+    },
+    {
+        "Title": "Star Wars: The Force Awakens",
+        "LoadTitle": "forceawakens",
+        "Alias": "forceawakens",
+        "IMDB": "https://www.imdb.com/title/tt2488496/",
+        "Tags": [
+            "action",
+            "adventure",
+            "scifi",
+            "2010s",
+            "starwars"
+        ],
+        "MoviePath": "J:\\Moviesold\\Star Wars Force Awakens\\Star Wars the Force Awakens.mkv",
+        "Duration": 8284,
+        "Duration Limit": 9000,
+        "Collection": "Star Wars",
+        "CollectionSequence": 7
+    },
+    {
+        "Title": "Star Wars: The Phantom Menace",
+        "LoadTitle": "phantommenace",
+        "Alias": "phantommenace",
+        "IMDB": "https://www.imdb.com/title/tt0120915/",
+        "Tags": [
+            "action",
+            "adventure",
+            "scifi",
+            "2000s",
+            "starwars"
+        ],
+        "MoviePath": "J:\\Moviesold\\Star Wars Phantom Menace\\PhantomMenace.mkv",
+        "Duration": 8175,
+        "Duration Limit": 9000,
+        "Collection": "Star Wars",
+        "CollectionSequence": 4
+    },
+    {
+        "Title": "Star Wars: Return of the Jedi",
+        "LoadTitle": "returofthejedi",
+        "Alias": "returnofthejedi",
+        "IMDB": "https://www.imdb.com/title/tt0086190/",
+        "Tags": [
+            "action",
+            "adventure",
+            "scifi",
+            "80s",
+            "starwars"
+        ],
+        "MoviePath": "J:\\Moviesold\\Star Wars Return of The Jedi\\title_t00.mkv",
+        "Duration": 8088,
+        "Duration Limit": 9000,
+        "Collection": "Star Wars",
+        "CollectionSequence": 3
+    },
+    {
+        "Title": "Star Wars: Revenge of the Sith",
+        "LoadTitle": "revengeofthesith",
+        "Alias": "revengeofthesith",
+        "IMDB": "https://www.imdb.com/title/tt0121766/",
+        "Tags": [
+            "action",
+            "adventure",
+            "scifi",
+            "2000s",
+            "starwars"
+        ],
+        "MoviePath": "J:\\Moviesold\\Star Wars Return of The Jedi\\title_t00.mkv",
+        "Duration": 8407,
+        "Duration Limit": 9000,
+        "Collection": "Star Wars",
+        "CollectionSequence": 6
+    },
+    {
+        "Title": "Teenage Mutant Ninja Turtles",
+        "LoadTitle": "tmnt",
+        "Alias": "tmnt",
+        "IMDB": "https://www.imdb.com/title/tt0100758/",
+        "Tags": [
+            "action",
+            "adventure",
+            "comedy",
+            "90s",
+            "martialarts"
+        ],
+        "MoviePath": "J:\\Moviesold\\Teenage Mutant Ninja Turtles\\TeenageMutantNinjaTurtles1990.mkv",
+        "Duration": 5608,
+        "Duration Limit": 7200,
+        "Collection": "TMNT",
+        "CollectionSequence": 1
+    },
+    {
+        "Title": "Tenchi Muyo In Love",
+        "LoadTitle": "tenchiinlove",
+        "Alias": "tenchiinlove",
+        "IMDB": "https://www.imdb.com/title/tt0117876/",
+        "Tags": [
+            "action",
+            "adventure",
+            "comedy",
+            "90s",
+            "animated",
+            "anime",
+            "scifi"
+        ],
+        "MoviePath": "J:\\Moviesold\\Tenchi Muyo In Love\\Tenchi Muyo In Love.mp4",
+        "Duration": 5957,
+        "Duration Limit": 7200,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "The Lord of the Rings: Fellowship of the Ring",
+        "LoadTitle": "fellowshipofthering",
+        "Alias": "fellowshipofthering",
+        "IMDB": "https://www.imdb.com/title/tt0120737/",
+        "Tags": [
+            "action",
+            "adventure",
+            "2000s",
+            "fantasy"
+        ],
+        "MoviePath": "J:\\Moviesold\\The Lord of the Rings Trilogy ExtCut hevc-d3g\\Fellowship of the Ring ExtCut hevc-d3g\\LOTR-Fellowship of the Ring 2001 ExtCut BluRay 1080p DD5.1 x265-d3g.mkv",
+        "Duration": 13696,
+        "Duration Limit": 14400,
+        "Collection": "LOTR",
+        "CollectionSequence": 1
+    },
+    {
+        "Title": "The Lord of the Rings: The Two Towers",
+        "LoadTitle": "twotowers",
+        "Alias": "twotowers",
+        "IMDB": "https://www.imdb.com/title/tt0167261/",
+        "Tags": [
+            "action",
+            "adventure",
+            "2000s",
+            "fantasy"
+        ],
+        "MoviePath": "J:\\Moviesold\\The Lord of the Rings Trilogy ExtCut hevc-d3g\\The Two Towers extcut hevc-d3g\\LOTR-The Two Towers 2002 ExtCut BluRay 1080p DD5.1 x265-d3g.mkv",
+        "Duration": 14129,
+        "Duration Limit": 14400,
+        "Collection": "LOTR",
+        "CollectionSequence": 2
+    },
+    {
+        "Title": "The Lord of the Rings: Return of the King",
+        "LoadTitle": "returnoftheking",
+        "Alias": "returnoftheking",
+        "IMDB": "https://www.imdb.com/title/tt0167260/",
+        "Tags": [
+            "action",
+            "adventure",
+            "2000s",
+            "fantasy"
+        ],
+        "MoviePath": "J:\\Moviesold\\The Lord of the Rings Trilogy ExtCut hevc-d3g\\LOTR-Return of the King hevc-d3g\\LOTR-The Return of the King 2003 BluRay AC-3 x265-d3g.mkv",
+        "Duration": 15795,
+        "Duration Limit": 16200,
+        "Collection": "LOTR",
+        "CollectionSequence": 3
+    },
+    {
+        "Title": "The Nutcracker",
+        "LoadTitle": "thenutcracker",
+        "Alias": "thenutcracker",
+        "IMDB": "https://www.imdb.com/title/tt0107719/",
+        "Tags": [
+            "christmas",
+            "holiday",
+            "90s",
+            "fantasy"
+        ],
+        "MoviePath": "J:\\Moviesold\\The Nutcracker\\The Nutcracker George balanchines.mkv",
+        "Duration": 5545,
+        "Duration Limit": 7200,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "The Sword in the Stone",
+        "LoadTitle": "swordinthestone",
+        "Alias": "swordinthestone",
+        "IMDB": "https://www.imdb.com/title/tt0057546/",
+        "Tags": [
+            "animated",
+            "disney",
+            "60s",
+            "fantasy"
+        ],
+        "MoviePath": "J:\\Moviesold\\The Sword in the Stone\\The Sword and the Stone.mkv",
+        "Duration": 5776,
+        "Duration Limit": 5400,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "The Addams Family",
+        "LoadTitle": "addamsfamily",
+        "Alias": "addamsfamily",
+        "IMDB": "https://www.imdb.com/title/tt0101272/",
+        "Tags": [
+            "comedy",
+            "halloween",
+            "holiday",
+            "spooky",
+            "90s"
+        ],
+        "MoviePath": "J:\\Moviesold\\The.Addams.Family.1991.720p.BluRay.x264-x0r\\The.Addams.Family.1991.720p.BluRay.x264-x0r.mkv",
+        "Duration": 6578,
+        "Duration Limit": 7200,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "The Dark Crystal",
+        "LoadTitle": "darkcrystal",
+        "Alias": "darkcrystal",
+        "IMDB": "https://www.imdb.com/title/tt0083791/",
+        "Tags": [
+            "fantasy",
+            "adventure",
+            "family",
+            "80s"
+        ],
+        "MoviePath": "J:\\Moviesold\\The.Dark.Crystal.1982.Remastered.1080p.BluRay.H264.AC3.DD5.1.Will1869\\The.Dark.Crystal.1982.Remastered.1080p.BluRay.H264.AC3.DD5.1.Will1869.mp4",
+        "Duration": 5587,
+        "Duration Limit": 7200,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "Toys",
+        "LoadTitle": "toys",
+        "Alias": "toys",
+        "IMDB": "https://www.imdb.com/title/tt0105629/",
+        "Tags": [
+            "drama",
+            "comedy",
+            "90s"
+        ],
+        "MoviePath": "J:\\Moviesold\\Toys\\TOYS1992.mkv",
+        "Duration": 7296,
+        "Duration Limit": 9000,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "Tron",
+        "LoadTitle": "tron",
+        "Alias": "tron",
+        "IMDB": "https://www.imdb.com/title/tt0084827/",
+        "Tags": [
+            "action",
+            "adventure",
+            "scifi",
+            "disney",
+            "80s"
+        ],
+        "MoviePath": "J:\\Moviesold\\Toys\\TOYS1992.mkv",
+        "Duration": 7296,
+        "Duration Limit": 9000,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "Twas the Night Before Christmas",
+        "LoadTitle": "nightbeforechristmas",
+        "Alias": "nightbeforechristmas",
+        "IMDB": "https://www.imdb.com/title/tt0208654/",
+        "Tags": [
+            "animated",
+            "christmas",
+            "holiday",
+            "70s"
+        ],
+        "MoviePath": "J:\\Moviesold\\Twas.The.Night.Before.Christmas.1974.720p.BluRay.x264-SADPANDA [NO RARS]\\Twas.The.Night.Before.Christmas.1974.720p.BluRay.x264-SADPANDA.mkv",
+        "Duration": 1456,
+        "Duration Limit": 1800,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "Willow",
+        "LoadTitle": "willow",
+        "Alias": "willow",
+        "IMDB": "https://www.imdb.com/title/tt0096446/",
+        "Tags": [
+            "fantasy",
+            "action",
+            "adventure",
+            "80s"
+        ],
+        "MoviePath": "J:\\Moviesold\\Willow 1988 10bit hevc-d3g\\Willow 1988 BDRip 10Bit 1080p DD5.1 H265-d3g.mkv",
+        "Duration": 1456,
+        "Duration Limit": 1800,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "Captain America: Civil War",
+        "LoadTitle": "civilwar",
+        "Alias": "civilwar",
+        "IMDB": "https://www.imdb.com/title/tt3498820/",
+        "Tags": [
+            "superhero",
+            "action",
+            "2010s",
+            "marvel",
+            "mcu"
+        ],
+        "MoviePath": "J:\\Moviesold\\Captain.America.Civil.War.2016.720p.BluRay.x264.mp4",
+        "Duration": 8861,
+        "Duration Limit": 9000,
+        "Collection": "MCU",
+        "CollectionSequence": 13
+    },
+    {
+        "Title": "Doctor Strange",
+        "LoadTitle": "doctorstrange",
+        "Alias": "doctorstrange",
+        "IMDB": "https://www.imdb.com/title/tt1211837/",
+        "Tags": [
+            "superhero",
+            "action",
+            "2010s",
+            "marvel",
+            "mcu"
+        ],
+        "MoviePath": "J:\\Moviesold\\Doctor Strange (2016)1080p.mp4",
+        "Duration": 6898,
+        "Duration Limit": 7200,
+        "Collection": "MCU",
+        "CollectionSequence": 14
+    },
+    {
+        "Title": "Iron Man",
+        "LoadTitle": "ironman",
+        "Alias": "ironman",
+        "IMDB": "https://www.imdb.com/title/tt0371746/",
+        "Tags": [
+            "superhero",
+            "action",
+            "2010s",
+            "marvel",
+            "mcu"
+        ],
+        "MoviePath": "J:\\Moviesold\\Iron Man (2008)1080p BluRay x264 AC3.mkv",
+        "Duration": 7561,
+        "Duration Limit": 9000,
+        "Collection": "MCU",
+        "CollectionSequence": 1
+    },
+    {
+        "Title": "The Mummy",
+        "LoadTitle": "themummy",
+        "Alias": "themummy",
+        "IMDB": "https://www.imdb.com/title/tt0120616/",
+        "Tags": [
+            "action",
+            "2000s",
+            "adventure",
+            "spooky"
+        ],
+        "MoviePath": "J:\\Moviesold\\The Mummy 1999 1080p Bluray Remux VC-1 DTS-HD 5.1-decatora27.mkv",
+        "Duration": 7485,
+        "Duration Limit": 9000,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "The Secret of NIMH",
+        "LoadTitle": "secretofnimh",
+        "Alias": "secretofnimh",
+        "IMDB": "https://www.imdb.com/title/tt0084649/",
+        "Tags": [
+            "animated",
+            "80s",
+            "fantasy",
+            "adventure"
+        ],
+        "MoviePath": "J:\\Moviesold\\The Secret of NIMH (1982)1080p.BluRay.AAC.AC3.mkv",
+        "Duration": 7485,
+        "Duration Limit": 9000,
         "Collection": "",
         "CollectionSequence": 0
     }
