@@ -26,10 +26,27 @@
             "comedy"
         ],
         "MoviePath": "J:\\Moviesold\\Back.To.The.Future.Trilogy.1080p.H264.AC3.DD5.1.Will1869\\Back.To.The.Future.Part.II.1989.1080p.BluRay.H264.AC3.DD5.1.mp4",
-        "Duration": 6480,
+        "Duration": 6485,
         "Duration Limit": 7200,
         "Collection": "Back To The Future",
         "CollectionSequence": 2
+    },
+    {
+        "Title": "Back To The Future III",
+        "LoadTitle": "backtothefuture3",
+        "Alias": "backtothefuture3",
+        "IMDB": "https://www.imdb.com/title/tt0099088/",
+        "Tags": [
+            "scifi",
+            "comedy",
+            "90s",
+            "western"
+        ],
+        "MoviePath": "J:\\Moviesold\\Back.To.The.Future.Trilogy.1080p.H264.AC3.DD5.1.Will1869\\Back.To.The.Future.Part.III.1990.1080p.BluRay.H264.AC3.DD5.1.mp4",
+        "Duration": 7104,
+        "Duration Limit": 7200,
+        "Collection": "Back To The Future",
+        "CollectionSequence": 3
     },
     {
         "Title": "Labyrinth",
@@ -43,6 +60,55 @@
         ],
         "MoviePath": "J:\\Moviesold\\Labyrinth 1986 30th Anniversary Edition x264 D3FiL3R (bd50)\\Labyrinth 1986 30th Anniversary Edition TrueHD Atmos 1080p BluRay x264-D3FiL3R.mkv",
         "Duration": 6062,
+        "Duration Limit": 7200,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "A Charlie Brown Christmas",
+        "LoadTitle": "charliebrownchristmas",
+        "Alias": "charliebrownchristmas",
+        "IMDB": "https://www.imdb.com/title/tt0059026/",
+        "Tags": [
+            "holiday",
+            "christmas",
+            "60s",
+            "animated"
+        ],
+        "MoviePath": "J:\\Moviesold\\A Charlie Brown Christmas\\A.Charlie.Brown.Christmas.1965.mkv",
+        "Duration": 1528,
+        "Duration Limit": 1800,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "A Christmas Story",
+        "LoadTitle": "christmasstory",
+        "Alias": "christmasstory",
+        "IMDB": "https://www.imdb.com/title/tt0085334/",
+        "Tags": [
+            "holiday",
+            "christmas",
+            "40s"
+        ],
+        "MoviePath": "J:\\Moviesold\\A Christmas Story\\A Christmas Story.mkv",
+        "Duration": 5600,
+        "Duration Limit": 7200,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "Elf",
+        "LoadTitle": "elf",
+        "Alias": "elf",
+        "IMDB": "https://www.imdb.com/title/tt0319343/",
+        "Tags": [
+            "holiday",
+            "christmas",
+            "2000s"
+        ],
+        "MoviePath": "J:\\Moviesold\\Elf.2003.720p.BrRip.x264.aac-se7en\\Elf.2003.720p.BrRip.x264.aac-se7en.mp4",
+        "Duration": 5803,
         "Duration Limit": 7200,
         "Collection": "",
         "CollectionSequence": 0
