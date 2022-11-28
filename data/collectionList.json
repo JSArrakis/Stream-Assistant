@@ -1,6 +1,7 @@
 [
     {
         "Title": "Toonami2k",
+        "Type": "Collection",
         "Duration": 10800,
         "StartBumper": {
             "Duration": 60,
