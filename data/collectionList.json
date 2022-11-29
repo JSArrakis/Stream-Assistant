@@ -122,5 +122,44 @@
                 "BumperEnd": []
             }
         ]
+    },
+    {
+        "Title": "Test",
+        "Type": "Collection",
+        "Duration": 1800,
+        "StartBumper": {
+            "Duration": 60,
+            "Path": "C:\\Users\\Main\\Desktop\\Bumpers\\Toonami - 2000 Opening (TOM 1).mp4"
+        },
+        "EndBumper": {
+            "Duration": 8,
+            "Path": "C:\\Users\\Main\\Desktop\\Bumpers\\Later-Tom1-hq.m4v"
+        },
+        "Commercials": "C:\\Users\\Main\\Desktop\\Commercials\\2000sCommercials\\",
+        "Promos": "C:\\Users\\Main\\Desktop\\Bumpers\\Toonami\\",
+        "DefaultPromo": {
+            "Path": "C:\\Users\\Main\\Desktop\\Bumpers\\Toonami\\15\\Default.mp4",
+            "Duration": 15
+        },
+        "Shows": [
+            {
+                "LoadTitle": "sailormoon",
+                "Sequence": 1,
+                "Subsequence": 0,
+                "DurationLimit": 1800,
+                "BumperStart": [
+                    {
+                        "Duration": 30,
+                        "Path": "C:\\Users\\Main\\Desktop\\Bumpers\\SailorMoon-Tom1-Intro-v2.mp4"
+                    }
+                ],
+                "BumperEnd": [
+                    {
+                        "Duration": 9,
+                        "Path": "C:\\Users\\Main\\Desktop\\Bumpers\\SailorMoontoReboot-Tom1-Transition.m4v"
+                    }
+                ]
+            }
+        ]
     }
 ]
