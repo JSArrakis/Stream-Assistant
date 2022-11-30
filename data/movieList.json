@@ -11,7 +11,7 @@
         ],
         "MoviePath": "J:\\Moviesold\\Back.To.The.Future.Trilogy.1080p.H264.AC3.DD5.1.Will1869\\Back.to.the.Future.1985.1080p.BluRay.H264.AC3.DD5.1.mp4",
         "Duration": 6965,
-        "Duration Limit": 7200,
+        "DurationLimit": 7200,
         "Collection": "Back To The Future",
         "CollectionSequence": 1
     },
@@ -27,7 +27,7 @@
         ],
         "MoviePath": "J:\\Moviesold\\Back.To.The.Future.Trilogy.1080p.H264.AC3.DD5.1.Will1869\\Back.To.The.Future.Part.II.1989.1080p.BluRay.H264.AC3.DD5.1.mp4",
         "Duration": 6485,
-        "Duration Limit": 7200,
+        "DurationLimit": 7200,
         "Collection": "Back To The Future",
         "CollectionSequence": 2
     },
@@ -44,7 +44,7 @@
         ],
         "MoviePath": "J:\\Moviesold\\Back.To.The.Future.Trilogy.1080p.H264.AC3.DD5.1.Will1869\\Back.To.The.Future.Part.III.1990.1080p.BluRay.H264.AC3.DD5.1.mp4",
         "Duration": 7104,
-        "Duration Limit": 7200,
+        "DurationLimit": 7200,
         "Collection": "Back To The Future",
         "CollectionSequence": 3
     },
@@ -60,7 +60,7 @@
         ],
         "MoviePath": "J:\\Moviesold\\Labyrinth 1986 30th Anniversary Edition x264 D3FiL3R (bd50)\\Labyrinth 1986 30th Anniversary Edition TrueHD Atmos 1080p BluRay x264-D3FiL3R.mkv",
         "Duration": 6062,
-        "Duration Limit": 7200,
+        "DurationLimit": 7200,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -77,7 +77,7 @@
         ],
         "MoviePath": "J:\\Moviesold\\A Charlie Brown Christmas\\A.Charlie.Brown.Christmas.1965.mkv",
         "Duration": 1528,
-        "Duration Limit": 1800,
+        "DurationLimit": 1800,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -94,7 +94,7 @@
         ],
         "MoviePath": "J:\\Moviesold\\A Christmas Story\\A Christmas Story.mkv",
         "Duration": 5600,
-        "Duration Limit": 7200,
+        "DurationLimit": 7200,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -111,7 +111,7 @@
         ],
         "MoviePath": "J:\\Moviesold\\Elf.2003.720p.BrRip.x264.aac-se7en\\Elf.2003.720p.BrRip.x264.aac-se7en.mp4",
         "Duration": 5803,
-        "Duration Limit": 7200,
+        "DurationLimit": 7200,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -128,7 +128,7 @@
         ],
         "MoviePath": "J:\\Moviesold\\2001 A Space Odyssey\\2001 A Space Odyssey.mkv",
         "Duration": 8566,
-        "Duration Limit": 10800,
+        "DurationLimit": 10800,
         "Collection": "Space Odyssey",
         "CollectionSequence": 1
     },
@@ -144,7 +144,7 @@
         ],
         "MoviePath": "J:\\Moviesold\\2010 The Year We Make Contact\\2010 The Year We Make Contact.avi",
         "Duration": 6965,
-        "Duration Limit": 7200,
+        "DurationLimit": 7200,
         "Collection": "Space Odyssey",
         "CollectionSequence": 2
     },
@@ -160,7 +160,7 @@
         ],
         "MoviePath": "J:\\Moviesold\\Across The Universe\\Across The Universe.mkv",
         "Duration": 7998,
-        "Duration Limit": 9000,
+        "DurationLimit": 9000,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -179,7 +179,7 @@
         ],
         "MoviePath": "J:\\Moviesold\\Adams Family Values 1993\\Addams.Family.Values.1993.720p.WEB-DL.H264-HDCL.mkv",
         "Duration": 5652,
-        "Duration Limit": 7200,
+        "DurationLimit": 7200,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -196,7 +196,7 @@
         ],
         "MoviePath": "J:\\Moviesold\\Aladdin\\Aladdin.mkv",
         "Duration": 5423,
-        "Duration Limit": 7200,
+        "DurationLimit": 7200,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -212,7 +212,7 @@
         ],
         "MoviePath": "J:\\Moviesold\\Alien\\Alien.avi",
         "Duration": 6997,
-        "Duration Limit": 7200,
+        "DurationLimit": 7200,
         "Collection": "Alien",
         "CollectionSequence": 1
     },
@@ -229,7 +229,7 @@
         ],
         "MoviePath": "J:\\Moviesold\\Aliens 1986\\Aliens 1986.avi",
         "Duration": 9267,
-        "Duration Limit": 10800,
+        "DurationLimit": 10800,
         "Collection": "Alien",
         "CollectionSequence": 2
     },
@@ -249,7 +249,7 @@
         ],
         "MoviePath": "J:\\Moviesold\\Alira\\Akira.mkv",
         "Duration": 7528,
-        "Duration Limit": 9000,
+        "DurationLimit": 9000,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -267,7 +267,7 @@
         ],
         "MoviePath": "J:\\Moviesold\\Avengers(2012)\\Avengers2012DVDrip.mkv",
         "Duration": 8575,
-        "Duration Limit": 9000,
+        "DurationLimit": 9000,
         "Collection": "MCU",
         "CollectionSequence": 6
     },
@@ -284,7 +284,7 @@
         ],
         "MoviePath": "J:\\Moviesold\\Batman.and.robin1997\\Batman_and_Robin1997.mkv",
         "Duration": 8575,
-        "Duration Limit": 9000,
+        "DurationLimit": 9000,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -302,7 +302,7 @@
         ],
         "MoviePath": "J:\\Moviesold\\Beetlejuice (1988) -jlw\\Beetlejuice (1988).mkv",
         "Duration": 8575,
-        "Duration Limit": 9000,
+        "DurationLimit": 9000,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -319,7 +319,7 @@
         ],
         "MoviePath": "J:\\Moviesold\\Blade.Runner.2049.2017.COMPLETE.NTSC.DVD9-HONOR\\BladeRunner2049.mkv",
         "Duration": 9807,
-        "Duration Limit": 10800,
+        "DurationLimit": 10800,
         "Collection": "Blade Runner",
         "CollectionSequence": 2
     },
@@ -336,7 +336,7 @@
         ],
         "MoviePath": "J:\\Moviesold\\Breakfast.At.Tiffanys.1961.1080p.BluRay.x264-NORDiCHD\\BladeRunner2049.mkv",
         "Duration": 6905,
-        "Duration Limit": 7200,
+        "DurationLimit": 7200,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -353,7 +353,7 @@
         ],
         "MoviePath": "J:\\Moviesold\\Bring.It.On.2000.iNTERNAL.BDRip.x264-MARS\\Bring.It.On.2000.BDRip.x264-MARS.mkv",
         "Duration": 5926,
-        "Duration Limit": 7200,
+        "DurationLimit": 7200,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -371,7 +371,7 @@
         ],
         "MoviePath": "J:\\Moviesold\\Captain American - The First Avenger 2011 DVDRiP XviD AC3 - BHRG\\Captain American - The First Avenger 2011 DVDRiP XviD AC3 - BHRG.avi",
         "Duration": 7450,
-        "Duration Limit": 9000,
+        "DurationLimit": 9000,
         "Collection": "MCU",
         "CollectionSequence": 5
     },
@@ -389,7 +389,7 @@
         ],
         "MoviePath": "J:\\Moviesold\\Captain.America.The.Winter.Soldier.2014.NTSC.MULTi.DVDR-0MNiDVD\\title_t00.mkv",
         "Duration": 8153,
-        "Duration Limit": 9000,
+        "DurationLimit": 9000,
         "Collection": "MCU",
         "CollectionSequence": 9
     },
@@ -406,7 +406,7 @@
         ],
         "MoviePath": "J:\\Moviesold\\Contact 1997 10bit hevc-d3g\\Contact 1997 BluRay 10Bit 1080p DD5.1 H265-d3g.mkv",
         "Duration": 8980,
-        "Duration Limit": 9000,
+        "DurationLimit": 9000,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -425,7 +425,7 @@
         ],
         "MoviePath": "J:\\Moviesold\\Cowboy.Bebop.The.Movie.2001.720p.BluRay.x264-x0r\\Cowboy.Bebop.The.Movie.2001.720p.BluRay.x264-x0r.mkv",
         "Duration": 6914,
-        "Duration Limit": 7200,
+        "DurationLimit": 7200,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -444,7 +444,7 @@
         ],
         "MoviePath": "J:\\Moviesold\\Dante's Peak 1997 10bit hevc-d3g\\Dante's Peak 1997 BluRay 10Bit 1080p DD5.1 H265-d3g.mkv",
         "Duration": 6508,
-        "Duration Limit": 7200,
+        "DurationLimit": 7200,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -461,7 +461,7 @@
         ],
         "MoviePath": "J:\\Moviesold\\Edge.of.Tomorrow.2014.HEVC.1080p.BluRay.DTS.x265-LEGi0N\\Edge.of.Tomorrow.2014.HEVC.1080p.BluRay.DTS.x265-LEGi0N.mkv",
         "Duration": 6809,
-        "Duration Limit": 7200,
+        "DurationLimit": 7200,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -478,7 +478,7 @@
         ],
         "MoviePath": "J:\\Moviesold\\Event Horizon\\EventHorizon.mkv",
         "Duration": 5756,
-        "Duration Limit": 7200,
+        "DurationLimit": 7200,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -496,7 +496,7 @@
         ],
         "MoviePath": "J:\\Moviesold\\Fifth Element\\The Fifth Element.mkv",
         "Duration": 7577,
-        "Duration Limit": 9000,
+        "DurationLimit": 9000,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -514,7 +514,7 @@
         ],
         "MoviePath": "J:\\Moviesold\\Ghostbusters 1984 REMASTERED HEVC D3FiL3R (iso)\\Ghostbusters 1984 REMASTERED BluRay 1080p DD5.1 x265-D3FiL3R.mkv",
         "Duration": 6308,
-        "Duration Limit": 7200,
+        "DurationLimit": 7200,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -531,7 +531,7 @@
         ],
         "MoviePath": "J:\\Moviesold\\Ghostbusters 1984 REMASTERED HEVC D3FiL3R (iso)\\Ghostbusters 1984 REMASTERED BluRay 1080p DD5.1 x265-D3FiL3R.mkv",
         "Duration": 6308,
-        "Duration Limit": 7200,
+        "DurationLimit": 7200,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -550,7 +550,7 @@
         ],
         "MoviePath": "J:\\Moviesold\\Guardians.of.the.Galaxy.2014.V2.RETAIL.DVDRip.XviD.AC3-EVO\\Guardians.of.the.Galaxy.2014.V2.RETAIL.DVDRip.XviD.AC3-EVO.avi",
         "Duration": 7250,
-        "Duration Limit": 9000,
+        "DurationLimit": 9000,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -569,7 +569,7 @@
         ],
         "MoviePath": "J:\\Moviesold\\Hook\\Hook_t00.mkv",
         "Duration": 8507,
-        "Duration Limit": 9000,
+        "DurationLimit": 9000,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -585,7 +585,7 @@
         ],
         "MoviePath": "J:\\Moviesold\\Indiana.Jones.Collection.1080p.BluRay.H264.AC3.DD5.1.Will1869\\Indiana.Jones.And.The.Kingdom.Of.The.Crystal.Skull.2008.1080p.BluRay.H264.AAC3.DD5.1.mp4",
         "Duration": 7352,
-        "Duration Limit": 9000,
+        "DurationLimit": 9000,
         "Collection": "Indiana Jones",
         "CollectionSequence": 4
     },
@@ -601,7 +601,7 @@
         ],
         "MoviePath": "J:\\Moviesold\\Indiana.Jones.Collection.1080p.BluRay.H264.AC3.DD5.1.Will1869\\Indiana.Jones.and.the.Last.Crusade.1989.1080p.BluRay.H264.AC3.DD5.1.mp4",
         "Duration": 7623,
-        "Duration Limit": 9000,
+        "DurationLimit": 9000,
         "Collection": "Indiana Jones",
         "CollectionSequence": 3
     },
@@ -617,7 +617,7 @@
         ],
         "MoviePath": "J:\\Moviesold\\Indiana.Jones.Collection.1080p.BluRay.H264.AC3.DD5.1.Will1869\\Indiana.Jones.And.The.Temple.Of.Doom.1984.1080p.BluRay.H264.AC3.DD5.1.mp4",
         "Duration": 7108,
-        "Duration Limit": 7200,
+        "DurationLimit": 7200,
         "Collection": "Indiana Jones",
         "CollectionSequence": 2
     },
@@ -633,7 +633,7 @@
         ],
         "MoviePath": "J:\\Moviesold\\Indiana.Jones.Collection.1080p.BluRay.H264.AC3.DD5.1.Will1869\\Raiders.Of.The.Lost.Ark.1981.1080p.BluRay.H264.AC3.DD5.1.mp4",
         "Duration": 6918,
-        "Duration Limit": 7200,
+        "DurationLimit": 7200,
         "Collection": "Indiana Jones",
         "CollectionSequence": 1
     },
@@ -651,7 +651,7 @@
         ],
         "MoviePath": "J:\\Moviesold\\Iron.Man.2.2010.720p.BluRay.x264-x0r\\Iron.Man.2.2010.720p.BluRay.x264-x0r.mkv",
         "Duration": 7479,
-        "Duration Limit": 9000,
+        "DurationLimit": 9000,
         "Collection": "MCU",
         "CollectionSequence": 3
     },
@@ -669,7 +669,7 @@
         ],
         "MoviePath": "J:\\Moviesold\\Jurassic.Park.1993.iNTERNAL.BDRip.x264-REGRET\\regret-jp.mkv",
         "Duration": 7596,
-        "Duration Limit": 9000,
+        "DurationLimit": 9000,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -686,7 +686,7 @@
         ],
         "MoviePath": "J:\\Moviesold\\Krull\\Krull.mkv",
         "Duration": 7243,
-        "Duration Limit": 9000,
+        "DurationLimit": 9000,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -704,7 +704,7 @@
         ],
         "MoviePath": "J:\\Moviesold\\Marvel Cinematic Universe - Phase 1&2 - Fighter\\Ant-Man (2015).mp4",
         "Duration": 7026,
-        "Duration Limit": 7200,
+        "DurationLimit": 7200,
         "Collection": "MCU",
         "CollectionSequence": 12
     },
@@ -722,7 +722,7 @@
         ],
         "MoviePath": "J:\\Moviesold\\Marvel Cinematic Universe - Phase 1&2 - Fighter\\Avengers_ Age of Ultron (2015).mp4",
         "Duration": 8478,
-        "Duration Limit": 9000,
+        "DurationLimit": 9000,
         "Collection": "MCU",
         "CollectionSequence": 11
     },
@@ -740,7 +740,7 @@
         ],
         "MoviePath": "J:\\Moviesold\\Marvel Cinematic Universe - Phase 1&2 - Fighter\\Iron Man 3 (2013).mp4",
         "Duration": 7832,
-        "Duration Limit": 9000,
+        "DurationLimit": 9000,
         "Collection": "MCU",
         "CollectionSequence": 7
     },
@@ -758,7 +758,7 @@
         ],
         "MoviePath": "J:\\Moviesold\\Marvel Cinematic Universe - Phase 1&2 - Fighter\\Thor (2011).mp4",
         "Duration": 6890,
-        "Duration Limit": 7200,
+        "DurationLimit": 7200,
         "Collection": "MCU",
         "CollectionSequence": 4
     },
@@ -776,7 +776,7 @@
         ],
         "MoviePath": "J:\\Moviesold\\Marvel Cinematic Universe - Phase 1&2 - Fighter\\Thor_ The Dark World (2013).mp4",
         "Duration": 6723,
-        "Duration Limit": 7200,
+        "DurationLimit": 7200,
         "Collection": "MCU",
         "CollectionSequence": 8
     },
@@ -794,7 +794,7 @@
         ],
         "MoviePath": "J:\\Moviesold\\Men.In.Black.1997.1080p.BRRip.x265.AC3-Freebee\\Men.In.Black.1997.1080p.BRRip.x265.AC3-Freebee.mkv",
         "Duration": 5878,
-        "Duration Limit": 7200,
+        "DurationLimit": 7200,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -813,7 +813,7 @@
         ],
         "MoviePath": "J:\\Moviesold\\Muppet Christmad Carol\\Muppet Christmas Carol.mkv",
         "Duration": 5152,
-        "Duration Limit": 5400,
+        "DurationLimit": 5400,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -830,7 +830,7 @@
         ],
         "MoviePath": "J:\\Moviesold\\Muppet Christmad Carol\\Muppet Christmas Carol.mkv",
         "Duration": 5822,
-        "Duration Limit": 7200,
+        "DurationLimit": 7200,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -848,7 +848,7 @@
         ],
         "MoviePath": "J:\\Moviesold\\Never Ending Story\\THE NEVERENDING STORY.mkv",
         "Duration": 5642,
-        "Duration Limit": 7200,
+        "DurationLimit": 7200,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -866,7 +866,7 @@
         ],
         "MoviePath": "J:\\Moviesold\\onemagicchristmas\\One Magic Christmas.mkv",
         "Duration": 5332,
-        "Duration Limit": 5400,
+        "DurationLimit": 5400,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -885,7 +885,7 @@
         ],
         "MoviePath": "J:\\Moviesold\\PatLabor\\Patlabor.mp4",
         "Duration": 7102,
-        "Duration Limit": 7200,
+        "DurationLimit": 7200,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -900,7 +900,7 @@
         ],
         "MoviePath": "J:\\Moviesold\\Poltergeist.2015.EXTENDED.CUT.1080p.BluRay.x264.DTS-HD MA 5.1-NoHaTE\\Poltergeist.2015.EXTENDED.CUT.1080p.BluRay.x264.DTS-HD MA 5.1-NoHaTE.mkv",
         "Duration": 6053,
-        "Duration Limit": 7200,
+        "DurationLimit": 7200,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -919,7 +919,7 @@
         ],
         "MoviePath": "J:\\Moviesold\\Return to Oz\\Return to Oz.mkv",
         "Duration": 6598,
-        "Duration Limit": 7200,
+        "DurationLimit": 7200,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -937,7 +937,7 @@
         ],
         "MoviePath": "J:\\Moviesold\\Rogue One (2016) -jlw\\Rogue One (2016).mkv",
         "Duration": 8037,
-        "Duration Limit": 9000,
+        "DurationLimit": 9000,
         "Collection": "Star Wars",
         "CollectionSequence": 8
     },
@@ -955,7 +955,7 @@
         ],
         "MoviePath": "J:\\Moviesold\\Rudolph.the.Red-Nosed.Reindeer.1964.720p.BluRay.x264-x0r\\Rudolph.the.Red-Nosed.Reindeer.1964.720p.BluRay.x264-x0r.mkv",
         "Duration": 3105,
-        "Duration Limit": 3600,
+        "DurationLimit": 3600,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -972,7 +972,7 @@
         ],
         "MoviePath": "J:\\Moviesold\\Skyfall 2012 DVDRip XviD AC3 iNT iTCH\\skyfall.dvdrip.xvid-itch.avi",
         "Duration": 8590,
-        "Duration Limit": 9000,
+        "DurationLimit": 9000,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -990,7 +990,7 @@
         ],
         "MoviePath": "J:\\Moviesold\\Star Wars A New Hope\\title_t00.mkv",
         "Duration": 7483,
-        "Duration Limit": 9000,
+        "DurationLimit": 9000,
         "Collection": "Star Wars",
         "CollectionSequence": 1
     },
@@ -1008,7 +1008,7 @@
         ],
         "MoviePath": "J:\\Moviesold\\Star Wars Attack Of The Clones\\title_t00.mkv",
         "Duration": 8547,
-        "Duration Limit": 9000,
+        "DurationLimit": 9000,
         "Collection": "Star Wars",
         "CollectionSequence": 5
     },
@@ -1026,7 +1026,7 @@
         ],
         "MoviePath": "J:\\Moviesold\\Star Wars Empire Strikes Back\\title_t00.mkv",
         "Duration": 7641,
-        "Duration Limit": 9000,
+        "DurationLimit": 9000,
         "Collection": "Star Wars",
         "CollectionSequence": 2
     },
@@ -1044,7 +1044,7 @@
         ],
         "MoviePath": "J:\\Moviesold\\Star Wars Force Awakens\\Star Wars the Force Awakens.mkv",
         "Duration": 8284,
-        "Duration Limit": 9000,
+        "DurationLimit": 9000,
         "Collection": "Star Wars",
         "CollectionSequence": 7
     },
@@ -1062,7 +1062,7 @@
         ],
         "MoviePath": "J:\\Moviesold\\Star Wars Phantom Menace\\PhantomMenace.mkv",
         "Duration": 8175,
-        "Duration Limit": 9000,
+        "DurationLimit": 9000,
         "Collection": "Star Wars",
         "CollectionSequence": 4
     },
@@ -1080,7 +1080,7 @@
         ],
         "MoviePath": "J:\\Moviesold\\Star Wars Return of The Jedi\\title_t00.mkv",
         "Duration": 8088,
-        "Duration Limit": 9000,
+        "DurationLimit": 9000,
         "Collection": "Star Wars",
         "CollectionSequence": 3
     },
@@ -1098,7 +1098,7 @@
         ],
         "MoviePath": "J:\\Moviesold\\Star Wars Return of The Jedi\\title_t00.mkv",
         "Duration": 8407,
-        "Duration Limit": 9000,
+        "DurationLimit": 9000,
         "Collection": "Star Wars",
         "CollectionSequence": 6
     },
@@ -1116,7 +1116,7 @@
         ],
         "MoviePath": "J:\\Moviesold\\Teenage Mutant Ninja Turtles\\TeenageMutantNinjaTurtles1990.mkv",
         "Duration": 5608,
-        "Duration Limit": 7200,
+        "DurationLimit": 7200,
         "Collection": "TMNT",
         "CollectionSequence": 1
     },
@@ -1136,7 +1136,7 @@
         ],
         "MoviePath": "J:\\Moviesold\\Tenchi Muyo In Love\\Tenchi Muyo In Love.mp4",
         "Duration": 5957,
-        "Duration Limit": 7200,
+        "DurationLimit": 7200,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -1153,7 +1153,7 @@
         ],
         "MoviePath": "J:\\Moviesold\\The Lord of the Rings Trilogy ExtCut hevc-d3g\\Fellowship of the Ring ExtCut hevc-d3g\\LOTR-Fellowship of the Ring 2001 ExtCut BluRay 1080p DD5.1 x265-d3g.mkv",
         "Duration": 13696,
-        "Duration Limit": 14400,
+        "DurationLimit": 14400,
         "Collection": "LOTR",
         "CollectionSequence": 1
     },
@@ -1170,7 +1170,7 @@
         ],
         "MoviePath": "J:\\Moviesold\\The Lord of the Rings Trilogy ExtCut hevc-d3g\\The Two Towers extcut hevc-d3g\\LOTR-The Two Towers 2002 ExtCut BluRay 1080p DD5.1 x265-d3g.mkv",
         "Duration": 14129,
-        "Duration Limit": 14400,
+        "DurationLimit": 14400,
         "Collection": "LOTR",
         "CollectionSequence": 2
     },
@@ -1187,7 +1187,7 @@
         ],
         "MoviePath": "J:\\Moviesold\\The Lord of the Rings Trilogy ExtCut hevc-d3g\\LOTR-Return of the King hevc-d3g\\LOTR-The Return of the King 2003 BluRay AC-3 x265-d3g.mkv",
         "Duration": 15795,
-        "Duration Limit": 16200,
+        "DurationLimit": 16200,
         "Collection": "LOTR",
         "CollectionSequence": 3
     },
@@ -1204,7 +1204,7 @@
         ],
         "MoviePath": "J:\\Moviesold\\The Nutcracker\\The Nutcracker George balanchines.mkv",
         "Duration": 5545,
-        "Duration Limit": 7200,
+        "DurationLimit": 7200,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -1221,7 +1221,7 @@
         ],
         "MoviePath": "J:\\Moviesold\\The Sword in the Stone\\The Sword and the Stone.mkv",
         "Duration": 5776,
-        "Duration Limit": 5400,
+        "DurationLimit": 5400,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -1239,7 +1239,7 @@
         ],
         "MoviePath": "J:\\Moviesold\\The.Addams.Family.1991.720p.BluRay.x264-x0r\\The.Addams.Family.1991.720p.BluRay.x264-x0r.mkv",
         "Duration": 6578,
-        "Duration Limit": 7200,
+        "DurationLimit": 7200,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -1256,7 +1256,7 @@
         ],
         "MoviePath": "J:\\Moviesold\\The.Dark.Crystal.1982.Remastered.1080p.BluRay.H264.AC3.DD5.1.Will1869\\The.Dark.Crystal.1982.Remastered.1080p.BluRay.H264.AC3.DD5.1.Will1869.mp4",
         "Duration": 5587,
-        "Duration Limit": 7200,
+        "DurationLimit": 7200,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -1272,7 +1272,7 @@
         ],
         "MoviePath": "J:\\Moviesold\\Toys\\TOYS1992.mkv",
         "Duration": 7296,
-        "Duration Limit": 9000,
+        "DurationLimit": 9000,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -1290,7 +1290,7 @@
         ],
         "MoviePath": "J:\\Moviesold\\Toys\\TOYS1992.mkv",
         "Duration": 7296,
-        "Duration Limit": 9000,
+        "DurationLimit": 9000,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -1307,7 +1307,7 @@
         ],
         "MoviePath": "J:\\Moviesold\\Twas.The.Night.Before.Christmas.1974.720p.BluRay.x264-SADPANDA [NO RARS]\\Twas.The.Night.Before.Christmas.1974.720p.BluRay.x264-SADPANDA.mkv",
         "Duration": 1456,
-        "Duration Limit": 1800,
+        "DurationLimit": 1800,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -1324,7 +1324,7 @@
         ],
         "MoviePath": "J:\\Moviesold\\Willow 1988 10bit hevc-d3g\\Willow 1988 BDRip 10Bit 1080p DD5.1 H265-d3g.mkv",
         "Duration": 1456,
-        "Duration Limit": 1800,
+        "DurationLimit": 1800,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -1342,7 +1342,7 @@
         ],
         "MoviePath": "J:\\Moviesold\\Captain.America.Civil.War.2016.720p.BluRay.x264.mp4",
         "Duration": 8861,
-        "Duration Limit": 9000,
+        "DurationLimit": 9000,
         "Collection": "MCU",
         "CollectionSequence": 13
     },
@@ -1360,7 +1360,7 @@
         ],
         "MoviePath": "J:\\Moviesold\\Doctor Strange (2016)1080p.mp4",
         "Duration": 6898,
-        "Duration Limit": 7200,
+        "DurationLimit": 7200,
         "Collection": "MCU",
         "CollectionSequence": 14
     },
@@ -1378,7 +1378,7 @@
         ],
         "MoviePath": "J:\\Moviesold\\Iron Man (2008)1080p BluRay x264 AC3.mkv",
         "Duration": 7561,
-        "Duration Limit": 9000,
+        "DurationLimit": 9000,
         "Collection": "MCU",
         "CollectionSequence": 1
     },
@@ -1395,7 +1395,7 @@
         ],
         "MoviePath": "J:\\Moviesold\\The Mummy 1999 1080p Bluray Remux VC-1 DTS-HD 5.1-decatora27.mkv",
         "Duration": 7485,
-        "Duration Limit": 9000,
+        "DurationLimit": 9000,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -1412,7 +1412,7 @@
         ],
         "MoviePath": "J:\\Moviesold\\The Secret of NIMH (1982)1080p.BluRay.AAC.AC3.mkv",
         "Duration": 7485,
-        "Duration Limit": 9000,
+        "DurationLimit": 9000,
         "Collection": "",
         "CollectionSequence": 0
     }

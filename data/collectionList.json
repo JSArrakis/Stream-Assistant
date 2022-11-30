@@ -14,8 +14,8 @@
         "Commercials": "C:\\Users\\Main\\Desktop\\Commercials\\2000sCommercials\\",
         "Promos": "C:\\Users\\Main\\Desktop\\Bumpers\\Toonami\\",
         "DefaultPromo": {
-            "Path": "C:\\Users\\Main\\Desktop\\Bumpers\\Toonami\\15\\Default.mp4",
-            "Duration": 15
+            "path": "C:\\Users\\Main\\Desktop\\Bumpers\\Toonami\\15\\Default.mp4",
+            "duration": 15
         },
         "Shows": [
             {
@@ -138,8 +138,8 @@
         "Commercials": "C:\\Users\\Main\\Desktop\\Commercials\\2000sCommercials\\",
         "Promos": "C:\\Users\\Main\\Desktop\\Bumpers\\Toonami\\",
         "DefaultPromo": {
-            "Path": "C:\\Users\\Main\\Desktop\\Bumpers\\Toonami\\15\\Default.mp4",
-            "Duration": 15
+            "path": "C:\\Users\\Main\\Desktop\\Bumpers\\Toonami\\15\\Default.mp4",
+            "duration": 15
         },
         "Shows": [
             {
