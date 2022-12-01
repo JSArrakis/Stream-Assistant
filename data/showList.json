@@ -15,7 +15,8 @@
 			"toonami",
 			"toonami2k"
 		],
-		"EpisodeCount": 5,
+		"SecondaryTags": [],
+		"EpisodeCount": 49,
 		"Episodes": [
 			{
 				"Season": 1,
@@ -477,7 +478,10 @@
 			"toonami",
 			"toonami2k"
 		],
-		"EpisodeCount": 5,
+		"SecondaryTags": [
+			"christmas"
+		],
+		"EpisodeCount": 28,
 		"Episodes": [
 			{
 				"Season": 1,
@@ -751,7 +755,8 @@
 			"toonami",
 			"toonami2k"
 		],
-		"EpisodeCount": 5,
+		"SecondaryTags": [],
+		"EpisodeCount": 20,
 		"Episodes": [
 			{
 				"Season": 1,
@@ -950,7 +955,8 @@
 			"toonami",
 			"toonami2k"
 		],
-		"EpisodeCount": 5,
+		"SecondaryTags": [],
+		"EpisodeCount": 38,
 		"Episodes": [
 			{
 				"Season": 1,
@@ -1320,7 +1326,8 @@
 			"toonami",
 			"toonami2k"
 		],
-		"EpisodeCount": 5,
+		"SecondaryTags": [],
+		"EpisodeCount": 46,
 		"Episodes": [
 			{
 				"Season": 1,
@@ -1752,7 +1759,8 @@
 			"toonami",
 			"toonami2k"
 		],
-		"EpisodeCount": 5,
+		"SecondaryTags": [],
+		"EpisodeCount": 39,
 		"Episodes": [
 			{
 				"Season": 1,
@@ -2117,10 +2125,14 @@
 		"Tags": [
 			"animated",
 			"morning",
+			"comedy",
 			"nickelodeon",
 			"nicktoons"
 		],
-		"EpisodeCount": 5,
+		"SecondaryTags": [
+			"christmas"
+		],
+		"EpisodeCount": 6,
 		"Episodes": [
 			{
 				"Season": 1,
@@ -2166,6 +2178,17 @@
 				"EpisodeTitle": "Doug's Big Nose",
 				"Duration": 705,
 				"EpisodeTags": []
+			},
+			{
+				"Season": 4,
+				"Episode": 24,
+				"EpisodeNumber": 101,
+				"EpisodePath": "I:\\tv\\Doug.1991.S01-S02-S03-S04\\S04\\0424 Doug's Christmas Story.mkv",
+				"EpisodeTitle": "Doug's Christmas Story",
+				"Duration": 1348,
+				"EpisodeTags": [
+					"christmas"
+				]
 			}
 		]
 	},
@@ -2179,10 +2202,14 @@
 		"Tags": [
 			"animated",
 			"morning",
+			"comedy",
 			"nickelodeon",
 			"nicktoons"
 		],
-		"EpisodeCount": 5,
+		"SecondaryTags": [
+			"christmas"
+		],
+		"EpisodeCount": 6,
 		"Episodes": [
 			{
 				"Season": 1,
@@ -2228,6 +2255,17 @@
 				"EpisodeTitle": "Beauty Contest - Baseball",
 				"Duration": 1363,
 				"EpisodeTags": []
+			},
+			{
+				"Season": 2,
+				"Episode": 14,
+				"EpisodeNumber": 27,
+				"EpisodePath": "I:\\tv\\Rugrats Complete 480 WEB-DL\\Rugrats.S02.480p.WEB-DL.AAC2.0.H.264-SA89\\Rugrats.S02E14.The.Santa.Experience.480p.WEB-DL.AAC2.0.H.264-SA89.mkv",
+				"EpisodeTitle": "The Santa Experience",
+				"Duration": 1437,
+				"EpisodeTags": [
+					"christmas"
+				]
 			}
 		]
 	},
@@ -2241,9 +2279,12 @@
 		"Tags": [
 			"animated",
 			"morning",
+			"scifi",
+			"comedy",
 			"cartoonnetwork",
 			"cartooncartoon"
 		],
+		"SecondaryTags": [],
 		"EpisodeCount": 13,
 		"Episodes": [
 			{
@@ -2371,6 +2412,15 @@
 				"EpisodeTitle": "Jurassic Pooch",
 				"Duration": 1338,
 				"EpisodeTags": []
+			},
+			{
+				"Season": 1,
+				"Episode": 13,
+				"EpisodeNumber": 13,
+				"EpisodePath": "I:\\tv\\Dexters Laboratory [jlw]\\Dexters Laboratory S01 [jlw]\\Dexter's Laboratory - 1x13 - Jurassic Pooch.mkv",
+				"EpisodeTitle": "Jurassic Pooch",
+				"Duration": 1338,
+				"EpisodeTags": []
 			}
 		]
 	},
@@ -2384,9 +2434,12 @@
 		"Tags": [
 			"animated",
 			"morning",
+			"comedy",
+			"spooky",
 			"cartoonnetwork",
 			"cartooncartoon"
 		],
+		"SecondaryTags": [],
 		"EpisodeCount": 13,
 		"Episodes": [
 			{
