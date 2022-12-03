@@ -5,7 +5,14 @@
 	"PlaylistName": "Playlist",
 	"Commercials": {
 		"nineties": "C:\\Users\\Main\\Desktop\\Commercials\\90sCommercials\\",
-		"aughts": "C:\\Users\\Main\\Desktop\\Commercials\\2000sCommercials\\"
+		"aughts": "C:\\Users\\Main\\Desktop\\Commercials\\2000sCommercials\\",
+		"christmas": "C:\\Users\\Main\\Desktop\\Commercials\\ChristmasCommercials\\"
+	},
+	"Shorts": {
+		"christmas": "C:\\Users\\Main\\Desktop\\Shorts\\Christmas\\"
+	},
+	"Music": {
+		"christmas": "C:\\Users\\Main\\Desktop\\MusicVideos\\Christmas\\"
 	},
 	"CommercialDuration": 300,
 	"StreamPromo": {

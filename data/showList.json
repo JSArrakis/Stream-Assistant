@@ -2562,5 +2562,144 @@
 				"EpisodeTags": []
 			}
 		]
+	},
+	{
+		"Title": "Bob's Burgers",
+		"LoadTitle": "bobsburgers",
+		"Alias": "bobsburgers",
+		"IMDB": "",
+		"DurationLimit": 1800,
+		"OverDuration": false,
+		"Tags": [
+			"animated",
+			"comedy"
+		],
+		"SecondaryTags": [
+			"christmas"
+		],
+		"EpisodeCount": 0,
+		"Episodes": [
+			{
+				"Season": 3,
+				"Episode": 9,
+				"EpisodeNumber": 31,
+				"EpisodePath": "I:\\tv\\Bobs Burgers S01-S08 1080p WEB-DL DD5.1 H.264-Mixed\\Bobs.Burgers.S03.1080p.WEB-DL.DD5.1.H264\\Bobs.Burgers.S03E09.God.Rest.Ye.Merry.Gentle-Mannequins.PROPER.1080p.WEB-DL.DD5.1.H264-iT00NZ.mkv",
+				"EpisodeTitle": "God Rest Ye Merry Gentle-Mannequins",
+				"Duration": 1297,
+				"EpisodeTags": [
+					"christmas"
+				]
+			},
+			{
+				"Season": 4,
+				"Episode": 8,
+				"EpisodeNumber": 53,
+				"EpisodePath": "I:\\tv\\Bobs Burgers S01-S08 1080p WEB-DL DD5.1 H.264-Mixed\\Bobs.Burgers.S04.1080p.WEB-DL.DD5.1.H264-iT00NZ\\Bobs.Burgers.S04E08.Christmas.in.the.Car.1080p.WEB-DL.DD5.1.H264-iT00NZ.mkv",
+				"EpisodeTitle": "Christmas in the Car",
+				"Duration": 1282,
+				"EpisodeTags": [
+					"christmas"
+				]
+			},
+			{
+				"Season": 5,
+				"Episode": 6,
+				"EpisodeNumber": 73,
+				"EpisodePath": "I:\\tv\\Bobs Burgers S01-S08 1080p WEB-DL DD5.1 H.264-Mixed\\Bob's Burgers S05 1080p Amazon WEB-DL DD+ 5.1 x264-TrollHD\\Bob's Burgers S05E06 1080p Amazon WEB-DL DD+ 5.1 x264-TrollHD.mkv",
+				"EpisodeTitle": "Father of the Bob",
+				"Duration": 1293,
+				"EpisodeTags": [
+					"christmas"
+				]
+			},
+			{
+				"Season": 6,
+				"Episode": 5,
+				"EpisodeNumber": 93,
+				"EpisodePath": "I:\\tv\\Bobs Burgers S01-S08 1080p WEB-DL DD5.1 H.264-Mixed\\Bob's Burgers S06 1080p Amazon WEB-DL DD+ 5.1 x264-TrollHD\\Bob's Burgers S06E05 1080p Amazon WEB-DL DD+ 5.1 x264-TrollHD.mkv",
+				"EpisodeTitle": "Nice-Capades",
+				"Duration": 1278,
+				"EpisodeTags": [
+					"christmas"
+				]
+			},
+			{
+				"Season": 7,
+				"Episode": 7,
+				"EpisodeNumber": 114,
+				"EpisodePath": "I:\\tv\\Bobs Burgers S01-S08 1080p WEB-DL DD5.1 H.264-Mixed\\Bob's Burgers S07 1080p Amazon WEB-DL DD+ 5.1 x264-TrollHD\\Bob's Burgers S06E05 1080p Amazon WEB-DL DD+ 5.1 x264-TrollHD.mkv",
+				"EpisodeTitle": "The Last Gingerbread House on the Left",
+				"Duration": 1314,
+				"EpisodeTags": [
+					"christmas"
+				]
+			},
+			{
+				"Season": 8,
+				"Episode": 6,
+				"EpisodeNumber": 135,
+				"EpisodePath": "I:\\tv\\Bobs.Burgers.S08E06.DVDRip.x264-NODLABS\\bobs.burgers.s08e06.dvdrip.x264-nodlabs.mkv",
+				"EpisodeTitle": "The Bleakening Part I",
+				"Duration": 1297,
+				"EpisodeTags": [
+					"christmas"
+				]
+			},
+			{
+				"Season": 8,
+				"Episode": 7,
+				"EpisodeNumber": 136,
+				"EpisodePath": "I:\\tv\\Bobs Burgers S01-S08 1080p WEB-DL DD5.1 H.264-Mixed\\Bobs.Burgers.S08.1080p.REPACK.AMZN.WEB-DL.DD+5.1.H.264-SiGMA\\bobs.burgers.s08e07.dvdrip.x264-nodlabs.mkv",
+				"EpisodeTitle": "The Bleakening Part II",
+				"Duration": 1296,
+				"EpisodeTags": [
+					"christmas"
+				]
+			},
+			{
+				"Season": 9,
+				"Episode": 10,
+				"EpisodeNumber": 160,
+				"EpisodePath": "I:\\tv\\Bobs Burgers S01-S08 1080p WEB-DL DD5.1 H.264-Mixed\\Bobs.Burgers.S09-S10.1080p.AMZN.WEB-DL.DDP5.1.H.264-Mixed\\Bobs.Burgers.S09.1080p.AMZN.WEB-DL.DDP5.1.H.264-Mixed\\Bobs.Burgers.S09E10.Better.Off.Sled.1080p.AMZN.WEB-DL.DD+5.1.H.264-QOQ.mkv",
+				"EpisodeTitle": "Better of Sled",
+				"Duration": 1286,
+				"EpisodeTags": [
+					"christmas"
+				]
+			},
+			{
+				"Season": 10,
+				"Episode": 10,
+				"EpisodeNumber": 182,
+				"EpisodePath": "I:\\tv\\Bobs Burgers S01-S08 1080p WEB-DL DD5.1 H.264-Mixed\\Bobs.Burgers.S09-S10.1080p.AMZN.WEB-DL.DDP5.1.H.264-Mixed\\Bob's.Burgers.S10E10.Have.Yourself.A.Maily.Linda.Christmas.1080p.HULU.WEB-DL.DD+5.1.H.264-CtrlHD.mkv",
+				"EpisodeTitle": "Have Yourself a Maily Linda Christmas",
+				"Duration": 1296,
+				"EpisodeTags": [
+					"christmas"
+				]
+			},
+			{
+				"Season": 11,
+				"Episode": 10,
+				"EpisodeNumber": 204,
+				"EpisodePath": "I:\\tv\\Bobs Burgers S01-S08 1080p WEB-DL DD5.1 H.264-Mixed\\Bobs.Burgers.S11.720p.HEVC.x265-MeGusta\\Bobs.Burgers.S11E10.720p.HEVC.x265-MeGusta.mkv",
+				"EpisodeTitle": "Yachty or Nice",
+				"Duration": 1297,
+				"EpisodeTags": [
+					"christmas"
+				]
+			},
+			{
+				"Season": 12,
+				"Episode": 10,
+				"EpisodeNumber": 226,
+				"EpisodePath": "I:\\tv\\Bobs Burgers S01-S08 1080p WEB-DL DD5.1 H.264-Mixed\\Bobs.Burgers.S12\\bobs.burgers.s12e10.1080p.web.h264-cakes.mkv",
+				"EpisodeTitle": "Gene's Christmas Break",
+				"Duration": 1298,
+				"EpisodeTags": [
+					"christmas"
+				]
+			}
+		]
 	}
 ]

@@ -1415,5 +1415,154 @@
         "DurationLimit": 9000,
         "Collection": "",
         "CollectionSequence": 0
+    },
+    {
+        "Title": "Gremlins",
+        "LoadTitle": "gremlins",
+        "Alias": "gremlins",
+        "IMDB": "https://www.imdb.com/title/tt0087363/",
+        "Tags": [
+            "horror",
+            "comedy",
+            "80s"
+        ],
+        "MoviePath": "I:\\Movies\\Gremlins 1984 10bit hevc-d3g\\Gremlins 1984 BDRip 10Bit 1080p DD5.1 Multi H265-d3g.mkv",
+        "Duration": 6375,
+        "DurationLimit": 7200,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "Die Hard",
+        "LoadTitle": "diehard",
+        "Alias": "diehard",
+        "IMDB": "https://www.imdb.com/title/tt0095016/",
+        "Tags": [
+            "christmas",
+            "action",
+            "80s"
+        ],
+        "MoviePath": "I:\\Movies\\Die.Hard.1988.BluRay.CEE.1080p\\Die Hard 1988 BluRay 10Bit 1080p DD5.1 H265-d3b.mkv",
+        "Duration": 7930,
+        "DurationLimit": 9000,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "Trading Places",
+        "LoadTitle": "tradingplaces",
+        "Alias": "tradingplaces",
+        "IMDB": "https://www.imdb.com/title/tt0086465/",
+        "Tags": [
+            "comedy",
+            "80s"
+        ],
+        "MoviePath": "I:\\Movies\\Trading.Places.1983.720p.BluRay.x264-x0r\\Trading.Places.1983.720p.BluRay.x264-x0r.mkv",
+        "Duration": 6981,
+        "DurationLimit": 7200,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "Edward Scissorhands",
+        "LoadTitle": "edwardscissorhands",
+        "Alias": "edwardscissorhands",
+        "IMDB": "https://www.imdb.com/title/tt0099487/",
+        "Tags": [
+            "comedy",
+            "drama",
+            "romance",
+            "spooky",
+            "90s"
+        ],
+        "MoviePath": "I:\\Movies\\Edward.Scissorhands.1990.720p.BluRay.x264-x0r\\Edward.Scissorhands.1990.720p.BluRay.x264-x0r.mkv",
+        "Duration": 6300,
+        "DurationLimit": 7200,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "Lethal Weapon",
+        "LoadTitle": "lethalweapon",
+        "Alias": "lethalweapon",
+        "IMDB": "https://www.imdb.com/title/tt0093409/",
+        "Tags": [
+            "action",
+            "crime",
+            "80s"
+        ],
+        "MoviePath": "I:\\Movies\\Lethal.Weapon.1987.720p.BRRip.x264-x0r\\Lethal.Weapon.1987.720p.BRRip.x264-x0r.mkv",
+        "Duration": 6577,
+        "DurationLimit": 7200,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "While You Were Sleeping",
+        "LoadTitle": "whileyouweresleeping",
+        "Alias": "whileyouweresleeping",
+        "IMDB": "https://www.imdb.com/title/tt0093409/",
+        "Tags": [
+            "comedy",
+            "romance",
+            "drama",
+            "90s"
+        ],
+        "MoviePath": "I:\\Movies\\While.You.Were.Sleeping.1995.720p.BluRay.x264-x0r\\While.You.Were.Sleeping.1995.720p.BluRay.x264-x0r.mkv",
+        "Duration": 6195,
+        "DurationLimit": 7200,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "You've Got Mail",
+        "LoadTitle": "youvegotmail",
+        "Alias": "youvegotmail",
+        "IMDB": "https://www.imdb.com/title/tt0128853/",
+        "Tags": [
+            "comedy",
+            "romance",
+            "drama",
+            "90s"
+        ],
+        "MoviePath": "I:\\Movies\\Youve.Got.Mail.1998.720p.BRRip.x264-x0r\\Youve.Got.Mail.1998.720p.BRRip.x264-x0r.mkv",
+        "Duration": 7164,
+        "DurationLimit": 7200,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "Bridget Jones's Diary",
+        "LoadTitle": "bridgetjonessdiary",
+        "Alias": "bridgetjonessdiary",
+        "IMDB": "https://www.imdb.com/title/tt0243155/",
+        "Tags": [
+            "comedy",
+            "romance",
+            "drama",
+            "2000s"
+        ],
+        "MoviePath": "I:\\Movies\\Bridget.Jones.Diary.2001.720p.BRRip.x264-x0r\\Bridget.Jones.Diary.2001.720p.BRRip.x264-x0r.mkv",
+        "Duration": 5800,
+        "DurationLimit": 7200,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "Batman Returns",
+        "LoadTitle": "batmanreturns",
+        "Alias": "batmanreturns",
+        "IMDB": "https://www.imdb.com/title/tt0243155/",
+        "Tags": [
+            "superhero",
+            "action",
+            "90s",
+            "dc"
+        ],
+        "MoviePath": "I:\\Movies\\Batman.Returns.1992.720p.BRRip.x264-x0r\\Batman.Returns.1992.720p.BRRip.x264-x0r.mkv",
+        "Duration": 7588,
+        "DurationLimit": 9000,
+        "Collection": "",
+        "CollectionSequence": 0
     }
 ]

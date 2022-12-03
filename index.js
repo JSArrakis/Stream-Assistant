@@ -15,22 +15,15 @@ const main = async () => {
 	//If result comes back false, do nothing, otherwise proceed.
 	if (await dirMan.manageDestinationDirectory(config, destinationDirectory, options)) {
 
-		//TODO: Create progression option for non collection block shows
-		//TODO: Optional: I need to know what era the playlist shows represent (based on cross section of metadata 
-		//stored on each show object)
-		//TODO: Optional: I need to know the weight of number of episodes of each series for proper number of 
-		//episodes per stream(metadata makes this easier)
+		//TODO: Get media durations programmatically from the file system v1.2
 		let stream = streamConstructor.constructStream(config, destinationDirectory, options);
 
 		dirMan.createStreamFile(destinationDirectory, playlistFileName, stream);
 
-		//TODO: Create output text (possibly in file) ready to copy and paste into Discord for easy stream 
-		//announcements
-
-		saCommander.executeStream(config, destinationDirectory, playlistFileName);
+		//saCommander.executeStream(config, destinationDirectory, playlistFileName);
 
 		if (options.test) {
-			console.log("Hope you meant to have testing enabled. Womp womp.");
+			// console.log("Hope you meant to have testing enabled. Womp womp.");
 		}
 	} else {
 		console.log("STREAM ASSISTANT DIDN'T DO ANYTHING! Assistant has already been ran for the current date.");
