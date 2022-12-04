@@ -2577,7 +2577,7 @@
 		"SecondaryTags": [
 			"christmas"
 		],
-		"EpisodeCount": 0,
+		"EpisodeCount": 11,
 		"Episodes": [
 			{
 				"Season": 3,
@@ -2696,6 +2696,58 @@
 				"EpisodePath": "I:\\tv\\Bobs Burgers S01-S08 1080p WEB-DL DD5.1 H.264-Mixed\\Bobs.Burgers.S12\\bobs.burgers.s12e10.1080p.web.h264-cakes.mkv",
 				"EpisodeTitle": "Gene's Christmas Break",
 				"Duration": 1298,
+				"EpisodeTags": [
+					"christmas"
+				]
+			}
+		]
+	},
+	{
+		"Title": "Futurama",
+		"LoadTitle": "futurama",
+		"Alias": "futurama",
+		"IMDB": "",
+		"DurationLimit": 1800,
+		"OverDuration": false,
+		"Tags": [
+			"animated",
+			"comedy",
+			"scifi"
+		],
+		"SecondaryTags": [
+			"christmas"
+		],
+		"EpisodeCount": 3,
+		"Episodes": [
+			{
+				"Season": 2,
+				"Episode": 8,
+				"EpisodeNumber": 17,
+				"EpisodePath": "I:\\tv\\Futurama x265 [jlw]\\Season 2\\Futurama - 2x08 - Xmas Story.mkv",
+				"EpisodeTitle": "Xmas Story",
+				"Duration": 1354,
+				"EpisodeTags": [
+					"christmas"
+				]
+			},
+			{
+				"Season": 4,
+				"Episode": 8,
+				"EpisodeNumber": 46,
+				"EpisodePath": "I:\\tv\\Futurama x265 [jlw]\\Season 4\\Futurama - S04E02 - A Tale of Two Santas.mkv",
+				"EpisodeTitle": "A Tale of Two Santas",
+				"Duration": 1354,
+				"EpisodeTags": [
+					"christmas"
+				]
+			},
+			{
+				"Season": 6,
+				"Episode": 13,
+				"EpisodeNumber": 85,
+				"EpisodePath": "I:\\tv\\Futurama x265 [jlw]\\Season 6\\Futurama - S06E13 - The Futurama Holiday Spectacular.mkv",
+				"EpisodeTitle": "The Futurama Holiday Spectacular",
+				"Duration": 1300,
 				"EpisodeTags": [
 					"christmas"
 				]

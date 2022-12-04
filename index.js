@@ -19,11 +19,12 @@ const main = async () => {
 		let stream = streamConstructor.constructStream(config, destinationDirectory, options);
 
 		dirMan.createStreamFile(destinationDirectory, playlistFileName, stream);
+		
 
-		//saCommander.executeStream(config, destinationDirectory, playlistFileName);
+		saCommander.executeStream(config, destinationDirectory, playlistFileName);
 
 		if (options.test) {
-			// console.log("Hope you meant to have testing enabled. Womp womp.");
+			console.log("Hope you meant to have testing enabled. Womp womp.");
 		}
 	} else {
 		console.log("STREAM ASSISTANT DIDN'T DO ANYTHING! Assistant has already been ran for the current date.");
