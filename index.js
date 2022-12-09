@@ -15,11 +15,11 @@ const main = async () => {
 	//If result comes back false, do nothing, otherwise proceed.
 	if (await dirMan.manageDestinationDirectory(config, destinationDirectory, options)) {
 
-		//TODO: Get media durations programmatically from the file system v1.2
+		//TODO: v1.2 Get media durations programmatically from the file system
 		let stream = streamConstructor.constructStream(config, destinationDirectory, options);
 
 		dirMan.createStreamFile(destinationDirectory, playlistFileName, stream);
-		
+
 
 		saCommander.executeStream(config, destinationDirectory, playlistFileName);
 
