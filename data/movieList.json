@@ -1562,6 +1562,230 @@
         "MoviePath": "I:\\Movies\\Batman.Returns.1992.720p.BRRip.x264-x0r\\Batman.Returns.1992.720p.BRRip.x264-x0r.mkv",
         "Duration": 7588,
         "DurationLimit": 9000,
+        "Collection": "Burton Batman",
+        "CollectionSequence": 2
+    },
+    {
+        "Title": "Home Alone",
+        "LoadTitle": "homealone",
+        "Alias": "homealone",
+        "IMDB": "https://www.imdb.com/title/tt0099785/",
+        "Tags": [
+            "christmas",
+            "holiday",
+            "90s",
+            "comedy"
+        ],
+        "MoviePath": "I:\\Movies\\Home.Alone.1&2.1080p.BluRay.H264.AC3.DD5.1.Will1869\\Home.Alone.1990.REMASTERED.1080p.BluRay.H264.AC3.DD5.1.mp4",
+        "Duration": 6173,
+        "DurationLimit": 7200,
+        "Collection": "Home Alone",
+        "CollectionSequence": 1
+    },
+    {
+        "Title": "Home Alone 2: Lost in New York",
+        "LoadTitle": "homealone2",
+        "Alias": "homealone2",
+        "IMDB": "https://www.imdb.com/title/tt0104431/",
+        "Tags": [
+            "christmas",
+            "holiday",
+            "90s",
+            "comedy"
+        ],
+        "MoviePath": "I:\\Movies\\Home.Alone.1&2.1080p.BluRay.H264.AC3.DD5.1.Will1869\\Home.Alone.2.Lost.In.New.York.1992.1080p.BluRay.H264.AC3.DD5.1.mp4",
+        "Duration": 7201,
+        "DurationLimit": 9000,
+        "Collection": "Home Alone",
+        "CollectionSequence": 2
+    },
+    {
+        "Title": "Santabear's First Christmas",
+        "LoadTitle": "santabear",
+        "Alias": "santabear",
+        "IMDB": "https://www.imdb.com/title/tt0396200/",
+        "Tags": [
+            "christmas",
+            "holiday",
+            "animaed",
+            "80s"
+        ],
+        "MoviePath": "I:\\Movies\\Santabear's First Christmas\\Santabear's.First.Christmas.mp4",
+        "Duration": 1368,
+        "DurationLimit": 1800,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "Polar Express",
+        "LoadTitle": "polarexpress",
+        "Alias": "polarexpress",
+        "IMDB": "https://www.imdb.com/title/tt0338348/",
+        "Tags": [
+            "christmas",
+            "holiday",
+            "2000s",
+            "cgi"
+        ],
+        "MoviePath": "I:\\Movies\\The Polar Express 2004 10bit hevc-d3g (r)\\The Polar Express 2004 BluRay 10Bit 1080p DD5.1 H265-d3g.mkv",
+        "Duration": 5996,
+        "DurationLimit": 7200,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "How the Grinch Stole Christmas (2000)",
+        "LoadTitle": "grinchchristmas2000",
+        "Alias": "grinchchristmas2000",
+        "IMDB": "https://www.imdb.com/title/tt0170016/",
+        "Tags": [
+            "christmas",
+            "holiday",
+            "2000s",
+            "comedy"
+        ],
+        "MoviePath": "I:\\Movies\\How The Grinch Stole Christmas 2000 10bit hevc-d3g\\How The Grinch Stole Christmas 2000 BluRay 10Bit 1080p DD5.1 H265-d3g.mkv",
+        "Duration": 6296,
+        "DurationLimit": 7200,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "Jingle All the Way",
+        "LoadTitle": "jinglealltheway",
+        "Alias": "jinglealltheway",
+        "IMDB": "https://www.imdb.com/title/tt0116705/",
+        "Tags": [
+            "christmas",
+            "holiday",
+            "90s",
+            "comedy"
+        ],
+        "MoviePath": "I:\\Movies\\Jingle.All.The.Way.1996.720p.BRRip.x264-x0r\\Jingle.All.The.Way.1996.720p.BRRip.x264-x0r.mkv",
+        "Duration": 5624,
+        "DurationLimit": 7200,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "How the Grinch Stole Christmas (1966)",
+        "LoadTitle": "grinchchristmas",
+        "Alias": "grinchchristmas",
+        "IMDB": "https://www.imdb.com/title/tt0060345/",
+        "Tags": [
+            "christmas",
+            "holiday",
+            "60s",
+            "animated"
+        ],
+        "MoviePath": "I:\\Movies\\How The Grinch Stole Christmas - 1966.mkv",
+        "Duration": 1545,
+        "DurationLimit": 1800,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "The Nightmare Before Christmas",
+        "LoadTitle": "nightmare",
+        "Alias": "nightmare",
+        "IMDB": "https://www.imdb.com/title/tt0107688/",
+        "Tags": [
+            "christmas",
+            "halloween",
+            "holiday",
+            "90s",
+            "animated",
+            "cgi"
+        ],
+        "MoviePath": "I:\\Movies\\The.Nightmare.Before.Christmas.1993.1080p.BluRay.H264.AC3.DD5.1.Will1869\\The.Nightmare.Before.Christmas.1993.1080p.BluRay.H264.AC3.DD5.1.Will1869.mp4",
+        "Duration": 4599,
+        "DurationLimit": 5400,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "Star Wars: Holiday Special",
+        "LoadTitle": "starwarsholidayspecial",
+        "Alias": "starwarsholidayspecial",
+        "IMDB": "https://www.imdb.com/title/tt0193524/",
+        "Tags": [
+            "christmas",
+            "starwars",
+            "holiday",
+            "70s",
+            "wtf"
+        ],
+        "MoviePath": "I:\\Movies\\StarWarsHolidaySpecial\\starwarsholidayspecial.mp4",
+        "Duration": 5847,
+        "DurationLimit": 7200,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "Super Troopers",
+        "LoadTitle": "supertroopers",
+        "Alias": "supertroopers",
+        "IMDB": "https://www.imdb.com/title/tt0247745/",
+        "Tags": [
+            "comedy",
+            "2000s",
+            "stoner"
+        ],
+        "MoviePath": "J:\\Moviesold\\Super Troopers\\SuperTroopers.mkv",
+        "Duration": 6008,
+        "DurationLimit": 7200,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "From All of Us to All of You",
+        "LoadTitle": "disneychristmas",
+        "Alias": "disneychristmas",
+        "IMDB": "https://www.imdb.com/title/tt0193524/",
+        "Tags": [
+            "christmas",
+            "disney",
+            "holiday",
+            "60s",
+            "animated"
+        ],
+        "MoviePath": "I:\\Movies\\FromAllOfUsToAllOfYou\\FromAllofUstoAllofYou.mp4",
+        "Duration": 1159,
+        "DurationLimit": 1800,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "Scrooged",
+        "LoadTitle": "scrooged",
+        "Alias": "scrooged",
+        "IMDB": "https://www.imdb.com/title/tt0096061/",
+        "Tags": [
+            "christmas",
+            "holiday",
+            "80s",
+            "comedy"
+        ],
+        "MoviePath": "J:\\Moviesold\\Scrooged\\Scrooged.mkv",
+        "Duration": 6058,
+        "DurationLimit": 7200,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "A Muppet Family Christmas",
+        "LoadTitle": "muppetfamilychristmas",
+        "Alias": "muppetfamilychristmas",
+        "IMDB": "https://www.imdb.com/title/tt0251282/",
+        "Tags": [
+            "christmas",
+            "holiday",
+            "80s",
+            "comedy"
+        ],
+        "MoviePath": "I:\\Movies\\MuppetFamilyChristmas\\MuppetFamilyChristmas.mp4",
+        "Duration": 2878,
+        "DurationLimit": 3600,
         "Collection": "",
         "CollectionSequence": 0
     }

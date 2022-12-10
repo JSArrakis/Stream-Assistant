@@ -2753,5 +2753,78 @@
 				]
 			}
 		]
+	},
+	{
+		"Title": "King of the Hill",
+		"LoadTitle": "kingofthehill",
+		"Alias": "kingofthehill",
+		"IMDB": "",
+		"DurationLimit": 1800,
+		"OverDuration": false,
+		"Tags": [
+			"animated",
+			"comedy"
+		],
+		"SecondaryTags": [
+			"christmas"
+		],
+		"EpisodeCount": 5,
+		"Episodes": [
+			{
+				"Season": 2,
+				"Episode": 10,
+				"EpisodeNumber": 23,
+				"EpisodePath": "J:\\TV\\King.of.the.Hill.S01-S13.COMPLETE.WEB-DL.H.264-MiXED\\King.of.the.Hill.S02.480p.WEB-DL.AAC2.0.H.264-SA89\\King.of.the.Hill.S02E10.The.Unbearable.Blindness.of.Laying.480p.WEB-DL.AAC2.0.H.264-SA89.mkv",
+				"EpisodeTitle": "The Unbearable Blindness of Laying",
+				"Duration": 1354,
+				"EpisodeTags": [
+					"christmas"
+				]
+			},
+			{
+				"Season": 5,
+				"Episode": 8,
+				"EpisodeNumber": 92,
+				"EpisodePath": "J:\\TV\\King.of.the.Hill.S01-S13.COMPLETE.WEB-DL.H.264-MiXED\\King.of.the.Hill.S05.480p.WEB-DL.AAC2.0.H.264-SA89\\King.of.the.Hill.S05E08.'Twas.the.Nut.Before.Christmas.480p.WEB-DL.AAC2.0.H.264-SA89.mkv",
+				"EpisodeTitle": "'Twas the Nut Before Christmas",
+				"Duration": 1356,
+				"EpisodeTags": [
+					"christmas"
+				]
+			},
+			{
+				"Season": 6,
+				"Episode": 4,
+				"EpisodeNumber": 108,
+				"EpisodePath": "J:\\TV\\King.of.the.Hill.S01-S13.COMPLETE.WEB-DL.H.264-MiXED\\King.of.the.Hill.S06.480p.WEB-DL.AAC2.0.H.264-SA89\\King.of.the.Hill.S06E04.The.Father.the.Son.and.J.C.480p.WEB-DL.AAC2.0.H.264-SA89.mkv",
+				"EpisodeTitle": "The Father the Son and J.C.",
+				"Duration": 1354,
+				"EpisodeTags": [
+					"christmas"
+				]
+			},
+			{
+				"Season": 8,
+				"Episode": 7,
+				"EpisodeNumber": 156,
+				"EpisodePath": "J:\\TV\\King.of.the.Hill.S01-S13.COMPLETE.WEB-DL.H.264-MiXED\\King.Of.The.Hill.s08.WEB-DL.AAC.2.0.H264-BTN\\King.Of.The.Hill.s08e07.Livin'.on.Reds,.Vitamin.C,.and.Pr.WEB-DL.AAC.2.0.H264-BTN.mkv",
+				"EpisodeTitle": "Livin' on Reds, Vitamin C, and Propane",
+				"Duration": 1321,
+				"EpisodeTags": [
+					"christmas"
+				]
+			},
+			{
+				"Season": 9,
+				"Episode": 2,
+				"EpisodeNumber": 173,
+				"EpisodePath": "J:\\TV\\King.of.the.Hill.S01-S13.COMPLETE.WEB-DL.H.264-MiXED\\King.Of.The.Hill.S09.WEB-DL.AAC.2.0.H264.BTN\\King.Of.The.Hill.S09E02.Ms.Wakefield.WEB-DL.AAC.2.0.H264.BTN.mkv",
+				"EpisodeTitle": "Ms Wakefield",
+				"Duration": 1325,
+				"EpisodeTags": [
+					"christmas"
+				]
+			}
+		]
 	}
 ]
