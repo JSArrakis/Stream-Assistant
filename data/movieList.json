@@ -261,7 +261,7 @@
         "Tags": [
             "superhero",
             "action",
-            "2010s",
+            "10s",
             "marvel",
             "mcu"
         ],
@@ -365,7 +365,7 @@
         "Tags": [
             "superhero",
             "action",
-            "2010s",
+            "10s",
             "marvel",
             "mcu"
         ],
@@ -383,7 +383,7 @@
         "Tags": [
             "superhero",
             "action",
-            "2010s",
+            "10s",
             "marvel",
             "mcu"
         ],
@@ -457,7 +457,7 @@
             "scifi",
             "action",
             "thriller",
-            "2010s"
+            "10s"
         ],
         "MoviePath": "J:\\Moviesold\\Edge.of.Tomorrow.2014.HEVC.1080p.BluRay.DTS.x265-LEGi0N\\Edge.of.Tomorrow.2014.HEVC.1080p.BluRay.DTS.x265-LEGi0N.mkv",
         "Duration": 6809,
@@ -545,7 +545,7 @@
             "marvel",
             "mcu",
             "comedy",
-            "2010s",
+            "10s",
             "superhero"
         ],
         "MoviePath": "J:\\Moviesold\\Guardians.of.the.Galaxy.2014.V2.RETAIL.DVDRip.XviD.AC3-EVO\\Guardians.of.the.Galaxy.2014.V2.RETAIL.DVDRip.XviD.AC3-EVO.avi",
@@ -580,7 +580,7 @@
         "IMDB": "https://www.imdb.com/title/tt0367882/",
         "Tags": [
             "action",
-            "2000s",
+            "00s",
             "adventure"
         ],
         "MoviePath": "J:\\Moviesold\\Indiana.Jones.Collection.1080p.BluRay.H264.AC3.DD5.1.Will1869\\Indiana.Jones.And.The.Kingdom.Of.The.Crystal.Skull.2008.1080p.BluRay.H264.AAC3.DD5.1.mp4",
@@ -645,7 +645,7 @@
         "Tags": [
             "superhero",
             "action",
-            "2010s",
+            "10s",
             "marvel",
             "mcu"
         ],
@@ -698,7 +698,7 @@
         "Tags": [
             "superhero",
             "action",
-            "2010s",
+            "10s",
             "marvel",
             "mcu"
         ],
@@ -716,7 +716,7 @@
         "Tags": [
             "superhero",
             "action",
-            "2010s",
+            "10s",
             "marvel",
             "mcu"
         ],
@@ -734,7 +734,7 @@
         "Tags": [
             "superhero",
             "action",
-            "2010s",
+            "10s",
             "marvel",
             "mcu"
         ],
@@ -752,7 +752,7 @@
         "Tags": [
             "superhero",
             "action",
-            "2010s",
+            "10s",
             "marvel",
             "mcu"
         ],
@@ -770,7 +770,7 @@
         "Tags": [
             "superhero",
             "action",
-            "2010s",
+            "10s",
             "marvel",
             "mcu"
         ],
@@ -933,7 +933,7 @@
             "scifi",
             "starwars",
             "adventure",
-            "2010s"
+            "10s"
         ],
         "MoviePath": "J:\\Moviesold\\Rogue One (2016) -jlw\\Rogue One (2016).mkv",
         "Duration": 8037,
@@ -968,7 +968,7 @@
             "action",
             "adventure",
             "spy",
-            "2010s"
+            "10s"
         ],
         "MoviePath": "J:\\Moviesold\\Skyfall 2012 DVDRip XviD AC3 iNT iTCH\\skyfall.dvdrip.xvid-itch.avi",
         "Duration": 8590,
@@ -1336,7 +1336,7 @@
         "Tags": [
             "superhero",
             "action",
-            "2010s",
+            "10s",
             "marvel",
             "mcu"
         ],
@@ -1354,7 +1354,7 @@
         "Tags": [
             "superhero",
             "action",
-            "2010s",
+            "10s",
             "marvel",
             "mcu"
         ],
@@ -1372,7 +1372,7 @@
         "Tags": [
             "superhero",
             "action",
-            "2010s",
+            "10s",
             "marvel",
             "mcu"
         ],
@@ -1784,6 +1784,1343 @@
             "comedy"
         ],
         "MoviePath": "I:\\Movies\\MuppetFamilyChristmas\\MuppetFamilyChristmas.mp4",
+        "Duration": 2878,
+        "DurationLimit": 3600,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "Zombieland",
+        "LoadTitle": "zombieland",
+        "Alias": "zombieland",
+        "IMDB": "",
+        "Tags": [
+            "spooky",
+            "2000s",
+            "comedy"
+        ],
+        "MoviePath": "",
+        "Duration": 2878,
+        "DurationLimit": 3600,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "Young Sherlock Holmes",
+        "LoadTitle": "youngsherlock",
+        "Alias": "youngsherlock",
+        "IMDB": "",
+        "Tags": [
+            "drama",
+            "mystery",
+            "80s"
+        ],
+        "MoviePath": "",
+        "Duration": 2878,
+        "DurationLimit": 3600,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "Young Frankenstein",
+        "LoadTitle": "youngfrankenstein",
+        "Alias": "youngfrankenstein",
+        "IMDB": "",
+        "Tags": [
+            "spooky",
+            "80s",
+            "halloween",
+            "comedy"
+        ],
+        "MoviePath": "",
+        "Duration": 2878,
+        "DurationLimit": 3600,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "You, Me and Dupree",
+        "LoadTitle": "youmedupree",
+        "Alias": "youmedupree",
+        "IMDB": "",
+        "Tags": [
+            "romance",
+            "2000s",
+            "comedy"
+        ],
+        "MoviePath": "",
+        "Duration": 2878,
+        "DurationLimit": 3600,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "Year of the Dog",
+        "LoadTitle": "yearofdog",
+        "Alias": "yearofdog",
+        "IMDB": "",
+        "Tags": [
+            "drama",
+            "2000s",
+            "comedy"
+        ],
+        "MoviePath": "",
+        "Duration": 2878,
+        "DurationLimit": 3600,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "Wreckers",
+        "LoadTitle": "wreckers",
+        "Alias": "wreckers",
+        "IMDB": "",
+        "Tags": [
+            "drama",
+            "romance",
+            "10s",
+            "british"
+        ],
+        "MoviePath": "",
+        "Duration": 2878,
+        "DurationLimit": 3600,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "Wolf Creek",
+        "LoadTitle": "wolfcreek",
+        "Alias": "wolfcreek",
+        "IMDB": "",
+        "Tags": [
+            "horror",
+            "halloween",
+            "2000s"
+        ],
+        "MoviePath": "",
+        "Duration": 2878,
+        "DurationLimit": 3600,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "Wild Wild West",
+        "LoadTitle": "wildwildwest",
+        "Alias": "wildwildwest",
+        "IMDB": "",
+        "Tags": [
+            "action",
+            "comedy",
+            "2000s",
+            "western"
+        ],
+        "MoviePath": "",
+        "Duration": 2878,
+        "DurationLimit": 3600,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "White Noise",
+        "LoadTitle": "whitenoise",
+        "Alias": "whitenoise",
+        "IMDB": "",
+        "Tags": [
+            "spooky",
+            "horror",
+            "2000s",
+            "drama"
+        ],
+        "MoviePath": "",
+        "Duration": 2878,
+        "DurationLimit": 3600,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "Werewolf of London",
+        "LoadTitle": "werewolflondon",
+        "Alias": "werewolflondon",
+        "IMDB": "",
+        "Tags": [
+            "horror",
+            "drama",
+            "1930s"
+        ],
+        "MoviePath": "",
+        "Duration": 2878,
+        "DurationLimit": 3600,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "We Were Soldiers",
+        "LoadTitle": "weweresoldiers",
+        "Alias": "weweresoldiers",
+        "IMDB": "",
+        "Tags": [
+            "war",
+            "military",
+            "2000s",
+            "action"
+        ],
+        "MoviePath": "",
+        "Duration": 2878,
+        "DurationLimit": 3600,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "We Own the Night",
+        "LoadTitle": "ownthenight",
+        "Alias": "ownthenight",
+        "IMDB": "",
+        "Tags": [
+            "action",
+            "thriller",
+            "2000s"
+        ],
+        "MoviePath": "",
+        "Duration": 2878,
+        "DurationLimit": 3600,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "Wayne's World",
+        "LoadTitle": "waynesworld",
+        "Alias": "waynesworld",
+        "IMDB": "",
+        "Tags": [
+            "comedy",
+            "90s",
+            "stoner"
+        ],
+        "MoviePath": "",
+        "Duration": 2878,
+        "DurationLimit": 3600,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "War of the Worlds",
+        "LoadTitle": "warofworlds",
+        "Alias": "warofworlds",
+        "IMDB": "",
+        "Tags": [
+            "scifi",
+            "action",
+            "2000s"
+        ],
+        "MoviePath": "",
+        "Duration": 2878,
+        "DurationLimit": 3600,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "Wall Street",
+        "LoadTitle": "wallstreet",
+        "Alias": "wallstreet",
+        "IMDB": "",
+        "Tags": [
+            "drama",
+            "crime",
+            "80s"
+        ],
+        "MoviePath": "",
+        "Duration": 2878,
+        "DurationLimit": 3600,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "View From the Top",
+        "LoadTitle": "viewfromtop",
+        "Alias": "viewfromtop",
+        "IMDB": "",
+        "Tags": [
+            "romance",
+            "2000s",
+            "comedy"
+        ],
+        "MoviePath": "",
+        "Duration": 2878,
+        "DurationLimit": 3600,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "Vertical Limit",
+        "LoadTitle": "verticallimit",
+        "Alias": "verticallimit",
+        "IMDB": "",
+        "Tags": [
+            "action",
+            "2000s",
+            "thriller"
+        ],
+        "MoviePath": "",
+        "Duration": 2878,
+        "DurationLimit": 3600,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "Vampire Hunter D",
+        "LoadTitle": "vampirehunterd",
+        "Alias": "vampirehunterd",
+        "IMDB": "",
+        "Tags": [
+            "scifi",
+            "anime",
+            "80s",
+            "horror"
+        ],
+        "MoviePath": "",
+        "Duration": 2878,
+        "DurationLimit": 3600,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "Used Cars",
+        "LoadTitle": "usedcars",
+        "Alias": "usedcars",
+        "IMDB": "",
+        "Tags": [
+            "80s",
+            "comedy"
+        ],
+        "MoviePath": "",
+        "Duration": 2878,
+        "DurationLimit": 3600,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "Catch Me If You Can",
+        "LoadTitle": "catchmeifyoucan",
+        "Alias": "catchmeifyoucan",
+        "IMDB": "",
+        "Tags": [
+            "crime",
+            "drama",
+            "2000s",
+            "comedy"
+        ],
+        "MoviePath": "",
+        "Duration": 2878,
+        "DurationLimit": 3600,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "127 Hours",
+        "LoadTitle": "127hours",
+        "Alias": "127hours",
+        "IMDB": "",
+        "Tags": [
+            "bio",
+            "10s",
+            "drama"
+        ],
+        "MoviePath": "",
+        "Duration": 2878,
+        "DurationLimit": 3600,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "1776",
+        "LoadTitle": "1776",
+        "Alias": "1776",
+        "IMDB": "",
+        "Tags": [
+            "musical",
+            "holiday",
+            "70s",
+            "drama"
+        ],
+        "MoviePath": "",
+        "Duration": 2878,
+        "DurationLimit": 3600,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "20 Million Miles to Earth",
+        "LoadTitle": "20milliontoearth",
+        "Alias": "20milliontoearth",
+        "IMDB": "",
+        "Tags": [
+            "scifi",
+            "creature",
+            "50s",
+            "horror"
+        ],
+        "MoviePath": "",
+        "Duration": 2878,
+        "DurationLimit": 3600,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "20,000 Leagues Under the Sea",
+        "LoadTitle": "20kleagues",
+        "Alias": "20kleagues",
+        "IMDB": "",
+        "Tags": [
+            "scifi",
+            "50s",
+            "adventure"
+        ],
+        "MoviePath": "",
+        "Duration": 2878,
+        "DurationLimit": 3600,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "2012",
+        "LoadTitle": "2012",
+        "Alias": "2012",
+        "IMDB": "",
+        "Tags": [
+            "2000s",
+            "scifi",
+            "drama"
+        ],
+        "MoviePath": "",
+        "Duration": 2878,
+        "DurationLimit": 3600,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "25th Hour",
+        "LoadTitle": "25thhour",
+        "Alias": "25thhour",
+        "IMDB": "",
+        "Tags": [
+            "2000s",
+            "drama"
+        ],
+        "MoviePath": "",
+        "Duration": 2878,
+        "DurationLimit": 3600,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "28 Days Later",
+        "LoadTitle": "28dayslater",
+        "Alias": "28dayslater",
+        "IMDB": "https://www.imdb.com/title/tt0289043/",
+        "Tags": [
+            "2000s",
+            "horror",
+            "zombie"
+        ],
+        "MoviePath": "",
+        "Duration": 2878,
+        "DurationLimit": 3600,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "50 First Dates",
+        "LoadTitle": "50firstdates",
+        "Alias": "50firstdates",
+        "IMDB": "https://www.imdb.com/title/tt0343660/",
+        "Tags": [
+            "2000s",
+            "drama",
+            "comedy",
+            "romance"
+        ],
+        "MoviePath": "",
+        "Duration": 2878,
+        "DurationLimit": 3600,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "A Game of Death",
+        "LoadTitle": "gameofdeath",
+        "Alias": "gameofdeath",
+        "IMDB": "https://www.imdb.com/title/tt0038549/",
+        "Tags": [
+            "40s",
+            "adventure",
+            "thriller"
+        ],
+        "MoviePath": "",
+        "Duration": 2878,
+        "DurationLimit": 3600,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "A History of Violence",
+        "LoadTitle": "historyofviolence",
+        "Alias": "historyofviolence",
+        "IMDB": "https://www.imdb.com/title/tt0399146/",
+        "Tags": [
+            "2000s",
+            "drama",
+            "action",
+            "thriller"
+        ],
+        "MoviePath": "",
+        "Duration": 2878,
+        "DurationLimit": 3600,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "A Murder of Crows",
+        "LoadTitle": "murderofcrows",
+        "Alias": "murderofcrows",
+        "IMDB": "https://www.imdb.com/title/tt0133985/",
+        "Tags": [
+            "90s",
+            "drama",
+            "thriller"
+        ],
+        "MoviePath": "",
+        "Duration": 2878,
+        "DurationLimit": 3600,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "A Nightmare on Elm Street",
+        "LoadTitle": "nightmareonelm",
+        "Alias": "nightmareonelm",
+        "IMDB": "",
+        "Tags": [
+            "80s",
+            "horror",
+            "slasher",
+            "halloween"
+        ],
+        "MoviePath": "",
+        "Duration": 2878,
+        "DurationLimit": 3600,
+        "Collection": "Nightmare on Elm Street",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "A Nightmare on Elm Street 2: Freddy's Revenge",
+        "LoadTitle": "nightmareonelm2",
+        "Alias": "nightmareonelm2",
+        "IMDB": "",
+        "Tags": [
+            "80s",
+            "horror",
+            "slasher"
+        ],
+        "MoviePath": "",
+        "Duration": 2878,
+        "DurationLimit": 3600,
+        "Collection": "Nightmare on Elm Street",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "A Nightmare on Elm Street 3: Dream Warriors",
+        "LoadTitle": "nightmareonelm3",
+        "Alias": "nightmareonelm3",
+        "IMDB": "",
+        "Tags": [
+            "80s",
+            "horror",
+            "slasher"
+        ],
+        "MoviePath": "",
+        "Duration": 2878,
+        "DurationLimit": 3600,
+        "Collection": "Nightmare on Elm Street",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "A Nightmare on Elm Street 4: The Dream Master",
+        "LoadTitle": "nightmareonelm4",
+        "Alias": "nightmareonelm4",
+        "IMDB": "",
+        "Tags": [
+            "80s",
+            "horror",
+            "slasher"
+        ],
+        "MoviePath": "",
+        "Duration": 2878,
+        "DurationLimit": 3600,
+        "Collection": "Nightmare on Elm Street",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "A Nightmare on Elm Street 5: The Dream Child",
+        "LoadTitle": "nightmareonelm5",
+        "Alias": "nightmareonelm5",
+        "IMDB": "",
+        "Tags": [
+            "80s",
+            "horror",
+            "slasher"
+        ],
+        "MoviePath": "",
+        "Duration": 2878,
+        "DurationLimit": 3600,
+        "Collection": "Nightmare on Elm Street",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "A Nightmare on Elm Street",
+        "LoadTitle": "nightmareonelm2010",
+        "Alias": "nightmareonelm2010",
+        "IMDB": "",
+        "Tags": [
+            "10s",
+            "horror",
+            "slasher",
+            "halloween"
+        ],
+        "MoviePath": "",
+        "Duration": 2878,
+        "DurationLimit": 3600,
+        "Collection": "Nightmare on Elm Street",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "A.I. Artificial Intelligence",
+        "LoadTitle": "artificialintelligence",
+        "Alias": "artificialintelligence",
+        "IMDB": "",
+        "Tags": [
+            "2000s",
+            "scifi",
+            "drama"
+        ],
+        "MoviePath": "",
+        "Duration": 2878,
+        "DurationLimit": 3600,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "Abbott and Costello Meet Frankenstein ",
+        "LoadTitle": "abbottandcostellofrankenstein",
+        "Alias": "abbottandcostellofrankenstein",
+        "IMDB": "https://www.imdb.com/title/tt0040068/",
+        "Tags": [
+            "40s",
+            "horror",
+            "comedy"
+        ],
+        "MoviePath": "",
+        "Duration": 2878,
+        "DurationLimit": 3600,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "Abbott and Costello Meet The Invisible Man ",
+        "LoadTitle": "abbottandcostelloinvisible",
+        "Alias": "abbottandcostelloinvisible",
+        "IMDB": "https://www.imdb.com/title/tt0043255/",
+        "Tags": [
+            "50s",
+            "scifi",
+            "comedy"
+        ],
+        "MoviePath": "",
+        "Duration": 2878,
+        "DurationLimit": 3600,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "Abbott and Costello Meet The Mummy ",
+        "LoadTitle": "abbottandcostellomummy",
+        "Alias": "abbottandcostellomummy",
+        "IMDB": "https://www.imdb.com/title/tt0047795/",
+        "Tags": [
+            "50s",
+            "horror",
+            "comedy"
+        ],
+        "MoviePath": "",
+        "Duration": 2878,
+        "DurationLimit": 3600,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "Ace Ventura: Pet Detective",
+        "LoadTitle": "aceventura",
+        "Alias": "aceventura",
+        "IMDB": "https://www.imdb.com/title/tt0109040/",
+        "Tags": [
+            "90s",
+            "comedy"
+        ],
+        "MoviePath": "",
+        "Duration": 2878,
+        "DurationLimit": 3600,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "Afternoon Delight",
+        "LoadTitle": "afternoondelight",
+        "Alias": "afternoondelight",
+        "IMDB": "https://www.imdb.com/title/tt2312890/",
+        "Tags": [
+            "10s",
+            "comedy",
+            "drama"
+        ],
+        "MoviePath": "",
+        "Duration": 2878,
+        "DurationLimit": 3600,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "Alfie",
+        "LoadTitle": "alfie",
+        "Alias": "alfie",
+        "IMDB": "https://www.imdb.com/title/tt0375173/",
+        "Tags": [
+            "2000s",
+            "comedy",
+            "drama",
+            "romance"
+        ],
+        "MoviePath": "",
+        "Duration": 2878,
+        "DurationLimit": 3600,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "All Good Things",
+        "LoadTitle": "allgoodthings",
+        "Alias": "allgoodthings",
+        "IMDB": "https://www.imdb.com/title/tt1175709/",
+        "Tags": [
+            "10s",
+            "crime",
+            "drama",
+            "romance"
+        ],
+        "MoviePath": "",
+        "Duration": 2878,
+        "DurationLimit": 3600,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "Amelie",
+        "LoadTitle": "amelie",
+        "Alias": "amelie",
+        "IMDB": "https://www.imdb.com/title/tt0211915/",
+        "Tags": [
+            "2000s",
+            "comedy",
+            "drama",
+            "romance",
+            "french"
+        ],
+        "MoviePath": "",
+        "Duration": 2878,
+        "DurationLimit": 3600,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "American History X",
+        "LoadTitle": "americanhistoryx",
+        "Alias": "americanhistoryx",
+        "IMDB": "https://www.imdb.com/title/tt0120586/",
+        "Tags": [
+            "90s",
+            "drama",
+            "crime"
+        ],
+        "MoviePath": "",
+        "Duration": 2878,
+        "DurationLimit": 3600,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "American Pie Presents: Band Camp",
+        "LoadTitle": "bandcamp",
+        "Alias": "bandcamp",
+        "IMDB": "https://www.imdb.com/title/tt0436058/",
+        "Tags": [
+            "2000s",
+            "comedy",
+            "stoner"
+        ],
+        "MoviePath": "",
+        "Duration": 2878,
+        "DurationLimit": 3600,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "American Wedding",
+        "LoadTitle": "americanwedding",
+        "Alias": "americanwedding",
+        "IMDB": "https://www.imdb.com/title/tt0328828/",
+        "Tags": [
+            "2000s",
+            "comedy",
+            "stoner"
+        ],
+        "MoviePath": "",
+        "Duration": 2878,
+        "DurationLimit": 3600,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "And the Band Played On",
+        "LoadTitle": "bandplayedon",
+        "Alias": "bandplayedon",
+        "IMDB": "https://www.imdb.com/title/tt0106273/",
+        "Tags": [
+            "90s",
+            "drama",
+            "bio"
+        ],
+        "MoviePath": "",
+        "Duration": 2878,
+        "DurationLimit": 3600,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "Angel Eyes",
+        "LoadTitle": "angeleyes",
+        "Alias": "angeleyes",
+        "IMDB": "https://www.imdb.com/title/tt0225071/",
+        "Tags": [
+            "2000s",
+            "drama",
+            "romance"
+        ],
+        "MoviePath": "",
+        "Duration": 2878,
+        "DurationLimit": 3600,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "Angus, Thongs, and Perfect Snogging",
+        "LoadTitle": "angusthongssnogging",
+        "Alias": "angusthongssnogging",
+        "IMDB": "https://www.imdb.com/title/tt0963743/",
+        "Tags": [
+            "2000s",
+            "comedy",
+            "romance",
+            "teen",
+            "british"
+        ],
+        "MoviePath": "",
+        "Duration": 2878,
+        "DurationLimit": 3600,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "Antitrust",
+        "LoadTitle": "antitrust",
+        "Alias": "antitrust",
+        "IMDB": "https://www.imdb.com/title/tt0218817/",
+        "Tags": [
+            "2000s",
+            "thriller",
+            "crime"
+        ],
+        "MoviePath": "",
+        "Duration": 2878,
+        "DurationLimit": 3600,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "Aquamarine",
+        "LoadTitle": "aquamarine",
+        "Alias": "aquamarine",
+        "IMDB": "https://www.imdb.com/title/tt0429591/",
+        "Tags": [
+            "2000s",
+            "fantasy",
+            "teen",
+            "comedy"
+        ],
+        "MoviePath": "",
+        "Duration": 2878,
+        "DurationLimit": 3600,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "Arena",
+        "LoadTitle": "arena",
+        "Alias": "arena",
+        "IMDB": "https://www.imdb.com/title/tt1117581/",
+        "Tags": [
+            "10s",
+            "action"
+        ],
+        "MoviePath": "",
+        "Duration": 2878,
+        "DurationLimit": 3600,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "Army of Darkness",
+        "LoadTitle": "armyofdarkness",
+        "Alias": "armyofdarkness",
+        "IMDB": "https://www.imdb.com/title/tt0106308/",
+        "Tags": [
+            "90s",
+            "comedy",
+            "horror",
+            "halloween"
+        ],
+        "MoviePath": "",
+        "Duration": 2878,
+        "DurationLimit": 3600,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "Arrival",
+        "LoadTitle": "arrival",
+        "Alias": "arrival",
+        "IMDB": "https://www.imdb.com/title/tt2543164/",
+        "Tags": [
+            "10s",
+            "scifi",
+            "drama"
+        ],
+        "MoviePath": "",
+        "Duration": 2878,
+        "DurationLimit": 3600,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "Art School Confidential",
+        "LoadTitle": "artschoolconfidential",
+        "Alias": "artschoolconfidential",
+        "IMDB": "https://www.imdb.com/title/tt0364955/",
+        "Tags": [
+            "2000s",
+            "comedy",
+            "drama"
+        ],
+        "MoviePath": "",
+        "Duration": 2878,
+        "DurationLimit": 3600,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "Assassins",
+        "LoadTitle": "assassins",
+        "Alias": "assassins",
+        "IMDB": "https://www.imdb.com/title/tt0112401/",
+        "Tags": [
+            "90s",
+            "action",
+            "thriller"
+        ],
+        "MoviePath": "",
+        "Duration": 2878,
+        "DurationLimit": 3600,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "Assault on Precinct 13 ",
+        "LoadTitle": "assaultonprecinct13",
+        "Alias": "assaultonprecint13",
+        "IMDB": "https://www.imdb.com/title/tt0398712/",
+        "Tags": [
+            "2000s",
+            "action",
+            "thriller"
+        ],
+        "MoviePath": "",
+        "Duration": 2878,
+        "DurationLimit": 3600,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "Bad Teacher",
+        "LoadTitle": "badteacher",
+        "Alias": "badteacher",
+        "IMDB": "https://www.imdb.com/title/tt1284575/",
+        "Tags": [
+            "10s",
+            "comedy",
+            "drama",
+            "romance"
+        ],
+        "MoviePath": "",
+        "Duration": 2878,
+        "DurationLimit": 3600,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "Bandits",
+        "LoadTitle": "bandits",
+        "Alias": "bandits",
+        "IMDB": "https://www.imdb.com/title/tt0219965/",
+        "Tags": [
+            "2000s",
+            "comedy",
+            "drama",
+            "crime"
+        ],
+        "MoviePath": "",
+        "Duration": 2878,
+        "DurationLimit": 3600,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "Basic Instinct 2",
+        "LoadTitle": "basicinstinct2",
+        "Alias": "basicinstinct2",
+        "IMDB": "https://www.imdb.com/title/tt0430912/",
+        "Tags": [
+            "2000s",
+            "drama",
+            "thriller"
+        ],
+        "MoviePath": "",
+        "Duration": 2878,
+        "DurationLimit": 3600,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "Basquiat",
+        "LoadTitle": "basquiat",
+        "Alias": "basquiat",
+        "IMDB": "https://www.imdb.com/title/tt0115632/",
+        "Tags": [
+            "90s",
+            "drama",
+            "bio"
+        ],
+        "MoviePath": "",
+        "Duration": 2878,
+        "DurationLimit": 3600,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "Battle in Seattle",
+        "LoadTitle": "battleinseattle",
+        "Alias": "battleinseattle",
+        "IMDB": "https://www.imdb.com/title/tt0850253/",
+        "Tags": [
+            "2000s",
+            "drama",
+            "thriller"
+        ],
+        "MoviePath": "",
+        "Duration": 2878,
+        "DurationLimit": 3600,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "Because I Said So",
+        "LoadTitle": "becauseisaidso",
+        "Alias": "becauseisaidso",
+        "IMDB": "https://www.imdb.com/title/tt0490084/",
+        "Tags": [
+            "2000s",
+            "romance",
+            "comedy"
+        ],
+        "MoviePath": "",
+        "Duration": 2878,
+        "DurationLimit": 3600,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "Being John Malkovich",
+        "LoadTitle": "beingjohnmalkovich",
+        "Alias": "beingjohnmalkovich",
+        "IMDB": "https://www.imdb.com/title/tt0120601/",
+        "Tags": [
+            "90s",
+            "wtf",
+            "drama",
+            "comedy"
+        ],
+        "MoviePath": "",
+        "Duration": 2878,
+        "DurationLimit": 3600,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "Being Julia",
+        "LoadTitle": "beingjulia",
+        "Alias": "beingjulia",
+        "IMDB": "https://www.imdb.com/title/tt0340012/",
+        "Tags": [
+            "2000s",
+            "drama",
+            "romance"
+        ],
+        "MoviePath": "",
+        "Duration": 2878,
+        "DurationLimit": 3600,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "Best in Show",
+        "LoadTitle": "bestinshow",
+        "Alias": "bestinshow",
+        "IMDB": "https://www.imdb.com/title/tt0218839/",
+        "Tags": [
+            "2000s",
+            "mockumentary",
+            "comedy"
+        ],
+        "MoviePath": "",
+        "Duration": 2878,
+        "DurationLimit": 3600,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "Best Laid Plans",
+        "LoadTitle": "bestlaidplans",
+        "Alias": "bestlaidplans",
+        "IMDB": "https://www.imdb.com/title/tt0133412/",
+        "Tags": [
+            "2000s",
+            "crime",
+            "drama"
+        ],
+        "MoviePath": "",
+        "Duration": 2878,
+        "DurationLimit": 3600,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "Big Fish",
+        "LoadTitle": "bigfish",
+        "Alias": "bigfish",
+        "IMDB": "https://www.imdb.com/title/tt0319061/",
+        "Tags": [
+            "2000s",
+            "fantasy",
+            "drama",
+            "comedy"
+        ],
+        "MoviePath": "",
+        "Duration": 2878,
+        "DurationLimit": 3600,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "Big Hero 6",
+        "LoadTitle": "bighero6",
+        "Alias": "bighero6",
+        "IMDB": "https://www.imdb.com/title/tt0319061/",
+        "Tags": [
+            "10s",
+            "animated",
+            "disney",
+            "comedy",
+            "superhero"
+        ],
+        "MoviePath": "",
+        "Duration": 2878,
+        "DurationLimit": 3600,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "Bill & Ted's Bogus Journey",
+        "LoadTitle": "billandted2",
+        "Alias": "billandted2",
+        "IMDB": "https://www.imdb.com/title/tt0101452/",
+        "Tags": [
+            "90s",
+            "comedy",
+            "scifi",
+            "stoner"
+        ],
+        "MoviePath": "",
+        "Duration": 2878,
+        "DurationLimit": 3600,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "Bill & Ted's Excellent Adventure",
+        "LoadTitle": "billandted",
+        "Alias": "billandted1",
+        "IMDB": "https://www.imdb.com/title/tt0096928/",
+        "Tags": [
+            "90s",
+            "comedy",
+            "scifi",
+            "stoner"
+        ],
+        "MoviePath": "",
+        "Duration": 2878,
+        "DurationLimit": 3600,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "Billy Elliot",
+        "LoadTitle": "billyelliot",
+        "Alias": "billyelliot",
+        "IMDB": "https://www.imdb.com/title/tt0249462/",
+        "Tags": [
+            "2000s",
+            "comedy",
+            "drama"
+        ],
+        "MoviePath": "",
+        "Duration": 2878,
+        "DurationLimit": 3600,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "The Black Dahlia",
+        "LoadTitle": "blackdahlia",
+        "Alias": "blackdahlia",
+        "IMDB": "https://www.imdb.com/title/tt0387877/",
+        "Tags": [
+            "2000s",
+            "thriller",
+            "drama",
+            "crime"
+        ],
+        "MoviePath": "",
+        "Duration": 2878,
+        "DurationLimit": 3600,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "Black Zoo",
+        "LoadTitle": "blackzoo",
+        "Alias": "blackzoo",
+        "IMDB": "https://www.imdb.com/title/tt0056872/",
+        "Tags": [
+            "60s",
+            "horror"
+        ],
+        "MoviePath": "",
+        "Duration": 2878,
+        "DurationLimit": 3600,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "Blade Runner",
+        "LoadTitle": "bladerunner",
+        "Alias": "bladerunner",
+        "IMDB": "https://www.imdb.com/title/tt0083658/",
+        "Tags": [
+            "80s",
+            "scifi"
+        ],
+        "MoviePath": "",
+        "Duration": 2878,
+        "DurationLimit": 3600,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "Blair Witch",
+        "LoadTitle": "blairwitch16",
+        "Alias": "blairwitch16",
+        "IMDB": "https://www.imdb.com/title/tt1540011/",
+        "Tags": [
+            "10s",
+            "horror",
+            "halloween"
+        ],
+        "MoviePath": "",
+        "Duration": 2878,
+        "DurationLimit": 3600,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "Blindness",
+        "LoadTitle": "blindness",
+        "Alias": "blindness",
+        "IMDB": "https://www.imdb.com/title/tt0861689/",
+        "Tags": [
+            "2000s",
+            "thriller",
+            "drama"
+        ],
+        "MoviePath": "",
+        "Duration": 2878,
+        "DurationLimit": 3600,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "Blood Diamond",
+        "LoadTitle": "blooddiamond",
+        "Alias": "blooddiamond",
+        "IMDB": "https://www.imdb.com/title/tt0450259/",
+        "Tags": [
+            "2000s",
+            "thriller",
+            "action"
+        ],
+        "MoviePath": "",
+        "Duration": 2878,
+        "DurationLimit": 3600,
+        "Collection": "",
+        "CollectionSequence": 0
+    },
+    {
+        "Title": "Blow",
+        "LoadTitle": "blow",
+        "Alias": "blow",
+        "IMDB": "https://www.imdb.com/title/tt0221027/",
+        "Tags": [
+            "2000s",
+            "bio",
+            "crime",
+            "drama"
+        ],
+        "MoviePath": "",
         "Duration": 2878,
         "DurationLimit": 3600,
         "Collection": "",
