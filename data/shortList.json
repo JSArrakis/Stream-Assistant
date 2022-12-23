@@ -1,0 +1,49 @@
+[
+    {
+        "title": "Bashir Meets Garak",
+        "tags": [
+            "trek"
+        ],
+        "path": "C:\\Users\\Main\\Desktop\\Shorts\\Test\\BashirMeetsGarak.mp4",
+        "duration": 113,
+        "type": "S"
+    },
+    {
+        "title": "Irrational Exuberance",
+        "tags": [
+            "meme"
+        ],
+        "path": "C:\\Users\\Main\\Desktop\\Shorts\\Test\\IrrationalExuberance.mp4",
+        "duration": 238,
+        "type": "S"
+    },
+    {
+        "title": "Mysterious Stranger",
+        "tags": [
+            "wtf"
+        ],
+        "path": "C:\\Users\\Main\\Desktop\\Shorts\\Test\\TheMysteriousStranger.mp4",
+        "duration": 314,
+        "type": "S"
+    },
+    {
+        "title": "Tie Fighter",
+        "tags": [
+            "starwars",
+            "anime",
+            "scifi"
+        ],
+        "path": "C:\\Users\\Main\\Desktop\\Shorts\\Test\\TieFighter.mp4",
+        "duration": 447,
+        "type": "S"
+    },
+    {
+        "title": "Ultimate Showdown",
+        "tags": [
+            "meme"
+        ],
+        "path": "C:\\Users\\Main\\Desktop\\Shorts\\Test\\UltimateShowdown.mp4",
+        "duration": 212,
+        "type": "S"
+    }
+]

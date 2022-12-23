@@ -16,10 +16,9 @@ const main = async () => {
 	if (await dirMan.manageDestinationDirectory(config, destinationDirectory, options)) {
 
 		//TODO: v1.2 Get media durations programmatically from the file system
-		let stream = streamConstructor.constructStream(config, destinationDirectory, options);
+		let stream = await streamConstructor.constructStream(config, destinationDirectory, options);
 
 		dirMan.createStreamFile(destinationDirectory, playlistFileName, stream);
-
 
 		saCommander.executeStream(config, destinationDirectory, playlistFileName);
 

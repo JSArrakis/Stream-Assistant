@@ -1,0 +1,73 @@
+[
+    {
+        "title": "Doja Cat - Say So (80s)",
+        "tags": [
+            "disco",
+            "80s",
+            "pop"
+        ],
+        "path": "C:\\Users\\Main\\Desktop\\MusicVideos\\Test\\DojaCat-SaySo.mp4",
+        "duration": 230,
+        "type": "M"
+    },
+    {
+        "title": "The Weeknd - Save Your Tears (Reverb)",
+        "tags": [
+            "reverb",
+            "pop",
+            "electronic",
+            "2020s"
+        ],
+        "path": "C:\\Users\\Main\\Desktop\\MusicVideos\\Test\\SaveYourTearsReverb.mp4",
+        "duration": 248,
+        "type": "M"
+    },
+    {
+        "title": "Arianna Grande - So Into You (Reverb)",
+        "tags": [
+            "reverb",
+            "pop",
+            "electronic",
+            "2010s"
+        ],
+        "path": "C:\\Users\\Main\\Desktop\\MusicVideos\\Test\\SoInToYouReverb.mp4",
+        "duration": 280,
+        "type": "M"
+    },
+    {
+        "title": "The 1975 - Somebody Else (Reverb)",
+        "tags": [
+            "reverb",
+            "pop",
+            "electronic",
+            "2010s"
+        ],
+        "path": "C:\\Users\\Main\\Desktop\\MusicVideos\\Test\\SomebodyElseReverb.mp4",
+        "duration": 416,
+        "type": "M"
+    },
+    {
+        "title": "Taylor Swift - Style (Reverb)",
+        "tags": [
+            "reverb",
+            "pop",
+            "electronic",
+            "2010s"
+        ],
+        "path": "C:\\Users\\Main\\Desktop\\MusicVideos\\Test\\StyleReverb.mp4",
+        "duration": 290,
+        "type": "M"
+    },
+    {
+        "title": "Clean Bandit - Symphony (Reverb)",
+        "tags": [
+            "reverb",
+            "pop",
+            "electronic",
+            "2010s"
+        ],
+        "path": "C:\\Users\\Main\\Desktop\\MusicVideos\\Test\\StyleReverb.mp4",
+        "duration": 262,
+        "type": "M"
+    }
+]
