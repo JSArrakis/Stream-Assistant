@@ -10,7 +10,7 @@
             "comedy"
         ],
         "MoviePath": "J:\\Moviesold\\Back.To.The.Future.Trilogy.1080p.H264.AC3.DD5.1.Will1869\\Back.to.the.Future.1985.1080p.BluRay.H264.AC3.DD5.1.mp4",
-        "Duration": 6965,
+        "Duration": 6966,
         "DurationLimit": 7200,
         "Collection": "Back To The Future",
         "CollectionSequence": 1
@@ -59,7 +59,7 @@
             "adventure"
         ],
         "MoviePath": "J:\\Moviesold\\Labyrinth 1986 30th Anniversary Edition x264 D3FiL3R (bd50)\\Labyrinth 1986 30th Anniversary Edition TrueHD Atmos 1080p BluRay x264-D3FiL3R.mkv",
-        "Duration": 6062,
+        "Duration": 6063,
         "DurationLimit": 7200,
         "Collection": "",
         "CollectionSequence": 0
@@ -76,7 +76,7 @@
             "animated"
         ],
         "MoviePath": "J:\\Moviesold\\A Charlie Brown Christmas\\A.Charlie.Brown.Christmas.1965.mkv",
-        "Duration": 1528,
+        "Duration": 1529,
         "DurationLimit": 1800,
         "Collection": "",
         "CollectionSequence": 0
@@ -128,7 +128,7 @@
         ],
         "MoviePath": "J:\\Moviesold\\2001 A Space Odyssey\\2001 A Space Odyssey.mkv",
         "Duration": 8566,
-        "DurationLimit": 10800,
+        "DurationLimit": 9000,
         "Collection": "Space Odyssey",
         "CollectionSequence": 1
     },
@@ -159,7 +159,7 @@
             "2000s"
         ],
         "MoviePath": "J:\\Moviesold\\Across The Universe\\Across The Universe.mkv",
-        "Duration": 7998,
+        "Duration": 7999,
         "DurationLimit": 9000,
         "Collection": "",
         "CollectionSequence": 0
@@ -195,7 +195,7 @@
             "90s"
         ],
         "MoviePath": "J:\\Moviesold\\Aladdin\\Aladdin.mkv",
-        "Duration": 5423,
+        "Duration": 5424,
         "DurationLimit": 7200,
         "Collection": "",
         "CollectionSequence": 0
@@ -211,7 +211,7 @@
             "70s"
         ],
         "MoviePath": "J:\\Moviesold\\Alien\\Alien.avi",
-        "Duration": 6997,
+        "Duration": 6998,
         "DurationLimit": 7200,
         "Collection": "Alien",
         "CollectionSequence": 1
@@ -248,7 +248,7 @@
             "cyberpunk"
         ],
         "MoviePath": "J:\\Moviesold\\Alira\\Akira.mkv",
-        "Duration": 7528,
+        "Duration": 7529,
         "DurationLimit": 9000,
         "Collection": "",
         "CollectionSequence": 0
@@ -266,7 +266,7 @@
             "mcu"
         ],
         "MoviePath": "J:\\Moviesold\\Avengers(2012)\\Avengers2012DVDrip.mkv",
-        "Duration": 8575,
+        "Duration": 8576,
         "DurationLimit": 9000,
         "Collection": "MCU",
         "CollectionSequence": 6
@@ -283,7 +283,7 @@
             "dc"
         ],
         "MoviePath": "J:\\Moviesold\\Batman.and.robin1997\\Batman_and_Robin1997.mkv",
-        "Duration": 8575,
+        "Duration": 7493,
         "DurationLimit": 9000,
         "Collection": "",
         "CollectionSequence": 0
@@ -301,8 +301,8 @@
             "80s"
         ],
         "MoviePath": "J:\\Moviesold\\Beetlejuice (1988) -jlw\\Beetlejuice (1988).mkv",
-        "Duration": 8575,
-        "DurationLimit": 9000,
+        "Duration": 5526,
+        "DurationLimit": 7200,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -318,7 +318,7 @@
             "2010s"
         ],
         "MoviePath": "J:\\Moviesold\\Blade.Runner.2049.2017.COMPLETE.NTSC.DVD9-HONOR\\BladeRunner2049.mkv",
-        "Duration": 9807,
+        "Duration": 9808,
         "DurationLimit": 10800,
         "Collection": "Blade Runner",
         "CollectionSequence": 2
@@ -334,8 +334,8 @@
             "romance",
             "60s"
         ],
-        "MoviePath": "J:\\Moviesold\\Breakfast.At.Tiffanys.1961.1080p.BluRay.x264-NORDiCHD\\BladeRunner2049.mkv",
-        "Duration": 6905,
+        "MoviePath": "J:\\Moviesold\\Breakfast.At.Tiffanys.1961.1080p.BluRay.x264-NORDiCHD\\nordichd-tiffs.1080p.mkv",
+        "Duration": 6906,
         "DurationLimit": 7200,
         "Collection": "",
         "CollectionSequence": 0
@@ -405,7 +405,7 @@
             "scifi"
         ],
         "MoviePath": "J:\\Moviesold\\Contact 1997 10bit hevc-d3g\\Contact 1997 BluRay 10Bit 1080p DD5.1 H265-d3g.mkv",
-        "Duration": 8980,
+        "Duration": 8981,
         "DurationLimit": 9000,
         "Collection": "",
         "CollectionSequence": 0
@@ -424,7 +424,7 @@
             "2000s"
         ],
         "MoviePath": "J:\\Moviesold\\Cowboy.Bebop.The.Movie.2001.720p.BluRay.x264-x0r\\Cowboy.Bebop.The.Movie.2001.720p.BluRay.x264-x0r.mkv",
-        "Duration": 6914,
+        "Duration": 6915,
         "DurationLimit": 7200,
         "Collection": "",
         "CollectionSequence": 0
@@ -477,7 +477,7 @@
             "90s"
         ],
         "MoviePath": "J:\\Moviesold\\Event Horizon\\EventHorizon.mkv",
-        "Duration": 5756,
+        "Duration": 5757,
         "DurationLimit": 7200,
         "Collection": "",
         "CollectionSequence": 0
@@ -495,7 +495,7 @@
             "90s"
         ],
         "MoviePath": "J:\\Moviesold\\Fifth Element\\The Fifth Element.mkv",
-        "Duration": 7577,
+        "Duration": 7578,
         "DurationLimit": 9000,
         "Collection": "",
         "CollectionSequence": 0
@@ -600,7 +600,7 @@
             "adventure"
         ],
         "MoviePath": "J:\\Moviesold\\Indiana.Jones.Collection.1080p.BluRay.H264.AC3.DD5.1.Will1869\\Indiana.Jones.and.the.Last.Crusade.1989.1080p.BluRay.H264.AC3.DD5.1.mp4",
-        "Duration": 7623,
+        "Duration": 7613,
         "DurationLimit": 9000,
         "Collection": "Indiana Jones",
         "CollectionSequence": 3
@@ -668,7 +668,7 @@
             "90s"
         ],
         "MoviePath": "J:\\Moviesold\\Jurassic.Park.1993.iNTERNAL.BDRip.x264-REGRET\\regret-jp.mkv",
-        "Duration": 7596,
+        "Duration": 7597,
         "DurationLimit": 9000,
         "Collection": "",
         "CollectionSequence": 0
@@ -703,7 +703,7 @@
             "mcu"
         ],
         "MoviePath": "J:\\Moviesold\\Marvel Cinematic Universe - Phase 1&2 - Fighter\\Ant-Man (2015).mp4",
-        "Duration": 7026,
+        "Duration": 7027,
         "DurationLimit": 7200,
         "Collection": "MCU",
         "CollectionSequence": 12
@@ -721,7 +721,7 @@
             "mcu"
         ],
         "MoviePath": "J:\\Moviesold\\Marvel Cinematic Universe - Phase 1&2 - Fighter\\Avengers_ Age of Ultron (2015).mp4",
-        "Duration": 8478,
+        "Duration": 8479,
         "DurationLimit": 9000,
         "Collection": "MCU",
         "CollectionSequence": 11
@@ -739,7 +739,7 @@
             "mcu"
         ],
         "MoviePath": "J:\\Moviesold\\Marvel Cinematic Universe - Phase 1&2 - Fighter\\Iron Man 3 (2013).mp4",
-        "Duration": 7832,
+        "Duration": 7833,
         "DurationLimit": 9000,
         "Collection": "MCU",
         "CollectionSequence": 7
@@ -757,7 +757,7 @@
             "mcu"
         ],
         "MoviePath": "J:\\Moviesold\\Marvel Cinematic Universe - Phase 1&2 - Fighter\\Thor (2011).mp4",
-        "Duration": 6890,
+        "Duration": 6891,
         "DurationLimit": 7200,
         "Collection": "MCU",
         "CollectionSequence": 4
@@ -793,7 +793,7 @@
             "comedy"
         ],
         "MoviePath": "J:\\Moviesold\\Men.In.Black.1997.1080p.BRRip.x265.AC3-Freebee\\Men.In.Black.1997.1080p.BRRip.x265.AC3-Freebee.mkv",
-        "Duration": 5878,
+        "Duration": 5879,
         "DurationLimit": 7200,
         "Collection": "",
         "CollectionSequence": 0
@@ -812,7 +812,7 @@
             "holiday"
         ],
         "MoviePath": "J:\\Moviesold\\Muppet Christmad Carol\\Muppet Christmas Carol.mkv",
-        "Duration": 5152,
+        "Duration": 5153,
         "DurationLimit": 5400,
         "Collection": "",
         "CollectionSequence": 0
@@ -865,7 +865,7 @@
             "holiday"
         ],
         "MoviePath": "J:\\Moviesold\\onemagicchristmas\\One Magic Christmas.mkv",
-        "Duration": 5332,
+        "Duration": 5333,
         "DurationLimit": 5400,
         "Collection": "",
         "CollectionSequence": 0
@@ -918,7 +918,7 @@
             "80s"
         ],
         "MoviePath": "J:\\Moviesold\\Return to Oz\\Return to Oz.mkv",
-        "Duration": 6598,
+        "Duration": 6589,
         "DurationLimit": 7200,
         "Collection": "",
         "CollectionSequence": 0
@@ -954,7 +954,7 @@
             "60s"
         ],
         "MoviePath": "J:\\Moviesold\\Rudolph.the.Red-Nosed.Reindeer.1964.720p.BluRay.x264-x0r\\Rudolph.the.Red-Nosed.Reindeer.1964.720p.BluRay.x264-x0r.mkv",
-        "Duration": 3105,
+        "Duration": 3106,
         "DurationLimit": 3600,
         "Collection": "",
         "CollectionSequence": 0
@@ -1007,7 +1007,7 @@
             "starwars"
         ],
         "MoviePath": "J:\\Moviesold\\Star Wars Attack Of The Clones\\title_t00.mkv",
-        "Duration": 8547,
+        "Duration": 8548,
         "DurationLimit": 9000,
         "Collection": "Star Wars",
         "CollectionSequence": 5
@@ -1025,7 +1025,7 @@
             "starwars"
         ],
         "MoviePath": "J:\\Moviesold\\Star Wars Empire Strikes Back\\title_t00.mkv",
-        "Duration": 7641,
+        "Duration": 7642,
         "DurationLimit": 9000,
         "Collection": "Star Wars",
         "CollectionSequence": 2
@@ -1043,7 +1043,7 @@
             "starwars"
         ],
         "MoviePath": "J:\\Moviesold\\Star Wars Force Awakens\\Star Wars the Force Awakens.mkv",
-        "Duration": 8284,
+        "Duration": 8285,
         "DurationLimit": 9000,
         "Collection": "Star Wars",
         "CollectionSequence": 7
@@ -1097,7 +1097,7 @@
             "starwars"
         ],
         "MoviePath": "J:\\Moviesold\\Star Wars Return of The Jedi\\title_t00.mkv",
-        "Duration": 8407,
+        "Duration": 8088,
         "DurationLimit": 9000,
         "Collection": "Star Wars",
         "CollectionSequence": 6
@@ -1115,7 +1115,7 @@
             "martialarts"
         ],
         "MoviePath": "J:\\Moviesold\\Teenage Mutant Ninja Turtles\\TeenageMutantNinjaTurtles1990.mkv",
-        "Duration": 5608,
+        "Duration": 5609,
         "DurationLimit": 7200,
         "Collection": "TMNT",
         "CollectionSequence": 1
@@ -1152,7 +1152,7 @@
             "fantasy"
         ],
         "MoviePath": "J:\\Moviesold\\The Lord of the Rings Trilogy ExtCut hevc-d3g\\Fellowship of the Ring ExtCut hevc-d3g\\LOTR-Fellowship of the Ring 2001 ExtCut BluRay 1080p DD5.1 x265-d3g.mkv",
-        "Duration": 13696,
+        "Duration": 13697,
         "DurationLimit": 14400,
         "Collection": "LOTR",
         "CollectionSequence": 1
@@ -1203,7 +1203,7 @@
             "fantasy"
         ],
         "MoviePath": "J:\\Moviesold\\The Nutcracker\\The Nutcracker George balanchines.mkv",
-        "Duration": 5545,
+        "Duration": 5546,
         "DurationLimit": 7200,
         "Collection": "",
         "CollectionSequence": 0
@@ -1220,7 +1220,7 @@
             "fantasy"
         ],
         "MoviePath": "J:\\Moviesold\\The Sword in the Stone\\The Sword and the Stone.mkv",
-        "Duration": 5776,
+        "Duration": 4777,
         "DurationLimit": 5400,
         "Collection": "",
         "CollectionSequence": 0
@@ -1238,7 +1238,7 @@
             "90s"
         ],
         "MoviePath": "J:\\Moviesold\\The.Addams.Family.1991.720p.BluRay.x264-x0r\\The.Addams.Family.1991.720p.BluRay.x264-x0r.mkv",
-        "Duration": 6578,
+        "Duration": 5979,
         "DurationLimit": 7200,
         "Collection": "",
         "CollectionSequence": 0
@@ -1255,7 +1255,7 @@
             "80s"
         ],
         "MoviePath": "J:\\Moviesold\\The.Dark.Crystal.1982.Remastered.1080p.BluRay.H264.AC3.DD5.1.Will1869\\The.Dark.Crystal.1982.Remastered.1080p.BluRay.H264.AC3.DD5.1.Will1869.mp4",
-        "Duration": 5587,
+        "Duration": 5586,
         "DurationLimit": 7200,
         "Collection": "",
         "CollectionSequence": 0
@@ -1323,7 +1323,7 @@
             "80s"
         ],
         "MoviePath": "J:\\Moviesold\\Willow 1988 10bit hevc-d3g\\Willow 1988 BDRip 10Bit 1080p DD5.1 H265-d3g.mkv",
-        "Duration": 7555,
+        "Duration": 7556,
         "DurationLimit": 9000,
         "Collection": "",
         "CollectionSequence": 0
@@ -1341,7 +1341,7 @@
             "mcu"
         ],
         "MoviePath": "J:\\Moviesold\\Captain.America.Civil.War.2016.720p.BluRay.x264.mp4",
-        "Duration": 8861,
+        "Duration": 8862,
         "DurationLimit": 9000,
         "Collection": "MCU",
         "CollectionSequence": 13
@@ -1359,7 +1359,7 @@
             "mcu"
         ],
         "MoviePath": "J:\\Moviesold\\Doctor Strange (2016)1080p.mp4",
-        "Duration": 6898,
+        "Duration": 6899,
         "DurationLimit": 7200,
         "Collection": "MCU",
         "CollectionSequence": 14
@@ -1377,7 +1377,7 @@
             "mcu"
         ],
         "MoviePath": "J:\\Moviesold\\Iron Man (2008)1080p BluRay x264 AC3.mkv",
-        "Duration": 7561,
+        "Duration": 7562,
         "DurationLimit": 9000,
         "Collection": "MCU",
         "CollectionSequence": 1
@@ -1411,8 +1411,8 @@
             "adventure"
         ],
         "MoviePath": "J:\\Moviesold\\The Secret of NIMH (1982)1080p.BluRay.AAC.AC3.mkv",
-        "Duration": 7485,
-        "DurationLimit": 9000,
+        "Duration": 4965,
+        "DurationLimit": 5400,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -1427,7 +1427,7 @@
             "80s"
         ],
         "MoviePath": "I:\\Movies\\Gremlins 1984 10bit hevc-d3g\\Gremlins 1984 BDRip 10Bit 1080p DD5.1 Multi H265-d3g.mkv",
-        "Duration": 6375,
+        "Duration": 6376,
         "DurationLimit": 7200,
         "Collection": "",
         "CollectionSequence": 0
@@ -1443,7 +1443,7 @@
             "80s"
         ],
         "MoviePath": "I:\\Movies\\Die.Hard.1988.BluRay.CEE.1080p\\Die Hard 1988 BluRay 10Bit 1080p DD5.1 H265-d3b.mkv",
-        "Duration": 7930,
+        "Duration": 7931,
         "DurationLimit": 9000,
         "Collection": "",
         "CollectionSequence": 0
@@ -1476,7 +1476,7 @@
             "90s"
         ],
         "MoviePath": "I:\\Movies\\Edward.Scissorhands.1990.720p.BluRay.x264-x0r\\Edward.Scissorhands.1990.720p.BluRay.x264-x0r.mkv",
-        "Duration": 6300,
+        "Duration": 6301,
         "DurationLimit": 7200,
         "Collection": "",
         "CollectionSequence": 0
@@ -1509,7 +1509,7 @@
             "90s"
         ],
         "MoviePath": "I:\\Movies\\While.You.Were.Sleeping.1995.720p.BluRay.x264-x0r\\While.You.Were.Sleeping.1995.720p.BluRay.x264-x0r.mkv",
-        "Duration": 6195,
+        "Duration": 6196,
         "DurationLimit": 7200,
         "Collection": "",
         "CollectionSequence": 0
@@ -1543,7 +1543,7 @@
             "2000s"
         ],
         "MoviePath": "I:\\Movies\\Bridget.Jones.Diary.2001.720p.BRRip.x264-x0r\\Bridget.Jones.Diary.2001.720p.BRRip.x264-x0r.mkv",
-        "Duration": 5800,
+        "Duration": 5801,
         "DurationLimit": 7200,
         "Collection": "",
         "CollectionSequence": 0
@@ -1560,7 +1560,7 @@
             "dc"
         ],
         "MoviePath": "I:\\Movies\\Batman.Returns.1992.720p.BRRip.x264-x0r\\Batman.Returns.1992.720p.BRRip.x264-x0r.mkv",
-        "Duration": 7588,
+        "Duration": 7589,
         "DurationLimit": 9000,
         "Collection": "Burton Batman",
         "CollectionSequence": 2
@@ -1628,7 +1628,7 @@
             "cgi"
         ],
         "MoviePath": "I:\\Movies\\The Polar Express 2004 10bit hevc-d3g (r)\\The Polar Express 2004 BluRay 10Bit 1080p DD5.1 H265-d3g.mkv",
-        "Duration": 5996,
+        "Duration": 5997,
         "DurationLimit": 7200,
         "Collection": "",
         "CollectionSequence": 0
@@ -1662,7 +1662,7 @@
             "comedy"
         ],
         "MoviePath": "I:\\Movies\\Jingle.All.The.Way.1996.720p.BRRip.x264-x0r\\Jingle.All.The.Way.1996.720p.BRRip.x264-x0r.mkv",
-        "Duration": 5624,
+        "Duration": 5625,
         "DurationLimit": 7200,
         "Collection": "",
         "CollectionSequence": 0
@@ -1698,7 +1698,7 @@
             "cgi"
         ],
         "MoviePath": "I:\\Movies\\The.Nightmare.Before.Christmas.1993.1080p.BluRay.H264.AC3.DD5.1.Will1869\\The.Nightmare.Before.Christmas.1993.1080p.BluRay.H264.AC3.DD5.1.Will1869.mp4",
-        "Duration": 4599,
+        "Duration": 4600,
         "DurationLimit": 5400,
         "Collection": "",
         "CollectionSequence": 0
@@ -1750,7 +1750,7 @@
             "animated"
         ],
         "MoviePath": "I:\\Movies\\FromAllOfUsToAllOfYou\\FromAllofUstoAllofYou.mp4",
-        "Duration": 1159,
+        "Duration": 1160,
         "DurationLimit": 1800,
         "Collection": "",
         "CollectionSequence": 0
@@ -1784,7 +1784,7 @@
             "comedy"
         ],
         "MoviePath": "I:\\Movies\\MuppetFamilyChristmas\\MuppetFamilyChristmas.mp4",
-        "Duration": 2878,
+        "Duration": 2879,
         "DurationLimit": 3600,
         "Collection": "",
         "CollectionSequence": 0
@@ -1799,9 +1799,9 @@
             "2000s",
             "comedy"
         ],
-        "MoviePath": "",
-        "Duration": 2878,
-        "DurationLimit": 3600,
+        "MoviePath": "J:\\Moviesold\\Warning.Hazardous.Outbreak.Movie.Pack.1080p.H264.AC3.DD.Will1869\\Zombieland.2009.1080p.BluRay.H264.AC3.DD5.1.mp4",
+        "Duration": 5262,
+        "DurationLimit": 5400,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -1815,9 +1815,9 @@
             "mystery",
             "80s"
         ],
-        "MoviePath": "",
-        "Duration": 2878,
-        "DurationLimit": 3600,
+        "MoviePath": "J:\\Moviesold\\Young Sherlock Holmes 1985 1080p WEB-DL H264 AC3 5.1.mkv",
+        "Duration": 6533,
+        "DurationLimit": 7200,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -1832,9 +1832,9 @@
             "halloween",
             "comedy"
         ],
-        "MoviePath": "",
-        "Duration": 2878,
-        "DurationLimit": 3600,
+        "MoviePath": "J:\\Moviesold\\Young Frankenstein\\YoungFrankenstein.mkv",
+        "Duration": 6338,
+        "DurationLimit": 7200,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -1848,9 +1848,9 @@
             "2000s",
             "comedy"
         ],
-        "MoviePath": "",
-        "Duration": 2878,
-        "DurationLimit": 3600,
+        "MoviePath": "J:\\Moviesold\\You Me and Dupree\\You Me and Dupree.mkv",
+        "Duration": 6564,
+        "DurationLimit": 7200,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -1864,9 +1864,9 @@
             "2000s",
             "comedy"
         ],
-        "MoviePath": "",
-        "Duration": 2878,
-        "DurationLimit": 3600,
+        "MoviePath": "J:\\Moviesold\\Year of the Dog\\YearOfTheDog.mkv",
+        "Duration": 5818,
+        "DurationLimit": 7200,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -1881,9 +1881,9 @@
             "10s",
             "british"
         ],
-        "MoviePath": "",
-        "Duration": 2878,
-        "DurationLimit": 3600,
+        "MoviePath": "J:\\Moviesold\\wreckers_2011_dvdrip_xvid-unveil\\wreckers.2011.dvdrip.xvid-unveil.avi",
+        "Duration": 4863,
+        "DurationLimit": 5400,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -1897,9 +1897,9 @@
             "halloween",
             "2000s"
         ],
-        "MoviePath": "",
-        "Duration": 2878,
-        "DurationLimit": 3600,
+        "MoviePath": "J:\\Moviesold\\Wolf.Creek.2005.720p.BluRay.x264-x0r\\Wolf.Creek.2005.720p.BluRay.x264-x0r.mkv",
+        "Duration": 6290,
+        "DurationLimit": 7200,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -1914,9 +1914,9 @@
             "2000s",
             "western"
         ],
-        "MoviePath": "",
-        "Duration": 2878,
-        "DurationLimit": 3600,
+        "MoviePath": "J:\\Moviesold\\WILD WILD WEST 1999 720p BRRip x264 AAC -MASSiVE\\WWWEST_720p_br_massive_enc.mkv",
+        "Duration": 6360,
+        "DurationLimit": 7200,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -1931,9 +1931,9 @@
             "2000s",
             "drama"
         ],
-        "MoviePath": "",
-        "Duration": 2878,
-        "DurationLimit": 3600,
+        "MoviePath": "J:\\Moviesold\\White Noise\\title_t00.mkv",
+        "Duration": 5881,
+        "DurationLimit": 7200,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -1947,9 +1947,9 @@
             "drama",
             "1930s"
         ],
-        "MoviePath": "",
-        "Duration": 2878,
-        "DurationLimit": 3600,
+        "MoviePath": "J:\\Moviesold\\The Original Universal Monsters Collection 1080p H264 AC3 DD2.0 Will1869\\Werewolf.of.London.1935.720p.H264 AC3 DD2.0.mp4",
+        "Duration": 4500,
+        "DurationLimit": 5400,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -1964,9 +1964,9 @@
             "2000s",
             "action"
         ],
-        "MoviePath": "",
-        "Duration": 2878,
-        "DurationLimit": 3600,
+        "MoviePath": "J:\\Moviesold\\We Were Soldiers\\title_t00.mkv",
+        "Duration": 8308,
+        "DurationLimit": 9000,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -1980,9 +1980,9 @@
             "thriller",
             "2000s"
         ],
-        "MoviePath": "",
-        "Duration": 2878,
-        "DurationLimit": 3600,
+        "MoviePath": "J:\\Moviesold\\We Own The Night\\We Own The Night_t00.mkv",
+        "Duration": 7052,
+        "DurationLimit": 7200,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -1996,9 +1996,9 @@
             "90s",
             "stoner"
         ],
-        "MoviePath": "",
-        "Duration": 2878,
-        "DurationLimit": 3600,
+        "MoviePath": "J:\\Moviesold\\Waynes.World.1992.720p.BluRay.x264-x0r\\Waynes.World.1992.720p.BluRay.x264-x0r.mkv",
+        "Duration": 5665,
+        "DurationLimit": 7200,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -2012,9 +2012,9 @@
             "action",
             "2000s"
         ],
-        "MoviePath": "",
-        "Duration": 2878,
-        "DurationLimit": 3600,
+        "MoviePath": "J:\\Moviesold\\War Of The Worlds\\title_t00.mkv",
+        "Duration": 10752,
+        "DurationLimit": 10800,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -2028,9 +2028,9 @@
             "crime",
             "80s"
         ],
-        "MoviePath": "",
-        "Duration": 2878,
-        "DurationLimit": 3600,
+        "MoviePath": "J:\\Moviesold\\Wallstreet\\Wall Street.mkv",
+        "Duration": 7541,
+        "DurationLimit": 9000,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -2044,9 +2044,9 @@
             "2000s",
             "comedy"
         ],
-        "MoviePath": "",
-        "Duration": 2878,
-        "DurationLimit": 3600,
+        "MoviePath": "J:\\Moviesold\\View From the Top 2003 1080p AMZN WEBRip DD5 1 x264-pawel2006\\View From the Top 2003 1080p AMZN WEBRip DD5 1 x264-pawel2006.mkv",
+        "Duration": 5240,
+        "DurationLimit": 5400,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -2060,9 +2060,9 @@
             "2000s",
             "thriller"
         ],
-        "MoviePath": "",
-        "Duration": 2878,
-        "DurationLimit": 3600,
+        "MoviePath": "J:\\Moviesold\\Vertical Limit\\Vertical Limit_t00.mkv",
+        "Duration": 7467,
+        "DurationLimit": 9000,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -2077,9 +2077,9 @@
             "80s",
             "horror"
         ],
-        "MoviePath": "",
-        "Duration": 2878,
-        "DurationLimit": 3600,
+        "MoviePath": "J:\\Moviesold\\Vampire.Hunter.D.1985.720p.BluRay.x264-x0r\\Vampire.Hunter.D.1985.720p.BluRay.x264-x0r.mkv",
+        "Duration": 4918,
+        "DurationLimit": 5400,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -2092,9 +2092,9 @@
             "80s",
             "comedy"
         ],
-        "MoviePath": "",
-        "Duration": 2878,
-        "DurationLimit": 3600,
+        "MoviePath": "J:\\Moviesold\\Used Cars\\Used Cars_t00.mkv",
+        "Duration": 6762,
+        "DurationLimit": 7200,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -2109,9 +2109,9 @@
             "2000s",
             "comedy"
         ],
-        "MoviePath": "",
-        "Duration": 2878,
-        "DurationLimit": 3600,
+        "MoviePath": "J:\\Moviesold\\Catch Me If You Can\\Catch Me If You Can.mkv",
+        "Duration": 8443,
+        "DurationLimit": 9000,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -2123,11 +2123,12 @@
         "Tags": [
             "bio",
             "10s",
-            "drama"
+            "drama",
+            "no"
         ],
-        "MoviePath": "",
-        "Duration": 2878,
-        "DurationLimit": 3600,
+        "MoviePath": "J:\\Moviesold\\127 Hours\\127 Hours.mkv",
+        "Duration": 5623,
+        "DurationLimit": 7200,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -2142,9 +2143,9 @@
             "70s",
             "drama"
         ],
-        "MoviePath": "",
-        "Duration": 2878,
-        "DurationLimit": 3600,
+        "MoviePath": "J:\\Moviesold\\1776\\1776.mkv",
+        "Duration": 9908,
+        "DurationLimit": 10800,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -2159,9 +2160,9 @@
             "50s",
             "horror"
         ],
-        "MoviePath": "",
-        "Duration": 2878,
-        "DurationLimit": 3600,
+        "MoviePath": "J:\\Moviesold\\20 Miles To Earth\\20 Miles To Earth.jpg",
+        "Duration": 0,
+        "DurationLimit": 0,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -2175,9 +2176,9 @@
             "50s",
             "adventure"
         ],
-        "MoviePath": "",
-        "Duration": 2878,
-        "DurationLimit": 3600,
+        "MoviePath": "J:\\Moviesold\\20,000 Leagues Under the Sea\\20,000 Leagues Under the Sea.mkv",
+        "Duration": 7621,
+        "DurationLimit": 9000,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -2191,9 +2192,9 @@
             "scifi",
             "drama"
         ],
-        "MoviePath": "",
-        "Duration": 2878,
-        "DurationLimit": 3600,
+        "MoviePath": "J:\\Moviesold\\2012\\2012.mkv",
+        "Duration": 9466,
+        "DurationLimit": 10800,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -2206,9 +2207,9 @@
             "2000s",
             "drama"
         ],
-        "MoviePath": "",
-        "Duration": 2878,
-        "DurationLimit": 3600,
+        "MoviePath": "J:\\Moviesold\\25th Hour\\25th Hour.mkv",
+        "Duration": 8086,
+        "DurationLimit": 9000,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -2222,9 +2223,9 @@
             "horror",
             "zombie"
         ],
-        "MoviePath": "",
-        "Duration": 2878,
-        "DurationLimit": 3600,
+        "MoviePath": "J:\\Moviesold\\Warning.Hazardous.Outbreak.Movie.Pack.1080p.H264.AC3.DD.Will1869\\28.Days.Later.2002.1080p.BluRay.H264.AC3.DD5.1.mp4",
+        "Duration": 6787,
+        "DurationLimit": 7200,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -2239,9 +2240,9 @@
             "comedy",
             "romance"
         ],
-        "MoviePath": "",
-        "Duration": 2878,
-        "DurationLimit": 3600,
+        "MoviePath": "J:\\Moviesold\\50 First Dates\\50 First Dates.mkv",
+        "Duration": 5945,
+        "DurationLimit": 7200,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -2255,9 +2256,9 @@
             "adventure",
             "thriller"
         ],
-        "MoviePath": "",
-        "Duration": 2878,
-        "DurationLimit": 3600,
+        "MoviePath": "J:\\Moviesold\\A Game of Death\\A Game of Death.mkv",
+        "Duration": 4342,
+        "DurationLimit": 5400,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -2272,9 +2273,9 @@
             "action",
             "thriller"
         ],
-        "MoviePath": "",
-        "Duration": 2878,
-        "DurationLimit": 3600,
+        "MoviePath": "J:\\Moviesold\\A History Of Violence\\A History of Violence.mkv",
+        "Duration": 5740,
+        "DurationLimit": 7200,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -2288,9 +2289,9 @@
             "drama",
             "thriller"
         ],
-        "MoviePath": "",
-        "Duration": 2878,
-        "DurationLimit": 3600,
+        "MoviePath": "J:\\Moviesold\\A Murder of Crows\\A Murder Of Crows.mkv",
+        "Duration": 6087,
+        "DurationLimit": 7200,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -2305,9 +2306,9 @@
             "slasher",
             "halloween"
         ],
-        "MoviePath": "",
-        "Duration": 2878,
-        "DurationLimit": 3600,
+        "MoviePath": "J:\\Moviesold\\A Nightmare On Elm Street\\A Nightmare On Elm Street.mp4",
+        "Duration": 5474,
+        "DurationLimit": 7200,
         "Collection": "Nightmare on Elm Street",
         "CollectionSequence": 0
     },
@@ -2321,9 +2322,9 @@
             "horror",
             "slasher"
         ],
-        "MoviePath": "",
-        "Duration": 2878,
-        "DurationLimit": 3600,
+        "MoviePath": "J:\\Moviesold\\A Nightmare on Elm Street 2 Freddy's Revenge\\A Nightmare on Elm Street 2 Freddy's Revenge.mp4",
+        "Duration": 5137,
+        "DurationLimit": 5400,
         "Collection": "Nightmare on Elm Street",
         "CollectionSequence": 0
     },
@@ -2337,9 +2338,9 @@
             "horror",
             "slasher"
         ],
-        "MoviePath": "",
-        "Duration": 2878,
-        "DurationLimit": 3600,
+        "MoviePath": "J:\\Moviesold\\A Nightmare on Elm Street 3 Dream Warriors\\A Nightmare on Elm Street 3 Dream Warriors.mp4",
+        "Duration": 5792,
+        "DurationLimit": 7200,
         "Collection": "Nightmare on Elm Street",
         "CollectionSequence": 0
     },
@@ -2353,9 +2354,9 @@
             "horror",
             "slasher"
         ],
-        "MoviePath": "",
-        "Duration": 2878,
-        "DurationLimit": 3600,
+        "MoviePath": "J:\\Moviesold\\A Nightmare on Elm Street 4 The Dream Master\\A Nightmare on Elm Street 4 The Dream Master.mp4",
+        "Duration": 5595,
+        "DurationLimit": 7200,
         "Collection": "Nightmare on Elm Street",
         "CollectionSequence": 0
     },
@@ -2369,9 +2370,9 @@
             "horror",
             "slasher"
         ],
-        "MoviePath": "",
-        "Duration": 2878,
-        "DurationLimit": 3600,
+        "MoviePath": "J:\\Moviesold\\A Nightmare on Elm Street 5 The Dream Child\\A Nightmare on Elm Street 5 The Dream Child.mp4",
+        "Duration": 5378,
+        "DurationLimit": 5400,
         "Collection": "Nightmare on Elm Street",
         "CollectionSequence": 0
     },
@@ -2386,9 +2387,9 @@
             "slasher",
             "halloween"
         ],
-        "MoviePath": "",
-        "Duration": 2878,
-        "DurationLimit": 3600,
+        "MoviePath": "J:\\Moviesold\\A Nighmare On Elm Street 2010\\A Nighmare On Elm Street 2010.mp4",
+        "Duration": 5732,
+        "DurationLimit": 7200,
         "Collection": "Nightmare on Elm Street",
         "CollectionSequence": 0
     },
@@ -2402,9 +2403,9 @@
             "scifi",
             "drama"
         ],
-        "MoviePath": "",
-        "Duration": 2878,
-        "DurationLimit": 3600,
+        "MoviePath": "J:\\Moviesold\\AI Artificial Intelligence\\AI Artificial Intelligence.mkv",
+        "Duration": 8750,
+        "DurationLimit": 9000,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -2418,9 +2419,9 @@
             "horror",
             "comedy"
         ],
-        "MoviePath": "",
-        "Duration": 2878,
-        "DurationLimit": 3600,
+        "MoviePath": "J:\\Moviesold\\The Original Universal Monsters Collection 1080p H264 AC3 DD2.0 Will1869\\Abbott and Costello Meet Frankenstein 1080p H264 AC3 DD2.0.mp4",
+        "Duration": 4968,
+        "DurationLimit": 5400,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -2434,9 +2435,9 @@
             "scifi",
             "comedy"
         ],
-        "MoviePath": "",
-        "Duration": 2878,
-        "DurationLimit": 3600,
+        "MoviePath": "J:\\Moviesold\\The Original Universal Monsters Collection 1080p H264 AC3 DD2.0 Will1869\\Bud.Abbott.Lou.Costello.Meet.The.Invisible.Man.1951.1080p H264 AC3 DD2.0.mp4",
+        "Duration": 4938,
+        "DurationLimit": 5400,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -2450,9 +2451,9 @@
             "horror",
             "comedy"
         ],
-        "MoviePath": "",
-        "Duration": 2878,
-        "DurationLimit": 3600,
+        "MoviePath": "J:\\Moviesold\\The Original Universal Monsters Collection 1080p H264 AC3 DD2.0 Will1869\\Abbott.And.Costello.Meet.The.Mummy.1955.1080p H264 AC3 DD2.0.mp4",
+        "Duration": 4767,
+        "DurationLimit": 5400,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -2465,9 +2466,9 @@
             "90s",
             "comedy"
         ],
-        "MoviePath": "",
-        "Duration": 2878,
-        "DurationLimit": 3600,
+        "MoviePath": "J:\\Moviesold\\Ace Ventura Pet Detective\\Ace Ventura Pet Detective.mkv",
+        "Duration": 5225,
+        "DurationLimit": 5400,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -2481,9 +2482,9 @@
             "comedy",
             "drama"
         ],
-        "MoviePath": "",
-        "Duration": 2878,
-        "DurationLimit": 3600,
+        "MoviePath": "J:\\Moviesold\\Afternoon Delight\\Afternoon Delight.mkv",
+        "Duration": 5869,
+        "DurationLimit": 7200,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -2498,9 +2499,9 @@
             "drama",
             "romance"
         ],
-        "MoviePath": "",
-        "Duration": 2878,
-        "DurationLimit": 3600,
+        "MoviePath": "J:\\Moviesold\\Alfie\\Alfie.mkv",
+        "Duration": 6336,
+        "DurationLimit": 7200,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -2515,9 +2516,9 @@
             "drama",
             "romance"
         ],
-        "MoviePath": "",
-        "Duration": 2878,
-        "DurationLimit": 3600,
+        "MoviePath": "J:\\Moviesold\\All Good Things\\title_t00.mkv",
+        "Duration": 6050,
+        "DurationLimit": 7200,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -2533,9 +2534,9 @@
             "romance",
             "french"
         ],
-        "MoviePath": "",
-        "Duration": 2878,
-        "DurationLimit": 3600,
+        "MoviePath": "J:\\Moviesold\\Amelia\\Amelia.mkv",
+        "Duration": 6681,
+        "DurationLimit": 7200,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -2549,9 +2550,9 @@
             "drama",
             "crime"
         ],
-        "MoviePath": "",
-        "Duration": 2878,
-        "DurationLimit": 3600,
+        "MoviePath": "J:\\Moviesold\\American History X\\title_t00.mkv",
+        "Duration": 7130,
+        "DurationLimit": 7200,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -2565,9 +2566,9 @@
             "comedy",
             "stoner"
         ],
-        "MoviePath": "",
-        "Duration": 2878,
-        "DurationLimit": 3600,
+        "MoviePath": "J:\\Moviesold\\American Pie Bandcamp\\title_t00.mkv",
+        "Duration": 5466,
+        "DurationLimit": 7200,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -2581,9 +2582,9 @@
             "comedy",
             "stoner"
         ],
-        "MoviePath": "",
-        "Duration": 2878,
-        "DurationLimit": 3600,
+        "MoviePath": "J:\\Moviesold\\American Wedding\\title_t00.mkv",
+        "Duration": 5776,
+        "DurationLimit": 7200,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -2597,9 +2598,9 @@
             "drama",
             "bio"
         ],
-        "MoviePath": "",
-        "Duration": 2878,
-        "DurationLimit": 3600,
+        "MoviePath": "J:\\Moviesold\\And The Band Played On 1993\\And.the.Band.Played.On.1993.DVDRip.DivX.avi",
+        "Duration": 8503,
+        "DurationLimit": 9000,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -2613,9 +2614,9 @@
             "drama",
             "romance"
         ],
-        "MoviePath": "",
-        "Duration": 2878,
-        "DurationLimit": 3600,
+        "MoviePath": "J:\\Moviesold\\Angel Eyes\\ANGEL EYES_t00.mkv",
+        "Duration": 6211,
+        "DurationLimit": 7200,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -2631,9 +2632,9 @@
             "teen",
             "british"
         ],
-        "MoviePath": "",
-        "Duration": 2878,
-        "DurationLimit": 3600,
+        "MoviePath": "J:\\Moviesold\\Angus.Thongs.and.Perfect.Snogging.2008.720p.WEB-DL.H264\\Angus.Thongs.and.Perfect.Snogging.2008.720p.WEB-DL.mkv",
+        "Duration": 6007,
+        "DurationLimit": 7200,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -2647,9 +2648,9 @@
             "thriller",
             "crime"
         ],
-        "MoviePath": "",
-        "Duration": 2878,
-        "DurationLimit": 3600,
+        "MoviePath": "J:\\Moviesold\\Antitrust\\title_t00.mkv",
+        "Duration": 6514,
+        "DurationLimit": 7200,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -2664,9 +2665,9 @@
             "teen",
             "comedy"
         ],
-        "MoviePath": "",
-        "Duration": 2878,
-        "DurationLimit": 3600,
+        "MoviePath": "J:\\Moviesold\\Aquamarine 2006 10bit hevc-d3g\\Aquamarine 2006 BluRay 10Bit 1080p DD5.1 H265-d3g.mkv",
+        "Duration": 6212,
+        "DurationLimit": 7200,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -2679,9 +2680,9 @@
             "10s",
             "action"
         ],
-        "MoviePath": "",
-        "Duration": 2878,
-        "DurationLimit": 3600,
+        "MoviePath": "J:\\Moviesold\\arena\\Arena (2011)_t00.mkv",
+        "Duration": 5655,
+        "DurationLimit": 7200,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -2696,9 +2697,9 @@
             "horror",
             "halloween"
         ],
-        "MoviePath": "",
-        "Duration": 2878,
-        "DurationLimit": 3600,
+        "MoviePath": "J:\\Moviesold\\Army.Of.Darkness.1992.REMASTERED.720p.BluRay.x264-CREEPSHOW\\creep-armyofdarknessremastered720.mkv",
+        "Duration": 5331,
+        "DurationLimit": 5400,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -2712,9 +2713,9 @@
             "scifi",
             "drama"
         ],
-        "MoviePath": "",
-        "Duration": 2878,
-        "DurationLimit": 3600,
+        "MoviePath": "J:\\Moviesold\\Arrival.2016.HEVC.1080p.BluRay.AC3.x265-LEGi0N.mkv",
+        "Duration": 6983,
+        "DurationLimit": 7200,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -2728,9 +2729,9 @@
             "comedy",
             "drama"
         ],
-        "MoviePath": "",
-        "Duration": 2878,
-        "DurationLimit": 3600,
+        "MoviePath": "J:\\Moviesold\\Art School Confidential\\ArtSchoolConfidential.mkv",
+        "Duration": 6141,
+        "DurationLimit": 7200,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -2744,9 +2745,9 @@
             "action",
             "thriller"
         ],
-        "MoviePath": "",
-        "Duration": 2878,
-        "DurationLimit": 3600,
+        "MoviePath": "J:\\Moviesold\\assasins\\title_t00.mkv",
+        "Duration": 7960,
+        "DurationLimit": 9000,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -2760,9 +2761,9 @@
             "action",
             "thriller"
         ],
-        "MoviePath": "",
-        "Duration": 2878,
-        "DurationLimit": 3600,
+        "MoviePath": "J:\\Moviesold\\Assault on Precinct 13\\Assault on Precinct 13.mkv",
+        "Duration": 6530,
+        "DurationLimit": 7200,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -2777,9 +2778,9 @@
             "drama",
             "romance"
         ],
-        "MoviePath": "",
-        "Duration": 2878,
-        "DurationLimit": 3600,
+        "MoviePath": "J:\\Moviesold\\Bad Teacher\\Bad Teacher.mkv",
+        "Duration": 5858,
+        "DurationLimit": 7200,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -2794,9 +2795,9 @@
             "drama",
             "crime"
         ],
-        "MoviePath": "",
-        "Duration": 2878,
-        "DurationLimit": 3600,
+        "MoviePath": "J:\\Moviesold\\Bandits\\title_t00.mkv",
+        "Duration": 7378,
+        "DurationLimit": 9000,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -2810,9 +2811,9 @@
             "drama",
             "thriller"
         ],
-        "MoviePath": "",
-        "Duration": 2878,
-        "DurationLimit": 3600,
+        "MoviePath": "J:\\Moviesold\\Basic Instinct 2\\Basic Instinct 2.mkv",
+        "Duration": 6965,
+        "DurationLimit": 7200,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -2826,9 +2827,9 @@
             "drama",
             "bio"
         ],
-        "MoviePath": "",
-        "Duration": 2878,
-        "DurationLimit": 3600,
+        "MoviePath": "J:\\Moviesold\\Basquiat\\Basquiat.1996.DVDivX.avi",
+        "Duration": 6385,
+        "DurationLimit": 7200,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -2842,9 +2843,9 @@
             "drama",
             "thriller"
         ],
-        "MoviePath": "",
-        "Duration": 2878,
-        "DurationLimit": 3600,
+        "MoviePath": "J:\\Moviesold\\Battle.in.Seattle.2007.720p.BluRay.x264-x0r\\Battle.in.Seattle.2007.720p.BluRay.x264-x0r.mkv",
+        "Duration": 5947,
+        "DurationLimit": 7200,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -2858,9 +2859,9 @@
             "romance",
             "comedy"
         ],
-        "MoviePath": "",
-        "Duration": 2878,
-        "DurationLimit": 3600,
+        "MoviePath": "J:\\Moviesold\\Because I said So\\title_t00.mkv",
+        "Duration": 6083,
+        "DurationLimit": 7200,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -2875,9 +2876,9 @@
             "drama",
             "comedy"
         ],
-        "MoviePath": "",
-        "Duration": 2878,
-        "DurationLimit": 3600,
+        "MoviePath": "J:\\Moviesold\\Being John Malkovich\\title_t00.mkv",
+        "Duration": 6756,
+        "DurationLimit": 7200,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -2891,9 +2892,9 @@
             "drama",
             "romance"
         ],
-        "MoviePath": "",
-        "Duration": 2878,
-        "DurationLimit": 3600,
+        "MoviePath": "J:\\Moviesold\\Being Julia\\Being Julia.mkv",
+        "Duration": 6243,
+        "DurationLimit": 7200,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -2907,9 +2908,9 @@
             "mockumentary",
             "comedy"
         ],
-        "MoviePath": "",
-        "Duration": 2878,
-        "DurationLimit": 3600,
+        "MoviePath": "J:\\Moviesold\\Best.In.Show.2000.720p.BRRip.XviD-SilentKitty2\\Best.In.Show.2000.720p.BRRip.XviD-SilentKitty2.avi",
+        "Duration": 5410,
+        "DurationLimit": 7200,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -2923,9 +2924,9 @@
             "crime",
             "drama"
         ],
-        "MoviePath": "",
-        "Duration": 2878,
-        "DurationLimit": 3600,
+        "MoviePath": "J:\\Moviesold\\Best Laid Plans\\Best Laid Plans.mkv",
+        "Duration": 5595,
+        "DurationLimit": 7200,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -2940,9 +2941,9 @@
             "drama",
             "comedy"
         ],
-        "MoviePath": "",
-        "Duration": 2878,
-        "DurationLimit": 3600,
+        "MoviePath": "J:\\Moviesold\\Big Fish 2003 BluRay 1080p DTS x264-PRoDJi.mkv",
+        "Duration": 7509,
+        "DurationLimit": 9000,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -2958,9 +2959,9 @@
             "comedy",
             "superhero"
         ],
-        "MoviePath": "",
-        "Duration": 2878,
-        "DurationLimit": 3600,
+        "MoviePath": "J:\\Moviesold\\Big Hero 6 (2014) 10bit hevc-d3g\\Big Hero 6 (2014) BluRay 10Bit 1080p DD5.1 H265-d3g.mkv",
+        "Duration": 6113,
+        "DurationLimit": 7200,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -2975,9 +2976,9 @@
             "scifi",
             "stoner"
         ],
-        "MoviePath": "",
-        "Duration": 2878,
-        "DurationLimit": 3600,
+        "MoviePath": "J:\\Moviesold\\Bill.and.Teds.Bogus.Journey.1991.1080p.BluRay.x264-nikt0\\Bill.and.Teds.Bogus.Journey.1991.1080p.BluRay.x264-nikt0.mkv",
+        "Duration": 5637,
+        "DurationLimit": 7200,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -2992,9 +2993,9 @@
             "scifi",
             "stoner"
         ],
-        "MoviePath": "",
-        "Duration": 2878,
-        "DurationLimit": 3600,
+        "MoviePath": "J:\\Moviesold\\Bill and Ted's Excellent Adventure 1989 10bit hevc-d3g\\Bill and Ted's Excellent Adventure 1989 BluRay 10Bit 1080p DD5.1 H265-d3g.mkv",
+        "Duration": 5391,
+        "DurationLimit": 5400,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -3008,9 +3009,9 @@
             "comedy",
             "drama"
         ],
-        "MoviePath": "",
-        "Duration": 2878,
-        "DurationLimit": 3600,
+        "MoviePath": "J:\\Moviesold\\Billy Elliot\\Billy Elliot.mkv",
+        "Duration": 6620,
+        "DurationLimit": 7200,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -3025,9 +3026,9 @@
             "drama",
             "crime"
         ],
-        "MoviePath": "",
-        "Duration": 2878,
-        "DurationLimit": 3600,
+        "MoviePath": "J:\\Moviesold\\Black Dahlia\\Black Dahlia.mkv",
+        "Duration": 7271,
+        "DurationLimit": 9000,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -3040,9 +3041,9 @@
             "60s",
             "horror"
         ],
-        "MoviePath": "",
-        "Duration": 2878,
-        "DurationLimit": 3600,
+        "MoviePath": "J:\\Moviesold\\Black Zoo 1963 DVDRip XViD\\Black Zoo 1963 DVDRip XViD.avi",
+        "Duration": 5296,
+        "DurationLimit": 5400,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -3055,9 +3056,9 @@
             "80s",
             "scifi"
         ],
-        "MoviePath": "",
-        "Duration": 2878,
-        "DurationLimit": 3600,
+        "MoviePath": "J:\\Moviesold\\Blade.Runner.1982.The.Final.Cut.1080p.UHD.BluRay.DTS.x264-NCmt.mkv",
+        "Duration": 7051,
+        "DurationLimit": 7200,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -3071,9 +3072,9 @@
             "horror",
             "halloween"
         ],
-        "MoviePath": "",
-        "Duration": 2878,
-        "DurationLimit": 3600,
+        "MoviePath": "J:\\Moviesold\\Blair Witch Collection 1080p H264 AC3 DD Will1869\\Blair.Witch.2016.1080p.BluRay.H264.AC3.DD5.1.Will1869.mp4",
+        "Duration": 5351,
+        "DurationLimit": 5400,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -3087,9 +3088,9 @@
             "thriller",
             "drama"
         ],
-        "MoviePath": "",
-        "Duration": 2878,
-        "DurationLimit": 3600,
+        "MoviePath": "J:\\Moviesold\\Blindness\\Blindness.mkv",
+        "Duration": 7267,
+        "DurationLimit": 9000,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -3103,9 +3104,9 @@
             "thriller",
             "action"
         ],
-        "MoviePath": "",
-        "Duration": 2878,
-        "DurationLimit": 3600,
+        "MoviePath": "J:\\Moviesold\\Blood Diamond\\BLOOD DIAMOND.mkv",
+        "Duration": 8600,
+        "DurationLimit": 9000,
         "Collection": "",
         "CollectionSequence": 0
     },
@@ -3120,9 +3121,9 @@
             "crime",
             "drama"
         ],
-        "MoviePath": "",
-        "Duration": 2878,
-        "DurationLimit": 3600,
+        "MoviePath": "J:\\Moviesold\\Blow\\Blow.mkv",
+        "Duration": 7402,
+        "DurationLimit": 9000,
         "Collection": "",
         "CollectionSequence": 0
     }

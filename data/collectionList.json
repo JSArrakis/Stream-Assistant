@@ -1,6 +1,7 @@
 [
     {
         "Title": "Toonami2k",
+        "LoadTitle": "Toonami2k",
         "Type": "Collection",
         "Duration": 10800,
         "StartBumper": {
@@ -125,6 +126,7 @@
     },
     {
         "Title": "Test",
+        "LoadTitle": "Test",
         "Type": "Collection",
         "Duration": 1800,
         "StartBumper": {

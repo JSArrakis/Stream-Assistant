@@ -2,6 +2,7 @@
 	"VLCLocation": "C:\\Program Files\\VideoLAN\\VLC\\",
 	"DestinationFolder": "C:\\Users\\Main\\Projects\\Stream\\ConstructedStream\\",
 	"TestFolder": "C:\\Users\\Main\\Projects\\Stream\\Test\\",
+	"DataFolder": "C:\\Users\\Main\\Documents\\GitHub\\Stream-Assistant\\data\\",
 	"PlaylistName": "Playlist",
 	"Commercials": {
 		"nineties": "C:\\Users\\Main\\Desktop\\Commercials\\90sCommercials\\",
