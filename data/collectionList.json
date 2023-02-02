@@ -4,6 +4,30 @@
         "LoadTitle": "Toonami2k",
         "Type": "Collection",
         "Duration": 10800,
+        "DurationLimit": 10800,
+        "Tags": [
+            "anime",
+            "action",
+            "mecha",
+            "scifi",
+            "military",
+            "toonami",
+            "toonami2k",
+            "animated",
+            "noir",
+            "dc",
+            "crime",
+            "superhero",
+            "comedy",
+            "harem",
+            "spaceopera",
+            "adventure",
+            "martialarts",
+            "magicalgirl",
+            "drama",
+            "romance",
+            "cgi"
+        ],
         "StartBumper": {
             "Duration": 60,
             "Path": "C:\\Users\\Main\\Desktop\\Bumpers\\Toonami - 2000 Opening (TOM 1).mp4"
@@ -129,6 +153,15 @@
         "LoadTitle": "Test",
         "Type": "Collection",
         "Duration": 1800,
+        "DurationLimit": 1800,
+        "Tags": [
+            "anime",
+            "magicalgirl",
+            "drama",
+            "romance",
+            "toonami",
+            "toonami2k"
+        ],
         "StartBumper": {
             "Duration": 60,
             "Path": "C:\\Users\\Main\\Desktop\\Bumpers\\Toonami - 2000 Opening (TOM 1).mp4"

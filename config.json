@@ -1,23 +1,23 @@
 {
-	"VLCLocation": "C:\\Program Files\\VideoLAN\\VLC\\",
-	"DestinationFolder": "C:\\Users\\Main\\Projects\\Stream\\ConstructedStream\\",
-	"TestFolder": "C:\\Users\\Main\\Projects\\Stream\\Test\\",
-	"DataFolder": "C:\\Users\\Main\\Documents\\GitHub\\Stream-Assistant\\data\\",
-	"PlaylistName": "Playlist",
-	"Commercials": {
+	"vlcLocation": "C:\\Program Files\\VideoLAN\\VLC\\",
+	"destinationFolder": "C:\\Users\\Main\\Projects\\Stream\\ConstructedStream\\",
+	"testFolder": "C:\\Users\\Main\\Projects\\Stream\\Test\\",
+	"dataFolder": "C:\\Users\\Main\\Documents\\GitHub\\Stream-Assistant\\data\\",
+	"playlistName": "Playlist",
+	"commercials": {
 		"nineties": "C:\\Users\\Main\\Desktop\\Commercials\\90sCommercials\\",
 		"aughts": "C:\\Users\\Main\\Desktop\\Commercials\\2000sCommercials\\",
 		"christmas": "C:\\Users\\Main\\Desktop\\Commercials\\ChristmasCommercials\\"
 	},
-	"Shorts": {
+	"shorts": {
 		"christmas": "C:\\Users\\Main\\Desktop\\Shorts\\Christmas\\"
 	},
-	"Music": {
+	"music": {
 		"christmas": "C:\\Users\\Main\\Desktop\\MusicVideos\\Christmas\\"
 	},
-	"CommercialDuration": 300,
-	"StreamPromo": {
-		"Path": "",
-		"Duration": 0
+	"commercialDuration": 300,
+	"streamPromo": {
+		"path": "",
+		"duration": 0
 	}
 }

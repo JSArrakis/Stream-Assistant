@@ -110,9 +110,13 @@ const main = async () => {
 		}
 
 	} else if (await dirMan.manageDestinationDirectory(config, destinationDirectory, options)) {
-		//If result comes back false, do nothing, otherwise proceed.
-		//TODO: v1.2 Get media durations programmatically from the file system
-		let stream = await streamConstructor.constructStream(config, destinationDirectory, options);
+		let progression = [];
+
+		if (dirMan.directoryExists(destinationDirectory + "progression.json")) {
+			progression = JSON.parse(dirMan.readFile(destinationDirectory + "progression.json"));
+		}
+
+		let stream = await streamConstructor.constructStream(config, getEnvironment(options, environs), destinationDirectory, options, progression);
 
 		dirMan.createStreamFile(destinationDirectory, playlistFileName, stream);
 
