@@ -4,20 +4,6 @@
 	"testFolder": "C:\\Users\\Main\\Projects\\Stream\\Test\\",
 	"dataFolder": "C:\\Users\\Main\\Documents\\GitHub\\Stream-Assistant\\data\\",
 	"playlistName": "Playlist",
-	"commercials": {
-		"nineties": "C:\\Users\\Main\\Desktop\\Commercials\\90sCommercials\\",
-		"aughts": "C:\\Users\\Main\\Desktop\\Commercials\\2000sCommercials\\",
-		"christmas": "C:\\Users\\Main\\Desktop\\Commercials\\ChristmasCommercials\\"
-	},
-	"shorts": {
-		"christmas": "C:\\Users\\Main\\Desktop\\Shorts\\Christmas\\"
-	},
-	"music": {
-		"christmas": "C:\\Users\\Main\\Desktop\\MusicVideos\\Christmas\\"
-	},
-	"commercialDuration": 300,
-	"streamPromo": {
-		"path": "",
-		"duration": 0
-	}
+	"repeatInterval": 86400,
+	"interval": 1800
 }

@@ -13,5 +13,8 @@
     "get-video-duration": "^4.1.0",
     "lodash": "^4.17.21",
     "moment": "^2.29.4"
+  },
+  "devDependencies": {
+    "@types/node": "^18.14.0"
   }
 }

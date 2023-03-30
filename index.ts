@@ -1,17 +1,9 @@
-import config from "./config.json";
 import { parseCommandLineArgs } from "./lib/saCommander";
+import { constructStream } from "./lib/streamConstructor";
 import { executeStream } from "./lib/streamExecutor";
-import * as dirMan from "./lib/directoryManager"
+import { Config } from "./models/config";
 
-interface Config {
-	vlcLocation: string;
-	destinationFolder: string;
-	testFolder: string;
-	dataFolder: string;
-	playlistName: string;
-}
-
-const typedConfig: Config = config;
+const config: Config = require('./config.json') as Config;
 
 async function main(): Promise<void> {
 
@@ -19,15 +11,9 @@ async function main(): Promise<void> {
 	//Get user selection
 	let options = parseCommandLineArgs();
 
-	//Get progression
-	let progression = [];
-	if (dirMan.directoryExists(config.destinationFolder + "progression.json")) {
-		progression = JSON.parse(dirMan.readFile(config.destinationFolder + "progression.json"));
-	}
-
-	//Create Stream
-
-	//Create Stream File
+	//Create Stream Array
+	let stream: string[] = constructStream(config, options)
+	//Create Stream File from Stream Array
 
 	//Execute Stream
 	executeStream(config.vlcLocation, config.destinationFolder, config.playlistName);
