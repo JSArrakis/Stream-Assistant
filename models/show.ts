@@ -14,7 +14,7 @@ export class Episode {
     Season: number;
     Episode: number;
     EpisodeNumber: number;
-    EpisodePath: string;
+    Path: string;
     EpisodeTitle: string;
     LoadTitle: string
     Duration: number;

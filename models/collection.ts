@@ -14,6 +14,7 @@ export class Collection extends BaseMedia {
     EndBumper: Bumper;
     Promos: Promo[];
     Shows: CollectionShow[];
+    Path: string;
 }
 
 class CollectionShow {

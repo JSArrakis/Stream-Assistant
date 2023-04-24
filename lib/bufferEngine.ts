@@ -3,7 +3,6 @@ import { Promo } from "../models/promo";
 import { TranslationTag } from "../models/translationTag";
 import { Command } from "./saCommander";
 import { Eras } from "../models/const/eras";
-import { PreviousBuffer } from "../models/previousBuffer";
 import { Commercial } from "../models/commercial";
 import { Short } from "../models/short";
 import { Music } from "../models/music";
@@ -12,6 +11,12 @@ class TranslatedTags {
     EraTags: string[];
     MainTags: string[];
     SecondaryTags: string[];
+
+    constructor(eraTags: string[], mainTags: string[], secondaryTags: string[]) {
+        this.EraTags = eraTags;
+        this.MainTags = mainTags;
+        this.SecondaryTags = secondaryTags;
+    }
 }
 
 export function createBuffer(
@@ -42,23 +47,38 @@ export function createBuffer(
         half = Math.ceil(duration / 2)
     }
 
-    if (half === 0) {
+    if (subsequentTags.length > 0 && precedingTags.length > 0)
+    {
+        if (half === 0) {
+            buffer.push(promo.Path)
+            let selectedB = selectBuffer(duration, media, convertedSubTags, prevBuff);
+            buffer.push(...selectedB[0]);
+            return [buffer, selectedB[1]]
+        } else {
+            let selectedA = selectBuffer(duration, media, convertedPreTags, prevBuff);
+            buffer.push(...selectedA[0]);
+            buffer.push(promo.Path);
+            let selectedB = selectBuffer(duration + selectedA[1], media, convertedSubTags, prevBuff);
+            buffer.push(...selectedB[0]);
+            return [buffer, selectedB[1]]
+        }
+    } else if(precedingTags.length > 0) {
+        //TODO Devise a signoff set
+        let selectedB = selectBuffer(duration, media, convertedPreTags, prevBuff);
         buffer.push(promo.Path)
-        let selectedB = selectBuffer(duration, media, convertedSubTags, prevBuff);
         buffer.push(...selectedB[0]);
+        buffer.push(promo.Path)
         return [buffer, selectedB[1]]
     } else {
-        let selectedA = selectBuffer(duration, media, convertedPreTags, prevBuff);
-        buffer.push(...selectedA[0]);
-        buffer.push(promo.Path);
-        let selectedB = selectBuffer(duration + selectedA[1], media, convertedSubTags, prevBuff);
+        let selectedB = selectBuffer(duration, media, convertedSubTags, prevBuff);
         buffer.push(...selectedB[0]);
+        buffer.push(promo.Path)
         return [buffer, selectedB[1]]
     }
 }
 
 function tagTranslator(tags: string[], translationTags: TranslationTag[]): TranslatedTags {
-    let translatedTags: TranslatedTags = new TranslatedTags();
+    let translatedTags: TranslatedTags = new TranslatedTags([], [], []);
 
     //check against list of constants for era tag.
     tags.forEach(tag => {

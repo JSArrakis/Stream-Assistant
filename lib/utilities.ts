@@ -22,6 +22,14 @@ export function ManageProgression(title: string, type: string, progression: Medi
     return episodeNumbers;
 }
 
+export function ReduceProgression(title: string, showLoadTitle: string, progression: MediaProgression[]) {
+    progression.filter(pitem => pitem.Title === title)[0].Shows
+        .filter(fshow => fshow.LoadTitle === showLoadTitle)
+        .forEach(sitem => {
+            sitem.Episode = sitem.Episode - 1;
+        });
+}
+
 function incrementProgression(progression: MediaProgression[], title: string, show: Show) {
     progression.filter(pitem => pitem.Title === title)[0].Shows
         .filter(fshow => fshow.LoadTitle === show.LoadTitle)

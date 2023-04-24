@@ -11,10 +11,14 @@ import { SelectedMedia } from "../models/selectedMedia";
 import { StagedMedia } from "../models/stagedMedia";
 import { getProceduralBlock } from "./proceduralEngine";
 import { Episode, Show } from "../models/show";
-import { ManageProgression } from "./utilities";
+import { ManageProgression, ReduceProgression } from "./utilities";
 import { TranslationTag } from "../models/translationTag";
+import { createBuffer } from "./bufferEngine";
+import { buffer } from "stream/consumers";
 
 export function constructStream(config: Config, options: Command): string[] {
+    let stream: string[] = []
+
     let progression: MediaProgression[] = loadProgression();
     const media: Media = loadMedia();
     const transaltionTags: TranslationTag[] = loadTranslationTags();
@@ -29,13 +33,90 @@ export function constructStream(config: Config, options: Command): string[] {
     );
 
     setProceduralTags(options, stagedMedia);
-
-    let stagedStream: SelectedMedia[] = getStagedStream(config, options, stagedMedia, media, progression);
+    const rightNow = moment().unix();
+    let stagedStream: SelectedMedia[] = getStagedStream(rightNow, config, options, stagedMedia, media, progression);
     let prevBuffer: Media = new Media([], [], [], [], [], [], []);
-    //HERE
+    let initialBuffer = createBuffer(
+        stagedStream[0].Time - rightNow,
+        options,
+        media,
+        [],
+        stagedStream[0].Tags,
+        transaltionTags,
+        prevBuffer)
+
+    stream.push(...initialBuffer[0])
+
+    let remainder = initialBuffer[1];
+    stagedStream.forEach((item, index) => {
+        let firstItem = index === 0 ? true : false;
+        let lastItem = index === stagedStream.length - 1 ? true : false;
+        if (item.Type == MediaType.Episode || item.Type == MediaType.Movie) {
+            let mediaItem = item.Media;
+            stream.push(mediaItem.Path);
+            let bufferDuration = mediaItem.DurationLimit - mediaItem.Duration
+            let buffer = createBuffer(
+                bufferDuration + remainder,
+                options,
+                media,
+                firstItem ? [] : stagedStream[index - 1].Tags,
+                lastItem ? [] : stagedStream[index + 1].Tags,
+                transaltionTags,
+                prevBuffer);
+            stream.push(...buffer[0]);
+            remainder = buffer[1];
+        } else if (item.Media instanceof Collection) {
+            let collection = item.Media;
+
+            /*This logic is to determine if a show should be populated in the stream for a collection. If the show
+            runs longer than the alloted time block for that show, skip the show 
+            following it. Time remaining will be filled with buffer media */
+
+            /*
+            -- Author note:: A good example of this is with the summer 2000 broadcast of Toonami with Tenchi Muyo. 
+            Tenchi has a few episodes that are weirdly 45 minutes instead of 30 minutes randomly with no real rhyme 
+            or reason. To handle this randomness, Toonami in it's original broadcast pulled the episode of Batman the 
+            Animated series which usually followed Tenchi for that day only and populated the remainder of the 
+            15 minutes that would have normally been Batman with Power Puff Girl episodes instead. This allowed 
+            Toonami to keep the fidelity of a 3 hour block run time and decreasing dead time and keeping interest of the 
+            audience while staying within theme (Toonami being a series of mostly violence driven animated shows 
+            in which the only Cartoon Network licensed property that fit in the alloted time slot that was also 
+            themed correctly was PPG)
+            */
+
+            let lastOverDuration = false;
+            collection.Shows.forEach((show, index) => {
+                let lastShowEpisode = collection.Shows[index - 1].Episode;
+                if (lastShowEpisode) {
+                    if (lastShowEpisode?.Duration > lastShowEpisode?.DurationLimit) {
+                        ReduceProgression(collection.Title, show.LoadTitle, progression)
+                    } else {
+                        let episode = show.Episode;
+                        if (episode) {
+                            stream.push(episode.Path)
+                            if (episode.Duration > episode.DurationLimit) {
+                                let nextShowEpisode = collection.Shows[index + 1].Episode;
+                                if (nextShowEpisode) {
+                                    let overDurationLength = (nextShowEpisode.DurationLimit + episode.DurationLimit) - episode.Duration + remainder;
+                                    let overBuffer = createBuffer(overDurationLength, options, media, [collection.LoadTitle], [collection.LoadTitle], transaltionTags, prevBuffer)
+                                    stream.push(...overBuffer[0]);
+                                    remainder = overBuffer[1];
+                                }
+                            } else {
+                                let underBuffer = createBuffer(episode.DurationLimit - episode.Duration, options, media, [collection.LoadTitle], [collection.LoadTitle], transaltionTags, prevBuffer)
+                                stream.push(...underBuffer[0]);
+                                remainder = underBuffer[1];
+                            }
+                        }
+                    }
+                }
+            });
+        }
+    })
+    return stream;
 }
 
-function getStagedStream(config: Config,
+function getStagedStream(rightNow: number, config: Config,
     options: Command,
     stagedMedia: StagedMedia,
     media: Media,
@@ -43,7 +124,6 @@ function getStagedStream(config: Config,
 
     let firstTimePoint: number = stagedMedia.EndTime;
     let selectedMedia: SelectedMedia[] = [];
-    const rightNow = moment().unix();
 
     if (stagedMedia.ScheduledMedia.length > 0) {
         firstTimePoint = stagedMedia.ScheduledMedia[0].Time;
