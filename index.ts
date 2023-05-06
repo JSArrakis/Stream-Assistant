@@ -1,6 +1,6 @@
-import { parseCommandLineArgs } from "./lib/saCommander";
-import { constructStream } from "./lib/streamConstructor";
-import { executeStream } from "./lib/streamExecutor";
+import { parseCommandLineArgs } from "./src/saCommander";
+import { constructStream } from "./src/streamConstructor";
+import { executeStream } from "./src/streamExecutor";
 import { Config } from "./models/config";
 
 const config: Config = require('./config.json') as Config;

@@ -1,7 +1,6 @@
 import { Media } from "../models/media";
 import { Promo } from "../models/promo";
 import { TranslationTag } from "../models/translationTag";
-import { Command } from "./saCommander";
 import { Eras } from "../models/const/eras";
 import { Commercial } from "../models/commercial";
 import { Short } from "../models/short";
@@ -21,7 +20,7 @@ class TranslatedTags {
 
 export function createBuffer(
     duration: number,
-    options: Command,
+    options: any,
     media: Media,
     precedingTags: string[],
     subsequentTags: string[],
@@ -47,8 +46,7 @@ export function createBuffer(
         half = Math.ceil(duration / 2)
     }
 
-    if (subsequentTags.length > 0 && precedingTags.length > 0)
-    {
+    if (subsequentTags.length > 0 && precedingTags.length > 0) {
         if (half === 0) {
             buffer.push(promo.Path)
             let selectedB = selectBuffer(duration, media, convertedSubTags, prevBuff);
@@ -62,7 +60,7 @@ export function createBuffer(
             buffer.push(...selectedB[0]);
             return [buffer, selectedB[1]]
         }
-    } else if(precedingTags.length > 0) {
+    } else if (precedingTags.length > 0) {
         //TODO Devise a signoff set
         let selectedB = selectBuffer(duration, media, convertedPreTags, prevBuff);
         buffer.push(promo.Path)

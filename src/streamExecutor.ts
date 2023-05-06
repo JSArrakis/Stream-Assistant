@@ -3,7 +3,7 @@ import { exec } from "child_process";
 /**
  * @param {string} cmd Console command string to execute via child process in commandline  
  */
-const execPromise = (cmd) => {
+const execPromise = (cmd: string): Promise<string> => {
     return new Promise((resolve, reject) => {
         exec(cmd, (err, stdout) => {
             if (err) return reject(err);
@@ -17,7 +17,7 @@ const execPromise = (cmd) => {
  * @param {string} sourceDirectory Directory in which playlist m3u file exists to execute
  * @param {string} playlistFileName Name of the playlist file to execute
  */
-export function executeStream(vlcLocation, sourceDirectory, playlistFileName) {
+export function executeStream(vlcLocation: string, sourceDirectory: string, playlistFileName: string): void {
     let consoleCommand = ["cd " + vlcLocation + " && vlc.exe " + sourceDirectory + playlistFileName + '.m3u'];
 
     consoleCommand.reduce((p, cmd) => {

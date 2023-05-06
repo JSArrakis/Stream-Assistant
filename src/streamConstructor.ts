@@ -2,10 +2,9 @@ import { Config } from "../models/config";
 import { MediaProgression } from "../models/mediaProgression"
 import { loadMedia, loadProgression, loadTranslationTags } from "../dataAccess/dataManager";
 import { Media } from "../models/media";
-import { Command } from "./saCommander";
 import { Movie } from "../models/movie";
 import { Collection } from "../models/collection";
-import moment from "moment";
+import * as moment from 'moment';
 import { MediaType } from "../models/enum/mediaTypes";
 import { SelectedMedia } from "../models/selectedMedia";
 import { StagedMedia } from "../models/stagedMedia";
@@ -14,9 +13,8 @@ import { Episode, Show } from "../models/show";
 import { ManageProgression, ReduceProgression } from "./utilities";
 import { TranslationTag } from "../models/translationTag";
 import { createBuffer } from "./bufferEngine";
-import { buffer } from "stream/consumers";
 
-export function constructStream(config: Config, options: Command): string[] {
+export function constructStream(config: Config, options: any): string[] {
     let stream: string[] = []
 
     let progression: MediaProgression[] = loadProgression();
@@ -67,57 +65,75 @@ export function constructStream(config: Config, options: Command): string[] {
             remainder = buffer[1];
         } else if (item.Media instanceof Collection) {
             let collection = item.Media;
-
-            /*This logic is to determine if a show should be populated in the stream for a collection. If the show
-            runs longer than the alloted time block for that show, skip the show 
-            following it. Time remaining will be filled with buffer media */
-
-            /*
-            -- Author note:: A good example of this is with the summer 2000 broadcast of Toonami with Tenchi Muyo. 
-            Tenchi has a few episodes that are weirdly 45 minutes instead of 30 minutes randomly with no real rhyme 
-            or reason. To handle this randomness, Toonami in it's original broadcast pulled the episode of Batman the 
-            Animated series which usually followed Tenchi for that day only and populated the remainder of the 
-            15 minutes that would have normally been Batman with Power Puff Girl episodes instead. This allowed 
-            Toonami to keep the fidelity of a 3 hour block run time and decreasing dead time and keeping interest of the 
-            audience while staying within theme (Toonami being a series of mostly violence driven animated shows 
-            in which the only Cartoon Network licensed property that fit in the alloted time slot that was also 
-            themed correctly was PPG)
-            */
-
-            let lastOverDuration = false;
-            collection.Shows.forEach((show, index) => {
-                let lastShowEpisode = collection.Shows[index - 1].Episode;
-                if (lastShowEpisode) {
-                    if (lastShowEpisode?.Duration > lastShowEpisode?.DurationLimit) {
-                        ReduceProgression(collection.Title, show.LoadTitle, progression)
-                    } else {
-                        let episode = show.Episode;
-                        if (episode) {
-                            stream.push(episode.Path)
-                            if (episode.Duration > episode.DurationLimit) {
-                                let nextShowEpisode = collection.Shows[index + 1].Episode;
-                                if (nextShowEpisode) {
-                                    let overDurationLength = (nextShowEpisode.DurationLimit + episode.DurationLimit) - episode.Duration + remainder;
-                                    let overBuffer = createBuffer(overDurationLength, options, media, [collection.LoadTitle], [collection.LoadTitle], transaltionTags, prevBuffer)
-                                    stream.push(...overBuffer[0]);
-                                    remainder = overBuffer[1];
-                                }
-                            } else {
-                                let underBuffer = createBuffer(episode.DurationLimit - episode.Duration, options, media, [collection.LoadTitle], [collection.LoadTitle], transaltionTags, prevBuffer)
-                                stream.push(...underBuffer[0]);
-                                remainder = underBuffer[1];
-                            }
-                        }
-                    }
-                }
-            });
+            let collectionBlock = createCollectionBlock(
+                collection,
+                progression,
+                options,
+                media,
+                transaltionTags,
+                prevBuffer);
+            stream.push(...collectionBlock[0]);
+            remainder = collectionBlock[1];
         }
     })
     return stream;
 }
 
+function createCollectionBlock(
+    collection: Collection,
+    progression: MediaProgression[],
+    options: any,
+    media: Media,
+    transaltionTags: TranslationTag[],
+    prevBuffer: Media): [string[], number] {
+    /*This logic is to determine if a show should be populated in the stream for a collection. If the show
+            runs longer than the alloted time block for that show, skip the show 
+            following it. Time remaining will be filled with buffer media */
+
+    /*
+    -- Author note:: A good example of this is with the summer 2000 broadcast of Toonami with Tenchi Muyo. 
+    Tenchi has a few episodes that are weirdly 45 minutes instead of 30 minutes randomly with no real rhyme 
+    or reason. To handle this randomness, Toonami in it's original broadcast pulled the episode of Batman the 
+    Animated series which usually followed Tenchi for that day only and populated the remainder of the 
+    15 minutes that would have normally been Batman with Power Puff Girl episodes instead. This allowed 
+    Toonami to keep the fidelity of a 3 hour block run time and decreasing dead time and keeping interest of the 
+    audience while staying within theme (Toonami being a series of mostly violence driven animated shows 
+    in which the only Cartoon Network licensed property that fit in the alloted time slot that was also 
+    themed correctly was PPG)
+    */
+    let remainder = 0;
+    let stream: string[] = [];
+    collection.Shows.forEach((show, index) => {
+        let lastShowEpisode = collection.Shows[index - 1].Episode;
+        if (lastShowEpisode) {
+            if (lastShowEpisode.Duration > lastShowEpisode.DurationLimit) {
+                ReduceProgression(collection.Title, show.LoadTitle, progression)
+            } else {
+                let episode = show.Episode;
+                if (episode) {
+                    stream.push(episode.Path)
+                    if (episode.Duration > episode.DurationLimit) {
+                        let nextShowEpisode = collection.Shows[index + 1].Episode;
+                        if (nextShowEpisode) {
+                            let overDurationLength = (nextShowEpisode.DurationLimit + episode.DurationLimit) - episode.Duration + remainder;
+                            let overBuffer = createBuffer(overDurationLength, options, media, [collection.LoadTitle], [collection.LoadTitle], transaltionTags, prevBuffer)
+                            stream.push(...overBuffer[0]);
+                            remainder = overBuffer[1];
+                        }
+                    } else {
+                        let underBuffer = createBuffer(episode.DurationLimit - episode.Duration, options, media, [collection.LoadTitle], [collection.LoadTitle], transaltionTags, prevBuffer)
+                        stream.push(...underBuffer[0]);
+                        remainder = underBuffer[1];
+                    }
+                }
+            }
+        }
+    });
+    return [stream, remainder];
+}
+
 function getStagedStream(rightNow: number, config: Config,
-    options: Command,
+    options: any,
     stagedMedia: StagedMedia,
     media: Media,
     progression: MediaProgression[]): SelectedMedia[] {
@@ -180,19 +196,25 @@ function getStagedStream(rightNow: number, config: Config,
     return selectedMedia;
 }
 
-function setProceduralTags(options: Command, stagedMedia: StagedMedia) {
+function setProceduralTags(options: any, stagedMedia: StagedMedia) {
     if (options.tagsAND === undefined
         && options.tagsOR === undefined) {
 
         let tagList: string[] = [];
         stagedMedia.InjectedMovies.forEach(inj => tagList.push(...inj.Media.Tags));
         stagedMedia.ScheduledMedia.forEach(sch => tagList.push(...sch.Media.Tags));
-        options.tagsOR = [...new Set(tagList)];
+        let uniquetags: string[] = [];
+        for (let i = 0; i < tagList.length; i++) {
+            if (uniquetags.indexOf(tagList[i]) === -1) {
+                uniquetags.push(tagList[i]);
+            }
+        }
+        options.tagsOR = uniquetags;
         //TODO: v1.4 Create different combos of block tags for tagsAND to give a more streamlined experience
     }
 }
 
-function evaluateStreamEndTime(options: Command, scheduledMedia: SelectedMedia[]): number {
+function evaluateStreamEndTime(options: any, scheduledMedia: SelectedMedia[]): number {
     let endTime: number = moment().startOf('day').add(1, "days").unix();
 
     if (options.endTime) {
@@ -218,7 +240,7 @@ function compareSelectedEndTime(endTime: number, scheduledMedia: SelectedMedia[]
     })
 }
 
-function getScheduledMedia(options: Command, media: Media, progression: MediaProgression[]): SelectedMedia[] {
+export function getScheduledMedia(options: any, media: Media, progression: MediaProgression[]): SelectedMedia[] {
     let selectedMedia: SelectedMedia[] = [];
     options.movies
         .filter((str: string) => str.includes('::'))
@@ -236,7 +258,7 @@ function getScheduledMedia(options: Command, media: Media, progression: MediaPro
     return selectedMedia.sort((a, b) => a.Time - b.Time);
 }
 
-function getInjectedMovies(options: Command, movies: Movie[]): SelectedMedia[] {
+function getInjectedMovies(options: any, movies: Movie[]): SelectedMedia[] {
     let selectedMedia: SelectedMedia[] = [];
     options.movies
         .filter((str: string) => !str.includes('::'))
@@ -247,7 +269,11 @@ function getInjectedMovies(options: Command, movies: Movie[]): SelectedMedia[] {
     return selectedMedia;
 }
 
-function getMovie(loadTitle: string, movieList: Movie[], time: number): SelectedMedia {
+export function getMovie(loadTitle: string, movieList: Movie[], time: number): SelectedMedia {
+    if (loadTitle === "" || loadTitle === undefined)
+    {
+        throw loadTitle + "Empty movie titles are not a valid input";
+    }
     let selectedMovie: Movie | undefined = movieList.find(movie => movie.LoadTitle === loadTitle);
     if (selectedMovie === undefined) {
         throw loadTitle + " is not a valid load title for a movie, re-check your spelling or make sure the title youre attempting to load exists.";
@@ -286,8 +312,10 @@ function assignCollEpisodes(collection: Collection, shows: Show[], progression: 
     })
 }
 
-function setEnvironment(options: Command) {
+function setEnvironment(options: any) {
     if (options.env !== undefined) {
+        options.env = 1;
+    } else {
         options.env = 1;
     }
 }

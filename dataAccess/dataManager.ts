@@ -16,8 +16,8 @@ const music = require("../data/musicList.json");
 const promos = require("../data/promoList.json");
 const commercials = require("../data/commercialList.json");
 const collections = require("../data/collectionList.json");
-const progression = require('./data/progression.json');
-const transaltionTags = require('./data/translationTags.json');
+const progression = require('../data/progression.json');
+const transaltionTags = require('../data/translationTags.json');
 
 export function loadMedia(): Media {
     const media: Media = {

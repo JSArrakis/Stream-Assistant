@@ -6,12 +6,11 @@ import { Movie } from "../models/movie";
 import { SelectedMedia } from "../models/selectedMedia";
 import { Episode, Show } from "../models/show";
 import { StagedMedia } from "../models/stagedMedia";
-import { Command } from "./saCommander";
 import { ManageProgression } from "./utilities";
 
 export function getProceduralBlock(
     config: Config,
-    options: Command,
+    options: any,
     stagedMedia: StagedMedia,
     media: Media,
     prevMovies: Movie[],
@@ -68,7 +67,7 @@ export function getProceduralBlock(
 
                     currDur = currDur + episode.DurationLimit;
                     currentTimePoint = currentTimePoint + episode.DurationLimit;
-                }); 
+                });
             }
         }
     }
@@ -76,7 +75,7 @@ export function getProceduralBlock(
     return selectedMedia;
 }
 
-function selectMovieUnderDuration(options: Command, movies: Movie[], duration: number): Movie {
+function selectMovieUnderDuration(options: any, movies: Movie[], duration: number): Movie {
     let filteredMovies: Movie[] = movies.filter(movie =>
         movie.Tags.some(tag => options.tagsOR.includes(tag)) &&
         movie.DurationLimit <= duration
@@ -86,7 +85,7 @@ function selectMovieUnderDuration(options: Command, movies: Movie[], duration: n
 
 }
 
-function selectShowUnderDuration(options: Command, shows: Show[], progression: MediaProgression[], duration: number): Episode[] {
+function selectShowUnderDuration(options: any, shows: Show[], progression: MediaProgression[], duration: number): Episode[] {
     let episodes: Episode[] = [];
 
     let filteredShows: Show[] = shows.filter(show =>
