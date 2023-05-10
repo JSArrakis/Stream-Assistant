@@ -270,8 +270,7 @@ function getInjectedMovies(options: any, movies: Movie[]): SelectedMedia[] {
 }
 
 export function getMovie(loadTitle: string, movieList: Movie[], time: number): SelectedMedia {
-    if (loadTitle === "" || loadTitle === undefined)
-    {
+    if (loadTitle === "" || loadTitle === undefined) {
         throw loadTitle + "Empty movie titles are not a valid input";
     }
     let selectedMovie: Movie | undefined = movieList.find(movie => movie.LoadTitle === loadTitle);
@@ -287,7 +286,7 @@ export function getMovie(loadTitle: string, movieList: Movie[], time: number): S
     )
 }
 
-function getCollection(loadTitle: string, media: Media, time: number, progression: MediaProgression[]): SelectedMedia {
+export function getCollection(loadTitle: string, media: Media, time: number, progression: MediaProgression[]): SelectedMedia {
     let selectedCollection: Collection | undefined = media.Collections.find(collection => collection.LoadTitle === loadTitle);
     if (selectedCollection === undefined) {
         throw loadTitle + " is not a valid load title for a collection, re-check your spelling or make sure the title youre attempting to load exists.";
@@ -304,7 +303,7 @@ function getCollection(loadTitle: string, media: Media, time: number, progressio
     )
 }
 
-function assignCollEpisodes(collection: Collection, shows: Show[], progression: MediaProgression[]): void {
+export function assignCollEpisodes(collection: Collection, shows: Show[], progression: MediaProgression[]): void {
     collection.Shows.forEach(show => {
         let selectedShow = shows.filter(item => item.LoadTitle = show.LoadTitle)[0];
         let episodeIdx = ManageProgression(collection.Title, "Collection", progression, selectedShow, 1)[0];

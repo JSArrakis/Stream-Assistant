@@ -1,23 +1,49 @@
 export class Show {
-    Title: string;
-    LoadTitle: string;
-    Alias: string;
-    IMDB: string;
-    DurationLimit: number;
-    OverDuration: boolean;
-    Tags: string[];
-    EpisodeCount: number;
-    Episodes: Episode[];
+    public Title: string;
+    public LoadTitle: string;
+    public Alias: string;
+    public IMDB: string;
+    public DurationLimit: number;
+    public OverDuration: boolean;
+    public Tags: string[];
+    public EpisodeCount: number;
+    public Episodes: Episode[];
+
+    constructor(title: string, loadTitle: string, alias: string, imdb: string, durationLimit: number,
+        overDuration: boolean, tags: string[], episodeCount: number, episodes: Episode[]) {
+        this.Title = title;
+        this.LoadTitle = loadTitle;
+        this.Alias = alias;
+        this.IMDB = imdb;
+        this.DurationLimit = durationLimit;
+        this.OverDuration = overDuration;
+        this.Tags = tags;
+        this.EpisodeCount = episodeCount;
+        this.Episodes = episodes;
+    }
 }
 
 export class Episode {
-    Season: number;
-    Episode: number;
-    EpisodeNumber: number;
-    Path: string;
-    EpisodeTitle: string;
-    LoadTitle: string
-    Duration: number;
-    DurationLimit: number;
-    Tags: string[];
+    public Season: number;
+    public Episode: number;
+    public EpisodeNumber: number;
+    public Path: string;
+    public EpisodeTitle: string;
+    public LoadTitle: string;
+    public Duration: number;
+    public DurationLimit: number;
+    public Tags: string[];
+
+    constructor(season: number, episode: number, episodeNumber: number, path: string, episodeTitle: string,
+        loadTitle: string, duration: number, durationLimit: number, tags: string[]) {
+        this.Season = season;
+        this.Episode = episode;
+        this.EpisodeNumber = episodeNumber;
+        this.Path = path;
+        this.EpisodeTitle = episodeTitle;
+        this.LoadTitle = loadTitle;
+        this.Duration = duration;
+        this.DurationLimit = durationLimit;
+        this.Tags = tags;
+    }
 }
