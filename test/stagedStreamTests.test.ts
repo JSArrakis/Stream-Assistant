@@ -158,6 +158,72 @@ describe('getMovie function', () => {
     });
 });
 
+describe('manageProgression function', () => {
+    it('should increment the correct show', () => {
+        let progression = new MediaProgression("collection1", "Collection", [
+            new ShowProgression("show1", 1),
+            new ShowProgression("show2", 1),
+            new ShowProgression("show3", 1),
+            new ShowProgression("show4", 1),
+        ])
+
+        let progressionTarget = new MediaProgression("collection1", "Collection", [
+            new ShowProgression("show1", 2),
+            new ShowProgression("show2", 1),
+            new ShowProgression("show3", 1),
+            new ShowProgression("show4", 1),
+        ])
+
+        utilities.ManageProgression("collection1", "Collection", [progression], show1, 1)
+
+        expect(progression).to.deep.equal(progressionTarget);
+    });
+
+    it('should increment the show by specified number', () => {
+        let num = 2
+        let progression = new MediaProgression("collection1", "Collection", [
+            new ShowProgression("show1", 1)
+        ])
+
+        let progressionTarget = new MediaProgression("collection1", "Collection", [
+            new ShowProgression("show1", 3)
+        ])
+
+        utilities.ManageProgression("collection1", "Collection", [progression], show1, num)
+
+        expect(progression).to.deep.equal(progressionTarget);
+    });
+
+    it('should restart show at end', () => {
+        let progression = new MediaProgression("collection1", "Collection", [
+            new ShowProgression("show1", 5)
+        ])
+
+        let progressionTarget = new MediaProgression("collection1", "Collection", [
+            new ShowProgression("show1", 1)
+        ])
+
+        utilities.ManageProgression("collection1", "Collection", [progression], show1, 1)
+
+        expect(progression).to.deep.equal(progressionTarget);
+    });
+
+    it('should restart show if multi-increment exceeds end of show', () => {
+        let num = 3
+        let progression = new MediaProgression("collection1", "Collection", [
+            new ShowProgression("show1", 4)
+        ])
+
+        let progressionTarget = new MediaProgression("collection1", "Collection", [
+            new ShowProgression("show1", 2)
+        ])
+
+        utilities.ManageProgression("collection1", "Collection", [progression], show1, num)
+
+        expect(progression).to.deep.equal(progressionTarget);
+    });
+});
+
 describe('assignCollepisodes function', () => {
     it('should select one episode per show based on collection progression', () => {
         let testCollection = deepCopy(collection1);
@@ -188,15 +254,21 @@ describe('assignCollepisodes function', () => {
 
         expect(testCollection).to.deep.equal(match);
     });
+});
 
-    it('If progression shows that the last epsiode of a show has been played, it starts the show over', () => {
-        let testCollection = deepCopy(collection1);
+describe('getCollection function', () => {
+    it('should populate selected collection with correct episodes into selected Media object', () => {
+
+        media = new Media([], [], [], [], [], [], []);
+        let collection = deepCopy(collection1);
+        media.Collections.push(collection);
+        media.Shows = [show1, show2, show3, show4, show5]
 
         let progression = new MediaProgression("collection1", "Collection", [
-            new ShowProgression("show1", 5),
-            new ShowProgression("show2", 5),
-            new ShowProgression("show3", 5),
-            new ShowProgression("show4", 5),
+            new ShowProgression("show1", 1),
+            new ShowProgression("show2", 1),
+            new ShowProgression("show3", 1),
+            new ShowProgression("show4", 1),
         ])
 
         let collectionShow1 = collShow1;
@@ -211,38 +283,10 @@ describe('assignCollepisodes function', () => {
         let collectionShow4 = collShow4;
         collectionShow4.Episode = episode1;
 
-        let match = deepCopy(collection1);
-        match.Shows = [collectionShow1, collectionShow2, collectionShow3, collectionShow4];
+        let targetCollection = deepCopy(collection1);
+        targetCollection.Shows = [collectionShow1, collectionShow2, collectionShow3, collectionShow4];
+        
 
-        streamConstructor.assignCollEpisodes(testCollection, shows, [progression]);
-
-        expect(testCollection).to.deep.equal(match);
+        streamConstructor.getCollection("collection1", media, 1, [progression])
     });
 });
-
-// describe('manageProgression function', () => {
-//     it('should increment the show progression by one', () => {
-//         utilities.ManageProgression("title", "type", [new MediaProgression()], new Show(), 1)
-//     });
-// });
-
-// describe('getCollection function', () => {
-//     it('should populate selected collection into selected Media object', () => {
-
-//         media.Collections.push(collection1)
-
-//         const loadTitle: string = "collection1";
-//         const time: number = 0;
-//         const match: SelectedMedia = new SelectedMedia(
-//             collection1,
-//             MediaType.Collection,
-//             0,
-//             1800,
-//             []
-//         );
-
-//         const result = streamConstructor.getCollection(loadTitle, media.Movies, time);
-
-//         expect(result).to.deep.equal(match);
-//     });
-// });

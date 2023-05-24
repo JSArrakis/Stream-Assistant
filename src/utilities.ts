@@ -7,12 +7,12 @@ export function getRandomMedia(objects: SelectedMedia[]): SelectedMedia {
     return objects[randomIndex];
 }
 
-export function ManageProgression(title: string, type: string, progression: MediaProgression[], show: Show, episodeCount: number): number[] {
+export function ManageProgression(title: string, type: string, progression: MediaProgression[], show: Show, numOfEpsRequested: number): number[] {
     let episodeNumbers: number[] = []
 
     addProgression(title, type, progression, show)
 
-    for (let i = 0; i < episodeCount; i++) {
+    for (let i = 0; i < numOfEpsRequested; i++) {
         let episode: number = progression
             .filter(prog => prog.Title === title)[0].Shows
             .filter(item => item.LoadTitle === show.LoadTitle)[0].Episode;

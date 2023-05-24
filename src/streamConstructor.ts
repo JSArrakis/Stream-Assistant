@@ -308,9 +308,7 @@ export function assignCollEpisodes(collection: Collection, shows: Show[], progre
         let selectedShow = shows.filter(item => item.LoadTitle === collShow.LoadTitle)[0];
         let episodeNum = ManageProgression(collection.Title, "Collection", progression, selectedShow, 1)[0];
         collShow.Episode = selectedShow.Episodes.filter(ep => ep.EpisodeNumber === episodeNum)[0];
-        console.log()
     })
-    console.log()
 }
 
 function setEnvironment(options: any) {
