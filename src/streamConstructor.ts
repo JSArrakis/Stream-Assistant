@@ -304,11 +304,13 @@ export function getCollection(loadTitle: string, media: Media, time: number, pro
 }
 
 export function assignCollEpisodes(collection: Collection, shows: Show[], progression: MediaProgression[]): void {
-    collection.Shows.forEach(show => {
-        let selectedShow = shows.filter(item => item.LoadTitle = show.LoadTitle)[0];
-        let episodeIdx = ManageProgression(collection.Title, "Collection", progression, selectedShow, 1)[0];
-        show.Episode = selectedShow.Episodes[episodeIdx];
+    collection.Shows.forEach(collShow => {
+        let selectedShow = shows.filter(item => item.LoadTitle === collShow.LoadTitle)[0];
+        let episodeNum = ManageProgression(collection.Title, "Collection", progression, selectedShow, 1)[0];
+        collShow.Episode = selectedShow.Episodes.filter(ep => ep.EpisodeNumber === episodeNum)[0];
+        console.log()
     })
+    console.log()
 }
 
 function setEnvironment(options: any) {

@@ -15,7 +15,7 @@ export function ManageProgression(title: string, type: string, progression: Medi
     for (let i = 0; i < episodeCount; i++) {
         let episode: number = progression
             .filter(prog => prog.Title === title)[0].Shows
-            .filter(show => show.LoadTitle == show.LoadTitle)[0].Episode;
+            .filter(item => item.LoadTitle === show.LoadTitle)[0].Episode;
         episodeNumbers.push(episode);
         incrementProgression(progression, title, show);
     }
@@ -30,18 +30,18 @@ export function ReduceProgression(title: string, showLoadTitle: string, progress
         });
 }
 
-function incrementProgression(progression: MediaProgression[], title: string, show: Show) {
+export function incrementProgression(progression: MediaProgression[], title: string, show: Show) {
     progression.filter(pitem => pitem.Title === title)[0].Shows
         .filter(fshow => fshow.LoadTitle === show.LoadTitle)
         .forEach(sitem => {
             sitem.Episode++;
-            if (sitem.Episode > show.Episodes.length) {
+            if (sitem.Episode > show.EpisodeCount) {
                 sitem.Episode = 1;
             }
         });
 }
 
-function addProgression(title: string, type: string, progression: MediaProgression[], show: Show) {
+export function addProgression(title: string, type: string, progression: MediaProgression[], show: Show) {
     let showProg = new ShowProgression(show.LoadTitle, 1)
     let progItem = new MediaProgression(title, type, [showProg])
 
@@ -61,4 +61,21 @@ function addProgression(title: string, type: string, progression: MediaProgressi
         progression.filter(pitem => pitem.Title === title)[0].Shows
             .push(showProg);
     }
+}
+
+export function deepCopy(obj) {
+    if (typeof obj !== 'object' || obj === null) {
+        return obj; // primitive value or null
+    }
+
+    if (Array.isArray(obj)) {
+        return obj.map(deepCopy); // array
+    }
+
+    const result = {};
+    for (const [key, value] of Object.entries(obj)) {
+        result[key] = deepCopy(value); // object
+    }
+
+    return result;
 }

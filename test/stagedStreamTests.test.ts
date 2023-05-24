@@ -8,6 +8,8 @@ import { Collection, CollectionShow } from '../models/collection';
 import { Bumper } from '../models/bumper';
 import { Show, Episode } from '../models/show';
 import { MediaProgression, ShowProgression } from '../models/mediaProgression';
+import * as utilities from '../src/utilities'
+import { deepCopy } from '../src/utilities';
 
 let media = new Media(
     [], //show
@@ -76,16 +78,16 @@ let collShow1 = new CollectionShow(
     "show1", 1, 1, 1800, undefined, undefined, undefined
 )
 let collShow2 = new CollectionShow(
-    "show2", 1, 1, 1800, undefined, undefined, undefined
+    "show2", 2, 1, 1800, undefined, undefined, undefined
 )
 let collShow3 = new CollectionShow(
-    "show3", 1, 1, 1800, undefined, undefined, undefined
+    "show3", 3, 1, 1800, undefined, undefined, undefined
 )
 let collShow4 = new CollectionShow(
-    "show4", 1, 1, 1800, undefined, undefined, undefined
+    "show4", 4, 1, 1800, undefined, undefined, undefined
 )
 let collShow5 = new CollectionShow(
-    "show5", 1, 1, 1800, undefined, undefined, undefined
+    "show5", 3, 1, 1800, undefined, undefined, undefined
 )
 
 let collection1 = new Collection(
@@ -157,34 +159,72 @@ describe('getMovie function', () => {
 });
 
 describe('assignCollepisodes function', () => {
-    it('should aggregate one episode per show based on collection progression and assign them to the collection', () => {
-        let progression = new MediaProgression("title", "type", [
+    it('should select one episode per show based on collection progression', () => {
+        let testCollection = deepCopy(collection1);
+
+        let progression = new MediaProgression("collection1", "Collection", [
             new ShowProgression("show1", 1),
             new ShowProgression("show2", 1),
             new ShowProgression("show3", 1),
-            new ShowProgression("show4", 1)
+            new ShowProgression("show4", 1),
         ])
 
         let collectionShow1 = collShow1;
         collectionShow1.Episode = episode1;
 
         let collectionShow2 = collShow2;
-        collectionShow2.Episode = episode2;
+        collectionShow2.Episode = episode1;
 
         let collectionShow3 = collShow3;
-        collectionShow3.Episode = episode3;
+        collectionShow3.Episode = episode1;
 
         let collectionShow4 = collShow4;
-        collectionShow4.Episode = episode4;
+        collectionShow4.Episode = episode1;
 
-        let match = collection1;
-        match.Shows = [collectionShow1, collectionShow2, collectionShow3, collectionShow4]
+        let match = deepCopy(collection1);
+        match.Shows = [collectionShow1, collectionShow2, collectionShow3, collectionShow4];
 
-        let result = streamConstructor.assignCollEpisodes(collection1, shows, [progression]);
+        streamConstructor.assignCollEpisodes(testCollection, shows, [progression]);
 
-        expect(result).to.deep.equal(match);
+        expect(testCollection).to.deep.equal(match);
+    });
+
+    it('If progression shows that the last epsiode of a show has been played, it starts the show over', () => {
+        let testCollection = deepCopy(collection1);
+
+        let progression = new MediaProgression("collection1", "Collection", [
+            new ShowProgression("show1", 5),
+            new ShowProgression("show2", 5),
+            new ShowProgression("show3", 5),
+            new ShowProgression("show4", 5),
+        ])
+
+        let collectionShow1 = collShow1;
+        collectionShow1.Episode = episode1;
+
+        let collectionShow2 = collShow2;
+        collectionShow2.Episode = episode1;
+
+        let collectionShow3 = collShow3;
+        collectionShow3.Episode = episode1;
+
+        let collectionShow4 = collShow4;
+        collectionShow4.Episode = episode1;
+
+        let match = deepCopy(collection1);
+        match.Shows = [collectionShow1, collectionShow2, collectionShow3, collectionShow4];
+
+        streamConstructor.assignCollEpisodes(testCollection, shows, [progression]);
+
+        expect(testCollection).to.deep.equal(match);
     });
 });
+
+// describe('manageProgression function', () => {
+//     it('should increment the show progression by one', () => {
+//         utilities.ManageProgression("title", "type", [new MediaProgression()], new Show(), 1)
+//     });
+// });
 
 // describe('getCollection function', () => {
 //     it('should populate selected collection into selected Media object', () => {
