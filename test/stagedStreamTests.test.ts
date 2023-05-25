@@ -291,4 +291,35 @@ describe('getCollection function', () => {
 
         expect(item).to.deep.equal(targetitem);
     });
+
+    // it('should throw an error when a blank name is requested', () => {
+    //     let progression = new MediaProgression("", "", [])
+    //     let loadTitle: string = "";
+    //     let time: number = 0;
+
+    //     expect(() => streamConstructor.getMovie(loadTitle, media.Movies, time)).to.throw("Empty movie titles are not a valid input");
+    // });
+});
+
+describe('getScheduledMedia function', () => {
+    media = new Media([], [], [], [], [], [], []);
+    media.Movies = [testMovie1, testMovie2, testMovie3];
+
+    it('should populate and arrange selected movies and media in order of time', () => {
+
+
+        let loadTitle: string = "test1";
+        let time: number = 0;
+        let match: SelectedMedia = new SelectedMedia(
+            testMovie1,
+            MediaType.Movie,
+            0,
+            7200,
+            ["tag1", "tag2", "tag3"]
+        );
+
+        let result = streamConstructor.getScheduledMedia();
+
+        expect(result).to.deep.equal();
+    });
 });
