@@ -302,24 +302,115 @@ describe('getCollection function', () => {
 });
 
 describe('getScheduledMedia function', () => {
-    media = new Media([], [], [], [], [], [], []);
-    media.Movies = [testMovie1, testMovie2, testMovie3];
+    let testmedia = new Media([], [], [], [], [], [], []);
+    testmedia.Movies = [testMovie1, testMovie2, testMovie3];
 
-    it('should populate and arrange selected movies and media in order of time', () => {
+    it('should not populate scheduled media if none present', () => {
+        let match: SelectedMedia[] = [];
 
+        var options = {
+            movies: ["test1", "test2"]
+        }
 
-        let loadTitle: string = "test1";
-        let time: number = 0;
-        let match: SelectedMedia = new SelectedMedia(
+        let result = streamConstructor.getScheduledMedia(options, media, []);
+
+        expect(result).to.deep.equal(match);
+    });
+
+    it('should populate and arrange selected movies in order of time', () => {
+        var options = {
+            movies: ["test1::1685052000", "test2::1685066400", "test3::1685059200"]
+        }
+
+        let result = streamConstructor.getScheduledMedia(options, testmedia, []);
+
+        expect(result[0]).to.deep.equal(new SelectedMedia(
             testMovie1,
             MediaType.Movie,
-            0,
+            1685052000,
             7200,
             ["tag1", "tag2", "tag3"]
-        );
+        ));
+        expect(result[1]).to.deep.equal(new SelectedMedia(
+            testMovie3,
+            MediaType.Movie,
+            1685059200,
+            7200,
+            ["tag2", "tag3"]
+        ));
+        expect(result[2]).to.deep.equal(new SelectedMedia(
+            testMovie2,
+            MediaType.Movie,
+            1685066400,
+            7200,
+            ["tag1", "tag2"]
+        ));
+    });
 
-        let result = streamConstructor.getScheduledMedia();
+    it('should populate and arrange selected movies and collections in order of time', () => {
+        var options = {
+            movies: ["test1::1685052000", "test2::1685073600", "test3::1685059200"],
+            blocks: ["collection1::1685066400"]
+        }
 
-        expect(result).to.deep.equal();
+        let testmedia = new Media([], [], [], [], [], [], []);
+        testmedia.Movies = [testMovie1, testMovie2, testMovie3];
+        testmedia.Collections.push(collection1);
+        testmedia.Shows = [show1, show2, show3, show4, show5]
+
+        let progression = new MediaProgression("collection1", "Collection", [
+            new ShowProgression("show1", 1),
+            new ShowProgression("show2", 1),
+            new ShowProgression("show3", 1),
+            new ShowProgression("show4", 1),
+        ])
+
+        let collectionShow1 = collShow1;
+        collectionShow1.Episode = episode1;
+
+        let collectionShow2 = collShow2;
+        collectionShow2.Episode = episode1;
+
+        let collectionShow3 = collShow3;
+        collectionShow3.Episode = episode1;
+
+        let collectionShow4 = collShow4;
+        collectionShow4.Episode = episode1;
+
+        let targetCollection = deepCopy(collection1);
+        targetCollection.Shows = [collectionShow1, collectionShow2, collectionShow3, collectionShow4];
+
+        new SelectedMedia(targetCollection, MediaType.Collection, 1, 7200, [])
+
+        let result = streamConstructor.getScheduledMedia(options, testmedia, [progression]);
+
+        expect(result[0]).to.deep.equal(new SelectedMedia(
+            testMovie1,
+            MediaType.Movie,
+            1685052000,
+            7200,
+            ["tag1", "tag2", "tag3"]
+        ));
+        expect(result[1]).to.deep.equal(new SelectedMedia(
+            testMovie3,
+            MediaType.Movie,
+            1685059200,
+            7200,
+            ["tag2", "tag3"]
+        ));
+        expect(result[2]).to.deep.equal(new SelectedMedia(
+            targetCollection,
+            MediaType.Collection,
+            1685066400,
+            7200,
+            []
+        ));
+        expect(result[3]).to.deep.equal(new SelectedMedia(
+            testMovie2,
+            MediaType.Movie,
+            1685073600,
+            7200,
+            ["tag1", "tag2"]
+        ));
     });
 });

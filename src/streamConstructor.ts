@@ -242,20 +242,25 @@ function compareSelectedEndTime(endTime: number, scheduledMedia: SelectedMedia[]
 
 export function getScheduledMedia(options: any, media: Media, progression: MediaProgression[]): SelectedMedia[] {
     let selectedMedia: SelectedMedia[] = [];
-    options.movies
-        .filter((str: string) => str.includes('::'))
-        .forEach((str: string) => {
-            let parsedMovie = str.split("::");
-            selectedMedia.push(getMovie(parsedMovie[0], media.Movies, parseInt(parsedMovie[1])));
-        });
+    if (options.movies) {
+        options.movies
+            .filter((str: string) => str.includes('::'))
+            .forEach((str: string) => {
+                let parsedMovie = str.split("::");
+                selectedMedia.push(getMovie(parsedMovie[0], media.Movies, parseInt(parsedMovie[1])));
+            });
+    }
 
-    options.blocks
-        .forEach((str: string) => {
-            let parsedCollection = str.split("::");
-            selectedMedia.push(getCollection(parsedCollection[0], media, parseInt(parsedCollection[1]), progression));
-        });
-
-    return selectedMedia.sort((a, b) => a.Time - b.Time);
+    if (options.blocks) {
+        options.blocks
+            .filter((str: string) => str.includes('::'))
+            .forEach((str: string) => {
+                let parsedCollection = str.split("::");
+                selectedMedia.push(getCollection(parsedCollection[0], media, parseInt(parsedCollection[1]), progression));
+            });
+    }
+    let sorted = selectedMedia.sort((a, b) => a.Time - b.Time);
+    return sorted;
 }
 
 function getInjectedMovies(options: any, movies: Movie[]): SelectedMedia[] {
