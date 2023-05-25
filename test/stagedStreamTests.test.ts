@@ -285,8 +285,10 @@ describe('getCollection function', () => {
 
         let targetCollection = deepCopy(collection1);
         targetCollection.Shows = [collectionShow1, collectionShow2, collectionShow3, collectionShow4];
-        
+        let targetitem = new SelectedMedia(targetCollection, MediaType.Collection, 1, 7200, [])
 
-        streamConstructor.getCollection("collection1", media, 1, [progression])
+        let item = streamConstructor.getCollection("collection1", media, 1, [progression])
+
+        expect(item).to.deep.equal(targetitem);
     });
 });
