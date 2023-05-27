@@ -9,7 +9,7 @@ import { MediaType } from "../models/enum/mediaTypes";
 import { SelectedMedia } from "../models/selectedMedia";
 import { StagedMedia } from "../models/stagedMedia";
 import { getProceduralBlock } from "./proceduralEngine";
-import { Episode, Show } from "../models/show";
+import { Show } from "../models/show";
 import { ManageProgression, ReduceProgression } from "./utilities";
 import { TranslationTag } from "../models/translationTag";
 import { createBuffer } from "./bufferEngine";
@@ -196,7 +196,7 @@ function getStagedStream(rightNow: number, config: Config,
     return selectedMedia;
 }
 
-function setProceduralTags(options: any, stagedMedia: StagedMedia) {
+export function setProceduralTags(options: any, stagedMedia: StagedMedia) {
     if (options.tagsAND === undefined
         && options.tagsOR === undefined) {
 
@@ -214,7 +214,7 @@ function setProceduralTags(options: any, stagedMedia: StagedMedia) {
     }
 }
 
-function evaluateStreamEndTime(options: any, scheduledMedia: SelectedMedia[]): number {
+export function evaluateStreamEndTime(options: any, scheduledMedia: SelectedMedia[]): number {
     let endTime: number = moment().startOf('day').add(1, "days").unix();
 
     if (options.endTime) {
@@ -263,7 +263,7 @@ export function getScheduledMedia(options: any, media: Media, progression: Media
     return sorted;
 }
 
-function getInjectedMovies(options: any, movies: Movie[]): SelectedMedia[] {
+export function getInjectedMovies(options: any, movies: Movie[]): SelectedMedia[] {
     let selectedMedia: SelectedMedia[] = [];
     options.movies
         .filter((str: string) => !str.includes('::'))

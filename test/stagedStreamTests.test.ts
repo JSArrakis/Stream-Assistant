@@ -10,6 +10,8 @@ import { Show, Episode } from '../models/show';
 import { MediaProgression, ShowProgression } from '../models/mediaProgression';
 import * as utilities from '../src/utilities'
 import { deepCopy } from '../src/utilities';
+import { StagedMedia } from '../models/stagedMedia';
+import moment from 'moment';
 
 let media = new Media(
     [], //show
@@ -60,6 +62,19 @@ let testMovie3 = new Movie(
     0
 );
 
+let testMovie4 = new Movie(
+    "Test4",
+    "test4",
+    "test4",
+    "",
+    ["tag2", "tag4"],
+    "pathToTest4",
+    7000,
+    7200,
+    "",
+    0
+);
+
 let episode1 = new Episode(1, 1, 1, "", "episode1", "episode1", 1648, 1800, [])
 let episode2 = new Episode(1, 2, 2, "", "episode2", "episode2", 1709, 1800, [])
 let episode3 = new Episode(1, 3, 3, "", "episode3", "episode3", 1603, 1800, [])
@@ -96,7 +111,7 @@ let collection1 = new Collection(
     "",
     7200,
     7200,
-    [],
+    ["tag4"],
     new Bumper(1, "", []),
     new Bumper(1, "", []),
     [],
@@ -285,7 +300,7 @@ describe('getCollection function', () => {
 
         let targetCollection = deepCopy(collection1);
         targetCollection.Shows = [collectionShow1, collectionShow2, collectionShow3, collectionShow4];
-        let targetitem = new SelectedMedia(targetCollection, MediaType.Collection, 1, 7200, [])
+        let targetitem = new SelectedMedia(targetCollection, MediaType.Collection, 1, 7200, ['tag4'])
 
         let item = streamConstructor.getCollection("collection1", media, 1, [progression])
 
@@ -349,12 +364,12 @@ describe('getScheduledMedia function', () => {
 
     it('should populate and arrange selected movies and collections in order of time', () => {
         var options = {
-            movies: ["test1::1685052000", "test2::1685073600", "test3::1685059200"],
+            movies: ["test1::1685052000", "test2::1685073600", "test3::1685059200", "test4"],
             blocks: ["collection1::1685066400"]
         }
 
         let testmedia = new Media([], [], [], [], [], [], []);
-        testmedia.Movies = [testMovie1, testMovie2, testMovie3];
+        testmedia.Movies = [testMovie1, testMovie2, testMovie3, testMovie4];
         testmedia.Collections.push(collection1);
         testmedia.Shows = [show1, show2, show3, show4, show5]
 
@@ -380,7 +395,7 @@ describe('getScheduledMedia function', () => {
         let targetCollection = deepCopy(collection1);
         targetCollection.Shows = [collectionShow1, collectionShow2, collectionShow3, collectionShow4];
 
-        new SelectedMedia(targetCollection, MediaType.Collection, 1, 7200, [])
+        new SelectedMedia(targetCollection, MediaType.Collection, 1, 7200, ["tag4"])
 
         let result = streamConstructor.getScheduledMedia(options, testmedia, [progression]);
 
@@ -403,7 +418,7 @@ describe('getScheduledMedia function', () => {
             MediaType.Collection,
             1685066400,
             7200,
-            []
+            ["tag4"]
         ));
         expect(result[3]).to.deep.equal(new SelectedMedia(
             testMovie2,
@@ -412,5 +427,180 @@ describe('getScheduledMedia function', () => {
             7200,
             ["tag1", "tag2"]
         ));
+    });
+});
+
+describe('getInjectedMovies function', () => {
+    it('should populate selected movies without scheduled times', () => {
+        let movies = [testMovie1, testMovie2, testMovie3];
+        let options = {
+            movies: ["test1", "test2::1685052000", "test3"]
+        };
+
+        let injectedMovies: SelectedMedia[] =
+            [
+                new SelectedMedia(
+                    testMovie1,
+                    MediaType.Movie,
+                    0,
+                    7200,
+                    ["tag1", "tag2", "tag3"]
+                ),
+                new SelectedMedia(
+                    testMovie3,
+                    MediaType.Movie,
+                    0,
+                    7200,
+                    ["tag2", "tag3"]
+                )
+            ]
+
+
+        let result = streamConstructor.getInjectedMovies(options, movies)
+
+        expect(injectedMovies).to.deep.equal(result);
+    });
+});
+
+describe('evaluateStreamEndTime function', () => {
+    it('should populate end time from options when present', () => {
+        let options = {
+            endTime: 1685080800
+        };
+
+        let scheduledMedia: SelectedMedia[] = [
+            new SelectedMedia(
+                testMovie1,
+                MediaType.Movie,
+                1685052000,
+                7200,
+                ["tag1", "tag2", "tag3"]
+            ),
+            new SelectedMedia(
+                testMovie3,
+                MediaType.Movie,
+                1685059200,
+                7200,
+                ["tag2", "tag3"]
+            ),
+            new SelectedMedia(
+                collection1,
+                MediaType.Collection,
+                1685066400,
+                7200,
+                ["tag4"]
+            ),
+            new SelectedMedia(
+                testMovie2,
+                MediaType.Movie,
+                1685073600,
+                7200,
+                ["tag1", "tag2"]
+            )
+        ]
+
+        let result = streamConstructor.evaluateStreamEndTime(options, scheduledMedia)
+
+        expect(1685080800).to.deep.equal(result);
+    });
+
+    it('should populate end time from scheduled movies when not set in options', () => {
+        let options = {
+        };
+
+        let scheduledMedia: SelectedMedia[] = [
+            new SelectedMedia(
+                testMovie1,
+                MediaType.Movie,
+                1685052000,
+                7200,
+                ["tag1", "tag2", "tag3"]
+            ),
+            new SelectedMedia(
+                testMovie3,
+                MediaType.Movie,
+                1685059200,
+                7200,
+                ["tag2", "tag3"]
+            ),
+            new SelectedMedia(
+                collection1,
+                MediaType.Collection,
+                1685066400,
+                7200,
+                ["tag4"]
+            ),
+            new SelectedMedia(
+                testMovie2,
+                MediaType.Movie,
+                1685073600,
+                7200,
+                ["tag1", "tag2"]
+            )
+        ]
+
+        let result = streamConstructor.evaluateStreamEndTime(options, scheduledMedia)
+
+        expect(1685073600).to.deep.equal(result);
+    });
+
+    it('should populate end time as end of day if no scheduled movies and when not set in options', () => {
+
+        let endTime: number = moment().startOf('day').add(1, "days").unix();
+        
+        let options = {
+        };
+
+        let scheduledMedia: SelectedMedia[] = []
+
+        let result = streamConstructor.evaluateStreamEndTime(options, scheduledMedia)
+
+        expect(endTime).to.deep.equal(result);
+    });
+});
+
+describe('setProceduralTags function', () => {
+    it('should populate tags from selected movies and collections into options.tagsOR if tagsOR is undefined', () => {
+        let options = {
+        };
+
+        let stagedmedia: StagedMedia = new StagedMedia(
+            [
+                new SelectedMedia(
+                    testMovie1,
+                    MediaType.Movie,
+                    1685052000,
+                    7200,
+                    ["tag1", "tag2", "tag3"]
+                ),
+                new SelectedMedia(
+                    testMovie3,
+                    MediaType.Movie,
+                    1685059200,
+                    7200,
+                    ["tag2", "tag3"]
+                ),
+                new SelectedMedia(
+                    collection1,
+                    MediaType.Collection,
+                    1685066400,
+                    7200,
+                    ["tag4"]
+                ),
+                new SelectedMedia(
+                    testMovie2,
+                    MediaType.Movie,
+                    1685073600,
+                    7200,
+                    ["tag1", "tag2"]
+                )
+            ],
+            [],
+            0
+        )
+
+        streamConstructor.setProceduralTags(options, stagedmedia)
+
+        expect(options["tagsOR"]).to.deep.equal(['tag1', 'tag2', 'tag3', 'tag4']);
     });
 });
