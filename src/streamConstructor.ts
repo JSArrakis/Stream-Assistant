@@ -132,20 +132,24 @@ function createCollectionBlock(
     return [stream, remainder];
 }
 
+export function getFirstProceduralDuration(rightNow: number, stagedMedia: StagedMedia): number {
+    let firstTimePoint: number = stagedMedia.EndTime;
+
+    if (stagedMedia.ScheduledMedia.length > 0) {
+        firstTimePoint = stagedMedia.ScheduledMedia[0].Time;
+    }
+
+    return firstTimePoint - rightNow;
+}
+
 function getStagedStream(rightNow: number, config: Config,
     options: any,
     stagedMedia: StagedMedia,
     media: Media,
     progression: MediaProgression[]): SelectedMedia[] {
 
-    let firstTimePoint: number = stagedMedia.EndTime;
-    let selectedMedia: SelectedMedia[] = [];
 
-    if (stagedMedia.ScheduledMedia.length > 0) {
-        firstTimePoint = stagedMedia.ScheduledMedia[0].Time;
-    }
-
-    let firstProceduralDuration = firstTimePoint - rightNow;
+    let firstProceduralDuration = getFirstProceduralDuration(rightNow, stagedMedia)
     if (firstProceduralDuration < 0) {
         throw "Time of first movie, collection, or selected end time needs to be in the future.";
     }
@@ -160,6 +164,7 @@ function getStagedStream(rightNow: number, config: Config,
         preMediaDuration = firstProceduralDuration;
     }
 
+    let selectedMedia: SelectedMedia[] = [];
     let prevMovies: Movie[] = [];
 
     if (initialProceduralBlockDuration > 0) {
@@ -223,10 +228,7 @@ export function evaluateStreamEndTime(options: any, scheduledMedia: SelectedMedi
         endTime = selectedEndTime;
     } else if (scheduledMedia.length > 0) {
         let lastScheduledMedia = scheduledMedia[scheduledMedia.length - 1];
-        let scheduledMediaEndTime = lastScheduledMedia.Time + lastScheduledMedia.Media.DurationLimit;
-        if (scheduledMediaEndTime > endTime) {
-            endTime = scheduledMediaEndTime;
-        }
+        endTime = lastScheduledMedia.Time + lastScheduledMedia.Media.DurationLimit;
     }
 
     return endTime;

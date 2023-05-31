@@ -11,7 +11,7 @@ import { MediaProgression, ShowProgression } from '../models/mediaProgression';
 import * as utilities from '../src/utilities'
 import { deepCopy } from '../src/utilities';
 import { StagedMedia } from '../models/stagedMedia';
-import moment from 'moment';
+import * as moment from 'moment';
 
 let media = new Media(
     [], //show
@@ -541,7 +541,7 @@ describe('evaluateStreamEndTime function', () => {
 
         let result = streamConstructor.evaluateStreamEndTime(options, scheduledMedia)
 
-        expect(1685073600).to.deep.equal(result);
+        expect(result).to.deep.equal(1685080800);
     });
 
     it('should populate end time as end of day if no scheduled movies and when not set in options', () => {
