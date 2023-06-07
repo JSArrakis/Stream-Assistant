@@ -142,7 +142,23 @@ export function getFirstProceduralDuration(rightNow: number, stagedMedia: Staged
     return firstTimePoint - rightNow;
 }
 
-function getStagedStream(rightNow: number, config: Config,
+export function setProceduralBlockDurations(interval: number, firstProceduralDuration: number) {
+    let preMediaDuration = 0;
+    let initialProceduralBlockDuration = 0;
+
+    if (firstProceduralDuration / interval >= 1) {
+        preMediaDuration = firstProceduralDuration % interval;
+        initialProceduralBlockDuration = firstProceduralDuration - preMediaDuration;
+    } else {
+        preMediaDuration = firstProceduralDuration;
+    }
+
+    return { preMediaDuration, initialProceduralBlockDuration };
+}
+
+export function getStagedStream(
+    rightNow: number,
+    config: Config,
     options: any,
     stagedMedia: StagedMedia,
     media: Media,
@@ -155,15 +171,7 @@ function getStagedStream(rightNow: number, config: Config,
     }
 
     let interval = config.interval;
-    let preMediaDuration = 0;
-    let initialProceduralBlockDuration = 0;
-    if (firstProceduralDuration / interval >= 1) {
-        preMediaDuration = firstProceduralDuration % interval;
-        initialProceduralBlockDuration = firstProceduralDuration - preMediaDuration;
-    } else {
-        preMediaDuration = firstProceduralDuration;
-    }
-
+    let { preMediaDuration, initialProceduralBlockDuration } = setProceduralBlockDurations(interval, firstProceduralDuration);
     let selectedMedia: SelectedMedia[] = [];
     let prevMovies: Movie[] = [];
 
@@ -180,7 +188,7 @@ function getStagedStream(rightNow: number, config: Config,
         );
         selectedMedia.push(...firstProceduralBlock);
     }
-    4
+
     stagedMedia.ScheduledMedia.forEach((item, index) => {
         selectedMedia.push(item);
         if (index < stagedMedia.ScheduledMedia.length - 1) {

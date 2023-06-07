@@ -1,4 +1,4 @@
-export interface Config {
+export class Config {
     vlcLocation: string;
     destinationFolder: string;
     testFolder: string;
