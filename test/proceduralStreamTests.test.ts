@@ -146,21 +146,154 @@ describe('setProceduralBlockDurations function', () => {
     });
 });
 
-describe('getProceduralBlock function', () => {
-    let config: Config = new Config();
-    let media: Media = new Media([], [], [], [], [], [], []);
-    let options = {}
-    let stagedMedia: StagedMedia = new StagedMedia([], [], 0);
-    let prevMovies: Movie[];
-    let progression: MediaProgression[] = [];
-    let duration: number = 0;
-    let lastTimePoint: number = 0;
-    it('should populate something', () => {
-
-        let result = proceduralEngine.getProceduralBlock(config, options, stagedMedia, media, prevMovies, progression, duration, lastTimePoint);
-
-        expect(result).to.equal(32400);
+describe('selectMovieUnderDuration', () => {
+    const movies: Movie[] = [
+      // Movies with matching tags
+      new Movie('Movie 1', 'LoadTitle 1', 'Alias 1', 'IMDB 1', ['Tag1', 'Tag2'], 'Path 1', 120, 150, 'Collection 1', 1),
+      new Movie('Movie 2', 'LoadTitle 2', 'Alias 2', 'IMDB 2', ['Tag1', 'Tag3'], 'Path 2', 90, 120, 'Collection 2', 1),
+      new Movie('Movie 3', 'LoadTitle 3', 'Alias 3', 'IMDB 3', ['Tag2', 'Tag3'], 'Path 3', 100, 180, 'Collection 3', 1),
+  
+      // Movies without matching tags
+      new Movie('Movie 4', 'LoadTitle 4', 'Alias 4', 'IMDB 4', ['Tag4', 'Tag5'], 'Path 4', 80, 120, 'Collection 4', 1),
+      new Movie('Movie 5', 'LoadTitle 5', 'Alias 5', 'IMDB 5', ['Tag5', 'Tag6'], 'Path 5', 150, 200, 'Collection 5', 1),
+      new Movie('Movie 6', 'LoadTitle 6', 'Alias 6', 'IMDB 6', ['Tag6', 'Tag7'], 'Path 6', 110, 130, 'Collection 6', 1),
+    ];
+  
+    it('should return a random movie with matching tags and duration', () => {
+      const options = {
+        tagsOR: ['Tag1', 'Tag2'],
+      };
+      const duration = 130;
+      const selectedMovie = proceduralEngine.selectMovieUnderDuration(options, movies, duration);
+      expect(selectedMovie).to.be.an.instanceOf(Movie);
+      expect(selectedMovie.Tags).to.include.oneOf(options.tagsOR);
+      expect(selectedMovie.DurationLimit).to.be.at.most(duration);
     });
+  
+    it('should return undefined if no movie matches the tags', () => {
+      const options = {
+        tagsOR: ['Tag8'],
+      };
+      const duration = 130;
+      const selectedMovie = proceduralEngine.selectMovieUnderDuration(options, movies, duration);
+      expect(selectedMovie).to.be.undefined;
+    });
+
+    it('should return undefined if no movie matches duration', () => {
+        const options = {
+          tagsOR: ['Tag4', 'Tag5', 'Tag8'],
+        };
+        const duration = 80;
+        const selectedMovie = proceduralEngine.selectMovieUnderDuration(options, movies, duration);
+        expect(selectedMovie).to.be.undefined;
+    });
+});
+
+describe('selectShowUnderDuration function', () => {
+  const shows: Show[] = [
+    // Shows with matching tags
+    new Show(
+      'Show 1',
+      'LoadTitle 1',
+      'Alias 1',
+      'IMDB 1',
+      1800,
+      false,
+      ['Tag1', 'Tag2'],
+      3,
+      [
+        new Episode(1, 1, 1, 'Path 1', 'Episode 1', 'LoadTitle 1', 1643, 1800, ['Tag1']),
+        new Episode(1, 2, 2, 'Path 2', 'Episode 2', 'LoadTitle 2', 1643, 1800, ['Tag2']),
+        new Episode(1, 3, 3, 'Path 3', 'Episode 3', 'LoadTitle 3', 1643, 1800, ['Tag1', 'Tag2']),
+      ]
+    ),
+    new Show(
+      'Show 2',
+      'LoadTitle 4',
+      'Alias 2',
+      'IMDB 2',
+      1800,
+      false,
+      ['Tag1', 'Tag3'],
+      2,
+      [
+        new Episode(1, 1, 1, 'Path 4', 'Episode 1', 'LoadTitle 4', 1643, 1800, ['Tag1']),
+        new Episode(1, 2, 2, 'Path 5', 'Episode 2', 'LoadTitle 5', 1643, 1800, ['Tag3']),
+      ]
+    ),
+
+    // Shows without matching tags
+    new Show(
+      'Show 3',
+      'LoadTitle 6',
+      'Alias 3',
+      'IMDB 3',
+      1800,
+      false,
+      ['Tag4', 'Tag5'],
+      3,
+      [
+        new Episode(1, 1, 1, 'Path 6', 'Episode 1', 'LoadTitle 6', 1643, 1800, ['Tag4']),
+        new Episode(1, 2, 2, 'Path 7', 'Episode 2', 'LoadTitle 7', 1643, 1800, ['Tag5']),
+        new Episode(1, 3, 3, 'Path 8', 'Episode 3', 'LoadTitle 8', 1643, 1800, ['Tag6']),
+      ]
+    ),
+  ];
+
+  const progression: MediaProgression[] = [
+    new MediaProgression('Main', 'Type', [
+      { LoadTitle: 'LoadTitle 1', Episode: 1 },
+      { LoadTitle: 'LoadTitle 4', Episode: 1 },
+      { LoadTitle: 'LoadTitle 6', Episode: 1 },
+    ]),
+  ];
+
+  it('should return an array of episodes with matching tags and duration', () => {
+    const options = {
+      tagsOR: ['Tag1', 'Tag2'],
+    };
+    const duration = 1800;
+    const selectedEpisodes = proceduralEngine.selectShowUnderDuration(options, shows, progression, duration);
+    expect(selectedEpisodes).to.be.an('array');
+    expect(selectedEpisodes).to.have.lengthOf(1);
+    const selectedEpisode = selectedEpisodes[0];
+    expect(selectedEpisode).to.be.an.instanceOf(Episode);
+    expect(selectedEpisode.DurationLimit).to.be.at.most(duration);
+  });
+});
+
+
+describe('getProceduralBlock', () => {
+
+  
+    it('should select movies and episodes until the duration is reached', () => {
+      const config: Config = /* create the config object */;
+      const options: any = /* create the options object */;
+      const stagedMedia: StagedMedia = /* create the stagedMedia object */;
+      const media: Media = /* create the media object */;
+      const prevMovies: Movie[] = /* create the prevMovies array */;
+      const progression: MediaProgression[] = /* create the progression array */;
+      const duration: number = /* set the duration value */;
+      const lastTimePoint: number = /* set the lastTimePoint value */;
+  
+      const result = proceduralEngine.getProceduralBlock(config, options, stagedMedia, media, prevMovies, progression, duration, lastTimePoint);
+  
+      expect(result).to.be.an('array').that.is.not.empty;
+  
+      let totalDuration = 0;
+      for (const item of result) {
+        expect(item.Type).to.be.oneOf([MediaType.Movie, MediaType.Episode]);
+        expect(item.Time).to.be.a('number');
+        expect(item.Duration).to.be.a('number');
+        expect(item.Tags).to.be.an('array');
+  
+        totalDuration += item.Duration;
+      }
+  
+      expect(totalDuration).to.be.at.most(duration);
+    });
+  
+    // Add more tests as needed for different scenarios
 });
 
 describe('getStagedStream function', () => {

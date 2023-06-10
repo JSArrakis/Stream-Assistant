@@ -36,8 +36,8 @@ export class CollectionShow {
     Sequence: number;
     Subsequence: number;
     DurationLimit: number;
-    BumperStart?: Bumper;
-    BumperEnd?: Bumper;
+    BumperStart: Bumper;
+    BumperEnd: Bumper;
     Episode?: Episode;
 
     constructor(loadTitle: string, sequence: number, subsequence: number, durationLimit: number, bumperStart?: Bumper,

@@ -10,7 +10,8 @@ export class Movie {
     Collection: string;
     CollectionSequence: number;
 
-    constructor(title: string,
+    constructor(
+        title: string,
         loadTitle: string,
         alias: string,
         imdb: string,
