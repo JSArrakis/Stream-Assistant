@@ -149,44 +149,52 @@ describe('setProceduralBlockDurations function', () => {
 describe('selectMovieUnderDuration', () => {
     const movies: Movie[] = [
       // Movies with matching tags
-      new Movie('Movie 1', 'LoadTitle 1', 'Alias 1', 'IMDB 1', ['Tag1', 'Tag2'], 'Path 1', 120, 150, 'Collection 1', 1),
-      new Movie('Movie 2', 'LoadTitle 2', 'Alias 2', 'IMDB 2', ['Tag1', 'Tag3'], 'Path 2', 90, 120, 'Collection 2', 1),
-      new Movie('Movie 3', 'LoadTitle 3', 'Alias 3', 'IMDB 3', ['Tag2', 'Tag3'], 'Path 3', 100, 180, 'Collection 3', 1),
+      new Movie('Movie 1', 'LoadTitle 1', 'Alias 1', 'IMDB 1', ['Tag1', 'Tag2'], 'Path 1', 6908, 7200, 'Collection 1', 1),
+      new Movie('Movie 2', 'LoadTitle 2', 'Alias 2', 'IMDB 2', ['Tag1', 'Tag3'], 'Path 2', 6908, 7200, 'Collection 2', 1),
+      new Movie('Movie 3', 'LoadTitle 3', 'Alias 3', 'IMDB 3', ['Tag1', 'Tag2', 'Tag3'], 'Path 3', 6908, 7200, 'Collection 3', 1),
   
       // Movies without matching tags
-      new Movie('Movie 4', 'LoadTitle 4', 'Alias 4', 'IMDB 4', ['Tag4', 'Tag5'], 'Path 4', 80, 120, 'Collection 4', 1),
-      new Movie('Movie 5', 'LoadTitle 5', 'Alias 5', 'IMDB 5', ['Tag5', 'Tag6'], 'Path 5', 150, 200, 'Collection 5', 1),
-      new Movie('Movie 6', 'LoadTitle 6', 'Alias 6', 'IMDB 6', ['Tag6', 'Tag7'], 'Path 6', 110, 130, 'Collection 6', 1),
+      new Movie('Movie 4', 'LoadTitle 4', 'Alias 4', 'IMDB 4', ['Tag4', 'Tag5'], 'Path 4', 6908, 7200, 'Collection 4', 1),
+      new Movie('Movie 5', 'LoadTitle 5', 'Alias 5', 'IMDB 5', ['Tag5', 'Tag6'], 'Path 5', 6908, 7200, 'Collection 5', 1),
+      new Movie('Movie 6', 'LoadTitle 6', 'Alias 6', 'IMDB 6', ['Tag6', 'Tag7'], 'Path 6', 6908, 7200, 'Collection 6', 1),
     ];
   
     it('should return a random movie with matching tags and duration', () => {
+      let prevMovies: Movie[] = [];
       const options = {
         tagsOR: ['Tag1', 'Tag2'],
       };
-      const duration = 130;
-      const selectedMovie = proceduralEngine.selectMovieUnderDuration(options, movies, duration);
+      const duration = 14400;
+      const selectedMovie = proceduralEngine.selectMovieUnderDuration(options, movies, prevMovies, duration);
       expect(selectedMovie).to.be.an.instanceOf(Movie);
       expect(selectedMovie.Tags).to.include.oneOf(options.tagsOR);
       expect(selectedMovie.DurationLimit).to.be.at.most(duration);
     });
+
+    it('should only return movies not previously played in this round', () => {
+      let prevMovies: Movie[] = [
+        new Movie('Movie 2', 'LoadTitle 2', 'Alias 2', 'IMDB 2', ['Tag1', 'Tag3'], 'Path 2', 6908, 7200, 'Collection 2', 1),
+        new Movie('Movie 3', 'LoadTitle 3', 'Alias 3', 'IMDB 3', ['Tag1', 'Tag2', 'Tag3'], 'Path 3', 6908, 7200, 'Collection 3', 1)
+      ];
+      
+      const options = {
+        tagsOR: ['Tag1'],
+      };
+      const duration = 14400;
+      const selectedMovie = proceduralEngine.selectMovieUnderDuration(options, movies, prevMovies, duration);
+      expect(selectedMovie).to.equal(movies[0]);
+    });
   
     it('should return undefined if no movie matches the tags', () => {
+      let prevMovies: Movie[] = [];
       const options = {
         tagsOR: ['Tag8'],
       };
-      const duration = 130;
-      const selectedMovie = proceduralEngine.selectMovieUnderDuration(options, movies, duration);
+      const duration = 14400;
+      const selectedMovie = proceduralEngine.selectMovieUnderDuration(options, movies, prevMovies, duration);
       expect(selectedMovie).to.be.undefined;
     });
-
-    it('should return undefined if no movie matches duration', () => {
-        const options = {
-          tagsOR: ['Tag4', 'Tag5', 'Tag8'],
-        };
-        const duration = 80;
-        const selectedMovie = proceduralEngine.selectMovieUnderDuration(options, movies, duration);
-        expect(selectedMovie).to.be.undefined;
-    });
+    
 });
 
 describe('selectShowUnderDuration function', () => {

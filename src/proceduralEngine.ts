@@ -69,11 +69,10 @@ export function selectRandomMovie(
     duration: number, 
     selectedMedia: SelectedMedia[], 
     prevMovies: Movie[], 
-    currentDuration: 
-    number, 
+    currentDuration: number, 
     currentTimePoint: number
 ) {
-    let selectedMovie = selectMovieUnderDuration(options, movies, duration);
+    let selectedMovie = selectMovieUnderDuration(options, movies, prevMovies, duration);
     let selectedMediaItem: SelectedMedia = new SelectedMedia(selectedMovie, MediaType.Movie, currentTimePoint, selectedMovie.DurationLimit, selectedMovie.Tags)
     selectedMedia.push(selectedMediaItem);
     prevMovies.push(selectedMovie);
@@ -102,14 +101,19 @@ export function selectInjectedMovie(
     currentTimePoint = currentTimePoint + injMovie.Duration;
 }
 
-export function selectMovieUnderDuration(options: any, movies: Movie[], duration: number): Movie {
+export function selectMovieUnderDuration(options: any, movies: Movie[], prevMovies: Movie[], duration: number): Movie {
     let filteredMovies: Movie[] = movies.filter(movie =>
         movie.Tags.some(tag => options.tagsOR.includes(tag)) &&
         movie.DurationLimit <= duration
     );
 
-    return filteredMovies[Math.floor(Math.random() * filteredMovies.length)];
+    let notRepeatMovies: Movie[] = filteredMovies.filter((item) => !prevMovies.some((obj) => obj.LoadTitle === item.LoadTitle));
 
+    let selectedMovie = notRepeatMovies.length > 0 ? 
+    notRepeatMovies[Math.floor(Math.random() * notRepeatMovies.length)] : 
+    filteredMovies[Math.floor(Math.random() * filteredMovies.length)];
+
+    return selectedMovie;
 }
 
 export function selectShowUnderDuration(options: any, shows: Show[], progression: MediaProgression[], duration: number): Episode[] {
@@ -120,7 +124,7 @@ export function selectShowUnderDuration(options: any, shows: Show[], progression
         show.DurationLimit <= duration
     );
 
-    let selectedShow = selectShowByDuration(duration, shows)
+    let selectedShow = selectShowByDuration(duration, filteredShows)
 
     if(selectedShow === undefined) {
         throw "Something went wrong when selecting a show by Duration"

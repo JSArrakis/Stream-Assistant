@@ -62,9 +62,14 @@ export class ShowBuilder {
         this.episodeCount = episodeCount;
         return this;
     }
+
+    public withEpisode(episode: Episode): ShowBuilder {
+      this.episodes.push(episode);
+      return this;
+    }
   
-    public withEpisodes(episodes: Episode[]): ShowBuilder {
-      this.episodes = episodes;
+    public withEpisodeList(episodes: Episode[]): ShowBuilder {
+      this.episodes.push(...episodes);
       return this;
     }
   

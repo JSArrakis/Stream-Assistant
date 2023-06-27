@@ -50,6 +50,41 @@ export class MediaBuilder {
       this.collections.push(collection);
       return this;
     }
+
+    public withShowList(shows: Show[]): MediaBuilder {
+      this.shows.push(...shows);
+      return this;
+    }
+  
+    public withMovieList(movies: Movie[]): MediaBuilder {
+      this.movies.push(...movies);
+      return this;
+    }
+  
+    public withShortList(shorts: Short[]): MediaBuilder {
+      this.shorts.push(...shorts);
+      return this;
+    }
+  
+    public withMusicList(music: Music[]): MediaBuilder {
+      this.music.push(...music);
+      return this;
+    }
+  
+    public withPromoList(promos: Promo[]): MediaBuilder {
+      this.promos.push(...promos);
+      return this;
+    }
+  
+    public withCommercialList(commercials: Commercial[]): MediaBuilder {
+      this.commercials.push(...commercials);
+      return this;
+    }
+  
+    public withCollectionList(collections: Collection[]): MediaBuilder {
+      this.collections.push(...collections);
+      return this;
+    }
   
     public build(): Media {
       return new Media(this.shows, this.movies, this.shorts, this.music, this.promos, this.commercials, this.collections);
