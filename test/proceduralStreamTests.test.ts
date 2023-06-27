@@ -270,13 +270,12 @@ describe('selectShowUnderDuration function', () => {
   });
 });
 
-
 describe('getProceduralBlock', () => {
 
   
     it('should select movies and episodes until the duration is reached', () => {
-      const config: Config = /* create the config object */;
-      const options: any = /* create the options object */;
+      const config: Config = new Config();
+      //TODO const options: any = {TagsOR: []};
       const stagedMedia: StagedMedia = /* create the stagedMedia object */;
       const media: Media = /* create the media object */;
       const prevMovies: Movie[] = /* create the prevMovies array */;
