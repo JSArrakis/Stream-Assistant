@@ -20,13 +20,13 @@ let episode2 = new Episode(1, 2, 2, "", "episode2", "episode2", 1709, 1800, [])
 let episode3 = new Episode(1, 3, 3, "", "episode3", "episode3", 1603, 1800, [])
 let episode4 = new Episode(1, 4, 4, "", "episode4", "episode4", 1600, 1800, [])
 let episode5a = new Episode(1, 5, 5, "", "episode5", "episode5", 1699, 1800, [])
-let episode5b = new Episode(1, 5, 5, "", "episode5", "episode5", 2703, 1800, [])
+let episode5b = new Episode(1, 5, 5, "", "episode5", "episode5", 2703, 3600, [])
 
 let show1 = new Show("Show1", "show1", "alias", "imdb", 1800, false, ["tag1", "tag5", "tag4"], 5, [episode1, episode2, episode3, episode4, episode5a])
 let show2 = new Show("Show2", "show2", "alias", "imdb", 1800, false, ["tag2", "tag5"], 5, [episode1, episode2, episode3, episode4, episode5a])
 let show3 = new Show("Show3", "show3", "alias", "imdb", 1800, false, ["tag5"], 5, [episode1, episode2, episode3, episode4, episode5a])
-let show4 = new Show("Show4", "show4", "alias", "imdb", 1800, false, ["tag4"], 5, [episode1, episode2, episode3, episode4, episode5a])
-let show5 = new Show("Show5", "show5", "alias", "imdb", 1800, true, ["tag6"], 5, [episode1, episode2, episode3, episode4, episode5b])
+let show4 = new Show("Show4", "show4", "alias", "imdb", 1800, false, ["tag4", "tag6"], 5, [episode1, episode2, episode3, episode4, episode5a])
+let show5 = new Show("Show5", "show5", "alias", "imdb", 1800, true, ["tag6", "tag7"], 5, [episode1, episode2, episode3, episode4, episode5b])
 let showList = [show1, show2, show3, show4, show5]
 
 let collShow1 = new CollectionShow(
@@ -95,7 +95,20 @@ let testMovie3 = new Movie(
   0
 );
 
-let movieList = [testMovie1, testMovie2, testMovie3];
+let testMovie4 = new Movie(
+  "Test4",
+  "test4",
+  "test4",
+  "",
+  ["tag5"],
+  "pathToTest4",
+  7000,
+  7200,
+  "",
+  0
+);
+
+let movieList = [testMovie1, testMovie2, testMovie3, testMovie4];
 
 let stagedMediaNoProc: StagedMedia = new StagedMedia(
   [
@@ -368,8 +381,29 @@ describe('getStagedStream function', () => {
 
 describe('getProceduralBlock', () => {
 
+  it('should randomly select a combination of movies and shows that fill the time available', () => {
+    const config: Config = new Config();
+    const options: any = { tagsOR: ["tag1", "tag2", "tag3"] };
+    const media: Media = new Media(showList, movieList, [], [], [], [], []);;
+    const prevMovies: Movie[] = [];
+    const progression: MediaProgression[] = [new MediaProgression("Main", "Main", [])]
+    const duration: number = 9000;
+    const lastTimePoint: number = 1685066400;
 
-  it('should create a procedural block before the first staged media', () => {
+    let result = proceduralEngine.getProceduralBlock(config, options, stagedMedia, media, prevMovies, progression, duration, lastTimePoint);
+    let totalDuration = result.reduce((acc, obj) => acc + obj.Duration, 0);
+    let countShows = result.filter(show => show.Type === MediaType.Episode).length;
+    let countMovies = result.filter(movie => movie.Type === MediaType.Movie).length;
+    let allTagsValid = result.every(
+      (obj) => obj.Tags.every((tag) => ["tag1", "tag2", "tag3"].includes(tag))
+    );
+    expect(result).to.be.an('array');
+    expect(countShows === 5 || (countShows === 1 && countMovies === 1)).to.be.true;
+    expect(totalDuration).to.equal(9000);
+    expect(allTagsValid).to.be.true;
+  });
+
+  it('should get only shows when no more movies fit the criteria', () => {
     const config: Config = new Config();
     const options: any = { tagsOR: ["tag1", "tag2", "tag3"] };
     const media: Media = new Media(showList, movieList, [], [], [], [], []);;
@@ -379,8 +413,63 @@ describe('getProceduralBlock', () => {
     const lastTimePoint: number = 1685066400;
 
     let result = proceduralEngine.getProceduralBlock(config, options, stagedMedia, media, prevMovies, progression, duration, lastTimePoint);
-    let hmmm = ""
+    let totalDuration = result.reduce((acc, obj) => acc + obj.Duration, 0);
+    let allElementsAreShows = result.every((obj) => obj.Type === MediaType.Episode);
+    let allTagsValid = result.every(
+      (obj) => obj.Tags.every((tag) => ["tag1", "tag2", "tag3"].includes(tag))
+    );
+    expect(result).to.be.an('array');
+    expect(result).to.have.lengthOf(4);
+    expect(totalDuration).to.equal(7200);
+    expect(allElementsAreShows).to.be.true;
+    expect(allTagsValid).to.be.true;
   });
 
-  // Add more tests as needed for different scenarios
+  it('should get 1 over duration episode if within duration', () => {
+    const config: Config = new Config();
+    const options: any = { tagsOR: ["tag7"] };
+    const media: Media = new Media(showList, movieList, [], [], [], [], []);;
+    const prevMovies: Movie[] = movieList;
+    const progression: MediaProgression[] = [new MediaProgression("Main", "Main", [new ShowProgression("show5", 5)])]
+    const duration: number = 3600;
+    const lastTimePoint: number = 1685066400;
+
+    let result = proceduralEngine.getProceduralBlock(config, options, stagedMedia, media, prevMovies, progression, duration, lastTimePoint);
+    let totalDuration = result.reduce((acc, obj) => acc + obj.Duration, 0);
+    let allElementsAreShows = result.every((obj) => obj.Type === MediaType.Episode);
+    let allTagsValid = result.every(
+      (obj) => obj.Tags.every((tag) => ["tag7"].includes(tag))
+    );
+    expect(result).to.be.an('array');
+    expect(result).to.have.lengthOf(1);
+    expect(totalDuration).to.equal(3600);
+    expect(allElementsAreShows).to.be.true;
+    expect(allTagsValid).to.be.true;
+  });
+
+  // OUT OF SCOPE
+  // This needs addtional work on selectShowByDuration function to make considerations on unique situations
+  // where it would be required to pick two sequential episodes from the same Over Duration show. 
+  // We Might need to fill the last 30 minute gap with something else
+  // it('should get two episodes from overduration show if not over duration episodes', () => {
+  //   const config: Config = new Config();
+  //   const options: any = { tagsOR: ["tag7"] };
+  //   const media: Media = new Media(showList, movieList, [], [], [], [], []);;
+  //   const prevMovies: Movie[] = movieList;
+  //   const progression: MediaProgression[] = [new MediaProgression("Main", "Main", [new ShowProgression("show5", 3)])]
+  //   const duration: number = 3600;
+  //   const lastTimePoint: number = 1685066400;
+
+  //   let result = proceduralEngine.getProceduralBlock(config, options, stagedMedia, media, prevMovies, progression, duration, lastTimePoint);
+  //   let totalDuration = result.reduce((acc, obj) => acc + obj.Duration, 0);
+  //   let allElementsAreShows = result.every((obj) => obj.Type === MediaType.Episode);
+  //   let allTagsValid = result.every(
+  //     (obj) => obj.Tags.every((tag) => ["tag7"].includes(tag))
+  //   );
+  //   expect(result).to.be.an('array');
+  //   expect(result).to.have.lengthOf(2);
+  //   expect(totalDuration).to.equal(3600);
+  //   expect(allElementsAreShows).to.be.true;
+  //   expect(allTagsValid).to.be.true;
+  // });
 });

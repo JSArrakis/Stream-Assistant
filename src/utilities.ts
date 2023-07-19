@@ -15,7 +15,6 @@ export function ManageProgression(title: string, type: string, progression: Medi
     for (let i = 0; i < numOfEpsRequested; i++) {
         let progContext: MediaProgression = progression
             .filter(prog => prog.Title === title)[0];
-        console.log("Prog Context: " + JSON.stringify(progContext));
         let episode = progContext.Shows.filter(item => item.LoadTitle === show.LoadTitle)[0].Episode;
         episodeNumbers.push(episode);
         incrementProgression(progression, title, show);

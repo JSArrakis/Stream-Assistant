@@ -23,8 +23,6 @@ export function getProceduralBlock(
     let currentTimePoint = lastTimePoint;
 
     while (currDur < duration) {
-        console.log("Current duration: " + currDur);
-        console.log("Duration: " + duration);
         let durRemainder = duration - currDur;
         let injDurMovies = stagedMedia.InjectedMovies.filter(inj => inj.Duration <= durRemainder);
         let procDurMovies = media.Movies.filter(mov => mov.Duration <= durRemainder && !isMovieSelected(mov, prevMovies));
@@ -34,22 +32,26 @@ export function getProceduralBlock(
             if (durRemainder > 5400) {
                 //Movie or Show
                 if (Math.random() < 0.5 && procDurMovies.length > 0) {
-                    selectRandomMovie(options, procDurMovies, duration, selectedMedia, prevMovies, currDur, currentTimePoint);
+                    let selectedMovie = selectMovieUnderDuration(options, media.Movies, prevMovies, durRemainder);
+                    let selectedMediaItem: SelectedMedia = new SelectedMedia(selectedMovie, "", MediaType.Movie, currentTimePoint, selectedMovie.DurationLimit, selectedMovie.Tags)
+                    selectedMedia.push(selectedMediaItem);
+                    prevMovies.push(selectedMovie);
+
+                    currDur = currDur + selectedMovie.DurationLimit;
+                    currentTimePoint = currentTimePoint + selectedMovie.DurationLimit;
                 } else {
-                    let result = selectShowUnderDuration(options, media.Shows, progression, duration);
+                    let result = selectShowUnderDuration(options, media.Shows, progression, durRemainder);
                     result[0].forEach(episode => {
                         selectedMedia.push(new SelectedMedia(episode, result[1], MediaType.Episode, currentTimePoint, episode.DurationLimit, episode.Tags));
-
                         currDur = currDur + episode.DurationLimit;
                         currentTimePoint = currentTimePoint + episode.DurationLimit;
                     });
                 }
             } else {
                 //Show
-                let result = selectShowUnderDuration(options, media.Shows, progression, duration);
+                let result = selectShowUnderDuration(options, media.Shows, progression, durRemainder);
                 result[0].forEach(episode => {
                     selectedMedia.push(new SelectedMedia(episode, result[1], MediaType.Episode, currentTimePoint, episode.DurationLimit, episode.Tags));
-
                     currDur = currDur + episode.DurationLimit;
                     currentTimePoint = currentTimePoint + episode.DurationLimit;
                 });
@@ -60,30 +62,12 @@ export function getProceduralBlock(
     return selectedMedia;
 }
 
-export function selectRandomMovie(
-    options: any, 
-    movies: Movie[], 
-    duration: number, 
-    selectedMedia: SelectedMedia[], 
-    prevMovies: Movie[], 
-    currentDuration: number, 
-    currentTimePoint: number
-) {
-    let selectedMovie = selectMovieUnderDuration(options, movies, prevMovies, duration);
-    let selectedMediaItem: SelectedMedia = new SelectedMedia(selectedMovie, "", MediaType.Movie, currentTimePoint, selectedMovie.DurationLimit, selectedMovie.Tags)
-    selectedMedia.push(selectedMediaItem);
-    prevMovies.push(selectedMovie);
-
-    currentDuration = currentDuration + selectedMovie.DurationLimit;
-    currentTimePoint = currentTimePoint + selectedMovie.DurationLimit;
-}
-
 export function selectInjectedMovie(
-    injectedMovies: SelectedMedia[], 
-    stagedMedia: StagedMedia, 
-    currentTimePoint: number, 
-    selectedMedia: SelectedMedia[], 
-    prevMovies: Movie[], 
+    injectedMovies: SelectedMedia[],
+    stagedMedia: StagedMedia,
+    currentTimePoint: number,
+    selectedMedia: SelectedMedia[],
+    prevMovies: Movie[],
     currentDuration: number
 ) {
     let injMovie = injectedMovies[Math.floor(Math.random() * injectedMovies.length)];
@@ -106,24 +90,22 @@ export function selectMovieUnderDuration(options: any, movies: Movie[], prevMovi
 
     let notRepeatMovies: Movie[] = filteredMovies.filter((item) => !prevMovies.some((obj) => obj.LoadTitle === item.LoadTitle));
 
-    let selectedMovie = notRepeatMovies.length > 0 ? 
-    notRepeatMovies[Math.floor(Math.random() * notRepeatMovies.length)] : 
-    filteredMovies[Math.floor(Math.random() * filteredMovies.length)];
+    let selectedMovie = notRepeatMovies.length > 0 ?
+        notRepeatMovies[Math.floor(Math.random() * notRepeatMovies.length)] :
+        filteredMovies[Math.floor(Math.random() * filteredMovies.length)];
 
     return selectedMovie;
 }
 
 export function selectShowUnderDuration(options: any, shows: Show[], progression: MediaProgression[], duration: number): [Episode[], string] {
     let episodes: Episode[] = [];
-
     let filteredShows: Show[] = shows.filter(show =>
         show.Tags.some(tag => options.tagsOR.includes(tag)) &&
         show.DurationLimit <= duration
     );
 
-    let selectedShow = selectShowByDuration(duration, filteredShows)
-    console.log("Selected show is " + selectedShow.Title);
-    if(selectedShow === undefined) {
+    let selectedShow = selectShowByDuration(duration, filteredShows);
+    if (selectedShow === undefined) {
         throw "Something went wrong when selecting a show by Duration"
     }
 
@@ -135,7 +117,6 @@ export function selectShowUnderDuration(options: any, shows: Show[], progression
             episodeIdx = ManageProgression("Main", "Main", progression, selectedShow, 1);
         } else {
             //select 2
-            
             episodeIdx = ManageProgression("Main", "Main", progression, selectedShow, 2);
         }
     } else {
@@ -144,7 +125,7 @@ export function selectShowUnderDuration(options: any, shows: Show[], progression
     }
 
     episodeIdx.forEach(idx => {
-        episodes.push(selectedShow.Episodes[idx]);
+        episodes.push(selectedShow.Episodes[idx - 1]);
     })
 
     return [episodes, selectedShow.Title];
@@ -156,17 +137,17 @@ function isMovieSelected(movie: Movie, prevMovies: Movie[]): boolean {
 
 function selectShowByDuration(duration: number, shows: Show[]): Show | undefined {
     let filteredShows: Show[] = shows.filter(show => {
-      if (duration < 3600) {
-        return !show.OverDuration && show.DurationLimit <= duration;
-      } else {
-        return show.DurationLimit <= duration;
-      }
+        if (duration < 3600) {
+            return !show.OverDuration && show.DurationLimit <= duration;
+        } else {
+            return show.DurationLimit <= duration;
+        }
     });
-  
+
     if (filteredShows.length === 0) {
-      return undefined;
+        return undefined;
     }
-  
+
     const randomIndex = Math.floor(Math.random() * filteredShows.length);
     return filteredShows[randomIndex];
 }
