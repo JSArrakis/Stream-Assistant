@@ -145,6 +145,7 @@ describe('getMovie function', () => {
         let time: number = 0;
         let match: SelectedMedia = new SelectedMedia(
             testMovie1,
+            "",
             MediaType.Movie,
             0,
             7200,
@@ -300,7 +301,7 @@ describe('getCollection function', () => {
 
         let targetCollection = deepCopy(collection1);
         targetCollection.Shows = [collectionShow1, collectionShow2, collectionShow3, collectionShow4];
-        let targetitem = new SelectedMedia(targetCollection, MediaType.Collection, 1, 7200, ['tag4'])
+        let targetitem = new SelectedMedia(targetCollection, "", MediaType.Collection, 1, 7200, ['tag4'])
 
         let item = streamConstructor.getCollection("collection1", media, 1, [progression])
 
@@ -341,6 +342,7 @@ describe('getScheduledMedia function', () => {
 
         expect(result[0]).to.deep.equal(new SelectedMedia(
             testMovie1,
+            "",
             MediaType.Movie,
             1685052000,
             7200,
@@ -348,6 +350,7 @@ describe('getScheduledMedia function', () => {
         ));
         expect(result[1]).to.deep.equal(new SelectedMedia(
             testMovie3,
+            "",
             MediaType.Movie,
             1685059200,
             7200,
@@ -355,6 +358,7 @@ describe('getScheduledMedia function', () => {
         ));
         expect(result[2]).to.deep.equal(new SelectedMedia(
             testMovie2,
+            "",
             MediaType.Movie,
             1685066400,
             7200,
@@ -395,12 +399,13 @@ describe('getScheduledMedia function', () => {
         let targetCollection = deepCopy(collection1);
         targetCollection.Shows = [collectionShow1, collectionShow2, collectionShow3, collectionShow4];
 
-        new SelectedMedia(targetCollection, MediaType.Collection, 1, 7200, ["tag4"])
+        new SelectedMedia(targetCollection, "", MediaType.Collection, 1, 7200, ["tag4"])
 
         let result = streamConstructor.getScheduledMedia(options, testmedia, [progression]);
 
         expect(result[0]).to.deep.equal(new SelectedMedia(
             testMovie1,
+            "",
             MediaType.Movie,
             1685052000,
             7200,
@@ -408,6 +413,7 @@ describe('getScheduledMedia function', () => {
         ));
         expect(result[1]).to.deep.equal(new SelectedMedia(
             testMovie3,
+            "",
             MediaType.Movie,
             1685059200,
             7200,
@@ -415,6 +421,7 @@ describe('getScheduledMedia function', () => {
         ));
         expect(result[2]).to.deep.equal(new SelectedMedia(
             targetCollection,
+            "",
             MediaType.Collection,
             1685066400,
             7200,
@@ -422,6 +429,7 @@ describe('getScheduledMedia function', () => {
         ));
         expect(result[3]).to.deep.equal(new SelectedMedia(
             testMovie2,
+            "",
             MediaType.Movie,
             1685073600,
             7200,
@@ -441,6 +449,7 @@ describe('getInjectedMovies function', () => {
             [
                 new SelectedMedia(
                     testMovie1,
+                    "",
                     MediaType.Movie,
                     0,
                     7200,
@@ -448,6 +457,7 @@ describe('getInjectedMovies function', () => {
                 ),
                 new SelectedMedia(
                     testMovie3,
+                    "",
                     MediaType.Movie,
                     0,
                     7200,
@@ -471,6 +481,7 @@ describe('evaluateStreamEndTime function', () => {
         let scheduledMedia: SelectedMedia[] = [
             new SelectedMedia(
                 testMovie1,
+                "",
                 MediaType.Movie,
                 1685052000,
                 7200,
@@ -478,6 +489,7 @@ describe('evaluateStreamEndTime function', () => {
             ),
             new SelectedMedia(
                 testMovie3,
+                "",
                 MediaType.Movie,
                 1685059200,
                 7200,
@@ -485,6 +497,7 @@ describe('evaluateStreamEndTime function', () => {
             ),
             new SelectedMedia(
                 collection1,
+                "",
                 MediaType.Collection,
                 1685066400,
                 7200,
@@ -492,6 +505,7 @@ describe('evaluateStreamEndTime function', () => {
             ),
             new SelectedMedia(
                 testMovie2,
+                "",
                 MediaType.Movie,
                 1685073600,
                 7200,
@@ -511,6 +525,7 @@ describe('evaluateStreamEndTime function', () => {
         let scheduledMedia: SelectedMedia[] = [
             new SelectedMedia(
                 testMovie1,
+                "",
                 MediaType.Movie,
                 1685052000,
                 7200,
@@ -518,6 +533,7 @@ describe('evaluateStreamEndTime function', () => {
             ),
             new SelectedMedia(
                 testMovie3,
+                "",
                 MediaType.Movie,
                 1685059200,
                 7200,
@@ -525,6 +541,7 @@ describe('evaluateStreamEndTime function', () => {
             ),
             new SelectedMedia(
                 collection1,
+                "",
                 MediaType.Collection,
                 1685066400,
                 7200,
@@ -532,6 +549,7 @@ describe('evaluateStreamEndTime function', () => {
             ),
             new SelectedMedia(
                 testMovie2,
+                "",
                 MediaType.Movie,
                 1685073600,
                 7200,
@@ -568,6 +586,7 @@ describe('setProceduralTags function', () => {
             [
                 new SelectedMedia(
                     testMovie1,
+                    "",
                     MediaType.Movie,
                     1685052000,
                     7200,
@@ -575,6 +594,7 @@ describe('setProceduralTags function', () => {
                 ),
                 new SelectedMedia(
                     testMovie3,
+                    "",
                     MediaType.Movie,
                     1685059200,
                     7200,
@@ -582,6 +602,7 @@ describe('setProceduralTags function', () => {
                 ),
                 new SelectedMedia(
                     collection1,
+                    "",
                     MediaType.Collection,
                     1685066400,
                     7200,
@@ -589,6 +610,7 @@ describe('setProceduralTags function', () => {
                 ),
                 new SelectedMedia(
                     testMovie2,
+                    "",
                     MediaType.Movie,
                     1685073600,
                     7200,
