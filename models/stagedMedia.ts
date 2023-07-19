@@ -1,6 +1,6 @@
 import { SelectedMedia } from "./selectedMedia";
 
-export class StagedMedia {
+export class  StagedMedia {
     ScheduledMedia: SelectedMedia[];
     InjectedMovies: SelectedMedia[];
     EndTime: number;

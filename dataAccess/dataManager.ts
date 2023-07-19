@@ -33,7 +33,11 @@ export function loadMedia(): Media {
 }
 
 export function loadProgression() {
-    return JSON.parse(progression) as MediaProgression[];
+    let parsed = JSON.parse(progression) as MediaProgression[];
+    if (parsed.filter(prog => prog.Title === "Main").length === 0) {
+        parsed.push(new MediaProgression("Main", "Main", []))
+    }
+    return parsed;
 }
 
 export function loadTranslationTags() {

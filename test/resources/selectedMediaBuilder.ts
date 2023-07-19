@@ -7,6 +7,7 @@ import { MovieBuilder } from "./movieBuilder";
 
 export class SelectedMediaBuilder {
     private media: (Movie | Collection | Episode);
+    private showTitle: string;
     private type: MediaType;
     private time: number;
     private duration: number;
@@ -53,6 +54,7 @@ export class SelectedMediaBuilder {
     public build(): SelectedMedia {
         return new SelectedMedia(
             this.media,
+            this.showTitle,
             this.type,
             this.time,
             this.duration,

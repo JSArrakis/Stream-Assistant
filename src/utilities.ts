@@ -13,9 +13,10 @@ export function ManageProgression(title: string, type: string, progression: Medi
     addProgression(title, type, progression, show)
 
     for (let i = 0; i < numOfEpsRequested; i++) {
-        let episode: number = progression
-            .filter(prog => prog.Title === title)[0].Shows
-            .filter(item => item.LoadTitle === show.LoadTitle)[0].Episode;
+        let progContext: MediaProgression = progression
+            .filter(prog => prog.Title === title)[0];
+        console.log("Prog Context: " + JSON.stringify(progContext));
+        let episode = progContext.Shows.filter(item => item.LoadTitle === show.LoadTitle)[0].Episode;
         episodeNumbers.push(episode);
         incrementProgression(progression, title, show);
     }
@@ -55,7 +56,7 @@ export function addProgression(title: string, type: string, progression: MediaPr
 
     let selectedShowProgression: ShowProgression[] = progression
         .filter(prog => prog.Title === title)[0].Shows
-        .filter(show => show.LoadTitle == show.LoadTitle);
+        .filter(selShow => selShow.LoadTitle == show.LoadTitle);
 
     if (selectedShowProgression.length === 0) {
         progression.filter(pitem => pitem.Title === title)[0].Shows

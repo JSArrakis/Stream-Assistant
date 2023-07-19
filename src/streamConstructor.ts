@@ -294,6 +294,7 @@ export function getMovie(loadTitle: string, movieList: Movie[], time: number): S
     }
     return new SelectedMedia(
         selectedMovie,
+        "",
         MediaType.Movie,
         time,
         selectedMovie.DurationLimit,
@@ -311,6 +312,7 @@ export function getCollection(loadTitle: string, media: Media, time: number, pro
 
     return new SelectedMedia(
         selectedCollection,
+        "",
         MediaType.Collection,
         time,
         selectedCollection.DurationLimit,
