@@ -9,19 +9,20 @@ import { MediaType } from "../models/enum/mediaTypes";
 import { SelectedMedia } from "../models/selectedMedia";
 import { StagedMedia } from "../models/stagedMedia";
 import { getProceduralBlock } from "./proceduralEngine";
-import { Show } from "../models/show";
+import { Episode, Show } from "../models/show";
 import { ManageProgression, ReduceProgression } from "./utilities";
 import { TranslationTag } from "../models/translationTag";
 import { createBuffer } from "./bufferEngine";
+import { Commercial } from "../models/commercial";
+import { Music } from "../models/music";
+import { Promo } from "../models/promo";
+import { Short } from "../models/short";
 
-export function constructStream(config: Config, options: any): string[] {
-    let stream: string[] = []
+export function constructStream(config: Config, options: any, media: Media = loadMedia(), transaltionTags: TranslationTag[] = loadTranslationTags(), progression: MediaProgression[] = loadProgression(), rightNow: number = moment().unix()): string[] {
+    let streamPaths: string[] = []
+    let streamObjects: (Promo | Music | Commercial | Short | Episode | Movie)[] = [];
 
-    let progression: MediaProgression[] = loadProgression();
-    const media: Media = loadMedia();
-    const transaltionTags: TranslationTag[] = loadTranslationTags();
-
-    setEnvironment(options);
+    setEnvironment(options); 
 
     let scheduledMedia: SelectedMedia[] = getScheduledMedia(options, media, progression);
     let stagedMedia = new StagedMedia(
@@ -31,9 +32,9 @@ export function constructStream(config: Config, options: any): string[] {
     );
 
     setProceduralTags(options, stagedMedia);
-    const rightNow = moment().unix();
     let stagedStream: SelectedMedia[] = getStagedStream(rightNow, config, options, stagedMedia, media, progression);
     let prevBuffer: Media = new Media([], [], [], [], [], [], []);
+
     let initialBuffer = createBuffer(
         stagedStream[0].Time - rightNow,
         options,
@@ -43,7 +44,7 @@ export function constructStream(config: Config, options: any): string[] {
         transaltionTags,
         prevBuffer)
 
-    stream.push(...initialBuffer[0])
+    streamPaths.push(...initialBuffer[0].map(obj => obj.Path));
 
     let remainder = initialBuffer[1];
     stagedStream.forEach((item, index) => {
@@ -51,7 +52,7 @@ export function constructStream(config: Config, options: any): string[] {
         let lastItem = index === stagedStream.length - 1 ? true : false;
         if (item.Type == MediaType.Episode || item.Type == MediaType.Movie) {
             let mediaItem = item.Media;
-            stream.push(mediaItem.Path);
+            streamPaths.push(mediaItem.Path);
             let bufferDuration = mediaItem.DurationLimit - mediaItem.Duration
             let buffer = createBuffer(
                 bufferDuration + remainder,
@@ -61,22 +62,24 @@ export function constructStream(config: Config, options: any): string[] {
                 lastItem ? [] : stagedStream[index + 1].Tags,
                 transaltionTags,
                 prevBuffer);
-            stream.push(...buffer[0]);
+            streamPaths.push(...buffer[0].map(obj => obj.Path));
             remainder = buffer[1];
-        } else if (item.Media instanceof Collection) {
-            let collection = item.Media;
-            let collectionBlock = createCollectionBlock(
-                collection,
-                progression,
-                options,
-                media,
-                transaltionTags,
-                prevBuffer);
-            stream.push(...collectionBlock[0]);
-            remainder = collectionBlock[1];
         }
+        //TODO
+        // else if (item.Media instanceof Collection) {
+        //     let collection = item.Media;
+        //     let collectionBlock = createCollectionBlock(
+        //         collection,
+        //         progression,
+        //         options,
+        //         media,
+        //         transaltionTags,
+        //         prevBuffer);
+        //     streamPaths.push(...collectionBlock[0]);
+        //     remainder = collectionBlock[1];
+        // }
     })
-    return stream;
+    return streamPaths;
 }
 
 function createCollectionBlock(
@@ -86,9 +89,11 @@ function createCollectionBlock(
     media: Media,
     transaltionTags: TranslationTag[],
     prevBuffer: Media): [string[], number] {
-    /*This logic is to determine if a show should be populated in the stream for a collection. If the show
-            runs longer than the alloted time block for that show, skip the show 
-            following it. Time remaining will be filled with buffer media */
+    /* 
+    -- This logic is to determine if a show should be populated in the stream for a collection. If the show
+    runs longer than the alloted time block for that show, skip the show following it. 
+    Time remaining will be filled with buffer media 
+    */
 
     /*
     -- Author note:: A good example of this is with the summer 2000 broadcast of Toonami with Tenchi Muyo. 
@@ -117,12 +122,12 @@ function createCollectionBlock(
                         if (nextShowEpisode) {
                             let overDurationLength = (nextShowEpisode.DurationLimit + episode.DurationLimit) - episode.Duration + remainder;
                             let overBuffer = createBuffer(overDurationLength, options, media, [collection.LoadTitle], [collection.LoadTitle], transaltionTags, prevBuffer)
-                            stream.push(...overBuffer[0]);
+                            stream.push(...overBuffer[0].map(obj => obj.Path));
                             remainder = overBuffer[1];
                         }
                     } else {
                         let underBuffer = createBuffer(episode.DurationLimit - episode.Duration, options, media, [collection.LoadTitle], [collection.LoadTitle], transaltionTags, prevBuffer)
-                        stream.push(...underBuffer[0]);
+                        stream.push(...underBuffer[0].map(obj => obj.Path));
                         remainder = underBuffer[1];
                     }
                 }

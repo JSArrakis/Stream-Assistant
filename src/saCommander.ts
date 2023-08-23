@@ -27,7 +27,7 @@ const validateTag = (tag: string) => {
     }
 };
 
-interface CommandLineArgs {
+export class CommandLineArgs {
     env?: string;
     movies?: string[];
     tagsOR?: string[];
@@ -40,12 +40,12 @@ export function parseCommandLineArgs(): CommandLineArgs {
     const args = minimist(process.argv.slice(2), {
         string: ["env", "endTime"],
         alias: {
-            env: "e",
+            env: "env",
             movies: "m",
-            tagsOR: "t",
-            tagsAND: "T",
+            tagsOR: "tO",
+            tagsAND: "tA",
             blocks: "b",
-            endTime: "E",
+            endTime: "et",
         },
     });
 
