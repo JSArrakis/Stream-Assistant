@@ -16,17 +16,18 @@ export function getProceduralBlock(
     prevMovies: Movie[],
     progression: MediaProgression[],
     duration: number,
-    lastTimePoint: number
+    latestTimePoint: number
 ): SelectedMedia[] {
     let currDur: number = 0;
     let selectedMedia: SelectedMedia[] = [];
-    let currentTimePoint = lastTimePoint;
+    let currentTimePoint = latestTimePoint;
 
     while (currDur < duration) {
         let durRemainder = duration - currDur;
         let injDurMovies = stagedMedia.InjectedMovies.filter(inj => inj.Duration <= durRemainder);
         let procDurMovies = media.Movies.filter(mov => mov.Duration <= durRemainder && !isMovieSelected(mov, prevMovies));
         if (injDurMovies.length > 0) {
+            //TODO: Add logic to select injected movie based on tags
             selectInjectedMovie(injDurMovies, stagedMedia, currentTimePoint, selectedMedia, prevMovies, currDur);
         } else {
             if (durRemainder > 5400) {

@@ -18,11 +18,19 @@ import { Music } from "../models/music";
 import { Promo } from "../models/promo";
 import { Short } from "../models/short";
 
-export function constructStream(config: Config, options: any, media: Media = loadMedia(), transaltionTags: TranslationTag[] = loadTranslationTags(), progression: MediaProgression[] = loadProgression(), rightNow: number = moment().unix()): string[] {
+export function constructStream(
+    config: Config,
+    options: any,
+    media: Media = loadMedia(),
+    transaltionTags: TranslationTag[] = loadTranslationTags(),
+    progression: MediaProgression[] = loadProgression(),
+    rightNow: number = moment().unix()):
+    [string[], (Promo | Music | Commercial | Short | Episode | Movie)[]] {
+
     let streamPaths: string[] = []
     let streamObjects: (Promo | Music | Commercial | Short | Episode | Movie)[] = [];
 
-    setEnvironment(options); 
+    setEnvironment(options);
 
     let scheduledMedia: SelectedMedia[] = getScheduledMedia(options, media, progression);
     let stagedMedia = new StagedMedia(
@@ -45,6 +53,7 @@ export function constructStream(config: Config, options: any, media: Media = loa
         prevBuffer)
 
     streamPaths.push(...initialBuffer[0].map(obj => obj.Path));
+    streamObjects.push(...initialBuffer[0]);
 
     let remainder = initialBuffer[1];
     stagedStream.forEach((item, index) => {
@@ -53,6 +62,7 @@ export function constructStream(config: Config, options: any, media: Media = loa
         if (item.Type == MediaType.Episode || item.Type == MediaType.Movie) {
             let mediaItem = item.Media;
             streamPaths.push(mediaItem.Path);
+            streamObjects.push(mediaItem);
             let bufferDuration = mediaItem.DurationLimit - mediaItem.Duration
             let buffer = createBuffer(
                 bufferDuration + remainder,
@@ -63,6 +73,7 @@ export function constructStream(config: Config, options: any, media: Media = loa
                 transaltionTags,
                 prevBuffer);
             streamPaths.push(...buffer[0].map(obj => obj.Path));
+            streamObjects.push(...buffer[0]);
             remainder = buffer[1];
         }
         //TODO
@@ -79,7 +90,7 @@ export function constructStream(config: Config, options: any, media: Media = loa
         //     remainder = collectionBlock[1];
         // }
     })
-    return streamPaths;
+    return [streamPaths, streamObjects];
 }
 
 function createCollectionBlock(
@@ -169,8 +180,7 @@ export function getStagedStream(
     media: Media,
     progression: MediaProgression[]): SelectedMedia[] {
 
-
-    let firstProceduralDuration = getFirstProceduralDuration(rightNow, stagedMedia)
+    let firstProceduralDuration = getFirstProceduralDuration(rightNow, stagedMedia);
     if (firstProceduralDuration < 0) {
         throw "Time of first movie, collection, or selected end time needs to be in the future.";
     }
@@ -189,7 +199,7 @@ export function getStagedStream(
             prevMovies,
             progression,
             initialProceduralBlockDuration,
-            rightNow - preMediaDuration
+            rightNow + preMediaDuration
         );
         selectedMedia.push(...firstProceduralBlock);
     }
@@ -197,6 +207,7 @@ export function getStagedStream(
     stagedMedia.ScheduledMedia.forEach((item, index) => {
         selectedMedia.push(item);
         if (index < stagedMedia.ScheduledMedia.length - 1) {
+            let procDuration = stagedMedia.ScheduledMedia[index + 1].Time - stagedMedia.ScheduledMedia[index].Time - stagedMedia.ScheduledMedia[index].Duration;
             let intermediateProcBlock = getProceduralBlock(
                 config,
                 options,
@@ -204,12 +215,18 @@ export function getStagedStream(
                 media,
                 prevMovies,
                 progression,
-                initialProceduralBlockDuration,
-                stagedMedia.ScheduledMedia[index + 1].Time - stagedMedia.ScheduledMedia[index].Time
+                procDuration,
+                stagedMedia.ScheduledMedia[index].Time + stagedMedia.ScheduledMedia[index].Duration
             );
             selectedMedia.push(...intermediateProcBlock);
         }
     })
+
+    let lastProceduralDuration =
+        stagedMedia.EndTime - (
+            stagedMedia.ScheduledMedia.length > 0
+                ? stagedMedia.ScheduledMedia[stagedMedia.ScheduledMedia.length - 1].Time + stagedMedia.ScheduledMedia[stagedMedia.ScheduledMedia.length - 1].Duration
+                : rightNow + preMediaDuration);
 
     return selectedMedia;
 }

@@ -110,44 +110,6 @@ let testMovie4 = new Movie(
 
 let movieList = [testMovie1, testMovie2, testMovie3, testMovie4];
 
-let stagedMediaNoProc: StagedMedia = new StagedMedia(
-  [
-    new SelectedMedia(
-      testMovie1,
-      "",
-      MediaType.Movie,
-      1685052000,
-      7200,
-      ["tag1", "tag2", "tag3"]
-    ),
-    new SelectedMedia(
-      testMovie3,
-      "",
-      MediaType.Movie,
-      1685059200,
-      7200,
-      ["tag2", "tag3"]
-    ),
-    new SelectedMedia(
-      collection1,
-      "",
-      MediaType.Collection,
-      1685066400,
-      7200,
-      ["tag4"]
-    ),
-    new SelectedMedia(
-      testMovie2,
-      "",
-      MediaType.Movie,
-      1685073600,
-      7200,
-      ["tag1", "tag2"]
-    )
-  ],
-  [],
-  1685080800)
-
 let stagedMedia: StagedMedia = new StagedMedia(
   [
     new SelectedMedia(
@@ -371,18 +333,10 @@ describe('selectShowUnderDuration function', () => {
   });
 });
 
-describe('getStagedStream function', () => {
-  let media = new Media([], [], [], [], [], [], []);
-  it('should throw an error if start time appears after any scheduled media', () => {
-
-    expect(() => streamConstructor.getStagedStream(1685052001, new Config(), {}, stagedMediaNoProc, media, [])).to.throw("Time of first movie, collection, or selected end time needs to be in the future.");
-  });
-});
-
 describe('getProceduralBlock', () => {
 
   it('should randomly select a combination of movies and shows that fill the time available', () => {
-    const config: Config = new Config();
+    const config: Config = new Config("", "", "", "", "", 0, 0);
     const options: any = { tagsOR: ["tag1", "tag2", "tag3"] };
     const media: Media = new Media(showList, movieList, [], [], [], [], []);;
     const prevMovies: Movie[] = [];
@@ -404,7 +358,7 @@ describe('getProceduralBlock', () => {
   });
 
   it('should get only shows when no more movies fit the criteria', () => {
-    const config: Config = new Config();
+    const config: Config = new Config("", "", "", "", "", 0, 0);
     const options: any = { tagsOR: ["tag1", "tag2", "tag3"] };
     const media: Media = new Media(showList, movieList, [], [], [], [], []);;
     const prevMovies: Movie[] = movieList;
@@ -426,7 +380,7 @@ describe('getProceduralBlock', () => {
   });
 
   it('should get 1 over duration episode if within duration', () => {
-    const config: Config = new Config();
+    const config: Config = new Config("","","","","",0,0);
     const options: any = { tagsOR: ["tag7"] };
     const media: Media = new Media(showList, movieList, [], [], [], [], []);;
     const prevMovies: Movie[] = movieList;

@@ -1,0 +1,369 @@
+import { expect } from 'chai';
+import { Media } from '../models/media';
+import * as streamConstructor from "../src/streamConstructor";
+import { Config } from '../models/config';
+import { StagedMedia } from '../models/stagedMedia';
+import { MediaType } from '../models/enum/mediaTypes';
+import { SelectedMedia } from '../models/selectedMedia';
+import { Bumper } from '../models/bumper';
+import { CollectionShow, Collection } from '../models/collection';
+import { Movie } from '../models/movie';
+import { Episode, Show } from '../models/show';
+import exp from 'constants';
+
+let episode1 = new Episode(1, 1, 1, "", "episode1", "episode1", 1648, 1800, [])
+let episode2 = new Episode(1, 2, 2, "", "episode2", "episode2", 1709, 1800, [])
+let episode3 = new Episode(1, 3, 3, "", "episode3", "episode3", 1603, 1800, [])
+let episode4 = new Episode(1, 4, 4, "", "episode4", "episode4", 1600, 1800, [])
+let episode5a = new Episode(1, 5, 5, "", "episode5", "episode5", 1699, 1800, [])
+let episode5b = new Episode(1, 5, 5, "", "episode5", "episode5", 2703, 3600, [])
+
+let show1 = new Show("Show1", "show1", "alias", "imdb", 1800, false, ["tag1", "tag5", "tag4"], 5, [episode1, episode2, episode3, episode4, episode5a])
+let show2 = new Show("Show2", "show2", "alias", "imdb", 1800, false, ["tag2", "tag5"], 5, [episode1, episode2, episode3, episode4, episode5a])
+let show3 = new Show("Show3", "show3", "alias", "imdb", 1800, false, ["tag5"], 5, [episode1, episode2, episode3, episode4, episode5a])
+let show4 = new Show("Show4", "show4", "alias", "imdb", 1800, false, ["tag4", "tag6"], 5, [episode1, episode2, episode3, episode4, episode5a])
+let show5 = new Show("Show5", "show5", "alias", "imdb", 1800, true, ["tag6", "tag7"], 5, [episode1, episode2, episode3, episode4, episode5b])
+let showList = [show1, show2, show3, show4, show5]
+
+let collShow1 = new CollectionShow(
+    "show1", 1, 1, 1800, undefined, undefined, undefined
+)
+let collShow2 = new CollectionShow(
+    "show2", 2, 1, 1800, undefined, undefined, undefined
+)
+let collShow3 = new CollectionShow(
+    "show3", 3, 1, 1800, undefined, undefined, undefined
+)
+let collShow4 = new CollectionShow(
+    "show4", 4, 1, 1800, undefined, undefined, undefined
+)
+
+let collection1 = new Collection(
+    "collection1",
+    "collection1",
+    "",
+    7200,
+    7200,
+    ["tag4"],
+    new Bumper(1, "", []),
+    new Bumper(1, "", []),
+    [],
+    [collShow1, collShow2, collShow3, collShow4],
+    ""
+)
+
+let testMovie1 = new Movie(
+    "Test1",
+    "test1",
+    "test1",
+    "",
+    ["tag1", "tag2", "tag3"],
+    "pathToTest1",
+    6451,
+    7200,
+    "",
+    0
+);
+
+let testMovie2 = new Movie(
+    "Test2",
+    "test2",
+    "test2",
+    "",
+    ["tag1", "tag2"],
+    "pathToTest2",
+    6351,
+    7200,
+    "",
+    0
+);
+
+let testMovie3 = new Movie(
+    "Test3",
+    "test3",
+    "test3",
+    "",
+    ["tag2", "tag3"],
+    "pathToTest3",
+    7000,
+    7200,
+    "",
+    0
+);
+
+let testMovie4 = new Movie(
+    "Test4",
+    "test4",
+    "test4",
+    "",
+    ["tag5"],
+    "pathToTest4",
+    7000,
+    7200,
+    "",
+    0
+);
+
+let testMovie5 = new Movie(
+    "Test5",
+    "test5",
+    "test5",
+    "",
+    ["tag3"],
+    "pathToTest5",
+    7000,
+    7200,
+    "",
+    0
+);
+
+let testMovie6 = new Movie(
+    "Test6",
+    "test6",
+    "test6",
+    "",
+    ["tag4"],
+    "pathToTest6",
+    7000,
+    7200,
+    "",
+    0
+);
+
+let testMovie7 = new Movie(
+    "Test7",
+    "test7",
+    "test7",
+    "",
+    ["tag4"],
+    "pathToTest7",
+    7000,
+    7200,
+    "",
+    0
+);
+
+let testMovie8 = new Movie(
+    "Test8",
+    "test8",
+    "test8",
+    "",
+    ["tag3"],
+    "pathToTest8",
+    7000,
+    7200,
+    "",
+    0
+);
+
+let testMovie9 = new Movie(
+    "Test9",
+    "test9",
+    "test9",
+    "",
+    ["tag3"],
+    "pathToTest9",
+    7000,
+    7200,
+    "",
+    0
+);
+
+let testMovie10 = new Movie(
+    "Test10",
+    "test10",
+    "test10",
+    "",
+    ["tag3"],
+    "pathToTest10",
+    7000,
+    7200,
+    "",
+    0
+);
+
+let injectedMedia1 = new SelectedMedia(
+    testMovie6,
+    "",
+    MediaType.Movie,
+    0,
+    7200,
+    ["tag4"]
+);
+
+let injectedMedia2 = new SelectedMedia(
+    testMovie7,
+    "",
+    MediaType.Movie,
+    0,
+    7200,
+    ["tag4"]
+);
+
+let scheduledMedia1 = new SelectedMedia(
+    testMovie1,
+    "",
+    MediaType.Movie,
+    100000,
+    7200,
+    ["tag1", "tag2", "tag3"]
+);
+let scheduledMedia2 = new SelectedMedia(
+    testMovie3,
+    "",
+    MediaType.Movie,
+    107200,
+    7200,
+    ["tag2", "tag3"]
+);
+let scheduledMedia3 = new SelectedMedia(
+    testMovie5,
+    "",
+    MediaType.Movie,
+    114400,
+    7200,
+    ["tag4"]
+);
+let scheduledMedia4 = new SelectedMedia(
+    testMovie2,
+    "",
+    MediaType.Movie,
+    121600,
+    7200,
+    ["tag1", "tag2"]
+);
+
+let stagedMediaNoProc: StagedMedia = new StagedMedia(
+    [
+        new SelectedMedia(
+            testMovie1,
+            "",
+            MediaType.Movie,
+            100000,
+            7200,
+            ["tag1", "tag2", "tag3"]
+        ),
+        new SelectedMedia(
+            testMovie3,
+            "",
+            MediaType.Movie,
+            107200,
+            7200,
+            ["tag2", "tag3"]
+        ),
+        new SelectedMedia(
+            collection1,
+            "",
+            MediaType.Collection,
+            114400,
+            7200,
+            ["tag4"]
+        ),
+        new SelectedMedia(
+            testMovie2,
+            "",
+            MediaType.Movie,
+            121600,
+            7200,
+            ["tag1", "tag2"]
+        )
+    ],
+    [],
+    128800)
+    
+describe('getFirstProceduralDuration function', () => {
+    it('should have no initial procedural block duration if start time matches first scheduled media', () => { 
+        let result = streamConstructor.getFirstProceduralDuration(100000, stagedMediaNoProc)
+        expect(result).to.equal(0);
+    });
+
+    it('should return a duration based on the gap between "now" and the first scheduled media', () => {
+        let result = streamConstructor.getFirstProceduralDuration(0, stagedMediaNoProc)
+        expect(result).to.equal(100000);
+    });
+
+    it('should make a procedural duration based on the end time if there is no scheduled media', () => {
+        let result = streamConstructor.getFirstProceduralDuration(0, new StagedMedia([], [], 100000))
+        expect(result).to.equal(100000);
+    });
+});
+
+describe('setProceduralBlockDurations function', () => { 
+    it('should return proper initial procedural durations (no pre-buffer)', () => {
+        let result = streamConstructor.setProceduralBlockDurations(1800, 7200);
+        expect(result.preMediaDuration).to.eq(0);
+        expect(result.initialProceduralBlockDuration).to.eq(7200);
+    });
+
+    it('should return proper initial procedural durations (pre-buffer)', () => {
+        let result = streamConstructor.setProceduralBlockDurations(1800, 8000);
+        expect(result.preMediaDuration).to.eq(800);
+        expect(result.initialProceduralBlockDuration).to.eq(7200);
+    });
+
+    it('should return proper initial procedural durations (only pre-buffer)', () => {
+        let result = streamConstructor.setProceduralBlockDurations(1800, 800);
+        expect(result.preMediaDuration).to.eq(800);
+        expect(result.initialProceduralBlockDuration).to.eq(0);
+    });
+});
+
+describe('getStagedStream function', () => {
+    let media = new Media([show2], [], [], [], [], [], []);
+    const config: Config = new Config("", "", "", "", "", 0, 1800);
+    const options: any = { tagsOR: ["tag1", "tag2", "tag3"] };
+    
+    it('should throw an error if start time appears after any scheduled media', () => {
+        expect(() => streamConstructor.getStagedStream(100001, config, options, stagedMediaNoProc, media, [])).to.throw("Time of first movie, collection, or selected end time needs to be in the future.");
+    });
+
+    it('should not fill procedural media if there are no gaps', () => {
+        let result = streamConstructor.getStagedStream(100000, config, options, stagedMediaNoProc, media, []);
+        expect(result[0].Time).to.equal(100000);
+        expect(result.length).to.equal(4);
+    });
+
+    it('should fill the first procedural media block starting at the first procedural time point', () => {
+        let tempStagedMedia = new StagedMedia([scheduledMedia1, scheduledMedia2, scheduledMedia3, scheduledMedia4], [], 100000);
+        let result = streamConstructor.getStagedStream(98000, config, options, tempStagedMedia, media, []);
+        expect(result[0].Time).to.equal(98200);
+        expect(result.length).to.equal(5);
+        expect(result[0].Type).to.equal(MediaType.Episode);
+        expect(result[1].Type).to.equal(MediaType.Movie);
+        expect(result[2].Type).to.equal(MediaType.Movie);
+        expect(result[3].Type).to.equal(MediaType.Movie);
+        expect(result[4].Type).to.equal(MediaType.Movie);
+    });
+
+    // it('should fill procedural media after last scheduled media', () => {
+    //     let result = streamConstructor.getStagedStream(85600, config, options, stagedMediaNoProc, media, []);
+    // });
+
+    // it('should fill procedural media in between scheduled media', () => {
+    //     let result = streamConstructor.getStagedStream(85600, config, options, stagedMediaNoProc, media, []);
+    // });
+
+    // it('should fill procedural media until end time if no scheduled media', () => {
+    //     let result = streamConstructor.getStagedStream(85600, config, options, stagedMediaNoProc, media, []);
+    // });
+
+    // it('should fill procedural media in gaps of stream duration', () => {
+    //     let result = streamConstructor.getStagedStream(85600, config, options, stagedMediaNoProc, media, []);
+    // });
+
+    // it('should select injected movies before other media', () => { 
+    //     let result = streamConstructor.getStagedStream(85600, config, options, stagedMediaNoProc, media, []);
+    // });
+
+    // it('should fill procedural media in gaps of stream duration without selecting previously used movies', () => {
+    //     let result = streamConstructor.getStagedStream(85600, config, options, stagedMediaNoProc, media, []);
+    // });
+
+    // it('should fill procedural media in gaps of stream duration with shows if no movies are available', () => {
+    //     let result = streamConstructor.getStagedStream(85600, config, options, stagedMediaNoProc, media, []);
+    // });
+
+});
+
+// describe('constructStream function', () => {
+// });
