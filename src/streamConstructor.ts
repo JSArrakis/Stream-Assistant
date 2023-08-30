@@ -208,25 +208,40 @@ export function getStagedStream(
         selectedMedia.push(item);
         if (index < stagedMedia.ScheduledMedia.length - 1) {
             let procDuration = stagedMedia.ScheduledMedia[index + 1].Time - stagedMedia.ScheduledMedia[index].Time - stagedMedia.ScheduledMedia[index].Duration;
-            let intermediateProcBlock = getProceduralBlock(
+            if (procDuration > 0) {
+                let intermediateProcBlock = getProceduralBlock(
+                    config,
+                    options,
+                    stagedMedia,
+                    media,
+                    prevMovies,
+                    progression,
+                    procDuration,
+                    stagedMedia.ScheduledMedia[index].Time + stagedMedia.ScheduledMedia[index].Duration
+                );
+                selectedMedia.push(...intermediateProcBlock);
+            }
+        }
+    })
+
+    if (stagedMedia.ScheduledMedia.length > 0) {
+        let lastScheduledMedia = stagedMedia.ScheduledMedia[stagedMedia.ScheduledMedia.length - 1];
+        let scheduledEndTime = stagedMedia.EndTime;
+        let endProcDuration = scheduledEndTime - lastScheduledMedia.Time - lastScheduledMedia.Duration;
+        if (endProcDuration > 0) {
+            let endProcBlock = getProceduralBlock(
                 config,
                 options,
                 stagedMedia,
                 media,
                 prevMovies,
                 progression,
-                procDuration,
-                stagedMedia.ScheduledMedia[index].Time + stagedMedia.ScheduledMedia[index].Duration
+                endProcDuration,
+                stagedMedia.ScheduledMedia[stagedMedia.ScheduledMedia.length - 1].Time + stagedMedia.ScheduledMedia[stagedMedia.ScheduledMedia.length - 1].Duration
             );
-            selectedMedia.push(...intermediateProcBlock);
+            selectedMedia.push(...endProcBlock);
         }
-    })
-
-    let lastProceduralDuration =
-        stagedMedia.EndTime - (
-            stagedMedia.ScheduledMedia.length > 0
-                ? stagedMedia.ScheduledMedia[stagedMedia.ScheduledMedia.length - 1].Time + stagedMedia.ScheduledMedia[stagedMedia.ScheduledMedia.length - 1].Duration
-                : rightNow + preMediaDuration);
+    }
 
     return selectedMedia;
 }

@@ -28,7 +28,24 @@ export function getProceduralBlock(
         let procDurMovies = media.Movies.filter(mov => mov.Duration <= durRemainder && !isMovieSelected(mov, prevMovies));
         if (injDurMovies.length > 0) {
             //TODO: Add logic to select injected movie based on tags
-            selectInjectedMovie(injDurMovies, stagedMedia, currentTimePoint, selectedMedia, prevMovies, currDur);
+            //separate movies that share tags with all scheduled movies that have gaps big enough to fit the duration
+            //of the injected movies in the selection (so gaps that are 2 hours or more)
+            //first match up all injected movies available with the adjacent tags into the appropriate gaps, then
+            //the movies filling the gaps will be selected at random from the groupings by tag
+            //now this will get complicated, but to make this intelligent, we will want to put anthologies in order through
+            //the entire stream duration. So if we have multiple gaps that have tags where a movie that is part of an anthology
+            //can be selected, we will want to select the movie that is next in the anthology. When an anthology movie is selected,
+            //we will want to check against an anthology object array to see if this anthology has already been selected, and if so,
+            //we will want to select the next movie in the anthology. If the anthology has not been selected, 
+            let injMovie = injDurMovies[Math.floor(Math.random() * injDurMovies.length)];
+            let indexInInjectedMovies: number = stagedMedia.InjectedMovies.indexOf(injMovie);
+
+            injMovie.Time = currentTimePoint;
+            stagedMedia.InjectedMovies.splice(indexInInjectedMovies, 1);
+            selectedMedia.push(injMovie);
+            prevMovies.push(injMovie.Media as Movie);
+            currentTimePoint = currentTimePoint + injMovie.Duration
+            currDur = currDur + injMovie.Duration;
         } else {
             if (durRemainder > 5400) {
                 //Movie or Show
@@ -61,26 +78,6 @@ export function getProceduralBlock(
     }
 
     return selectedMedia;
-}
-
-export function selectInjectedMovie(
-    injectedMovies: SelectedMedia[],
-    stagedMedia: StagedMedia,
-    currentTimePoint: number,
-    selectedMedia: SelectedMedia[],
-    prevMovies: Movie[],
-    currentDuration: number
-) {
-    let injMovie = injectedMovies[Math.floor(Math.random() * injectedMovies.length)];
-    let indexInInjectedMovies: number = stagedMedia.InjectedMovies.indexOf(injMovie);
-
-    injMovie.Time = currentTimePoint;
-    selectedMedia.push(injMovie);
-    prevMovies.push(injMovie.Media as Movie);
-    stagedMedia.InjectedMovies.splice(indexInInjectedMovies, 1);
-
-    currentDuration = currentDuration + injMovie.Duration;
-    currentTimePoint = currentTimePoint + injMovie.Duration;
 }
 
 export function selectMovieUnderDuration(options: any, movies: Movie[], prevMovies: Movie[], duration: number): Movie {

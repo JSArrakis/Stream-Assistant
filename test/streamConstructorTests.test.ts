@@ -9,7 +9,6 @@ import { Bumper } from '../models/bumper';
 import { CollectionShow, Collection } from '../models/collection';
 import { Movie } from '../models/movie';
 import { Episode, Show } from '../models/show';
-import exp from 'constants';
 
 let episode1 = new Episode(1, 1, 1, "", "episode1", "episode1", 1648, 1800, [])
 let episode2 = new Episode(1, 2, 2, "", "episode2", "episode2", 1709, 1800, [])
@@ -188,7 +187,7 @@ let injectedMedia1 = new SelectedMedia(
     MediaType.Movie,
     0,
     7200,
-    ["tag4"]
+    ["tag4", "injected"]
 );
 
 let injectedMedia2 = new SelectedMedia(
@@ -197,7 +196,16 @@ let injectedMedia2 = new SelectedMedia(
     MediaType.Movie,
     0,
     7200,
-    ["tag4"]
+    ["tag4", "injected"]
+);
+
+let injectedMedia3 = new SelectedMedia(
+    testMovie10,
+    "",
+    MediaType.Movie,
+    0,
+    7200,
+    ["tag4", "injected"]
 );
 
 let scheduledMedia1 = new SelectedMedia(
@@ -229,6 +237,15 @@ let scheduledMedia4 = new SelectedMedia(
     "",
     MediaType.Movie,
     121600,
+    7200,
+    ["tag1", "tag2"]
+);
+
+let scheduledMedia5 = new SelectedMedia(
+    testMovie6,
+    "",
+    MediaType.Movie,
+    128800,
     7200,
     ["tag1", "tag2"]
 );
@@ -270,9 +287,9 @@ let stagedMediaNoProc: StagedMedia = new StagedMedia(
     ],
     [],
     128800)
-    
+
 describe('getFirstProceduralDuration function', () => {
-    it('should have no initial procedural block duration if start time matches first scheduled media', () => { 
+    it('should have no initial procedural block duration if start time matches first scheduled media', () => {
         let result = streamConstructor.getFirstProceduralDuration(100000, stagedMediaNoProc)
         expect(result).to.equal(0);
     });
@@ -288,7 +305,7 @@ describe('getFirstProceduralDuration function', () => {
     });
 });
 
-describe('setProceduralBlockDurations function', () => { 
+describe('setProceduralBlockDurations function', () => {
     it('should return proper initial procedural durations (no pre-buffer)', () => {
         let result = streamConstructor.setProceduralBlockDurations(1800, 7200);
         expect(result.preMediaDuration).to.eq(0);
@@ -309,10 +326,10 @@ describe('setProceduralBlockDurations function', () => {
 });
 
 describe('getStagedStream function', () => {
-    let media = new Media([show2], [], [], [], [], [], []);
+    let media = new Media([show2], [testMovie8, testMovie9, testMovie10], [], [], [], [], []);
     const config: Config = new Config("", "", "", "", "", 0, 1800);
     const options: any = { tagsOR: ["tag1", "tag2", "tag3"] };
-    
+
     it('should throw an error if start time appears after any scheduled media', () => {
         expect(() => streamConstructor.getStagedStream(100001, config, options, stagedMediaNoProc, media, [])).to.throw("Time of first movie, collection, or selected end time needs to be in the future.");
     });
@@ -324,7 +341,7 @@ describe('getStagedStream function', () => {
     });
 
     it('should fill the first procedural media block starting at the first procedural time point', () => {
-        let tempStagedMedia = new StagedMedia([scheduledMedia1, scheduledMedia2, scheduledMedia3, scheduledMedia4], [], 100000);
+        let tempStagedMedia = new StagedMedia([scheduledMedia1, scheduledMedia2, scheduledMedia3, scheduledMedia4], [], 128800);
         let result = streamConstructor.getStagedStream(98000, config, options, tempStagedMedia, media, []);
         expect(result[0].Time).to.equal(98200);
         expect(result.length).to.equal(5);
@@ -335,35 +352,121 @@ describe('getStagedStream function', () => {
         expect(result[4].Type).to.equal(MediaType.Movie);
     });
 
-    // it('should fill procedural media after last scheduled media', () => {
-    //     let result = streamConstructor.getStagedStream(85600, config, options, stagedMediaNoProc, media, []);
-    // });
+    it('should fill procedural media after last scheduled media', () => {
+        let tempStagedMedia = new StagedMedia([scheduledMedia1, scheduledMedia2, scheduledMedia3, scheduledMedia4], [], 130600);
+        let result = streamConstructor.getStagedStream(100000, config, options, tempStagedMedia, media, []);
+        expect(result[0].Time).to.equal(100000);
+        expect(result.length).to.equal(5);
+        expect(result[0].Type).to.equal(MediaType.Movie);
+        expect(result[1].Type).to.equal(MediaType.Movie);
+        expect(result[2].Type).to.equal(MediaType.Movie);
+        expect(result[3].Type).to.equal(MediaType.Movie);
+        expect(result[4].Type).to.equal(MediaType.Episode);
+    });
 
-    // it('should fill procedural media in between scheduled media', () => {
-    //     let result = streamConstructor.getStagedStream(85600, config, options, stagedMediaNoProc, media, []);
-    // });
+    it('should fill procedural media in between scheduled media', () => {
+        for (let i = 0; i < 20; i++) {
+            let tempStagedMedia = new StagedMedia([scheduledMedia1, scheduledMedia3], [], 121600);
+            let result = streamConstructor.getStagedStream(100000, config, options, tempStagedMedia, media, []);
+            expect(result[0].Time).to.equal(100000);
+            let correctResultLength = result.length === 3 || result.length === 6;
+            expect(correctResultLength).to.be.true;
+            if (result.length === 3) {
+                expect(result[0].Type).to.equal(MediaType.Movie);
+                expect(result[1].Type).to.equal(MediaType.Movie);
+                expect(result[2].Type).to.equal(MediaType.Movie);
+            } else {
+                expect(result[0].Type).to.equal(MediaType.Movie);
+                expect(result[1].Type).to.equal(MediaType.Episode);
+                expect(result[2].Type).to.equal(MediaType.Episode);
+                expect(result[3].Type).to.equal(MediaType.Episode);
+                expect(result[4].Type).to.equal(MediaType.Episode);
+                expect(result[5].Type).to.equal(MediaType.Movie);
+            }
+        }
+    });
 
-    // it('should fill procedural media until end time if no scheduled media', () => {
-    //     let result = streamConstructor.getStagedStream(85600, config, options, stagedMediaNoProc, media, []);
-    // });
+    it('should fill procedural media until end time if no scheduled media', () => {
+        for (let i = 0; i < 100; i++) {
+            let tempStagedMedia = new StagedMedia([], [], 114400);
+            let result = streamConstructor.getStagedStream(100000, config, options, tempStagedMedia, media, []);
+            expect(result[0].Time).to.equal(100000);
+            let correctResultLength = result.length === 2 || result.length === 5 || result.length === 8;
+            if (result.length === 2) {
+                expect(result[0].Type).to.equal(MediaType.Movie);
+                expect(result[1].Type).to.equal(MediaType.Movie);
+            } else if (result.length === 5) {
+                if (result[0].Type === MediaType.Movie)
+                {
+                    expect(result[0].Type).to.equal(MediaType.Movie);
+                    expect(result[1].Type).to.equal(MediaType.Episode);
+                    expect(result[2].Type).to.equal(MediaType.Episode);
+                    expect(result[3].Type).to.equal(MediaType.Episode);
+                    expect(result[4].Type).to.equal(MediaType.Episode);
+                } else if (result[2].Type === MediaType.Episode) {
+                    expect(result[0].Type).to.equal(MediaType.Episode);
+                    expect(result[1].Type).to.equal(MediaType.Episode);
+                    expect(result[2].Type).to.equal(MediaType.Episode);
+                    expect(result[3].Type).to.equal(MediaType.Episode);
+                    expect(result[4].Type).to.equal(MediaType.Movie);
+                } else {
+                    expect(result[0].Type).to.equal(MediaType.Episode);
+                    expect(result[1].Type).to.equal(MediaType.Episode);
+                    expect(result[2].Type).to.equal(MediaType.Movie);
+                    expect(result[3].Type).to.equal(MediaType.Episode);
+                    expect(result[4].Type).to.equal(MediaType.Episode);
+                }
+            } else {
+                expect(result[0].Type).to.equal(MediaType.Episode);
+                expect(result[1].Type).to.equal(MediaType.Episode);
+                expect(result[2].Type).to.equal(MediaType.Episode);
+                expect(result[3].Type).to.equal(MediaType.Episode);
+                expect(result[4].Type).to.equal(MediaType.Episode);
+                expect(result[5].Type).to.equal(MediaType.Episode);
+                expect(result[6].Type).to.equal(MediaType.Episode);
+                expect(result[7].Type).to.equal(MediaType.Episode);
+            }
+        }
+    });
 
-    // it('should fill procedural media in gaps of stream duration', () => {
-    //     let result = streamConstructor.getStagedStream(85600, config, options, stagedMediaNoProc, media, []);
-    // });
+    it('should select injected movies before other movies', () => { 
+        for (let i = 0; i < 20; i++) {
+            let tempStagedMedia = new StagedMedia([scheduledMedia1, scheduledMedia4], [injectedMedia1, injectedMedia2], 128800);
+            let result = streamConstructor.getStagedStream(100000, config, options, tempStagedMedia, media, []);
+            expect(result[0].Time).to.equal(100000);
+            expect(result.length).to.equal(4);
+            expect(result[0].Type).to.equal(MediaType.Movie);
+            expect(result[1].Type).to.equal(MediaType.Movie);
+            expect(result[2].Type).to.equal(MediaType.Movie);
+            expect(result[3].Type).to.equal(MediaType.Movie);
+            expect(result[1].Tags).to.include("injected");
+            expect(result[2].Tags).to.include("injected");
+        }
+    });
 
-    // it('should select injected movies before other media', () => { 
-    //     let result = streamConstructor.getStagedStream(85600, config, options, stagedMediaNoProc, media, []);
-    // });
-
-    // it('should fill procedural media in gaps of stream duration without selecting previously used movies', () => {
-    //     let result = streamConstructor.getStagedStream(85600, config, options, stagedMediaNoProc, media, []);
-    // });
-
-    // it('should fill procedural media in gaps of stream duration with shows if no movies are available', () => {
-    //     let result = streamConstructor.getStagedStream(85600, config, options, stagedMediaNoProc, media, []);
-    // });
+    it('should fill procedural media in gaps of stream duration without selecting previously used movies', () => {
+        let tempMedia = new Media([show2], [testMovie10], [], [], [], [], []);
+        for (let i = 0; i < 20; i++) {
+            let tempStagedMedia = new StagedMedia([scheduledMedia1, scheduledMedia5], [injectedMedia3], 136300);
+            let result = streamConstructor.getStagedStream(100000, config, options, tempStagedMedia, media, []);
+            expect(result[0].Time).to.equal(100000);
+            expect(result.length).to.equal(11);
+            expect(result[0].Type).to.equal(MediaType.Movie);
+            expect(result[1].Type).to.equal(MediaType.Movie);
+            expect(result[2].Type).to.equal(MediaType.Episode);
+            expect(result[3].Type).to.equal(MediaType.Episode);
+            expect(result[4].Type).to.equal(MediaType.Episode);
+            expect(result[5].Type).to.equal(MediaType.Episode);
+            expect(result[6].Type).to.equal(MediaType.Episode);
+            expect(result[7].Type).to.equal(MediaType.Episode);
+            expect(result[8].Tags).to.equal(MediaType.Episode);
+            expect(result[9].Tags).to.equal(MediaType.Episode);
+            expect(result[10].Type).to.equal(MediaType.Movie);
+            expect(result[1].Tags).to.include("injected");
+        }
+    });
 
 });
 
-// describe('constructStream function', () => {
-// });
+describe('constructStream function', () => {
+});
