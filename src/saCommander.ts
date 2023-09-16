@@ -1,85 +1,117 @@
-import minimist from "minimist";
+import { CommandLineArgs } from '../models/commandLineArgs';
+const mediaTypes = ["shows", "movies", "shorts", "music", "promos", "commercials",];
 
-const validateBlock = (block: string) => {
-    if (!/^[a-zA-Z0-9_]*::[0-9]*$/gmi.test(block)) {
+export function processCommandLineArgs(): CommandLineArgs {
+    let args = new CommandLineArgs();
+    let options = process.argv.slice(2);
+    options.forEach((option) => {
+        if (option.includes("--env")) {
+            args.env = parseInt(option.split("=")[1]);
+        }
+        if (option.includes("--durEval")) {
+            let evalCandidates = option.split("=")[1].split(" ");
+            evalCandidates.forEach(item => {
+                if (!mediaTypes.includes(item)) {
+                    throw new Error(
+                        "Any media types submitted for duration evaluation must be one of the following: shows, movies, shorts, music, promos, commercials"
+                    );
+                }
+            });
+            args.durEval = evalCandidates;
+        }
+        if (option.includes("--movies")) {
+            let inputMovies = option.split("=")[1].split(",");
+            inputMovies.forEach(item => validateMovie(item));
+            let convertedMovies: string[] = []
+            inputMovies.forEach(item => {
+                let converted = convertValidMovieDateTime(item);
+                convertedMovies.push(converted);
+            });
+            args.movies = convertedMovies;
+        }
+        if (option.includes("--tagsOR")) {
+            args.tagsOR = option.split("=")[1].split(",");
+        }
+        if (option.includes("--endTime")) {
+            let inputEndTime = option.split("=")[1];
+            validateInputDateTime(inputEndTime);
+            args.endTime = convertToUnixTime(inputEndTime);
+        }
+        if (option.includes("--startTime")) {
+            let inputStartTime = option.split("=")[1];
+            validateStartDateTime(inputStartTime);
+            args.startTime = convertToUnixTime(inputStartTime);
+        }
+    });
+
+    return args;
+}
+
+export function validateInputDateTime(dateString: string): void {
+    let validDateTime = /^\d{4}-(0[1-9]|1[0-2])-\d{2}T([01]\d|2[0-3]):([03]0)$/gmi
+    if (!validDateTime.test(dateString)) {
         throw new Error(
-            "Any blocks submitted must conform to the format of Title::UnixTimeStamp e.g. Toonami2k::1670191200 where Title is the title of the block you wish to create and Time is the time in 24 time for your system's local time. See the param --BlockList for all possible blocks available with their descriptions."
+            "Any times submitted must conform to the format of e.g. 2022-01-01T00:00"
         );
     }
-};
+    let date = new Date(dateString);
 
-const validateMovie = (movie: string) => {
-    if (
-        !/^[a-zA-Z0-9_]*::[0-9]*$/gmi.test(movie) &&
-        !/^[a-zA-Z0-9_]*$/gmi.test(movie)
-    ) {
+    // Check if the parsed date is valid
+    if (isNaN(date.getTime())) {
+        throw new Error(
+            "${dateString} is not a valid date. Please use the format YYYY-MM-DDTHH:MM e.g. 2022-01-01T00:00"
+        );
+    }
+}
+
+export function validateStartDateTime(dateString: string): void {
+    let validDateTime = /^\d{4}-(0[1-9]|1[0-2])-\d{2}T([01]\d|2[0-3]):([0-5]\d)$/gmi
+
+    if (!validDateTime.test(dateString)) {
+        throw new Error(
+            "Any times submitted must conform to the format of e.g. 2022-01-01T00:00"
+        );
+    }
+    let date = new Date(dateString);
+
+    // Check if the parsed date is valid
+    if (isNaN(date.getTime())) {
+        throw new Error(
+            "${dateString} is not a valid date. Please use the format YYYY-MM-DDTHH:MM e.g. 2022-01-01T00:00"
+        );
+    }
+}
+
+export function validateMovie(movie: string): void {
+    let scheduledMovie = /^[a-zA-Z0-9_]*::\d{4}-(0[1-9]|1[0-2])-\d{2}T([01]\d|2[0-3]):([03]0)$/gmi
+    let injectedMovie = /^[a-zA-Z0-9_]*$/gmi;
+    if (!scheduledMovie.test(movie) && !injectedMovie.test(movie)) {
         throw new Error(
             "Any movies submitted must conform to the format of LoadTitle or LoadTitle::UnixTimeStamp e.g. themummy::1670191200"
         );
     }
 };
 
-const validateTag = (tag: string) => {
-    if (!/^(\([a-z0-9]+(?:,[a-z0-9]+)*\))$/gm.test(tag)) {
-        throw new Error(
-            "Each tag combo must be comma separated with no spaces e.g. scifi,80s,horror"
-        );
-    }
-};
+export function convertValidMovieDateTime(movie: string): string {
+    if (movie.includes("::")) {
+        let timesplit = movie.split("::");
 
-export class CommandLineArgs {
-    env?: string;
-    movies?: string[];
-    tagsOR?: string[];
-    tagsAND?: string[];
-    blocks?: string[];
-    endTime?: string;
+        // Convert the Date object to a Unix timestamp (milliseconds since Jan 1, 1970)
+        let timestamp = convertToUnixTime(timesplit[1]);
+        return `${timesplit[0]}::${timestamp}`;
+    } else {
+        return movie;
+    }
 }
 
-export function parseCommandLineArgs(): CommandLineArgs {
-    const args = minimist(process.argv.slice(2), {
-        string: ["env", "endTime"],
-        alias: {
-            env: "env",
-            movies: "m",
-            tagsOR: "tO",
-            tagsAND: "tA",
-            blocks: "b",
-            endTime: "et",
-        },
-    });
+function convertToUnixTime(dateString: string): number {
+    let [datePart, timePart] = dateString.split('T');
+    let [year, month, day] = datePart.split('-').map(Number);
+    let [hour, minute] = timePart.split(':').map(Number);
 
-    if (args.blocks) {
-        args.blocks.forEach(validateBlock);
-    }
+    // Create a Date object with the extracted values
+    let date = new Date(year, month - 1, day, hour, minute); // Month is 0-based
 
-    if (args.movies && args.movies.length > 0) {
-        args.movies.forEach(validateMovie);
-    }
-
-    if (args.tagsAND) {
-        args.tagsAND.forEach(validateTag);
-    }
-
-    if (!(args.blocks || args.endTime)) {
-        if (args.movies && args.movies.length > 0) {
-            let hasScheduledMovies = false;
-            args.movies.forEach((m: string) => {
-                if (m.includes("::")) {
-                    hasScheduledMovies = true;
-                }
-            });
-            if (hasScheduledMovies === false) {
-                throw new Error(
-                    "The stream must be set up with a stream duration, a block or movie with a set time, or an end time"
-                );
-            }
-        } else {
-            throw new Error(
-                "The stream must be set up with a stream duration, a block or movie with a set time, or an end time"
-            );
-        }
-    }
-
-    return args;
+    // Convert the Date object to a Unix timestamp (milliseconds since Jan 1, 1970)
+    return Math.floor(date.getTime() / 1000);
 }

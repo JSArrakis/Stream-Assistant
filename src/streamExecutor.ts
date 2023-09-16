@@ -1,4 +1,5 @@
 import { exec } from "child_process";
+const fs = require('fs');
 
 /**
  * @param {string} cmd Console command string to execute via child process in commandline  
@@ -17,16 +18,23 @@ const execPromise = (cmd: string): Promise<string> => {
  * @param {string} sourceDirectory Directory in which playlist m3u file exists to execute
  * @param {string} playlistFileName Name of the playlist file to execute
  */
-export function executeStream(vlcLocation: string, sourceDirectory: string, playlistFileName: string): void {
-    let consoleCommand = ["cd " + vlcLocation + " && vlc.exe " + sourceDirectory + playlistFileName + '.m3u'];
+export const executeStream = async (vlcLocation: string, sourceDirectory: string, playlistFileName: string): Promise<void> => {
+    const cmd: string = `"${vlcLocation}" "${sourceDirectory}${playlistFileName}.m3u"`;
+    console.log(cmd);
+    await execPromise(cmd);
+}
 
-    consoleCommand.reduce((p, cmd) => {
-        return p.then(() => {
-            return execPromise(cmd);
-        });
-    }, Promise.resolve()).then((results) => {
-        console.log(results);
-    }, (err) => {
-        if (err) throw err;
-    });
+
+
+export function createM3UFile(streamPaths: string[], folderLocation: string, fileName: string): void {
+    // Combine folder location and file name to get the full file path
+    const filePath = `${folderLocation}/${fileName}.m3u`;
+
+    // Create an M3U playlist content by joining the stream paths with newlines
+    const playlistContent = streamPaths.join('\n');
+
+    // Write the M3U playlist content to the file
+    fs.writeFileSync(filePath, playlistContent);
+
+    console.log(`M3U file "${fileName}.m3u" created in ${folderLocation}`);
 }

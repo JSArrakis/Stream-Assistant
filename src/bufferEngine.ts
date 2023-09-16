@@ -20,19 +20,39 @@ export class TranslatedTags {
 }
 
 export function createBuffer(
+    inputTags: string[],
     duration: number,
     options: any,
     media: Media,
     precedingTags: string[],
     subsequentTags: string[],
     translationTags: TranslationTag[],
-    prevBuff: Media): [(Promo | Music | Short | Commercial)[], number] {
+    prevBuff: Media): [(Promo | Music | Short | Commercial)[], number, Media] {
     let buffer: (Promo | Music | Short | Commercial)[] = [];
 
     let convertedPreTags: TranslatedTags = tagTranslator(precedingTags, translationTags);
     let convertedSubTags: TranslatedTags = tagTranslator(subsequentTags, translationTags);
 
-    let envPromos: Promo[] = media.Promos.filter(promo => promo.Tags.includes(options.env));
+    //if converted pre tags has Main tags, and options.tagsOR contains "halloween" then set that tag as the only tag in main tags
+    if (convertedPreTags.MainTags.length > 0) {
+        if (options.tagsOR.includes("halloween")) {
+            convertedPreTags.MainTags = ["halloween"];
+        }
+        if (options.tagsOR.includes("christmas")) {
+            convertedPreTags.MainTags = ["christmas"];
+        }
+    }
+
+    if (convertedSubTags.MainTags.length > 0) {
+        if (options.tagsOR.includes("halloween")) {
+            convertedSubTags.MainTags = ["halloween"];
+        }
+        if (options.tagsOR.includes("christmas")) {
+            convertedSubTags.MainTags = ["christmas"];
+        }
+    }
+
+    let envPromos: Promo[] = media.Promos.filter(promo => promo.Tags.includes(`${options.env}`));
     let selectedPromos: Promo[] = envPromos.filter(sp => sp.Duration <= duration);
     let promo: Promo;
     if (selectedPromos.length < 1) {
@@ -43,45 +63,44 @@ export function createBuffer(
 
     let remDur: number = duration - promo.Duration;
     let halfA: number = 0;
-    if (remDur >= 30) {
-        halfA = Math.ceil(remDur / 2)
-    }
-    let halfB: number = remDur - halfA;
-
-    if (subsequentTags.length > 0 && precedingTags.length > 0) {
-        //No media before this or very short buffer duration,
-        //no time for more than a promo and maybe 1 or 2 commercials
-        //So to theme this we will put the proomo in the front of the buffer
-        //and theme the buffer to the next set of tags
-        //This also works for the duration above 30 seconds when it is the first buffer
-        //before the staged media starts
-        if (halfA === 0) {
-            buffer.push(promo)
-            let selectedB = selectBuffer(remDur, media, convertedSubTags, prevBuff);
-            buffer.push(...selectedB[0]);
-            return [buffer, selectedB[1]]
-        } else {
-            let selectedA = selectBuffer(halfA, media, convertedPreTags, prevBuff);
-            buffer.push(...selectedA[0]);
-            buffer.push(promo);
-            let selectedB = selectBuffer(halfB + selectedA[1], media, convertedSubTags, prevBuff);
-            buffer.push(...selectedB[0]);
-            return [buffer, selectedB[1]]
-        }
-    } else if (precedingTags.length > 0) {
-        //TODO Devise a signoff set
-        let selectedB = selectBuffer(remDur - promo.Duration, media, convertedPreTags, prevBuff);
-        buffer.push(promo)
-        buffer.push(...selectedB[0]);
-        buffer.push(promo)
-        return [buffer, selectedB[1]]
+    let halfB: number = 0;
+    if (convertedPreTags.MainTags.length === 0 && convertedPreTags.EraTags.length === 0) {
+        halfB = remDur;
+    } else if (convertedSubTags.MainTags.length === 0 && convertedSubTags.EraTags.length === 0) {
+        halfA = remDur;
     } else {
-        //TODO Devise a stream start set
-        //TODO Devise a cycle start set
-        let selectedB = selectBuffer(remDur, media, convertedSubTags, prevBuff);
-        buffer.push(...selectedB[0]);
+        if (remDur >= 30) {
+            halfA = Math.ceil(remDur / 2)
+        }
+        halfB = remDur - halfA;
+    }
+
+    if (halfA === 0) {
+        let selectedB = selectMediaWithinDuration(media, convertedSubTags, remDur, prevBuff);
+        buffer.push(...selectedB.selectedMedia);
         buffer.push(promo)
-        return [buffer, selectedB[1]]
+        prevBuff = selectedB.chosenMedia;
+        return [buffer, selectedB.remainingDuration, prevBuff]
+    } else if (halfB === 0) {
+        let selectedA = selectMediaWithinDuration(media, convertedSubTags, remDur, prevBuff);
+        buffer.push(promo)
+        buffer.push(...selectedA.selectedMedia);
+        return [buffer, selectedA.remainingDuration, prevBuff]
+    } else {
+        let newPrevBuff: Media = new Media([], [], [], [], [], [], []);
+        let selectedA = selectMediaWithinDuration(media, convertedSubTags, remDur, prevBuff);
+        buffer.push(...selectedA.selectedMedia);
+        buffer.push(promo);
+        newPrevBuff = selectedA.chosenMedia;
+        prevBuff.Commercials.push(...selectedA.chosenMedia.Commercials);
+        prevBuff.Music.push(...selectedA.chosenMedia.Music);
+        prevBuff.Shorts.push(...selectedA.chosenMedia.Shorts);
+        let selectedB = selectMediaWithinDuration(media, convertedSubTags, remDur, prevBuff);
+        buffer.push(...selectedB.selectedMedia);
+        newPrevBuff.Commercials.push(...selectedB.chosenMedia.Commercials);
+        newPrevBuff.Music.push(...selectedB.chosenMedia.Music);
+        newPrevBuff.Shorts.push(...selectedB.chosenMedia.Shorts);
+        return [buffer, selectedB.remainingDuration, newPrevBuff]
     }
 }
 
@@ -112,100 +131,6 @@ export function tagTranslator(tags: string[], translationTags: TranslationTag[])
     return translatedTags;
 }
 
-export function selectBuffer(duration: number, media: Media, tags: TranslatedTags, prevBuff: Media): [(Music | Short | Commercial)[], number] {
-
-    let buffer: (Music | Short | Commercial)[] = [];
-    let remainder = duration;
-
-    let bufferBlacklist: Media = new Media([], [], [], [], [], [], []);
-    bufferBlacklist.Commercials = prevBuff.Commercials;
-    bufferBlacklist.Music = prevBuff.Music;
-    bufferBlacklist.Shorts = prevBuff.Shorts;
-
-    let bufferBlock = fillTargetedBuffer(remainder, media, tags, bufferBlacklist);
-    buffer.push(...bufferBlock[0]);
-    remainder = bufferBlock[1];
-
-    prevBuff.Commercials = bufferBlock[2].Commercials;
-    prevBuff.Music = bufferBlock[2].Music;
-    prevBuff.Shorts = bufferBlock[2].Shorts;
-
-    return [buffer, remainder];
-}
-
-function fillTargetedBuffer(duration: number, media: Media, tags: TranslatedTags, bufferBlacklist: Media): [(Music | Short | Commercial)[], number, Media] {
-    let buffer: (Music | Short | Commercial)[] = [];
-    let taggedMedia: Media = new Media([], [], [], [], [], [], []);
-    let selectedMedia: Media = new Media([], [], [], [], [], [], []);
-    taggedMedia.Shorts = getBufferShorts(duration, media, tags, bufferBlacklist);
-    taggedMedia.Music = getBufferMusic(duration, media, tags, bufferBlacklist);
-    taggedMedia.Commercials = getBufferCommercials(duration, media, tags, bufferBlacklist);
-    let remainder = duration;
-
-    let alternator: Boolean = true;
-
-    while (remainder > 0 && hasCommercialsUnderDuration(remainder, media, bufferBlacklist)) {
-
-        let musicAvailable: boolean = hasMusicUnderDuration(remainder, taggedMedia, bufferBlacklist);
-        let shortsAvailable: boolean = hasShortsUnderDuration(remainder, taggedMedia, bufferBlacklist);
-
-        if (musicAvailable || shortsAvailable) {
-            if (alternator) {
-                let commBuff: Commercial[] = [];
-                let commRemain: number = 120;
-                let commDur: number = 0;
-                if (remainder < commRemain) {
-                    commRemain = remainder;
-                }
-                while (commRemain > 0 && hasCommercialsUnderDuration(commRemain, media, bufferBlacklist)) {
-                    let selectedComm = selectCommercial(duration, taggedMedia, media, bufferBlacklist);
-                    commBuff.push(selectedComm[0]);
-                    commRemain = commRemain - selectedComm[1];
-                    commDur = commDur + selectedComm[1];
-                    bufferBlacklist.Commercials.push(selectedComm[0]);
-                }
-
-                buffer.push(...commBuff);
-                selectedMedia.Commercials.push(...commBuff);
-                remainder = remainder - commDur;
-                alternator = false;
-
-            } else {
-                let selectedMoS = selectMusicOrShort(duration, taggedMedia, bufferBlacklist);
-                buffer.push(selectedMoS[0]);
-                if (selectedMoS[0] instanceof Music) {
-                    selectedMedia.Music.push(selectedMoS[0]);
-                    bufferBlacklist.Music.push(selectedMoS[0]);
-                } else {
-                    selectedMedia.Shorts.push(selectedMoS[0]);
-                    bufferBlacklist.Shorts.push(selectedMoS[0]);
-                }
-                remainder = remainder - selectedMoS[1];
-                alternator = true;
-
-            }
-        } else {
-            let commBuff: Commercial[] = [];
-            let commRemain: number = 120;
-            let commDur: number = 0;
-            if (remainder < commRemain) {
-                commRemain = remainder;
-            }
-            while (commRemain > 0 && hasCommercialsUnderDuration(commRemain, media, bufferBlacklist)) {
-                let selectedComm = selectCommercial(commRemain, taggedMedia, media, bufferBlacklist);
-                commBuff.push(selectedComm[0]);
-                commRemain = commRemain - selectedComm[1];
-                commDur = commDur + selectedComm[1];
-                bufferBlacklist.Commercials.push(selectedComm[0]);
-            }
-
-            buffer.push(...commBuff);
-            selectedMedia.Commercials.push(...commBuff);
-            remainder = remainder - commDur;
-        }
-    }
-    return [buffer, remainder, selectedMedia];
-}
 
 export function selectMusicOrShort(duration: number, taggedMedia: Media, prevBuff: Media): [(Music | Short), number] {
     let combo: (Music | Short)[] = [];
@@ -220,156 +145,220 @@ export function selectMusicOrShort(duration: number, taggedMedia: Media, prevBuf
     return [sel, sel.Duration];
 }
 
-export function selectCommercial(duration: number, taggedMedia: Media, media: Media, prevBuff: Media): [Commercial, number] {
-    let taggedCandidates = getCommercials(duration, taggedMedia, prevBuff);
-    if (taggedCandidates.length > 0) {
-        let fullDur: Commercial[] = []
-        if (duration <= 45) {
-            fullDur = taggedCandidates.filter(can => can.Duration == duration);
+// Define a function to filter media by main tags
+function filterMediaByMainTags(media: Media, tags: TranslatedTags): [Commercial[], Music[], Short[]] {
+    const { MainTags } = tags;
+
+    const filteredCommercials: Commercial[] = [];
+    const filteredMusic: Music[] = [];
+    const filteredShorts: Short[] = [];
+
+    // Filter Commercials
+    media.Commercials.forEach((commercial) => {
+        if (commercial.Tags.some((tag) => MainTags.includes(tag))) {
+            filteredCommercials.push(commercial);
         }
-        if (fullDur.length > 0) {
-            let sel = fullDur[Math.floor(Math.random() * fullDur.length)];
-            return [sel, sel.Duration];
+    });
+
+    // Filter Music
+    media.Music.forEach((music) => {
+        if (music.Tags.some((tag) => MainTags.includes(tag))) {
+            filteredMusic.push(music);
+        }
+    });
+
+    // Filter Shorts
+    media.Shorts.forEach((short) => {
+        if (short.Tags.some((tag) => MainTags.includes(tag))) {
+            filteredShorts.push(short);
+        }
+    });
+
+    return [filteredCommercials, filteredMusic, filteredShorts];
+}
+
+// Define a function to select commercials
+function selectCommercials(
+    filteredCommercials: Commercial[],
+    remainingDuration: number,
+    usedCommercialTitles: Set<string>
+): [Commercial[], number] {
+    const selectedCommercials: Commercial[] = [];
+
+    let commercialBlock = 120;
+
+    while (remainingDuration > 0) {
+        let availableCommercials: Commercial[] = [];
+        // load available commercials from filtered commercials where duration is equal to remaining commercial block
+        availableCommercials = filteredCommercials.filter(
+            (commercial) =>
+                commercial.Duration <= remainingDuration &&
+                commercial.Duration === commercialBlock &&
+                !usedCommercialTitles.has(commercial.Title)
+        );
+        if (availableCommercials.length === 0) {
+            availableCommercials = filteredCommercials.filter(
+                (commercial) =>
+                    commercial.Duration <= remainingDuration &&
+                    commercial.Duration <= commercialBlock &&
+                    !usedCommercialTitles.has(commercial.Title)
+            );
+        }
+
+        if (availableCommercials.length === 0) {
+            availableCommercials = filteredCommercials.filter(
+                (commercial) =>
+                    commercial.Duration <= remainingDuration &&
+                    commercial.Duration <= commercialBlock
+            );
+        }
+
+
+        if (availableCommercials.length > 0) {
+            //select random commercial from available commercials
+            const selectedCommercial =
+                availableCommercials[
+                Math.floor(Math.random() * availableCommercials.length)
+                ];
+            selectedCommercials.push(selectedCommercial);
+            remainingDuration -= selectedCommercial.Duration;
+            usedCommercialTitles.add(selectedCommercial.Title);
+            commercialBlock -= selectedCommercial.Duration; // Reduce commercialBlock
+            console.log("Commercial Block: " + commercialBlock);
         } else {
-            let sel = taggedCandidates[Math.floor(Math.random() * taggedCandidates.length)];
-            return [sel, sel.Duration];
-        }
-    } else {
-        //TODO: Blacklist per genre
-        //TODO: Walking genre
-        let untaggedCandidates = getCommercials(duration, media, prevBuff);
-        let fullDur: Commercial[] = []
-        if (duration <= 45) {
-            fullDur = untaggedCandidates.filter(can => can.Duration == duration);
-        }
-        if (fullDur.length > 0) {
-            let sel = fullDur[Math.floor(Math.random() * fullDur.length)];
-            return [sel, sel.Duration];
-        } else {
-            let sel = untaggedCandidates[Math.floor(Math.random() * untaggedCandidates.length)];
-            return [sel, sel.Duration];
+            console.log("No commercials available with remaining commercial block duration of " + commercialBlock + " and remaining buffer duration of " + remainingDuration);
+            break;
         }
     }
+
+    return [selectedCommercials, remainingDuration];
 }
 
-export function getBufferMusic(duration: number, media: Media, tags: TranslatedTags, prevBuff: Media) {
-    let music: Music[] = [];
-    music.push(...getTagMusic(duration, media, tags.MainTags, prevBuff));
-    return music;
+// Define a function to select shorts or music
+function selectShortOrMusic(
+    filteredShorts: Short[],
+    filteredMusic: Music[],
+    remainingDuration: number,
+    usedShortTitles: Set<string>,
+    usedMusicTitles: Set<string>
+): (Short | Music) | null {
+    const availableShorts = filteredShorts.filter(
+        (short) =>
+            short.Duration <= remainingDuration &&
+            !usedShortTitles.has(short.Title)
+    );
+
+    const availableMusic = filteredMusic.filter(
+        (music) =>
+            music.Duration <= remainingDuration &&
+            !usedMusicTitles.has(music.Title)
+    );
+
+    if (availableShorts.length === 0 && availableMusic.length === 0) {
+        return null; // No suitable shorts or music available
+    }
+
+    const useShort = Math.random() < 0.5; // 50% chance of selecting a short
+
+    if (useShort && availableShorts.length > 0) {
+        const selectedShort = availableShorts[0];
+        remainingDuration -= selectedShort.Duration;
+        usedShortTitles.add(selectedShort.Title);
+        return selectedShort;
+    } else if (availableMusic.length > 0) {
+        const selectedMusic = availableMusic[0];
+        remainingDuration -= selectedMusic.Duration;
+        usedMusicTitles.add(selectedMusic.Title);
+        return selectedMusic;
+    }
+
+    return null; // No suitable shorts or music available
 }
 
-export function getBufferShorts(duration: number, media: Media, tags: TranslatedTags, prevBuff: Media) {
-    let shorts: Short[] = [];
-    shorts.push(...getTagShorts(duration, media, tags.MainTags, prevBuff));
-    return shorts;
-}
+// Define the main function
+export function selectMediaWithinDuration(
+    media: Media,
+    tags: TranslatedTags,
+    duration: number,
+    alreadyUsed: Media // Pass the already used media object
+): {
+    selectedMedia: (Commercial | Short | Music)[];
+    chosenMedia: Media;
+    remainingDuration: number; // Include remaining duration
+} {
 
-export function getBufferCommercials(duration: number, media: Media, tags: TranslatedTags, prevBuff: Media): Commercial[] {
-    let commercials: Commercial[] = [];
-    commercials.push(...getTagCommercials(duration, media, tags.MainTags, prevBuff));
-    commercials.push(...getTagCommercials(duration, media, tags.SecondaryTags, prevBuff));
-    return commercials;
-}
+    // Calculate remaining duration
+    let remainingDuration = duration;
 
-export function getTagMusic(duration: number, media: Media, tags: string[], prevBuff: Media): Music[] {
-    //get genre commercials under duration
-    return media.Music.filter(item => {
-        // Check if the item's Duration is less than or equal to currentDuration
-        if (item.Duration > duration) {
-            return false;
-        }
+    const [filteredCommercials, filteredMusic, filteredShorts] = filterMediaByMainTags(media, tags);
 
-        // Check if the item's Tags contain at least one of the strings in currentTags
-        const tagIntersection = item.Tags.filter(tag => tags.includes(tag));
-        if (tagIntersection.length === 0) {
-            return false;
-        }
+    const usedCommercialTitles = new Set<string>();
+    const usedMusicTitles = new Set<string>();
+    const usedShortTitles = new Set<string>();
 
-        // Check if the item exists in List2
-        const existsInList2 = prevBuff.Music.some(list2Item => list2Item.Path === item.Path);
-        if (existsInList2) {
-            return false;
-        }
-
-        // If all checks pass, include the item in the filtered result
-        return true;
+    alreadyUsed.Commercials.forEach((commercial) => {
+        usedCommercialTitles.add(commercial.Title);
     });
-}
-
-export function getTagShorts(duration: number, media: Media, tags: string[], prevBuff: Media): Short[] {
-    //get genre commercials under duration
-    return media.Shorts.filter(item => {
-        // Check if the item's Duration is less than or equal to currentDuration
-        if (item.Duration > duration) {
-            return false;
-        }
-
-        // Check if the item's Tags contain at least one of the strings in currentTags
-        const tagIntersection = item.Tags.filter(tag => tags.includes(tag));
-        if (tagIntersection.length === 0) {
-            return false;
-        }
-
-        // Check if the item exists in List2
-        const existsInList2 = prevBuff.Shorts.some(list2Item => list2Item.Path === item.Path);
-        if (existsInList2) {
-            return false;
-        }
-
-        // If all checks pass, include the item in the filtered result
-        return true;
+    alreadyUsed.Music.forEach((music) => {
+        usedMusicTitles.add(music.Title);
     });
-}
-
-export function getCommercials(duration: number, media: Media, prevBuff: Media): Commercial[] {
-    //get genre commercials under duration
-    return media.Commercials.filter(
-        sc => sc.Duration <= duration && !prevBuff.Commercials.some(selected => selected.Path === sc.Path)
-    );
-}
-
-export function getTagCommercials(duration: number, media: Media, tags: string[], prevBuff: Media): Commercial[] {
-    //get genre commercials under duration
-    return media.Commercials.filter(item => {
-        // Check if the item's Duration is less than or equal to currentDuration
-        if (item.Duration > duration) {
-            return false;
-        }
-
-        // Check if the item's Tags contain at least one of the strings in currentTags
-        const tagIntersection = item.Tags.filter(tag => tags.includes(tag));
-        if (tagIntersection.length === 0) {
-            return false;
-        }
-
-        // Check if the item exists in List2
-        const existsInList2 = prevBuff.Commercials.some(list2Item => list2Item.Path === item.Path);
-        if (existsInList2) {
-            return false;
-        }
-
-        // If all checks pass, include the item in the filtered result
-        return true;
+    alreadyUsed.Shorts.forEach((short) => {
+        usedShortTitles.add(short.Title);
     });
-}
 
-export function hasCommercialsUnderDuration(duration: number, media: Media, selectedMedia: Media): boolean {
-    let underDuration = media.Commercials.filter(
-        sc => sc.Duration <= duration && !selectedMedia.Commercials.some(selected => selected.Path === sc.Path)
-    );
-    return underDuration.length > 0;
-}
+    const selectedCommercials: Commercial[] = [];
 
-export function hasShortsUnderDuration(duration: number, media: Media, selectedMedia: Media): boolean {
-    let underDuration = media.Shorts.filter(
-        sc => sc.Duration <= duration && !selectedMedia.Shorts.some(selected => selected.Path === sc.Path)
-    );
-    return underDuration.length > 0;
-}
+    const selectedMedia: (Commercial | Short | Music)[] = [];
 
-export function hasMusicUnderDuration(duration: number, media: Media, selectedMedia: Media): boolean {
-    let underDuration = media.Music.filter(
-        sc => sc.Duration <= duration && !selectedMedia.Music.some(selected => selected.Path === sc.Path)
+    while (remainingDuration > 0) {
+        const chosenCommercials = selectCommercials(
+            filteredCommercials,
+            remainingDuration,
+            usedCommercialTitles
+        );
+        selectedCommercials.push(...chosenCommercials[0]);
+        selectedMedia.push(...chosenCommercials[0]);
+
+        remainingDuration = chosenCommercials[1];
+
+        const selectedShortOrMusic = selectShortOrMusic(
+            filteredShorts,
+            filteredMusic,
+            remainingDuration,
+            usedShortTitles,
+            usedMusicTitles
+        );
+
+        if (selectedShortOrMusic) {
+            selectedMedia.push(selectedShortOrMusic);
+            if (selectedShortOrMusic instanceof Short) {
+                usedShortTitles.add(selectedShortOrMusic.Title);
+            } else {
+                usedMusicTitles.add(selectedShortOrMusic.Title);
+            }
+            remainingDuration -= selectedShortOrMusic.Duration;
+        }
+
+        if (chosenCommercials[0].length === 0 && !selectedShortOrMusic) {
+            console.log("Breaking buffer fill loop due to no commercials or shorts/music available");
+            break;
+        }
+    }
+
+    // Create a new Media object with selected commercials, music, and shorts
+    const mediaWithSelected = new Media(
+        [...alreadyUsed.Shows],
+        [...alreadyUsed.Movies],
+        selectedMedia.filter((media) => media instanceof Short) as Short[],
+        selectedMedia.filter((media) => media instanceof Music) as Music[],
+        [...alreadyUsed.Promos],
+        selectedCommercials,
+        [...alreadyUsed.Collections]
     );
-    return underDuration.length > 0;
+
+    return {
+        selectedMedia,
+        chosenMedia: mediaWithSelected,
+        remainingDuration,
+    };
 }

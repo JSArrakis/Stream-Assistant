@@ -49,8 +49,8 @@ export function getProceduralBlock(
         } else {
             if (durRemainder > 5400) {
                 //Movie or Show
-                if (Math.random() < 0.5 && procDurMovies.length > 0) {
-                    let selectedMovie = selectMovieUnderDuration(options, media.Movies, prevMovies, durRemainder);
+                let selectedMovie = selectMovieUnderDuration(options, media.Movies, prevMovies, durRemainder);
+                if (Math.random() < 0.5 && procDurMovies.length > 0 && selectedMovie !== undefined) {
                     let selectedMediaItem: SelectedMedia = new SelectedMedia(selectedMovie, "", MediaType.Movie, currentTimePoint, selectedMovie.DurationLimit, selectedMovie.Tags)
                     selectedMedia.push(selectedMediaItem);
                     prevMovies.push(selectedMovie);
@@ -60,6 +60,7 @@ export function getProceduralBlock(
                 } else {
                     let result = selectShowUnderDuration(options, media.Shows, progression, durRemainder);
                     result[0].forEach(episode => {
+
                         selectedMedia.push(new SelectedMedia(episode, result[1], MediaType.Episode, currentTimePoint, episode.DurationLimit, episode.Tags));
                         currDur = currDur + episode.DurationLimit;
                         currentTimePoint = currentTimePoint + episode.DurationLimit;
@@ -104,7 +105,9 @@ export function selectShowUnderDuration(options: any, shows: Show[], progression
 
     let selectedShow = selectShowByDuration(duration, filteredShows);
     if (selectedShow === undefined) {
-        throw "Something went wrong when selecting a show by Duration"
+        throw new Error(
+            "Something went wrong when selecting a show by Duration"
+        );
     }
 
     let episodeIdx: number[] = [];
@@ -123,7 +126,12 @@ export function selectShowUnderDuration(options: any, shows: Show[], progression
     }
 
     episodeIdx.forEach(idx => {
-        episodes.push(selectedShow.Episodes[idx - 1]);
+        if (selectedShow !== undefined) {
+            let episode = selectedShow.Episodes[idx - 1]
+            //add selectedShow tags to episode tags that dont already exist
+            episode.Tags = [...new Set([...selectedShow.Tags, ...episode.Tags])];
+            episodes.push(episode);
+        }
     })
 
     return [episodes, selectedShow.Title];

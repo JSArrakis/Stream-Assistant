@@ -9,6 +9,8 @@ import { Bumper } from '../models/bumper';
 import { CollectionShow, Collection } from '../models/collection';
 import { Movie } from '../models/movie';
 import { Episode, Show } from '../models/show';
+import { TranslationTag } from '../models/translationTag';
+import { Commercial } from '../models/commercial';
 
 let episode1 = new Episode(1, 1, 1, "", "episode1", "episode1", 1648, 1800, [])
 let episode2 = new Episode(1, 2, 2, "", "episode2", "episode2", 1709, 1800, [])
@@ -17,11 +19,11 @@ let episode4 = new Episode(1, 4, 4, "", "episode4", "episode4", 1600, 1800, [])
 let episode5a = new Episode(1, 5, 5, "", "episode5", "episode5", 1699, 1800, [])
 let episode5b = new Episode(1, 5, 5, "", "episode5", "episode5", 2703, 3600, [])
 
-let show1 = new Show("Show1", "show1", "alias", "imdb", 1800, false, ["tag1", "tag5", "tag4"], 5, [episode1, episode2, episode3, episode4, episode5a])
-let show2 = new Show("Show2", "show2", "alias", "imdb", 1800, false, ["tag2", "tag5"], 5, [episode1, episode2, episode3, episode4, episode5a])
-let show3 = new Show("Show3", "show3", "alias", "imdb", 1800, false, ["tag5"], 5, [episode1, episode2, episode3, episode4, episode5a])
-let show4 = new Show("Show4", "show4", "alias", "imdb", 1800, false, ["tag4", "tag6"], 5, [episode1, episode2, episode3, episode4, episode5a])
-let show5 = new Show("Show5", "show5", "alias", "imdb", 1800, true, ["tag6", "tag7"], 5, [episode1, episode2, episode3, episode4, episode5b])
+let show1 = new Show("Show1", "show1", "alias", "imdb", 1800, false, ["tag1", "tag5", "tag4"], [], 5, [episode1, episode2, episode3, episode4, episode5a])
+let show2 = new Show("Show2", "show2", "alias", "imdb", 1800, false, ["tag2", "tag5"], [], 5, [episode1, episode2, episode3, episode4, episode5a])
+let show3 = new Show("Show3", "show3", "alias", "imdb", 1800, false, ["tag5"], [], 5, [episode1, episode2, episode3, episode4, episode5a])
+let show4 = new Show("Show4", "show4", "alias", "imdb", 1800, false, ["tag4", "tag6"], [], 5, [episode1, episode2, episode3, episode4, episode5a])
+let show5 = new Show("Show5", "show5", "alias", "imdb", 1800, true, ["tag6", "tag7"], [], 5, [episode1, episode2, episode3, episode4, episode5b])
 let showList = [show1, show2, show3, show4, show5]
 
 let collShow1 = new CollectionShow(
@@ -44,8 +46,8 @@ let collection1 = new Collection(
     7200,
     7200,
     ["tag4"],
-    new Bumper(1, "", []),
-    new Bumper(1, "", []),
+    new Bumper("", 1, "", "b", []),
+    new Bumper("", 1, "", "b", []),
     [],
     [collShow1, collShow2, collShow3, collShow4],
     ""
@@ -396,8 +398,7 @@ describe('getStagedStream function', () => {
                 expect(result[0].Type).to.equal(MediaType.Movie);
                 expect(result[1].Type).to.equal(MediaType.Movie);
             } else if (result.length === 5) {
-                if (result[0].Type === MediaType.Movie)
-                {
+                if (result[0].Type === MediaType.Movie) {
                     expect(result[0].Type).to.equal(MediaType.Movie);
                     expect(result[1].Type).to.equal(MediaType.Episode);
                     expect(result[2].Type).to.equal(MediaType.Episode);
@@ -429,7 +430,7 @@ describe('getStagedStream function', () => {
         }
     });
 
-    it('should select injected movies before other movies', () => { 
+    it('should select injected movies before other movies', () => {
         for (let i = 0; i < 20; i++) {
             let tempStagedMedia = new StagedMedia([scheduledMedia1, scheduledMedia4], [injectedMedia1, injectedMedia2], 128800);
             let result = streamConstructor.getStagedStream(100000, config, options, tempStagedMedia, media, []);
@@ -468,5 +469,64 @@ describe('getStagedStream function', () => {
 
 });
 
-describe('constructStream function', () => {
-});
+// describe('constructStream function', () => {
+//     let config = new Config("", "", "", "", "", 0, 1800);
+//     const options: any = { tagsOR: ["tag1", "tag2", "tag3"] };
+//     let media = new Media([show2], [testMovie10], [], [], [], [...generateCommercialList(
+//         ['Tag1', 'Tag2', 'Tag3', 'Tag4', 'Tag5', 'Tag6'],
+//         [
+//             [10, 1], [14, 2], [15, 10], [26, 1],
+//             [27, 1], [29, 17], [30, 118], [31, 8],
+//             [32, 6], [33, 4], [34, 3], [35, 1],
+//             [37, 1], [38, 1], [39, 1], [40, 1],
+//             [41, 1], [42, 1], [45, 2], [60, 4],
+//             [62, 1], [69, 1]
+//         ]
+//     )], []);
+//     const translationTags = [
+//         new TranslationTag('Tag1', ['TranslatedTag1', 'TranslatedTag2']),
+//         new TranslationTag('Tag2', ['TranslatedTag3']),
+//         // Add more translationTags as needed for specific test cases
+//     ];
+
+//     it('should return the selected stream with proper buffer content', () => {
+//         let result = streamConstructor.constructStream(config, options, media, translationTags, progression, rightNow);
+//     });
+// });
+
+function getRandomTags(tagList: string[]): string[] {
+    const selectedTags: string[] = [];
+    const numberOfTags = Math.floor(Math.random() * tagList.length) + 1; // Select random number of tags (at least 1)
+
+    // Create a copy of the tagList
+    const copyTagList = [...tagList];
+
+    for (let i = 0; i < numberOfTags; i++) {
+        const randomIndex = Math.floor(Math.random() * copyTagList.length);
+        const randomTag = copyTagList[randomIndex];
+        selectedTags.push(randomTag);
+
+        // Remove the selected tag from the copyTagList to ensure it is not selected again
+        copyTagList.splice(randomIndex, 1);
+    }
+
+    return selectedTags;
+}
+
+function generateCommercialList(tagList: string[], durationsWithCount: [number, number][]): Commercial[] {
+
+    let commercials: Commercial[] = [];
+    let pathCounter = 1;
+
+    for (let [duration, count] of durationsWithCount) {
+        for (let i = 0; i < count; i++) {
+            let path = `commercial_${pathCounter}.mp4`;
+            pathCounter++;
+
+            let selectedTags = getRandomTags(tagList)
+            commercials.push(new Commercial('', duration, path, 'Commercial', selectedTags));
+        }
+    }
+
+    return commercials;
+}

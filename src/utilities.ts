@@ -63,19 +63,37 @@ export function addProgression(title: string, type: string, progression: MediaPr
     }
 }
 
-export function deepCopy(obj) {
+// export function deepCopy(obj) {
+//     if (typeof obj !== 'object' || obj === null) {
+//         return obj; // primitive value or null
+//     }
+
+//     if (Array.isArray(obj)) {
+//         return obj.map(deepCopy); // array
+//     }
+
+//     const result = {};
+//     for (const [key, value] of Object.entries(obj)) {
+//         result[key] = deepCopy(value); // object
+//     }
+
+//     return result;
+// }
+
+export function deepCopy<T>(obj: T): T {
     if (typeof obj !== 'object' || obj === null) {
         return obj; // primitive value or null
     }
 
     if (Array.isArray(obj)) {
-        return obj.map(deepCopy); // array
+        return obj.map(deepCopy) as T; // array
     }
 
-    const result = {};
+    const result: Record<string, any> = {};
     for (const [key, value] of Object.entries(obj)) {
         result[key] = deepCopy(value); // object
     }
 
-    return result;
+    return result as T;
 }
+

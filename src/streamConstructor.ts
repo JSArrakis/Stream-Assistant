@@ -1,10 +1,10 @@
 import { Config } from "../models/config";
 import { MediaProgression } from "../models/mediaProgression"
-import { loadMedia, loadProgression, loadTranslationTags } from "../dataAccess/dataManager";
+import { loadProgression, loadTranslationTags } from "../dataAccess/dataManager";
 import { Media } from "../models/media";
 import { Movie } from "../models/movie";
 import { Collection } from "../models/collection";
-import * as moment from 'moment';
+import moment from 'moment';
 import { MediaType } from "../models/enum/mediaTypes";
 import { SelectedMedia } from "../models/selectedMedia";
 import { StagedMedia } from "../models/stagedMedia";
@@ -17,14 +17,15 @@ import { Commercial } from "../models/commercial";
 import { Music } from "../models/music";
 import { Promo } from "../models/promo";
 import { Short } from "../models/short";
+import { CommandLineArgs } from "../models/commandLineArgs";
 
 export function constructStream(
     config: Config,
-    options: any,
-    media: Media = loadMedia(),
-    transaltionTags: TranslationTag[] = loadTranslationTags(),
-    progression: MediaProgression[] = loadProgression(),
-    rightNow: number = moment().unix()):
+    options: CommandLineArgs,
+    media: Media,
+    transaltionTags: TranslationTag[] = loadTranslationTags(config.dataFolder + 'translationTags.json'),
+    progression: MediaProgression[] = loadProgression(config.dataFolder + 'progression.json'),
+    rightNow: number = (options.startTime === undefined) ? moment().unix() : options.startTime):
     [string[], (Promo | Music | Commercial | Short | Episode | Movie)[]] {
 
     let streamPaths: string[] = []
@@ -33,6 +34,7 @@ export function constructStream(
     setEnvironment(options);
 
     let scheduledMedia: SelectedMedia[] = getScheduledMedia(options, media, progression);
+
     let stagedMedia = new StagedMedia(
         scheduledMedia,
         getInjectedMovies(options, media.Movies),
@@ -40,10 +42,12 @@ export function constructStream(
     );
 
     setProceduralTags(options, stagedMedia);
+
     let stagedStream: SelectedMedia[] = getStagedStream(rightNow, config, options, stagedMedia, media, progression);
     let prevBuffer: Media = new Media([], [], [], [], [], [], []);
 
     let initialBuffer = createBuffer(
+        options.tagsOR === undefined ? [] : options.tagsOR,
         stagedStream[0].Time - rightNow,
         options,
         media,
@@ -54,10 +58,10 @@ export function constructStream(
 
     streamPaths.push(...initialBuffer[0].map(obj => obj.Path));
     streamObjects.push(...initialBuffer[0]);
+    prevBuffer = initialBuffer[2];
 
     let remainder = initialBuffer[1];
     stagedStream.forEach((item, index) => {
-        let firstItem = index === 0 ? true : false;
         let lastItem = index === stagedStream.length - 1 ? true : false;
         if (item.Type == MediaType.Episode || item.Type == MediaType.Movie) {
             let mediaItem = item.Media;
@@ -65,13 +69,15 @@ export function constructStream(
             streamObjects.push(mediaItem);
             let bufferDuration = mediaItem.DurationLimit - mediaItem.Duration
             let buffer = createBuffer(
+                options.tagsOR === undefined ? [] : options.tagsOR,
                 bufferDuration + remainder,
                 options,
                 media,
-                firstItem ? [] : stagedStream[index - 1].Tags,
+                stagedStream[index].Tags,
                 lastItem ? [] : stagedStream[index + 1].Tags,
                 transaltionTags,
                 prevBuffer);
+            prevBuffer = buffer[2];
             streamPaths.push(...buffer[0].map(obj => obj.Path));
             streamObjects.push(...buffer[0]);
             remainder = buffer[1];
@@ -132,12 +138,28 @@ function createCollectionBlock(
                         let nextShowEpisode = collection.Shows[index + 1].Episode;
                         if (nextShowEpisode) {
                             let overDurationLength = (nextShowEpisode.DurationLimit + episode.DurationLimit) - episode.Duration + remainder;
-                            let overBuffer = createBuffer(overDurationLength, options, media, [collection.LoadTitle], [collection.LoadTitle], transaltionTags, prevBuffer)
+                            let overBuffer = createBuffer(
+                                [],
+                                overDurationLength,
+                                options,
+                                media,
+                                [collection.LoadTitle],
+                                [collection.LoadTitle],
+                                transaltionTags,
+                                prevBuffer)
                             stream.push(...overBuffer[0].map(obj => obj.Path));
                             remainder = overBuffer[1];
                         }
                     } else {
-                        let underBuffer = createBuffer(episode.DurationLimit - episode.Duration, options, media, [collection.LoadTitle], [collection.LoadTitle], transaltionTags, prevBuffer)
+                        let underBuffer = createBuffer(
+                            [],
+                            episode.DurationLimit - episode.Duration,
+                            options,
+                            media,
+                            [collection.LoadTitle],
+                            [collection.LoadTitle],
+                            transaltionTags,
+                            prevBuffer)
                         stream.push(...underBuffer[0].map(obj => obj.Path));
                         remainder = underBuffer[1];
                     }
@@ -246,7 +268,7 @@ export function getStagedStream(
     return selectedMedia;
 }
 
-export function setProceduralTags(options: any, stagedMedia: StagedMedia) {
+export function setProceduralTags(options: CommandLineArgs, stagedMedia: StagedMedia): void {
     if (options.tagsAND === undefined
         && options.tagsOR === undefined) {
 
@@ -312,12 +334,13 @@ export function getScheduledMedia(options: any, media: Media, progression: Media
 
 export function getInjectedMovies(options: any, movies: Movie[]): SelectedMedia[] {
     let selectedMedia: SelectedMedia[] = [];
-    options.movies
-        .filter((str: string) => !str.includes('::'))
-        .forEach((str: string) => {
-            selectedMedia.push(getMovie(str, movies, 0));
-        });
-
+    if (options.movies !== undefined) {
+        options.movies
+            .filter((str: string) => !str.includes('::'))
+            .forEach((str: string) => {
+                selectedMedia.push(getMovie(str, movies, 0));
+            });
+    }
     return selectedMedia;
 }
 
@@ -365,7 +388,8 @@ export function assignCollEpisodes(collection: Collection, shows: Show[], progre
     })
 }
 
-function setEnvironment(options: any) {
+function setEnvironment(options: CommandLineArgs) {
+    //TODO: Just all of this
     if (options.env !== undefined) {
         options.env = 1;
     } else {

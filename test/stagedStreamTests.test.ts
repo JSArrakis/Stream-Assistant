@@ -11,7 +11,8 @@ import { MediaProgression, ShowProgression } from '../models/mediaProgression';
 import * as utilities from '../src/utilities'
 import { deepCopy } from '../src/utilities';
 import { StagedMedia } from '../models/stagedMedia';
-import * as moment from 'moment';
+import moment from 'moment';
+import { CommandLineArgs } from '../models/commandLineArgs';
 
 let media = new Media(
     [], //show
@@ -82,11 +83,11 @@ let episode4 = new Episode(1, 4, 4, "", "episode4", "episode4", 1600, 1800, [])
 let episode5a = new Episode(1, 5, 5, "", "episode5", "episode5", 1699, 1800, [])
 let episode5b = new Episode(1, 5, 5, "", "episode5", "episode5", 2703, 1800, [])
 
-let show1 = new Show("Show1", "show1", "alias", "imdb", 1800, false, ["tags"], 5, [episode1, episode2, episode3, episode4, episode5a])
-let show2 = new Show("Show2", "show2", "alias", "imdb", 1800, false, ["tags"], 5, [episode1, episode2, episode3, episode4, episode5a])
-let show3 = new Show("Show3", "show3", "alias", "imdb", 1800, false, ["tags"], 5, [episode1, episode2, episode3, episode4, episode5a])
-let show4 = new Show("Show4", "show4", "alias", "imdb", 1800, false, ["tags"], 5, [episode1, episode2, episode3, episode4, episode5a])
-let show5 = new Show("Show5", "show5", "alias", "imdb", 1800, true, ["tags"], 5, [episode1, episode2, episode3, episode4, episode5b])
+let show1 = new Show("Show1", "show1", "alias", "imdb", 1800, false, ["tags"], [], 5, [episode1, episode2, episode3, episode4, episode5a])
+let show2 = new Show("Show2", "show2", "alias", "imdb", 1800, false, ["tags"], [], 5, [episode1, episode2, episode3, episode4, episode5a])
+let show3 = new Show("Show3", "show3", "alias", "imdb", 1800, false, ["tags"], [], 5, [episode1, episode2, episode3, episode4, episode5a])
+let show4 = new Show("Show4", "show4", "alias", "imdb", 1800, false, ["tags"], [], 5, [episode1, episode2, episode3, episode4, episode5a])
+let show5 = new Show("Show5", "show5", "alias", "imdb", 1800, true, ["tags"], [], 5, [episode1, episode2, episode3, episode4, episode5b])
 let shows = [show1, show2, show3, show4, show5]
 
 let collShow1 = new CollectionShow(
@@ -112,8 +113,8 @@ let collection1 = new Collection(
     7200,
     7200,
     ["tag4"],
-    new Bumper(1, "", []),
-    new Bumper(1, "", []),
+    new Bumper("", 1, "", "b", []),
+    new Bumper("", 1, "", "b", []),
     [],
     [collShow1, collShow2, collShow3, collShow4],
     ""
@@ -126,8 +127,8 @@ let collection2 = new Collection(
     7200,
     7200,
     [],
-    new Bumper(1, "", []),
-    new Bumper(1, "", []),
+    new Bumper("", 1, "", "b", []),
+    new Bumper("", 1, "", "b", []),
     [],
     [collShow1, collShow2, collShow5, collShow4],
     ""
@@ -565,7 +566,7 @@ describe('evaluateStreamEndTime function', () => {
     it('should populate end time as end of day if no scheduled movies and when not set in options', () => {
 
         let endTime: number = moment().startOf('day').add(1, "days").unix();
-        
+
         let options = {
         };
 
@@ -579,8 +580,7 @@ describe('evaluateStreamEndTime function', () => {
 
 describe('setProceduralTags function', () => {
     it('should populate tags from selected movies and collections into options.tagsOR if tagsOR is undefined', () => {
-        let options = {
-        };
+        let options: CommandLineArgs = new CommandLineArgs();
 
         let stagedmedia: StagedMedia = new StagedMedia(
             [

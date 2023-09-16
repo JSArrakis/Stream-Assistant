@@ -22,11 +22,11 @@ let episode4 = new Episode(1, 4, 4, "", "episode4", "episode4", 1600, 1800, [])
 let episode5a = new Episode(1, 5, 5, "", "episode5", "episode5", 1699, 1800, [])
 let episode5b = new Episode(1, 5, 5, "", "episode5", "episode5", 2703, 3600, [])
 
-let show1 = new Show("Show1", "show1", "alias", "imdb", 1800, false, ["tag1", "tag5", "tag4"], 5, [episode1, episode2, episode3, episode4, episode5a])
-let show2 = new Show("Show2", "show2", "alias", "imdb", 1800, false, ["tag2", "tag5"], 5, [episode1, episode2, episode3, episode4, episode5a])
-let show3 = new Show("Show3", "show3", "alias", "imdb", 1800, false, ["tag5"], 5, [episode1, episode2, episode3, episode4, episode5a])
-let show4 = new Show("Show4", "show4", "alias", "imdb", 1800, false, ["tag4", "tag6"], 5, [episode1, episode2, episode3, episode4, episode5a])
-let show5 = new Show("Show5", "show5", "alias", "imdb", 1800, true, ["tag6", "tag7"], 5, [episode1, episode2, episode3, episode4, episode5b])
+let show1 = new Show("Show1", "show1", "alias", "imdb", 1800, false, ["tag1", "tag5", "tag4"], [], 5, [episode1, episode2, episode3, episode4, episode5a])
+let show2 = new Show("Show2", "show2", "alias", "imdb", 1800, false, ["tag2", "tag5"], [], 5, [episode1, episode2, episode3, episode4, episode5a])
+let show3 = new Show("Show3", "show3", "alias", "imdb", 1800, false, ["tag5"], [], 5, [episode1, episode2, episode3, episode4, episode5a])
+let show4 = new Show("Show4", "show4", "alias", "imdb", 1800, false, ["tag4", "tag6"], [], 5, [episode1, episode2, episode3, episode4, episode5a])
+let show5 = new Show("Show5", "show5", "alias", "imdb", 1800, true, ["tag6", "tag7"], [], 5, [episode1, episode2, episode3, episode4, episode5b])
 let showList = [show1, show2, show3, show4, show5]
 
 let collShow1 = new CollectionShow(
@@ -49,8 +49,8 @@ let collection1 = new Collection(
   7200,
   7200,
   ["tag4"],
-  new Bumper(1, "", []),
-  new Bumper(1, "", []),
+  new Bumper("", 1, "", "b", []),
+  new Bumper("", 1, "", "b", []),
   [],
   [collShow1, collShow2, collShow3, collShow4],
   ""
@@ -271,6 +271,7 @@ describe('selectShowUnderDuration function', () => {
       1800,
       false,
       ['Tag1', 'Tag2'],
+      [],
       3,
       [
         new Episode(1, 1, 1, 'Path 1', 'Episode 1', 'LoadTitle 1', 1643, 1800, ['Tag1']),
@@ -286,6 +287,7 @@ describe('selectShowUnderDuration function', () => {
       1800,
       false,
       ['Tag1', 'Tag3'],
+      [],
       2,
       [
         new Episode(1, 1, 1, 'Path 4', 'Episode 1', 'LoadTitle 4', 1643, 1800, ['Tag1']),
@@ -302,6 +304,7 @@ describe('selectShowUnderDuration function', () => {
       1800,
       false,
       ['Tag4', 'Tag5'],
+      [],
       3,
       [
         new Episode(1, 1, 1, 'Path 6', 'Episode 1', 'LoadTitle 6', 1643, 1800, ['Tag4']),
@@ -380,7 +383,7 @@ describe('getProceduralBlock', () => {
   });
 
   it('should get 1 over duration episode if within duration', () => {
-    const config: Config = new Config("","","","","",0,0);
+    const config: Config = new Config("", "", "", "", "", 0, 0);
     const options: any = { tagsOR: ["tag7"] };
     const media: Media = new Media(showList, movieList, [], [], [], [], []);;
     const prevMovies: Movie[] = movieList;

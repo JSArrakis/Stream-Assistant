@@ -1,74 +1,276 @@
-import { Show } from "../models/show";
-import { Movie } from "../models/movie";
+import * as fs from 'fs';
 import { Short } from "../models/short";
-import { Music } from "../models/music";
-import { Promo } from "../models/promo";
-import { Commercial } from "../models/commercial";
-import { Collection } from "../models/collection";
 import { Media } from "../models/media";
-import { MediaProgression } from "../models/mediaProgression";
+import { MediaProgression, ShowProgression } from "../models/mediaProgression";
 import { TranslationTag } from "../models/translationTag";
-
-const shows = require("../data/showList.json");
-const movies = require("../data/movieList.json");
-const shorts = require("../data/shortList.json");
-const music = require("../data/musicList.json");
-const promos = require("../data/promoList.json");
-const commercials = require("../data/commercialList.json");
-const collections = require("../data/collectionList.json");
+import { Config } from '../models/config';
+import { Movie } from '../models/movie';
+import { Commercial } from '../models/commercial';
+import { Music } from '../models/music';
+import { Promo } from '../models/promo';
+import { Episode, Show } from '../models/show';
 const progression = require('../data/progression.json');
 const transaltionTags = require('../data/translationTags.json');
 
-export function loadMedia(): Media {
+export function loadMedia(config: Config): Media {
     const media: Media = {
-        Shows: loadShows(),
-        Movies: loadMovies(),
-        Shorts: loadShorts(),
-        Music: loadMusic(),
-        Promos: loadPromos(),
-        Commercials: loadCommercials(),
-        Collections: loadCollections()
+        Shows: loadShowsFromJsonFile(config.dataFolder + 'showsList.json'),
+        Movies: loadMoviesFromJsonFile(config.dataFolder + 'moviesList.json'),
+        Shorts: loadShortsFromJsonFile(config.dataFolder + 'shortsList.json'),
+        Music: loadMusicFromJsonFile(config.dataFolder + 'musicList.json'),
+        Promos: loadPromosFromJsonFile(config.dataFolder + 'promosList.json'),
+        Commercials: loadCommercialsFromJsonFile(config.dataFolder + 'commercialsList.json'),
+        Collections: []
     }
     return media;
 }
 
-export function loadProgression() {
-    let parsed = JSON.parse(progression) as MediaProgression[];
-    if (parsed.filter(prog => prog.Title === "Main").length === 0) {
-        parsed.push(new MediaProgression("Main", "Main", []))
+export function loadProgression(filePath: string): MediaProgression[] {
+    try {
+        const jsonString = fs.readFileSync(filePath, 'utf-8');
+        const jsonParsed = JSON.parse(jsonString);
+
+        // Validate that the JSON is an array
+        if (!Array.isArray(jsonParsed)) {
+            throw new Error('JSON data is not an array.');
+        }
+
+
+        const mediaProgression: MediaProgression[] = jsonParsed.map((item: any) => {
+            let progShows = item.Shows.map((showprog: any) => {
+                return new ShowProgression(
+                    showprog.LoadTitle,
+                    showprog.Episode
+                );
+            });
+            return new MediaProgression(
+                item.Title,
+                item.Type,
+                progShows
+            );
+        });
+
+        if (mediaProgression.filter(prog => prog.Title === "Main").length === 0) {
+            mediaProgression.push(new MediaProgression("Main", "Main", []))
+        }
+
+        return mediaProgression;
+    } catch (error) {
+        throw new Error(`Error loading translation tags from JSON file ${filePath}: ${error}`);
     }
-    return parsed;
 }
 
-export function loadTranslationTags() {
-    return JSON.parse(transaltionTags) as TranslationTag[];
+export function loadTranslationTags(filePath: string): TranslationTag[] {
+    try {
+        const jsonString = fs.readFileSync(filePath, 'utf-8');
+        const jsonParsed = JSON.parse(jsonString);
+
+        // Validate that the JSON is an array
+        if (!Array.isArray(jsonParsed)) {
+            throw new Error('JSON data is not an array.');
+        }
+
+        // Map the JSON objects to Short instances
+        const translationTags: TranslationTag[] = jsonParsed.map((item: any) => {
+            return new TranslationTag(
+                item.Tag,
+                item.Translation
+            );
+        });
+
+        return translationTags;
+    } catch (error) {
+        throw new Error(`Error loading translation tags from JSON file ${filePath}: ${error}`);
+    }
 }
 
-function loadShows() {
-    return JSON.parse(shows) as Show[];
+export function loadShowsFromJsonFile(filePath: string): Show[] {
+    try {
+        const jsonString = fs.readFileSync(filePath, 'utf-8');
+        const jsonParsed = JSON.parse(jsonString);
+
+        // Validate that the JSON is an array
+        if (!Array.isArray(jsonParsed)) {
+            throw new Error('JSON data is not an array.');
+        }
+
+        // Map the JSON objects to Short instances
+        const shows: Show[] = jsonParsed.map((item: any) => {
+            let episodes = item.Episodes.map((episode: any) => {
+                return new Episode(
+                    episode.Season,
+                    episode.Episode,
+                    episode.EpisodeNumber,
+                    episode.Path,
+                    episode.Title,
+                    episode.LoadTitle,
+                    episode.Duration,
+                    episode.DurationLimit,
+                    episode.Tags
+                );
+            });
+
+            return new Show(
+                item.Title,
+                item.LoadTitle,
+                item.Alias,
+                item.IMDB,
+                item.DurationLimit,
+                item.OverDuration,
+                item.Tags,
+                item.SecondaryTags,
+                item.EpisodeCount,
+                episodes);
+        });
+
+        return shows;
+    } catch (error) {
+        throw new Error(`Error loading shows from JSON file ${filePath}: ${error}`);
+    }
 }
 
-function loadMovies() {
-    return JSON.parse(movies) as Movie[];
+export function loadMoviesFromJsonFile(filePath: string): Movie[] {
+    try {
+        const jsonString = fs.readFileSync(filePath, 'utf-8');
+        const jsonParsed = JSON.parse(jsonString);
+
+        // Validate that the JSON is an array
+        if (!Array.isArray(jsonParsed)) {
+            throw new Error('JSON data is not an array.');
+        }
+
+        // Map the JSON objects to Short instances
+        const movies: Movie[] = jsonParsed.map((item: any) => {
+            return new Movie(
+                item.Title,
+                item.LoadTitle,
+                item.Alias,
+                item.IMDB,
+                item.Tags,
+                item.Path,
+                item.Duration,
+                item.DurationLimit,
+                item.Collection,
+                item.CollectionSequence);
+        });
+
+        return movies;
+    } catch (error) {
+        throw new Error(`Error loading movies from JSON file ${filePath}: ${error}`);
+    }
 }
 
-function loadShorts() {
-    return JSON.parse(shorts) as Short[];
+export function loadShortsFromJsonFile(filePath: string): Short[] {
+    try {
+        const jsonString = fs.readFileSync(filePath, 'utf-8');
+        const jsonParsed = JSON.parse(jsonString);
+
+        // Validate that the JSON is an array
+        if (!Array.isArray(jsonParsed)) {
+            throw new Error('JSON data is not an array.');
+        }
+
+        // Map the JSON objects to Short instances
+        const shorts: Short[] = jsonParsed.map((item: any) => {
+            return new Short(item.Title, item.Duration, item.Path, item.Type, item.Tags);
+        });
+
+        return shorts;
+    } catch (error) {
+        throw new Error(`Error loading shorts from JSON file ${filePath}: ${error}`);
+    }
 }
 
-function loadMusic() {
-    return JSON.parse(music) as Music[];
+export function loadCommercialsFromJsonFile(filePath: string): Commercial[] {
+    try {
+        const jsonString = fs.readFileSync(filePath, 'utf-8');
+        const jsonParsed = JSON.parse(jsonString);
+
+        // Validate that the JSON is an array
+        if (!Array.isArray(jsonParsed)) {
+            throw new Error('JSON data is not an array.');
+        }
+
+        // Map the JSON objects to Short instances
+        const commercials: Commercial[] = jsonParsed.map((item: any) => {
+            return new Commercial(item.Title, item.Duration, item.Path, item.Type, item.Tags);
+        });
+
+        return commercials;
+    } catch (error) {
+        throw new Error(`Error loading commercials from JSON file ${filePath}: ${error}`);
+    }
 }
 
-function loadPromos() {
-    return JSON.parse(music) as Promo[];
+export function loadMusicFromJsonFile(filePath: string): Music[] {
+    try {
+        const jsonString = fs.readFileSync(filePath, 'utf-8');
+        const jsonParsed = JSON.parse(jsonString);
+
+        // Validate that the JSON is an array
+        if (!Array.isArray(jsonParsed)) {
+            throw new Error('JSON data is not an array.');
+        }
+
+        // Map the JSON objects to Short instances
+        const music: Music[] = jsonParsed.map((item: any) => {
+            return new Music(item.Title, item.Path, item.Duration, item.Type, item.Tags);
+        });
+
+        return music;
+    } catch (error) {
+        throw new Error(`Error loading music from JSON file ${filePath}: ${error}`);
+    }
 }
 
-function loadCommercials() {
-    return JSON.parse(commercials) as Commercial[];
+export function loadPromosFromJsonFile(filePath: string): Promo[] {
+    try {
+        const jsonString = fs.readFileSync(filePath, 'utf-8');
+        const jsonParsed = JSON.parse(jsonString);
+
+        // Validate that the JSON is an array
+        if (!Array.isArray(jsonParsed)) {
+            throw new Error('JSON data is not an array.');
+        }
+
+        // Map the JSON objects to Short instances
+        const promos: Promo[] = jsonParsed.map((item: any) => {
+            return new Promo(item.Title, item.Duration, item.Path, item.Type, item.Tags);
+        });
+
+        return promos;
+    } catch (error) {
+        throw new Error(`Error loading promos from JSON file ${filePath}: ${error}`);
+    }
 }
 
-function loadCollections() {
-    return JSON.parse(collections) as Collection[];
-}
+// function loadMovies() {
+//     const content = fs.readFileSync(movies, 'utf-8').trim();
+//     return JSON.parse(content) as Movie[];
+// }
+
+// function loadShorts() {
+//     const content = fs.readFileSync(shorts, 'utf-8').trim();
+//     return JSON.parse(content) as Short[];
+// }
+
+// function loadMusic() {
+//     const content = fs.readFileSync(shows, 'utf-8').trim();
+//     return JSON.parse(music) as Music[];
+// }
+
+// function loadPromos() {
+//     const content = fs.readFileSync(shows, 'utf-8').trim();
+//     return JSON.parse(music) as Promo[];
+// }
+
+// function loadCommercials() {
+//     const content = fs.readFileSync(commercials, 'utf-8').trim();
+//     return JSON.parse(content) as Commercial[];
+// }
+
+// function loadCollections() {
+//     const content = fs.readFileSync(collections, 'utf-8').trim();
+//     return JSON.parse(content) as Collection[];
+// }
 

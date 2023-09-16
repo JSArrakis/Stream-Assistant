@@ -1,73 +1,71 @@
 [
-    {
-        "title": "Doja Cat - Say So (80s)",
-        "tags": [
-            "disco",
-            "80s",
-            "pop"
-        ],
-        "path": "C:\\Users\\Main\\Desktop\\MusicVideos\\Test\\DojaCat-SaySo.mp4",
-        "duration": 230,
-        "type": "M"
-    },
-    {
-        "title": "The Weeknd - Save Your Tears (Reverb)",
-        "tags": [
-            "reverb",
-            "pop",
-            "electronic",
-            "2020s"
-        ],
-        "path": "C:\\Users\\Main\\Desktop\\MusicVideos\\Test\\SaveYourTearsReverb.mp4",
-        "duration": 248,
-        "type": "M"
-    },
-    {
-        "title": "Arianna Grande - So Into You (Reverb)",
-        "tags": [
-            "reverb",
-            "pop",
-            "electronic",
-            "2010s"
-        ],
-        "path": "C:\\Users\\Main\\Desktop\\MusicVideos\\Test\\SoInToYouReverb.mp4",
-        "duration": 280,
-        "type": "M"
-    },
-    {
-        "title": "The 1975 - Somebody Else (Reverb)",
-        "tags": [
-            "reverb",
-            "pop",
-            "electronic",
-            "2010s"
-        ],
-        "path": "C:\\Users\\Main\\Desktop\\MusicVideos\\Test\\SomebodyElseReverb.mp4",
-        "duration": 416,
-        "type": "M"
-    },
-    {
-        "title": "Taylor Swift - Style (Reverb)",
-        "tags": [
-            "reverb",
-            "pop",
-            "electronic",
-            "2010s"
-        ],
-        "path": "C:\\Users\\Main\\Desktop\\MusicVideos\\Test\\StyleReverb.mp4",
-        "duration": 290,
-        "type": "M"
-    },
-    {
-        "title": "Clean Bandit - Symphony (Reverb)",
-        "tags": [
-            "reverb",
-            "pop",
-            "electronic",
-            "2010s"
-        ],
-        "path": "C:\\Users\\Main\\Desktop\\MusicVideos\\Test\\StyleReverb.mp4",
-        "duration": 262,
-        "type": "M"
-    }
+  {
+    "Title": "Dragula - Rob Zombie",
+    "Path": "E:\\Media\\Music\\MUSICVIDEO.Dragula.RobZombie.mp4",
+    "Duration": 228,
+    "Type": "M",
+    "Tags": [
+      "90s",
+      "rock",
+      "numetal",
+      "halloween"
+    ]
+  },
+  {
+    "Title": "Everybody - Backstreet Boys",
+    "Path": "E:\\Media\\Music\\MUSICVIDEO.Everybody.BackstreetBoys.mp4",
+    "Duration": 362,
+    "Type": "M",
+    "Tags": [
+      "90s",
+      "pop",
+      "halloween"
+    ]
+  },
+  {
+    "Title": "I Miss You - Blink 182",
+    "Path": "E:\\Media\\Music\\MUSICVIDEO.IMissYou.Blink182.mp4",
+    "Duration": 230,
+    "Type": "M",
+    "Tags": [
+      "90s",
+      "punk",
+      "halloween"
+    ]
+  },
+  {
+    "Title": "Living Dead Girl - Rob Zombie",
+    "Path": "E:\\Media\\Music\\MUSICVIDEO.LivingDeadGirl.RobZombie.mp4",
+    "Duration": 230,
+    "Type": "M",
+    "Tags": [
+      "90s",
+      "rock",
+      "numetal",
+      "halloween"
+    ]
+  },
+  {
+    "Title": "Nightmare on my Street - DJ Jazzy Jeff & The Fresh Prince",
+    "Path": "E:\\Media\\Music\\MUSICVIDEO.NightmareOnMyStreet.FreshPrince.mp4",
+    "Duration": 357,
+    "Type": "M",
+    "Tags": [
+      "90s",
+      "rap",
+      "halloween"
+    ]
+  },
+  {
+    "Title": "Michael Jackson - Thriller",
+    "Path": "E:\\Media\\Music\\MUSICVIDEO.Thriller.MichaelJackson.mp4",
+    "Duration": 822,
+    "Type": "M",
+    "Tags": [
+      "80s",
+      "r&b",
+      "pop",
+      "halloween"
+    ]
+  }
 ]

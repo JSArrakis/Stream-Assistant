@@ -1,13 +1,15 @@
 export class Short {
+    Title: string;
     Path: string;
     Duration: number;
     Type: string;
     Tags: string[];
 
-    constructor(path: string, duration: number, type: string, tags: string[]) {
-    this.Path = path;
-    this.Duration = duration;
-    this.Type = type;
-    this.Tags = tags;
-}
+    constructor(title: string, duration: number, path: string, type: string, tags: string[]) {
+        this.Title = title;
+        this.Duration = duration;
+        this.Path = path;
+        this.Type = type;
+        this.Tags = tags;
+    }
 }
