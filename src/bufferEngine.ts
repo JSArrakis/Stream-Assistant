@@ -5,7 +5,6 @@ import { Eras } from "../models/const/eras";
 import { Commercial } from "../models/commercial";
 import { Short } from "../models/short";
 import { Music } from "../models/music";
-import { SelectedMedia } from "../models/selectedMedia";
 
 export class TranslatedTags {
     EraTags: string[];
