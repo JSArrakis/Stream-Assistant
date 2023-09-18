@@ -1,5 +1,5 @@
-export class CommandLineArgs {
-    env?: number;
+export class InputArgs {
+    env?: string;
     movies?: string[];
     tagsOR?: string[];
     tagsAND?: string[];

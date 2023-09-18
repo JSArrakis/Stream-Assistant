@@ -51,7 +51,7 @@ export function createBuffer(
         }
     }
 
-    let envPromos: Promo[] = media.Promos.filter(promo => promo.Tags.includes(`${options.env}`));
+    let envPromos: Promo[] = media.Promos.filter(promo => promo.Tags.includes(options.env));
     let selectedPromos: Promo[] = envPromos.filter(sp => sp.Duration <= duration);
     let promo: Promo;
     if (selectedPromos.length < 1) {

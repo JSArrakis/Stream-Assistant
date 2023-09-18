@@ -1,12 +1,12 @@
-import { CommandLineArgs } from '../models/commandLineArgs';
+import { InputArgs } from '../models/inputArgs';
 const mediaTypes = ["shows", "movies", "shorts", "music", "promos", "commercials",];
 
-export function processCommandLineArgs(): CommandLineArgs {
-    let args = new CommandLineArgs();
+export function processCommandLineArgs(): InputArgs {
+    let args = new InputArgs();
     let options = process.argv.slice(2);
     options.forEach((option) => {
         if (option.includes("--env")) {
-            args.env = parseInt(option.split("=")[1]);
+            args.env = option.split("=")[1];
         }
         if (option.includes("--durEval")) {
             let evalCandidates = option.split("=")[1].split(" ");
@@ -44,6 +44,49 @@ export function processCommandLineArgs(): CommandLineArgs {
         }
     });
 
+    return args;
+}
+
+export function processInputOptions(inputOptions: any): InputArgs {
+    let args = new InputArgs();
+
+    if (inputOptions.env) {
+        args.env = inputOptions.env;
+    }
+    if (inputOptions.durEval) {
+        let evalCandidates: string[] = inputOptions.durEval
+        evalCandidates.forEach(item => {
+            if (!mediaTypes.includes(item)) {
+                throw new Error(
+                    "Any media types submitted for duration evaluation must be one of the following: shows, movies, shorts, music, promos, commercials"
+                );
+            }
+        });
+        args.durEval = evalCandidates;
+    }
+    if (inputOptions.movies) {
+        let inputMovies: string[] = inputOptions.movies
+        inputMovies.forEach(item => validateMovie(item));
+        let convertedMovies: string[] = []
+        inputMovies.forEach(item => {
+            let converted = convertValidMovieDateTime(item);
+            convertedMovies.push(converted);
+        });
+        args.movies = convertedMovies;
+    }
+    if (inputOptions.tagsOR) {
+        args.tagsOR = inputOptions.tagsOR;
+    }
+    if (inputOptions.endTime) {
+        let inputEndTime: string = inputOptions.endTime
+        validateInputDateTime(inputEndTime);
+        args.endTime = convertToUnixTime(inputEndTime);
+    }
+    if (inputOptions.startTime) {
+        let inputStartTime: string = inputOptions.startTime
+        validateStartDateTime(inputStartTime);
+        args.startTime = convertToUnixTime(inputStartTime);
+    }
     return args;
 }
 

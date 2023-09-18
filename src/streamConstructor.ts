@@ -17,11 +17,11 @@ import { Commercial } from "../models/commercial";
 import { Music } from "../models/music";
 import { Promo } from "../models/promo";
 import { Short } from "../models/short";
-import { CommandLineArgs } from "../models/commandLineArgs";
+import { InputArgs } from "../models/inputArgs";
 
 export function constructStream(
     config: Config,
-    options: CommandLineArgs,
+    options: InputArgs,
     media: Media,
     transaltionTags: TranslationTag[] = loadTranslationTags(config.dataFolder + 'translationTags.json'),
     progression: MediaProgression[] = loadProgression(config.dataFolder + 'progression.json'),
@@ -268,7 +268,7 @@ export function getStagedStream(
     return selectedMedia;
 }
 
-export function setProceduralTags(options: CommandLineArgs, stagedMedia: StagedMedia): void {
+export function setProceduralTags(options: InputArgs, stagedMedia: StagedMedia): void {
     if (options.tagsAND === undefined
         && options.tagsOR === undefined) {
 
@@ -388,11 +388,11 @@ export function assignCollEpisodes(collection: Collection, shows: Show[], progre
     })
 }
 
-function setEnvironment(options: CommandLineArgs) {
+function setEnvironment(options: InputArgs) {
     //TODO: Just all of this
     if (options.env !== undefined) {
-        options.env = 1;
+        options.env = "FC";
     } else {
-        options.env = 1;
+        options.env = "FC";
     }
 }
