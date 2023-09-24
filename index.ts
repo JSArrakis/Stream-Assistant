@@ -1,34 +1,32 @@
-import { processCommandLineArgs } from "./src/saCommander";
 import { constructStream } from "./src/streamConstructor";
 import { Config } from "./models/config";
-import { Promo } from "./models/promo";
-import { Music } from "./models/music";
-import { Commercial } from "./models/commercial";
-import { Short } from "./models/short";
-import { Episode } from "./models/show";
-import { Movie } from "./models/movie";
-
-import { processMediaWithDurationDetection } from "./tools/durationUtility";
+import * as VLC from "vlc-client"
 import { loadMedia } from "./dataAccess/dataManager";
 import { Media } from "./models/media";
-import { createM3UFile, executeStream } from "./src/streamExecutor";
-const config: Config = require('./config.json') as Config;
+import { execSync } from 'child_process';
+import * as fs from 'fs';
 
-import { InputArgs } from "./models/inputArgs";
+import { StreamArgs } from "./models/streamArgs";
+import { LoadMediaArgs } from "./models/loadMediaArgs";
 import express, { Request, Response } from 'express';
 import { body, validationResult } from 'express-validator';
+import { MediaBlock } from "./models/mediaBlock";
 
+const config: Config = require('./config.json') as Config;
 const app = express();
 const port = process.env.PORT || 3000;
 
-const allowedFields = ['env', 'movies', 'tagsOR', 'endTime', 'startTime'];
+const streamAllowedFields = ['env', 'movies', 'tagsOR', 'endTime', 'startTime', 'password'];
+const loadMediaAllowedFields = ['password', 'media'];
+let upcomingStream: MediaBlock[] = [];
+let onDeckStream: MediaBlock[] = [];
 
-const postValidationRules = [
+const streamStartValidationRules = [
 	// Ensure only allowed fields are present
 	(req: Request, res: Response, next: Function) => {
 		const requestBody: Record<string, any> = req.body;
 
-		const extraFields = Object.keys(requestBody).filter((field) => !allowedFields.includes(field));
+		const extraFields = Object.keys(requestBody).filter((field) => !streamAllowedFields.includes(field));
 		if (extraFields.length > 0) {
 			return res.status(400).json({ error: `Invalid fields: ${extraFields.join(', ')}` });
 		}
@@ -121,33 +119,142 @@ const postValidationRules = [
 
 			return true;
 		}),
+
+	// Validate the 'password' field
+	body('password')
+		.isString()
+];
+
+const loadMediaValidationRules = [
+	// Ensure only allowed fields are present
+	(req: Request, res: Response, next: Function) => {
+		const requestBody: Record<string, any> = req.body;
+
+		const extraFields = Object.keys(requestBody).filter((field) => !loadMediaAllowedFields.includes(field));
+		if (extraFields.length > 0) {
+			return res.status(400).json({ error: `Invalid fields: ${extraFields.join(', ')}` });
+		}
+		next();
+	},
+
+	// Validate the 'media' field
+	body('media')
+		.isArray()
+		.custom((value: string[]) => {
+			for (const item of value) {
+				if (typeof item !== 'string') {
+					throw new Error('media must be an array of strings');
+				}
+			}
+			return true;
+		}),
+
+	// Validate the 'password' field
+	body('password')
+		.isString()
 ];
 
 app.use(express.json());
 
-app.post('/api/startStream', postValidationRules, (req: Request, res: Response) => {
+app.post('/api/startStream', streamStartValidationRules, async (req: Request, res: Response) => {
 	// Check for validation errors
 	const errors = validationResult(req);
 	if (!errors.isEmpty()) {
 		return res.status(400).json({ errors: errors.array() });
 	}
 
-	let args: InputArgs = mapRequestToInputArgs(req);
+	let args: StreamArgs = mapStreamStartRequestToInputArgs(req);
+
+	let currentProcesses = listRunningProcesses();
+	let vlcIsActive = isVLCRunning(currentProcesses);
+	if (!vlcIsActive) {
+		execSync("start vlc");
+		await delay(2);
+	}
+
+
 
 	const media: Media = loadMedia(config);
 
-	let stream: [string[], (Promo | Music | Commercial | Short | Episode | Movie)[]] = constructStream(config, args, media);
-	// convert stream to m3u file
-	createM3UFile(stream[0], config.destinationFolder, config.playlistName);
-	// execute stream
-	executeStream(config.vlcLocation, config.destinationFolder, config.playlistName);
-	console.log(stream);
+	let stream: MediaBlock[] = constructStream(config, args, media);
+	// // convert stream to m3u file
+	// createM3UFile(stream[0], config.destinationFolder, config.playlistName);
+	// // execute stream
+	// executeStream(config.vlcLocation, config.destinationFolder, config.playlistName);
 
-	res.json({ stream: stream[0] });
+	const vlc = new VLC.Client({
+		ip: "localhost",
+		port: 8080,
+		username: "",
+		password: args.password
+	});
+
+	for (const item of stream) {
+		try {
+			//If item has a initial Buffer, add it to the playlist
+			if (item.InitialBuffer != null || item.InitialBuffer != undefined) {
+				item.InitialBuffer.forEach(async (element) => {
+					await vlc.addToPlaylist(element.Path);
+				});
+			}
+			if (item.MainBlock?.Path != null || item.MainBlock?.Path != undefined) {
+				await vlc.addToPlaylist(item.MainBlock.Path)
+			}
+			item.Buffer.forEach(async (element) => {
+				await vlc.addToPlaylist(element.Path);
+			});
+		} catch (error) {
+			console.error("An error occurred when adding to Playlist:", error);
+		}
+	}
+
+	try {
+		await vlc.next();
+	} catch (error) {
+		console.error("An error occurred when playing stream:", error);
+	}
+
+	// create json file with stream and write it to the destination folder
+	fs.writeFileSync(config.destinationFolder + "output.json", JSON.stringify(stream));
+
+	res.status(200).json({ message: stream });
 });
 
 app.get('/', (req: Request, res: Response) => {
 	res.json({ message: 'Welcome to your API!' });
+});
+
+app.post('/api/loadMedia', loadMediaValidationRules, async (req: Request, res: Response) => {
+	const errors = validationResult(req);
+	if (!errors.isEmpty()) {
+		return res.status(400).json({ errors: errors.array() });
+	}
+	let args: LoadMediaArgs = new LoadMediaArgs(req.body.password, req.body.media);
+
+	let currentProcesses = listRunningProcesses();
+	let vlcIsActive = isVLCRunning(currentProcesses);
+	if (!vlcIsActive) {
+		execSync("start vlc")
+	}
+
+	const vlc = new VLC.Client({
+		ip: "localhost",
+		port: 8080,
+		username: "", // username is optional
+		password: args.password
+	});
+
+	for (const item of args.media) {
+		try {
+			// Your asynchronous code logic goes here
+			await vlc.addToPlaylist(item);
+		} catch (error) {
+			console.error("An error occurred:", error);
+		}
+	}
+
+	// After all items are processed, you can send a response or perform other actions.
+	res.status(200).json({ message: 'Media added to playlist successfully' });
 });
 
 app.listen(port, () => {
@@ -159,11 +266,13 @@ function convertISOToUnix(isoDateTime: string): number {
 	return Math.floor(new Date(isoDateTime).getTime() / 1000);
 }
 
-export function mapRequestToInputArgs(req: Request): InputArgs {
+export function mapStreamStartRequestToInputArgs(req: Request): StreamArgs {
 	const { env, movies, tagsOR, endTime, startTime } = req.body;
-
+	const inputArgs: StreamArgs = new StreamArgs(req.body.password);
 	// Map env directly
-	const inputArgs: InputArgs = { env };
+	if (env) {
+		inputArgs.env = env;
+	}
 
 	// Map tagsOR directly
 	if (tagsOR) {
@@ -197,20 +306,63 @@ export function mapRequestToInputArgs(req: Request): InputArgs {
 	return inputArgs;
 }
 
-// async function main(): Promise<void> {
-// 	const media: Media = loadMedia(config);
+function getCurrentUnixTimestamp() {
+	return Math.floor(Date.now() / 1000); // Convert milliseconds to seconds
+}
 
-// 	//Get user selection
-// 	let options: CommandLineArgs = processCommandLineArgs();
-// 	console.log(options);
-// 	if (options.durEval) {
-// 		await processMediaWithDurationDetection(config, media, options.durEval)
-// 	} else {
-// 		let stream: [string[], (Promo | Music | Commercial | Short | Episode | Movie)[]] = constructStream(config, options, media);
-// 		// convert stream to m3u file
-// 		createM3UFile(stream[0], config.destinationFolder, config.playlistName);
-// 		// execute stream
-// 		executeStream(config.vlcLocation, config.destinationFolder, config.playlistName);
-// 		console.log(stream);
-// 	}
-// }
+// Function to calculate the delay until the next interval mark
+function calculateDelayToNextInterval(intervalInSeconds: number) {
+	const now = new Date();
+	const currentSeconds = now.getSeconds();
+	const secondsToNextInterval = intervalInSeconds - (currentSeconds % intervalInSeconds);
+	return secondsToNextInterval * 1000; // Convert seconds to milliseconds
+}
+
+// Initial delay until the next interval mark in seconds
+const intervalInSeconds: number = 1800;
+const initialDelay = calculateDelayToNextInterval(intervalInSeconds);
+
+// Function to perform the check and set the next interval
+function cycleCheck() {
+	const currentUnixTimestamp = getCurrentUnixTimestamp();
+	console.log(`Current Unix Timestamp: ${currentUnixTimestamp}`);
+
+	// Calculate the delay until the next interval mark and set it as the new interval
+	const nextDelay = calculateDelayToNextInterval(intervalInSeconds);
+	setTimeout(cycleCheck, nextDelay);
+}
+
+// Start the initial check after the calculated delay
+setTimeout(cycleCheck, initialDelay);
+
+function listRunningProcesses(): string[] {
+	try {
+		const stdout = execSync('tasklist', { encoding: 'utf-8' });
+		const processesList = stdout
+			.split('\n')
+			.filter((line) => line.trim() !== '') // Remove empty lines
+			.map((line) => line.trim()); // Trim whitespace
+
+		return processesList;
+	} catch (error: any) {
+		console.error('Error:', error.message);
+		return [];
+	}
+}
+
+function isVLCRunning(processesList: string[]): boolean {
+	for (const processInfo of processesList) {
+		if (processInfo.toLowerCase().includes('vlc.exe')) {
+			return true;
+		}
+	}
+	return false;
+}
+
+async function delay(seconds: number): Promise<void> {
+	return new Promise<void>((resolve) => {
+		setTimeout(() => {
+			resolve();
+		}, seconds * 1000); // Convert seconds to milliseconds
+	});
+}

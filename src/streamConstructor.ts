@@ -13,23 +13,19 @@ import { Episode, Show } from "../models/show";
 import { ManageProgression, ReduceProgression } from "./utilities";
 import { TranslationTag } from "../models/translationTag";
 import { createBuffer } from "./bufferEngine";
-import { Commercial } from "../models/commercial";
-import { Music } from "../models/music";
-import { Promo } from "../models/promo";
-import { Short } from "../models/short";
-import { InputArgs } from "../models/inputArgs";
+import { StreamArgs } from "../models/streamArgs";
+import { MediaBlock } from "../models/mediaBlock";
 
 export function constructStream(
     config: Config,
-    options: InputArgs,
+    options: StreamArgs,
     media: Media,
     transaltionTags: TranslationTag[] = loadTranslationTags(config.dataFolder + 'translationTags.json'),
     progression: MediaProgression[] = loadProgression(config.dataFolder + 'progression.json'),
     rightNow: number = (options.startTime === undefined) ? moment().unix() : options.startTime):
-    [string[], (Promo | Music | Commercial | Short | Episode | Movie)[]] {
+    MediaBlock[] {
 
-    let streamPaths: string[] = []
-    let streamObjects: (Promo | Music | Commercial | Short | Episode | Movie)[] = [];
+    let streamBlocks: MediaBlock[] = [];
 
     setEnvironment(options);
 
@@ -56,17 +52,18 @@ export function constructStream(
         transaltionTags,
         prevBuffer)
 
-    streamPaths.push(...initialBuffer[0].map(obj => obj.Path));
-    streamObjects.push(...initialBuffer[0]);
+    let hasInitialBuffer = initialBuffer[0].length > 0 ? true : false;
+
     prevBuffer = initialBuffer[2];
 
     let remainder = initialBuffer[1];
     stagedStream.forEach((item, index) => {
         let lastItem = index === stagedStream.length - 1 ? true : false;
+
         if (item.Type == MediaType.Episode || item.Type == MediaType.Movie) {
+            let mediaBlock = new MediaBlock([], [], undefined);
             let mediaItem = item.Media;
-            streamPaths.push(mediaItem.Path);
-            streamObjects.push(mediaItem);
+            mediaBlock.MainBlock = mediaItem;
             let bufferDuration = mediaItem.DurationLimit - mediaItem.Duration
             let buffer = createBuffer(
                 options.tagsOR === undefined ? [] : options.tagsOR,
@@ -78,9 +75,13 @@ export function constructStream(
                 transaltionTags,
                 prevBuffer);
             prevBuffer = buffer[2];
-            streamPaths.push(...buffer[0].map(obj => obj.Path));
-            streamObjects.push(...buffer[0]);
+            mediaBlock.Buffer.push(...buffer[0]);
             remainder = buffer[1];
+            if (index === 0 && hasInitialBuffer) {
+                mediaBlock.InitialBuffer.push(...initialBuffer[0]);
+                hasInitialBuffer = false;
+            }
+            streamBlocks.push(mediaBlock);
         }
         //TODO
         // else if (item.Media instanceof Collection) {
@@ -95,8 +96,9 @@ export function constructStream(
         //     streamPaths.push(...collectionBlock[0]);
         //     remainder = collectionBlock[1];
         // }
-    })
-    return [streamPaths, streamObjects];
+
+    });
+    return streamBlocks;
 }
 
 function createCollectionBlock(
@@ -268,7 +270,7 @@ export function getStagedStream(
     return selectedMedia;
 }
 
-export function setProceduralTags(options: InputArgs, stagedMedia: StagedMedia): void {
+export function setProceduralTags(options: StreamArgs, stagedMedia: StagedMedia): void {
     if (options.tagsAND === undefined
         && options.tagsOR === undefined) {
 
@@ -388,7 +390,7 @@ export function assignCollEpisodes(collection: Collection, shows: Show[], progre
     })
 }
 
-function setEnvironment(options: InputArgs) {
+function setEnvironment(options: StreamArgs) {
     //TODO: Just all of this
     if (options.env !== undefined) {
         options.env = "FC";

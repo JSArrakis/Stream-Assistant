@@ -1,4 +1,4 @@
-export class InputArgs {
+export class StreamArgs {
     env?: string;
     movies?: string[];
     tagsOR?: string[];
@@ -7,4 +7,10 @@ export class InputArgs {
     endTime?: number;
     durEval?: string[];
     startTime?: number;
+    continuous?: boolean;
+    password: string;
+
+    constructor(password: string) {
+        this.password = password;
+    }
 }

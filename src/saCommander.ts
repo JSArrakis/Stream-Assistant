@@ -1,8 +1,10 @@
-import { InputArgs } from '../models/inputArgs';
+import { StreamArgs } from '../models/streamArgs';
 const mediaTypes = ["shows", "movies", "shorts", "music", "promos", "commercials",];
 
-export function processCommandLineArgs(): InputArgs {
-    let args = new InputArgs();
+
+
+export function processCommandLineArgs(): StreamArgs {
+    let args = new StreamArgs();
     let options = process.argv.slice(2);
     options.forEach((option) => {
         if (option.includes("--env")) {
@@ -47,8 +49,8 @@ export function processCommandLineArgs(): InputArgs {
     return args;
 }
 
-export function processInputOptions(inputOptions: any): InputArgs {
-    let args = new InputArgs();
+export function processInputOptions(inputOptions: any): StreamArgs {
+    let args = new StreamArgs();
 
     if (inputOptions.env) {
         args.env = inputOptions.env;

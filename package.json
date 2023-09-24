@@ -22,6 +22,8 @@
     "minimist": "^1.2.8",
     "mocha": "^10.2.0",
     "moment": "^2.29.4",
+    "ps-list": "^8.1.1",
+    "vlc-client": "^1.1.1",
     "yargs": "^17.7.2"
   },
   "devDependencies": {

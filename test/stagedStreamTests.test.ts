@@ -12,7 +12,7 @@ import * as utilities from '../src/utilities'
 import { deepCopy } from '../src/utilities';
 import { StagedMedia } from '../models/stagedMedia';
 import moment from 'moment';
-import { InputArgs } from '../models/inputArgs';
+import { StreamArgs } from '../models/streamArgs';
 
 let media = new Media(
     [], //show
@@ -580,7 +580,7 @@ describe('evaluateStreamEndTime function', () => {
 
 describe('setProceduralTags function', () => {
     it('should populate tags from selected movies and collections into options.tagsOR if tagsOR is undefined', () => {
-        let options: InputArgs = new InputArgs();
+        let options: StreamArgs = new StreamArgs();
 
         let stagedmedia: StagedMedia = new StagedMedia(
             [
