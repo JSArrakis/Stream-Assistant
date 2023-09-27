@@ -24,7 +24,7 @@ export function constructStream(
     progression: MediaProgression[] = loadProgression(config.dataFolder + 'progression.json'),
     rightNow: number = (options.startTime === undefined) ? moment().unix() : options.startTime):
     MediaBlock[] {
-
+    console.log("Right Now: " + rightNow)
     let streamBlocks: MediaBlock[] = [];
 
     setEnvironment(options);
@@ -53,7 +53,7 @@ export function constructStream(
         prevBuffer)
 
     let hasInitialBuffer = initialBuffer[0].length > 0 ? true : false;
-
+    // console log the initial buffer remainder
     prevBuffer = initialBuffer[2];
 
     let remainder = initialBuffer[1];
@@ -64,7 +64,9 @@ export function constructStream(
             let mediaBlock = new MediaBlock([], [], undefined);
             let mediaItem = item.Media;
             mediaBlock.MainBlock = mediaItem;
+            mediaBlock.StartTime = item.Time;
             let bufferDuration = mediaItem.DurationLimit - mediaItem.Duration
+
             let buffer = createBuffer(
                 options.tagsOR === undefined ? [] : options.tagsOR,
                 bufferDuration + remainder,
@@ -74,6 +76,12 @@ export function constructStream(
                 lastItem ? [] : stagedStream[index + 1].Tags,
                 transaltionTags,
                 prevBuffer);
+
+            //sum of all buffer durations
+            let totalDuration: number = 0;
+            for (const obj of buffer[0]) {
+                totalDuration += obj.Duration;
+            }
             prevBuffer = buffer[2];
             mediaBlock.Buffer.push(...buffer[0]);
             remainder = buffer[1];

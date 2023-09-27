@@ -73,7 +73,9 @@ export function createBuffer(
         }
         halfB = remDur - halfA;
     }
-
+    console.log("Buffer Duration: " + duration);
+    console.log("Half A: " + halfA);
+    console.log("Half B: " + halfB);
     if (halfA === 0) {
         let selectedB = selectMediaWithinDuration(media, convertedSubTags, remDur, prevBuff);
         buffer.push(...selectedB.selectedMedia);
@@ -87,14 +89,14 @@ export function createBuffer(
         return [buffer, selectedA.remainingDuration, prevBuff]
     } else {
         let newPrevBuff: Media = new Media([], [], [], [], [], [], []);
-        let selectedA = selectMediaWithinDuration(media, convertedSubTags, remDur, prevBuff);
+        let selectedA = selectMediaWithinDuration(media, convertedSubTags, halfA, prevBuff);
         buffer.push(...selectedA.selectedMedia);
         buffer.push(promo);
         newPrevBuff = selectedA.chosenMedia;
         prevBuff.Commercials.push(...selectedA.chosenMedia.Commercials);
         prevBuff.Music.push(...selectedA.chosenMedia.Music);
         prevBuff.Shorts.push(...selectedA.chosenMedia.Shorts);
-        let selectedB = selectMediaWithinDuration(media, convertedSubTags, remDur, prevBuff);
+        let selectedB = selectMediaWithinDuration(media, convertedSubTags, halfB, prevBuff);
         buffer.push(...selectedB.selectedMedia);
         newPrevBuff.Commercials.push(...selectedB.chosenMedia.Commercials);
         newPrevBuff.Music.push(...selectedB.chosenMedia.Music);
@@ -223,9 +225,7 @@ function selectCommercials(
             remainingDuration -= selectedCommercial.Duration;
             usedCommercialTitles.add(selectedCommercial.Title);
             commercialBlock -= selectedCommercial.Duration; // Reduce commercialBlock
-            console.log("Commercial Block: " + commercialBlock);
         } else {
-            console.log("No commercials available with remaining commercial block duration of " + commercialBlock + " and remaining buffer duration of " + remainingDuration);
             break;
         }
     }
@@ -339,7 +339,6 @@ export function selectMediaWithinDuration(
         }
 
         if (chosenCommercials[0].length === 0 && !selectedShortOrMusic) {
-            console.log("Breaking buffer fill loop due to no commercials or shorts/music available");
             break;
         }
     }

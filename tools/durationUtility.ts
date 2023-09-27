@@ -10,8 +10,6 @@ import { Config } from '../models/config';
 import { Show } from '../models/show';
 
 export async function processMediaWithDurationDetection(config: Config, media: Media, mediaTypes: string[]): Promise<void> {
-    console.log('Processing media duration...')
-    console.log(mediaTypes);
 
     for (const mediaType of mediaTypes) {
         let mediaList: (Short[] | Commercial[] | Music[] | Promo[] | Movie[]) = [];
@@ -34,19 +32,16 @@ export async function processMediaWithDurationDetection(config: Config, media: M
                 "Any media types submitted for duration evaluation must be one of the following: shows, movies, shorts, music, promos, commercials"
             );
         }
-        console.log(`Processing ${mediaList.length} ${mediaType}...`);
         if (mediaType === 'shows') {
             for (let show of media.Shows) {
                 for (let episode of show.Episodes) {
                     let durationInSeconds = await getMediaDuration(episode.Path);
-                    console.log(`Duration of ${episode.Title}: ${durationInSeconds}`);
                     episode.Duration = durationInSeconds; // Update duration value
                 }
             }
         } else {
             for (let item of mediaList) {
                 let durationInSeconds = await getMediaDuration(item.Path);
-                console.log(`Duration of ${item.Title}: ${durationInSeconds}`);
                 item.Duration = durationInSeconds; // Update duration value
                 if (mediaType === 'movies') {
                     let movie = item as Movie;
@@ -56,7 +51,6 @@ export async function processMediaWithDurationDetection(config: Config, media: M
         }
 
 
-        console.log(`Finished processing ${mediaList.length} ${mediaType}.`)
         if (mediaType === 'shows') {
             fs.writeFileSync(config.dataFolder + "showsList.json", JSON.stringify(showList, null, 2));
         } else {

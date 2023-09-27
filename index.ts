@@ -20,6 +20,8 @@ const streamAllowedFields = ['env', 'movies', 'tagsOR', 'endTime', 'startTime', 
 const loadMediaAllowedFields = ['password', 'media'];
 let upcomingStream: MediaBlock[] = [];
 let onDeckStream: MediaBlock[] = [];
+let continuousStream: boolean = false;
+let vlc: VLC.Client;
 
 const streamStartValidationRules = [
 	// Ensure only allowed fields are present
@@ -52,9 +54,7 @@ const streamStartValidationRules = [
 				if (typeof item !== 'string') {
 					throw new Error('movies must be an array of strings');
 				}
-				console.log("Movie being checked: " + item);
 				if (item.includes('::')) {
-					console.log("Movie being spliced: " + item);
 					const [firstPart, secondPart] = item.split('::');
 					// Check the first part for only letters and numbers
 					if (!/^[a-zA-Z0-9]+$/.test(firstPart)) {
@@ -156,14 +156,27 @@ const loadMediaValidationRules = [
 
 app.use(express.json());
 
-app.post('/api/startStream', streamStartValidationRules, async (req: Request, res: Response) => {
+//For later the ability to close vlc
+//taskkill /F /IM vlc.exe
+
+app.post('/api/continuousStream', streamStartValidationRules, async (req: Request, res: Response) => {
+	console.log("Continuous Stream Request Received");
 	// Check for validation errors
 	const errors = validationResult(req);
 	if (!errors.isEmpty()) {
 		return res.status(400).json({ errors: errors.array() });
 	}
 
+	console.log("Continuous Stream Request Validated");
+	continuousStream = true;
 	let args: StreamArgs = mapStreamStartRequestToInputArgs(req);
+
+	vlc = new VLC.Client({
+		ip: "localhost",
+		port: 8080,
+		username: "",
+		password: args.password
+	});
 
 	let currentProcesses = listRunningProcesses();
 	let vlcIsActive = isVLCRunning(currentProcesses);
@@ -172,7 +185,81 @@ app.post('/api/startStream', streamStartValidationRules, async (req: Request, re
 		await delay(2);
 	}
 
+	try {
+		let playlist = await vlc.getPlaylist();
+		console.log("Playlist Length: " + playlist.length);
+		if (playlist.length > 0) {
+			await vlc.emptyPlaylist();
+		}
+	} catch (error) {
+		console.error("An error occurred when clearing playlist:", error);
+	}
 
+	const media: Media = loadMedia(config);
+
+	upcomingStream = constructStream(config, args, media);
+	console.log("Upcoming Stream Length: " + upcomingStream.length);
+
+	for (let i = 0; i < 2; i++) {
+		if (upcomingStream.length > 0) {
+			let selectedObject = upcomingStream.shift();
+			if (selectedObject != null || selectedObject != undefined) {
+				onDeckStream.push(selectedObject);
+			}
+		}
+	}
+	console.log("On Deck Stream Length: " + onDeckStream.length);
+	console.log("New Upcoming Stream Length: " + upcomingStream.length);
+
+	for (const item of onDeckStream) {
+		await addMediaBlock(vlc, item);
+	}
+
+	// // convert stream to m3u file
+	// createM3UFile(stream[0], config.destinationFolder, config.playlistName);
+	// // execute stream
+	// executeStream(config.vlcLocation, config.destinationFolder, config.playlistName);
+
+	try {
+		await vlc.next();
+	} catch (error) {
+		console.error("An error occurred when playing stream:", error);
+	}
+
+	res.status(200).json({ message: "Stream Starting" });
+});
+
+app.post('/api/adhocStream', streamStartValidationRules, async (req: Request, res: Response) => {
+	// Check for validation errors
+	const errors = validationResult(req);
+	if (!errors.isEmpty()) {
+		return res.status(400).json({ errors: errors.array() });
+	}
+
+	let args: StreamArgs = mapStreamStartRequestToInputArgs(req);
+
+	const vlc = new VLC.Client({
+		ip: "localhost",
+		port: 8080,
+		username: "",
+		password: args.password
+	});
+
+	let currentProcesses = listRunningProcesses();
+	let vlcIsActive = isVLCRunning(currentProcesses);
+	if (!vlcIsActive) {
+		execSync("start vlc");
+		await delay(2);
+	}
+
+	try {
+		let playlist = await vlc.getPlaylist();
+		if (playlist.length > 0) {
+			await vlc.emptyPlaylist();
+		}
+	} catch (error) {
+		console.error("An error occurred when clearing playlist:", error);
+	}
 
 	const media: Media = loadMedia(config);
 
@@ -182,30 +269,8 @@ app.post('/api/startStream', streamStartValidationRules, async (req: Request, re
 	// // execute stream
 	// executeStream(config.vlcLocation, config.destinationFolder, config.playlistName);
 
-	const vlc = new VLC.Client({
-		ip: "localhost",
-		port: 8080,
-		username: "",
-		password: args.password
-	});
-
 	for (const item of stream) {
-		try {
-			//If item has a initial Buffer, add it to the playlist
-			if (item.InitialBuffer != null || item.InitialBuffer != undefined) {
-				item.InitialBuffer.forEach(async (element) => {
-					await vlc.addToPlaylist(element.Path);
-				});
-			}
-			if (item.MainBlock?.Path != null || item.MainBlock?.Path != undefined) {
-				await vlc.addToPlaylist(item.MainBlock.Path)
-			}
-			item.Buffer.forEach(async (element) => {
-				await vlc.addToPlaylist(element.Path);
-			});
-		} catch (error) {
-			console.error("An error occurred when adding to Playlist:", error);
-		}
+
 	}
 
 	try {
@@ -237,7 +302,7 @@ app.post('/api/loadMedia', loadMediaValidationRules, async (req: Request, res: R
 		execSync("start vlc")
 	}
 
-	const vlc = new VLC.Client({
+	vlc = new VLC.Client({
 		ip: "localhost",
 		port: 8080,
 		username: "", // username is optional
@@ -319,13 +384,38 @@ function calculateDelayToNextInterval(intervalInSeconds: number) {
 }
 
 // Initial delay until the next interval mark in seconds
-const intervalInSeconds: number = 1800;
+const intervalInSeconds: number = 300;
 const initialDelay = calculateDelayToNextInterval(intervalInSeconds);
 
 // Function to perform the check and set the next interval
-function cycleCheck() {
+async function cycleCheck() {
 	const currentUnixTimestamp = getCurrentUnixTimestamp();
 	console.log(`Current Unix Timestamp: ${currentUnixTimestamp}`);
+	if (onDeckStream.length >= 2) {
+		console.log("Target Unix Timestamp: " + onDeckStream[1].StartTime);
+	} else {
+		console.log("There arent enough items in the on deck stream to check for a new item");
+	}
+	if (onDeckStream.length >= 1 && currentUnixTimestamp === onDeckStream[0].StartTime) {
+		console.log(onDeckStream[0].MainBlock?.Title + " is starting now");
+	}
+
+	if (continuousStream && onDeckStream.length >= 2) {
+		if (onDeckStream[1].StartTime && currentUnixTimestamp >= onDeckStream[1].StartTime) {
+			let removed = onDeckStream.shift();
+			if (removed != null || removed != undefined) {
+				console.log("Removing " + removed.MainBlock?.Title + " and post buffer from On Deck Stream");
+			}
+			let added = upcomingStream.shift();
+			if (added != null || added != undefined) {
+				console.log("Adding " + added.MainBlock?.Title + " to On Deck Stream");
+			}
+			if (added != null || added != undefined) {
+				onDeckStream.push(added);
+				await addMediaBlock(vlc, added);
+			}
+		}
+	}
 
 	// Calculate the delay until the next interval mark and set it as the new interval
 	const nextDelay = calculateDelayToNextInterval(intervalInSeconds);
@@ -365,4 +455,27 @@ async function delay(seconds: number): Promise<void> {
 			resolve();
 		}, seconds * 1000); // Convert seconds to milliseconds
 	});
+}
+
+async function addMediaBlock(vlc: VLC.Client, item: MediaBlock): Promise<void> {
+	try {
+		//If item has a initial Buffer, add it to the playlist
+		console.log("Adding " + item.InitialBuffer.length + " initial buffer items to playlist");
+		if (item.InitialBuffer != null || item.InitialBuffer != undefined) {
+			item.InitialBuffer.forEach(async (element) => {
+				await vlc.addToPlaylist(element.Path);
+			});
+		}
+
+		if (item.MainBlock?.Path != null || item.MainBlock?.Path != undefined) {
+			console.log("Adding " + item.MainBlock.Title + " to playlist");
+			await vlc.addToPlaylist(item.MainBlock.Path);
+		}
+		console.log("Adding " + item.Buffer.length + " post buffer items to playlist");
+		item.Buffer.forEach(async (element) => {
+			await vlc.addToPlaylist(element.Path);
+		});
+	} catch (error) {
+		console.error("An error occurred when adding to Playlist:", error);
+	}
 }
