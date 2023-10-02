@@ -5,7 +5,7 @@ import { loadMedia } from "./dataAccess/dataManager";
 import { Media } from "./models/media";
 import { execSync } from 'child_process';
 import * as fs from 'fs';
-
+import moment from 'moment';
 import { StreamArgs } from "./models/streamArgs";
 import { LoadMediaArgs } from "./models/loadMediaArgs";
 import express, { Request, Response } from 'express';
@@ -22,6 +22,8 @@ let upcomingStream: MediaBlock[] = [];
 let onDeckStream: MediaBlock[] = [];
 let continuousStream: boolean = false;
 let vlc: VLC.Client;
+let media: Media = loadMedia(config);
+let continuousStreamArgs: StreamArgs;
 
 const streamStartValidationRules = [
 	// Ensure only allowed fields are present
@@ -169,13 +171,13 @@ app.post('/api/continuousStream', streamStartValidationRules, async (req: Reques
 
 	console.log("Continuous Stream Request Validated");
 	continuousStream = true;
-	let args: StreamArgs = mapStreamStartRequestToInputArgs(req);
+	continuousStreamArgs = mapStreamStartRequestToInputArgs(req);
 
 	vlc = new VLC.Client({
 		ip: "localhost",
 		port: 8080,
 		username: "",
-		password: args.password
+		password: continuousStreamArgs.password
 	});
 
 	let currentProcesses = listRunningProcesses();
@@ -195,9 +197,7 @@ app.post('/api/continuousStream', streamStartValidationRules, async (req: Reques
 		console.error("An error occurred when clearing playlist:", error);
 	}
 
-	const media: Media = loadMedia(config);
-
-	upcomingStream = constructStream(config, args, media);
+	upcomingStream = constructStream(config, continuousStreamArgs, media);
 	console.log("Upcoming Stream Length: " + upcomingStream.length);
 
 	for (let i = 0; i < 2; i++) {
@@ -371,15 +371,12 @@ export function mapStreamStartRequestToInputArgs(req: Request): StreamArgs {
 	return inputArgs;
 }
 
-function getCurrentUnixTimestamp() {
-	return Math.floor(Date.now() / 1000); // Convert milliseconds to seconds
-}
-
 // Function to calculate the delay until the next interval mark
 function calculateDelayToNextInterval(intervalInSeconds: number) {
-	const now = new Date();
-	const currentSeconds = now.getSeconds();
-	const secondsToNextInterval = intervalInSeconds - (currentSeconds % intervalInSeconds);
+	const now = moment().unix();
+	console.log(`Current Unix Timestamp: ${now}`);
+	const secondsToNextInterval = intervalInSeconds - (now % intervalInSeconds);
+	console.log(`Seconds to next interval: ${secondsToNextInterval}`);
 	return secondsToNextInterval * 1000; // Convert seconds to milliseconds
 }
 
@@ -389,7 +386,7 @@ const initialDelay = calculateDelayToNextInterval(intervalInSeconds);
 
 // Function to perform the check and set the next interval
 async function cycleCheck() {
-	const currentUnixTimestamp = getCurrentUnixTimestamp();
+	const currentUnixTimestamp = moment().unix();
 	console.log(`Current Unix Timestamp: ${currentUnixTimestamp}`);
 	if (onDeckStream.length >= 2) {
 		console.log("Target Unix Timestamp: " + onDeckStream[1].StartTime);
@@ -415,6 +412,20 @@ async function cycleCheck() {
 				await addMediaBlock(vlc, added);
 			}
 		}
+	}
+
+
+
+
+	const endOfDayMarker = moment().set({ hour: 23, minute: 30, second: 0 }).unix();
+	if (currentUnixTimestamp === endOfDayMarker) {
+		let tomorrowsTimeStamp = moment().add(1, 'days').set({ hour: 0, minute: 0, second: 0 }).unix();
+		let tomorrowsContinuousStreamArgs = new StreamArgs(continuousStreamArgs.password);
+		tomorrowsContinuousStreamArgs.env = continuousStreamArgs.env;
+		tomorrowsContinuousStreamArgs.tagsOR = continuousStreamArgs.tagsOR;
+		tomorrowsContinuousStreamArgs.startTime = tomorrowsTimeStamp;
+		const stream = constructStream(config, new StreamArgs(""), media);
+		upcomingStream.push(...stream);
 	}
 
 	// Calculate the delay until the next interval mark and set it as the new interval
@@ -460,7 +471,9 @@ async function delay(seconds: number): Promise<void> {
 async function addMediaBlock(vlc: VLC.Client, item: MediaBlock): Promise<void> {
 	try {
 		//If item has a initial Buffer, add it to the playlist
-		console.log("Adding " + item.InitialBuffer.length + " initial buffer items to playlist");
+		if (item.InitialBuffer.length > 0) {
+			console.log("Adding " + item.InitialBuffer.length + " initial buffer items to playlist");
+		}
 		if (item.InitialBuffer != null || item.InitialBuffer != undefined) {
 			item.InitialBuffer.forEach(async (element) => {
 				await vlc.addToPlaylist(element.Path);

@@ -73,9 +73,6 @@ export function createBuffer(
         }
         halfB = remDur - halfA;
     }
-    console.log("Buffer Duration: " + duration);
-    console.log("Half A: " + halfA);
-    console.log("Half B: " + halfB);
     if (halfA === 0) {
         let selectedB = selectMediaWithinDuration(media, convertedSubTags, remDur, prevBuff);
         buffer.push(...selectedB.selectedMedia);
