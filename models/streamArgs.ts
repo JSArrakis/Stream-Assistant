@@ -10,6 +10,7 @@ export class StreamArgs {
     continuous?: boolean;
     password: string;
 
+
     constructor(password: string) {
         this.password = password;
     }

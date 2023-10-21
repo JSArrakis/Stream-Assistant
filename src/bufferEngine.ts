@@ -73,6 +73,7 @@ export function createBuffer(
         }
         halfB = remDur - halfA;
     }
+
     if (halfA === 0) {
         let selectedB = selectMediaWithinDuration(media, convertedSubTags, remDur, prevBuff);
         buffer.push(...selectedB.selectedMedia);
@@ -80,9 +81,10 @@ export function createBuffer(
         prevBuff = selectedB.chosenMedia;
         return [buffer, selectedB.remainingDuration, prevBuff]
     } else if (halfB === 0) {
-        let selectedA = selectMediaWithinDuration(media, convertedSubTags, remDur, prevBuff);
+        let selectedA = selectMediaWithinDuration(media, convertedPreTags, remDur, prevBuff);
         buffer.push(promo)
         buffer.push(...selectedA.selectedMedia);
+        prevBuff = selectedA.chosenMedia;
         return [buffer, selectedA.remainingDuration, prevBuff]
     } else {
         let newPrevBuff: Media = new Media([], [], [], [], [], [], []);
