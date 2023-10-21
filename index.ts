@@ -162,14 +162,12 @@ app.use(express.json());
 //taskkill /F /IM vlc.exe
 
 app.post('/api/continuousStream', streamStartValidationRules, async (req: Request, res: Response) => {
-	console.log("Continuous Stream Request Received");
 	// Check for validation errors
 	const errors = validationResult(req);
 	if (!errors.isEmpty()) {
 		return res.status(400).json({ errors: errors.array() });
 	}
 
-	console.log("Continuous Stream Request Validated");
 	continuousStream = true;
 	continuousStreamArgs = mapStreamStartRequestToInputArgs(req);
 
@@ -198,7 +196,6 @@ app.post('/api/continuousStream', streamStartValidationRules, async (req: Reques
 	}
 
 	upcomingStream = constructStream(config, continuousStreamArgs, media);
-	console.log("Upcoming Stream Length: " + upcomingStream.length);
 
 	for (let i = 0; i < 2; i++) {
 		if (upcomingStream.length > 0) {
@@ -208,8 +205,6 @@ app.post('/api/continuousStream', streamStartValidationRules, async (req: Reques
 			}
 		}
 	}
-	console.log("On Deck Stream Length: " + onDeckStream.length);
-	console.log("New Upcoming Stream Length: " + upcomingStream.length);
 
 	for (const item of onDeckStream) {
 		await addMediaBlock(vlc, item);
