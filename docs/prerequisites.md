@@ -16,7 +16,7 @@ Before integrating Stream Assistant into your media workflow, ensure that the fo
 - Essential Software:
   - VLC for media playback
   - MongoDB for database operations
-  - Node.js (Eventually transitioning to Docker and VLC)
+  - Node.js
 
 ## Installation
 
