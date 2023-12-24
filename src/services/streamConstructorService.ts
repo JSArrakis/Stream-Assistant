@@ -1,6 +1,6 @@
 import { Config } from "../models/config";
 import { MediaProgression } from "../models/mediaProgression"
-import { loadProgression, loadTranslationTags } from "../dataAccess/dataManager";
+import { loadProgression, loadTranslationTags } from "../../dataAccess/dataManager";
 import { Media } from "../models/media";
 import { Movie } from "../models/movie";
 import { Collection } from "../models/collection";
@@ -10,7 +10,7 @@ import { SelectedMedia } from "../models/selectedMedia";
 import { StagedMedia } from "../models/stagedMedia";
 import { getProceduralBlock } from "./proceduralEngine";
 import { Episode, Show } from "../models/show";
-import { ManageProgression, ReduceProgression } from "./utilities";
+import { ManageProgression, ReduceProgression } from "../utils/utilities";
 import { TranslationTag } from "../models/translationTag";
 import { createBuffer } from "./bufferEngine";
 import { StreamArgs } from "../models/streamArgs";
@@ -27,16 +27,21 @@ export function constructStream(
     console.log("Right Now: " + rightNow)
     let streamBlocks: MediaBlock[] = [];
 
+    //Set which audience is being targeted with the stream
     setEnvironment(options);
 
+    //Get the media that is scheduled to be played from the api request
     let scheduledMedia: SelectedMedia[] = getScheduledMedia(options, media, progression);
 
+    //Get the media that is injected into the stream from the api request
+    //Get the end time of the stream
     let stagedMedia = new StagedMedia(
         scheduledMedia,
         getInjectedMovies(options, media.Movies),
         evaluateStreamEndTime(options, scheduledMedia)
     );
 
+    //Get genre tag from either directly selected tags in the request or from the scheduled media
     setProceduralTags(options, stagedMedia);
 
     let stagedStream: SelectedMedia[] = getStagedStream(rightNow, config, options, stagedMedia, media, progression);

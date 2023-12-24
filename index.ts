@@ -1,7 +1,7 @@
 import { constructStream } from "./src/streamConstructor";
 import { Config } from "./models/config";
 import * as VLC from "vlc-client"
-import { loadMedia } from "./dataAccess/dataManager";
+import { loadMedia, getMedia } from "./dataAccess/dataManager";
 import { Media } from "./models/media";
 import { execSync } from 'child_process';
 import * as fs from 'fs';
@@ -13,6 +13,7 @@ import { body, validationResult } from 'express-validator';
 import { MediaBlock } from "./models/mediaBlock";
 
 const config: Config = require('./config.json') as Config;
+loadMedia(config);
 const app = express();
 const port = process.env.PORT || 3000;
 
@@ -22,7 +23,7 @@ let upcomingStream: MediaBlock[] = [];
 let onDeckStream: MediaBlock[] = [];
 let continuousStream: boolean = false;
 let vlc: VLC.Client;
-let media: Media = loadMedia(config);
+let media: Media = getMedia()
 let continuousStreamArgs: StreamArgs;
 
 const streamStartValidationRules = [
@@ -210,11 +211,6 @@ app.post('/api/continuousStream', streamStartValidationRules, async (req: Reques
 		await addMediaBlock(vlc, item);
 	}
 
-	// // convert stream to m3u file
-	// createM3UFile(stream[0], config.destinationFolder, config.playlistName);
-	// // execute stream
-	// executeStream(config.vlcLocation, config.destinationFolder, config.playlistName);
-
 	try {
 		await vlc.next();
 	} catch (error) {
@@ -256,7 +252,7 @@ app.post('/api/adhocStream', streamStartValidationRules, async (req: Request, re
 		console.error("An error occurred when clearing playlist:", error);
 	}
 
-	const media: Media = loadMedia(config);
+	const media: Media = getMedia()
 
 	let stream: MediaBlock[] = constructStream(config, args, media);
 	// // convert stream to m3u file
@@ -328,6 +324,7 @@ function convertISOToUnix(isoDateTime: string): number {
 
 export function mapStreamStartRequestToInputArgs(req: Request): StreamArgs {
 	const { env, movies, tagsOR, endTime, startTime } = req.body;
+	// const { env, movies, tagsOR, endTime, startTime } = req.body;
 	const inputArgs: StreamArgs = new StreamArgs(req.body.password);
 	// Map env directly
 	if (env) {

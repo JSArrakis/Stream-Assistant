@@ -12,8 +12,10 @@ import { Episode, Show } from '../models/show';
 const progression = require('../data/progression.json');
 const transaltionTags = require('../data/translationTags.json');
 
-export function loadMedia(config: Config): Media {
-    const media: Media = {
+let media = new Media([],[],[],[],[],[],[]);
+
+export function loadMedia(config: Config): void {
+    media  = {
         Shows: loadShowsFromJsonFile(config.dataFolder + 'showsList.json'),
         Movies: loadMoviesFromJsonFile(config.dataFolder + 'moviesList.json'),
         Shorts: loadShortsFromJsonFile(config.dataFolder + 'shortsList.json'),
@@ -22,6 +24,9 @@ export function loadMedia(config: Config): Media {
         Commercials: loadCommercialsFromJsonFile(config.dataFolder + 'commercialsList.json'),
         Collections: []
     }
+}
+
+export function getMedia(): Media {
     return media;
 }
 
@@ -243,34 +248,3 @@ export function loadPromosFromJsonFile(filePath: string): Promo[] {
         throw new Error(`Error loading promos from JSON file ${filePath}: ${error}`);
     }
 }
-
-// function loadMovies() {
-//     const content = fs.readFileSync(movies, 'utf-8').trim();
-//     return JSON.parse(content) as Movie[];
-// }
-
-// function loadShorts() {
-//     const content = fs.readFileSync(shorts, 'utf-8').trim();
-//     return JSON.parse(content) as Short[];
-// }
-
-// function loadMusic() {
-//     const content = fs.readFileSync(shows, 'utf-8').trim();
-//     return JSON.parse(music) as Music[];
-// }
-
-// function loadPromos() {
-//     const content = fs.readFileSync(shows, 'utf-8').trim();
-//     return JSON.parse(music) as Promo[];
-// }
-
-// function loadCommercials() {
-//     const content = fs.readFileSync(commercials, 'utf-8').trim();
-//     return JSON.parse(content) as Commercial[];
-// }
-
-// function loadCollections() {
-//     const content = fs.readFileSync(collections, 'utf-8').trim();
-//     return JSON.parse(content) as Collection[];
-// }
-
