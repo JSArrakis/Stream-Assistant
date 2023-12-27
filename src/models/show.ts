@@ -1,3 +1,4 @@
+import mongoose from 'mongoose';
 export class Show {
     public Title: string;
     public LoadTitle: string;
@@ -25,6 +26,18 @@ export class Show {
     }
 }
 
+export const EpisodeSchema = new mongoose.Schema({
+    Season: Number,
+    Episode: Number,
+    EpisodeNumber: Number,
+    Path: String,
+    Title: String,
+    LoadTitle: String,
+    Duration: Number,
+    DurationLimit: Number,
+    Tags: [String],
+});
+
 export class Episode {
     public Season: number;
     public Episode: number;
@@ -49,3 +62,18 @@ export class Episode {
         this.Tags = tags;
     }
 }
+
+export const ShowSchema = new mongoose.Schema({
+    Title: String,
+    LoadTitle: String,
+    Alias: String,
+    IMDB: String,
+    DurationLimit: Number,
+    OverDuration: Boolean,
+    Tags: [String],
+    SecondaryTags: [String],
+    EpisodeCount: Number,
+    Episodes: [EpisodeSchema],  // Use the EpisodeSchema here
+});
+
+export const ShowModel = mongoose.model('Show', ShowSchema);

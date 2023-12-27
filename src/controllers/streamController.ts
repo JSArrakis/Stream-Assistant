@@ -5,7 +5,7 @@ import { validationResult } from 'express-validator';
 import { StreamArgs } from '../models/streamArgs';
 import { addInitialMediaBlocks, getConfig, getContinuousStreamArgs, initializeOnDeckStream, initializeStream, mapStreamStartRequestToInputArgs, setContinuousStream, setContinuousStreamArgs } from '../services/streamService';
 import * as fs from 'fs';
-import { streamStartValidationRules } from "../validators/streamValidator";
+import { streamStartValidationRules, testValidationRules } from "../validators/streamValidator";
 import { createVLCClient, isVLCRunning, listRunningProcesses } from '../services/vlcClient';
 import { playVLC, setVLCClient } from '../services/backgroundService';
 import { getMedia, loadMedia } from '../../dataAccess/dataManager';
@@ -14,6 +14,17 @@ import { MediaBlock } from '../models/mediaBlock';
 import { constructStream } from '../streamConstructor';
 
 export const streamController = express.Router();
+
+export async function testHandler(req: Request, res: Response): Promise<void> {
+    const errors = testValidationRules(req);
+    if (errors.length > 0) {
+        res.status(400).json({ errors: errors });
+        return;
+    }
+
+    res.status(200).json("Success!");
+    return;
+}
 
 export async function continuousStreamHandler(req: Request, res: Response): Promise<void> {
     // Check for validation errors

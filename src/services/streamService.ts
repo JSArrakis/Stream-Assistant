@@ -13,6 +13,7 @@ let onDeckStream: MediaBlock[] = [];
 let continuousStream = false;
 let continuousStreamArgs: StreamArgs;
 let config: Config;
+let streamVarianceInSeconds = 0;
 
 function initializeStream(config: Config, continuousStreamArgs: StreamArgs, media: Media): void {
     upcomingStream = constructStream(config, continuousStreamArgs, media);
@@ -82,6 +83,14 @@ function convertISOToUnix(isoDateTime: string): number {
     return Math.floor(new Date(isoDateTime).getTime() / 1000);
 }
 
+function getStreamVariationInSeconds(): number {
+    return streamVarianceInSeconds;
+}
+
+function setStreamVariationInSeconds(value: number): void {
+    streamVarianceInSeconds = value;
+}
+
 export function mapStreamStartRequestToInputArgs(req: Request): StreamArgs {
     const { env, movies, tagsOR, endTime, startTime } = req.body;
     const inputArgs: StreamArgs = new StreamArgs(req.body.password);
@@ -143,5 +152,7 @@ export {
     addInitialMediaBlocks,
     removeFromUpcomingStream,
     setConfig,
-    getConfig
+    getConfig,
+    setStreamVariationInSeconds,
+    getStreamVariationInSeconds
 };

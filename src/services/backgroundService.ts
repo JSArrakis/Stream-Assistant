@@ -1,7 +1,7 @@
 // src/services/backgroundService.ts
 
 import moment from 'moment';
-import { constructStream } from '../streamConstructor';
+import { constructStream } from './streamConstructorService';
 import { StreamArgs } from '../models/streamArgs';
 import { addToOnDeckStream, getConfig, getContinuousStreamArgs, getOnDeckStream, isContinuousStream, removeFromOnDeckStream, removeFromUpcomingStream } from './streamService';
 import { MediaBlock } from '../models/mediaBlock';
@@ -10,6 +10,8 @@ import { getMedia } from '../../dataAccess/dataManager';
 
 const intervalInSeconds: number = 300;
 let vlc: VLC.Client;
+let endOfDayMarker: number = 0;
+let tomorrow: number = 0;
 
 function calculateDelayToNextInterval(intervalInSeconds: number): number {
     const now = moment().unix();
@@ -17,6 +19,14 @@ function calculateDelayToNextInterval(intervalInSeconds: number): number {
     const secondsToNextInterval = intervalInSeconds - (now % intervalInSeconds);
     console.log(`Seconds to next interval: ${secondsToNextInterval}`);
     return secondsToNextInterval * 1000; // Convert seconds to milliseconds
+}
+
+function setEndOfDayMarker() {
+    endOfDayMarker = moment().set({ hour: 23, minute: 30, second: 0 }).unix();
+}
+
+function setTomorrow() {
+    tomorrow = moment().add(1, 'days').set({ hour: 0, minute: 0, second: 0 }).unix();
 }
 
 async function cycleCheck() {
@@ -49,17 +59,23 @@ async function cycleCheck() {
         }
     }
 
-    const endOfDayMarker = moment().set({ hour: 23, minute: 30, second: 0 }).unix();
-    if (currentUnixTimestamp === endOfDayMarker) {
-        let continuousStreamArgs = getContinuousStreamArgs();
-        let tomorrowsTimeStamp = moment().add(1, 'days').set({ hour: 0, minute: 0, second: 0 }).unix();
-        let tomorrowsContinuousStreamArgs = new StreamArgs(continuousStreamArgs.password);
-        tomorrowsContinuousStreamArgs.env = continuousStreamArgs.env;
-        tomorrowsContinuousStreamArgs.tagsOR = continuousStreamArgs.tagsOR;
-        tomorrowsContinuousStreamArgs.startTime = tomorrowsTimeStamp;
-        const stream = constructStream(getConfig(), new StreamArgs(""), getMedia());
-        addToOnDeckStream(stream);
+    if (currentUnixTimestamp >= tomorrow) {
+        setTomorrow()
     }
+
+    if (currentUnixTimestamp >= endOfDayMarker) {
+        setEndOfDayMarker();
+        if (isContinuousStream()) {
+            let continuousStreamArgs = getContinuousStreamArgs();
+            let tomorrowsContinuousStreamArgs = new StreamArgs(continuousStreamArgs.password);
+            tomorrowsContinuousStreamArgs.env = continuousStreamArgs.env;
+            tomorrowsContinuousStreamArgs.tagsOR = continuousStreamArgs.tagsOR;
+            tomorrowsContinuousStreamArgs.startTime = tomorrow
+            const stream = constructStream(getConfig(), tomorrowsContinuousStreamArgs, getMedia());
+            addToOnDeckStream(stream);
+        }
+    }
+
 
     // Calculate the delay until the next interval mark and set it as the new interval
     const nextDelay = calculateDelayToNextInterval(intervalInSeconds);
@@ -120,6 +136,8 @@ export {
     setVLCClient,
     playVLC,
     addMediaBlock,
-    calculateDelayToNextInterval
+    calculateDelayToNextInterval,
+    setEndOfDayMarker,
+    setTomorrow
 };
 

@@ -5,9 +5,22 @@ import { body, validationResult } from 'express-validator';
 const streamAllowedFields = ['env', 'movies', 'tagsOR', 'endTime', 'startTime', 'password'];
 const loadMediaAllowedFields = ['password', 'media'];
 
+export function testValidationRules(req: Request): string[] {
+    let errors: string[] = [];
+    if (isFieldSet(req, 'test')) {
+        errors.push('Test field is not allowed');
+    }
+    return errors;
+}
+
+function isFieldSet(obj: Record<string, any>, fieldName: string): boolean {
+    return obj.hasOwnProperty(fieldName) && obj[fieldName] !== undefined && obj[fieldName] !== null;
+}
+
 export const streamStartValidationRules = [
     // Ensure only allowed fields are present
     (req: Request, res: Response, next: Function) => {
+
         const requestBody: Record<string, any> = req.body;
 
         const extraFields = Object.keys(requestBody).filter((field) => !streamAllowedFields.includes(field));

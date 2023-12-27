@@ -1,10 +1,10 @@
 import { Config } from "./src/models/config";
 import { loadMedia } from "./dataAccess/dataManager";
 import express from 'express';
-import { continuousStreamHandler, adHocStreamHandler } from "./src/controllers/streamController";
-import { streamStartValidationRules } from "./src/validators/streamValidator";
+import { continuousStreamHandler, adHocStreamHandler, testHandler } from "./src/controllers/streamController";
+import { streamStartValidationRules, testValidationRules } from "./src/validators/streamValidator";
 import { setConfig } from "./src/services/streamService";
-import { cycleCheck } from "./src/services/backgroundService";
+import { cycleCheck, setEndOfDayMarker, setTomorrow } from "./src/services/backgroundService";
 
 const config: Config = require('./config.json') as Config;
 loadMedia(config);
@@ -16,7 +16,9 @@ app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });
 
+setEndOfDayMarker();
+setTomorrow();
 cycleCheck();
 
-app.post('/api/continuousStream', streamStartValidationRules, continuousStreamHandler);
-app.post('/api/adhocStream', streamStartValidationRules, adHocStreamHandler);
+app.post('/api/continuousStream', testHandler);
+// app.post('/api/adhocStream', streamStartValidationRules, adHocStreamHandler);

@@ -9,7 +9,7 @@ import { MediaType } from "../models/enum/mediaTypes";
 import { SelectedMedia } from "../models/selectedMedia";
 import { StagedMedia } from "../models/stagedMedia";
 import { getProceduralBlock } from "./proceduralEngine";
-import { Episode, Show } from "../models/show";
+import { Show } from "../models/show";
 import { ManageProgression, ReduceProgression } from "./utilities";
 import { TranslationTag } from "../models/translationTag";
 import { createBuffer } from "./bufferEngine";

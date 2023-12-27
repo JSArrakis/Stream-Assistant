@@ -6,7 +6,7 @@ import { Movie } from "../models/movie";
 import { SelectedMedia } from "../models/selectedMedia";
 import { Episode, Show } from "../models/show";
 import { StagedMedia } from "../models/stagedMedia";
-import { ManageProgression } from "./utilities";
+import { ManageProgression } from "../utils/utilities";
 
 export function getProceduralBlock(
     config: Config,
