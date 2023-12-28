@@ -6,7 +6,7 @@ import { StreamArgs } from '../models/streamArgs';
 import { addToOnDeckStream, getConfig, getContinuousStreamArgs, getOnDeckStream, isContinuousStream, removeFromOnDeckStream, removeFromUpcomingStream } from './streamService';
 import { MediaBlock } from '../models/mediaBlock';
 import * as VLC from 'vlc-client';
-import { getMedia } from '../../dataAccess/dataManager';
+import { getMedia } from './dataManager';
 
 const intervalInSeconds: number = 300;
 let vlc: VLC.Client;

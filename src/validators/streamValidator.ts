@@ -3,21 +3,8 @@ import { Request, Response, NextFunction } from 'express';
 import { body, validationResult } from 'express-validator';
 
 const streamAllowedFields = ['env', 'movies', 'tagsOR', 'endTime', 'startTime', 'password'];
-const loadMediaAllowedFields = ['password', 'media'];
 
-export function testValidationRules(req: Request): string[] {
-    let errors: string[] = [];
-    if (isFieldSet(req, 'test')) {
-        errors.push('Test field is not allowed');
-    }
-    return errors;
-}
-
-function isFieldSet(obj: Record<string, any>, fieldName: string): boolean {
-    return obj.hasOwnProperty(fieldName) && obj[fieldName] !== undefined && obj[fieldName] !== null;
-}
-
-export const streamStartValidationRules = [
+export const streamValidationRules = [
     // Ensure only allowed fields are present
     (req: Request, res: Response, next: Function) => {
 
@@ -112,35 +99,6 @@ export const streamStartValidationRules = [
                 throw new Error('startTime must be in the format YYYY-MM-DDTHH:MM');
             }
 
-            return true;
-        }),
-
-    // Validate the 'password' field
-    body('password')
-        .isString()
-];
-
-export const loadMediaValidationRules = [
-    // Ensure only allowed fields are present
-    (req: Request, res: Response, next: Function) => {
-        const requestBody: Record<string, any> = req.body;
-
-        const extraFields = Object.keys(requestBody).filter((field) => !loadMediaAllowedFields.includes(field));
-        if (extraFields.length > 0) {
-            return res.status(400).json({ error: `Invalid fields: ${extraFields.join(', ')}` });
-        }
-        next();
-    },
-
-    // Validate the 'media' field
-    body('media')
-        .isArray()
-        .custom((value: string[]) => {
-            for (const item of value) {
-                if (typeof item !== 'string') {
-                    throw new Error('media must be an array of strings');
-                }
-            }
             return true;
         }),
 

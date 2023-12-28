@@ -9,13 +9,13 @@ import { Commercial } from '../models/commercial';
 import { Music } from '../models/music';
 import { Promo } from '../models/promo';
 import { Episode, Show } from '../models/show';
-const progression = require('../data/progression.json');
-const transaltionTags = require('../data/translationTags.json');
+const progression = require('../../data/progression.json');
+const transaltionTags = require('../../data/translationTags.json');
 
-let media = new Media([],[],[],[],[],[],[]);
+let media = new Media([], [], [], [], [], [], []);
 
 export function loadMedia(config: Config): void {
-    media  = {
+    media = {
         Shows: loadShowsFromJsonFile(config.dataFolder + 'showsList.json'),
         Movies: loadMoviesFromJsonFile(config.dataFolder + 'moviesList.json'),
         Shorts: loadShortsFromJsonFile(config.dataFolder + 'shortsList.json'),
@@ -122,6 +122,7 @@ export function loadShowsFromJsonFile(filePath: string): Show[] {
                 item.IMDB,
                 item.DurationLimit,
                 item.OverDuration,
+                item.FirstEpisodeOverDuration,
                 item.Tags,
                 item.SecondaryTags,
                 item.EpisodeCount,

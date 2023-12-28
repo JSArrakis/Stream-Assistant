@@ -12,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "@types/express": "^4.17.17",
+    "@types/mongodb": "^4.0.7",
     "@types/mongoose": "^5.11.97",
     "body-parser": "^1.20.2",
     "chai": "^4.3.7",
@@ -24,6 +25,7 @@
     "minimist": "^1.2.8",
     "mocha": "^10.2.0",
     "moment": "^2.29.4",
+    "mongodb": "^6.3.0",
     "mongoose": "^8.0.3",
     "ps-list": "^8.1.1",
     "vlc-client": "^1.1.1",
@@ -46,6 +48,6 @@
     "karma-typescript-es6-transform": "^5.5.3",
     "ts-mocha": "^10.0.0",
     "ts-node-dev": "^2.0.0",
-    "typescript": "^5.2.2"
+    "typescript": "^5.3.3"
   }
 }

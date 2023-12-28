@@ -1,6 +1,6 @@
 import { Config } from "../models/config";
 import { MediaProgression } from "../models/mediaProgression"
-import { loadProgression, loadTranslationTags } from "../../dataAccess/dataManager";
+import { loadProgression, loadTranslationTags } from "./dataManager";
 import { Media } from "../models/media";
 import { Movie } from "../models/movie";
 import { Collection } from "../models/collection";
