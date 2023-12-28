@@ -5,7 +5,6 @@ import { Eras } from "../models/const/eras";
 import { Commercial } from "../models/commercial";
 import { Short } from "../models/short";
 import { Music } from "../models/music";
-import { SelectedMedia } from "../models/selectedMedia";
 
 export class TranslatedTags {
     EraTags: string[];
@@ -19,8 +18,19 @@ export class TranslatedTags {
     }
 }
 
+class SelectedMedia {
+    selectedMedia: (Promo | Music | Short | Commercial)[];
+    chosenMedia: Media;
+    remainingDuration: number;
+
+    constructor(selectedMedia: (Promo | Music | Short | Commercial)[], chosenMedia: Media, remainingDuration: number) {
+        this.selectedMedia = selectedMedia;
+        this.chosenMedia = chosenMedia;
+        this.remainingDuration = remainingDuration;
+    }
+}
+
 export function createBuffer(
-    inputTags: string[],
     duration: number,
     options: any,
     media: Media,
@@ -52,7 +62,7 @@ export function createBuffer(
         }
     }
 
-    let envPromos: Promo[] = media.Promos.filter(promo => promo.Tags.includes(`${options.env}`));
+    let envPromos: Promo[] = media.Promos.filter(promo => promo.Tags.includes(options.env));
     let selectedPromos: Promo[] = envPromos.filter(sp => sp.Duration <= duration);
     let promo: Promo;
     if (selectedPromos.length < 1) {
@@ -82,20 +92,21 @@ export function createBuffer(
         prevBuff = selectedB.chosenMedia;
         return [buffer, selectedB.remainingDuration, prevBuff]
     } else if (halfB === 0) {
-        let selectedA = selectMediaWithinDuration(media, convertedSubTags, remDur, prevBuff);
+        let selectedA = selectMediaWithinDuration(media, convertedPreTags, remDur, prevBuff);
         buffer.push(promo)
         buffer.push(...selectedA.selectedMedia);
+        prevBuff = selectedA.chosenMedia;
         return [buffer, selectedA.remainingDuration, prevBuff]
     } else {
         let newPrevBuff: Media = new Media([], [], [], [], [], [], []);
-        let selectedA = selectMediaWithinDuration(media, convertedSubTags, remDur, prevBuff);
+        let selectedA = selectMediaWithinDuration(media, convertedSubTags, halfA, prevBuff);
         buffer.push(...selectedA.selectedMedia);
         buffer.push(promo);
         newPrevBuff = selectedA.chosenMedia;
         prevBuff.Commercials.push(...selectedA.chosenMedia.Commercials);
         prevBuff.Music.push(...selectedA.chosenMedia.Music);
         prevBuff.Shorts.push(...selectedA.chosenMedia.Shorts);
-        let selectedB = selectMediaWithinDuration(media, convertedSubTags, remDur, prevBuff);
+        let selectedB = selectMediaWithinDuration(media, convertedSubTags, halfB, prevBuff);
         buffer.push(...selectedB.selectedMedia);
         newPrevBuff.Commercials.push(...selectedB.chosenMedia.Commercials);
         newPrevBuff.Music.push(...selectedB.chosenMedia.Music);
@@ -224,9 +235,7 @@ function selectCommercials(
             remainingDuration -= selectedCommercial.Duration;
             usedCommercialTitles.add(selectedCommercial.Title);
             commercialBlock -= selectedCommercial.Duration; // Reduce commercialBlock
-            console.log("Commercial Block: " + commercialBlock);
         } else {
-            console.log("No commercials available with remaining commercial block duration of " + commercialBlock + " and remaining buffer duration of " + remainingDuration);
             break;
         }
     }
@@ -340,7 +349,6 @@ export function selectMediaWithinDuration(
         }
 
         if (chosenCommercials[0].length === 0 && !selectedShortOrMusic) {
-            console.log("Breaking buffer fill loop due to no commercials or shorts/music available");
             break;
         }
     }

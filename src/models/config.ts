@@ -6,8 +6,9 @@ export class Config {
     playlistName: string;
     repeatInterval: number;
     interval: number;
+    backgroundInterval: number;
 
-    constructor(vlcLocation: string, destinationFolder: string, testFolder: string, dataFolder: string, playlistName: string, repeatInterval: number, interval: number) {
+    constructor(vlcLocation: string, destinationFolder: string, testFolder: string, dataFolder: string, playlistName: string, repeatInterval: number, interval: number, backgroundInterval: number) {
         this.vlcLocation = vlcLocation;
         this.destinationFolder = destinationFolder;
         this.testFolder = testFolder;
@@ -15,6 +16,7 @@ export class Config {
         this.playlistName = playlistName;
         this.repeatInterval = repeatInterval;
         this.interval = interval;
+        this.backgroundInterval = backgroundInterval;
     }
         
 }

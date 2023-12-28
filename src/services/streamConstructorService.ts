@@ -1,6 +1,6 @@
 import { Config } from "../models/config";
 import { MediaProgression } from "../models/mediaProgression"
-import { loadProgression, loadTranslationTags } from "../dataAccess/dataManager";
+import { loadProgression, loadTranslationTags } from "./dataManager";
 import { Media } from "../models/media";
 import { Movie } from "../models/movie";
 import { Collection } from "../models/collection";
@@ -10,44 +10,44 @@ import { SelectedMedia } from "../models/selectedMedia";
 import { StagedMedia } from "../models/stagedMedia";
 import { getProceduralBlock } from "./proceduralEngine";
 import { Episode, Show } from "../models/show";
-import { ManageProgression, ReduceProgression } from "./utilities";
+import { ManageProgression, ReduceProgression } from "../utils/utilities";
 import { TranslationTag } from "../models/translationTag";
 import { createBuffer } from "./bufferEngine";
-import { Commercial } from "../models/commercial";
-import { Music } from "../models/music";
-import { Promo } from "../models/promo";
-import { Short } from "../models/short";
-import { CommandLineArgs } from "../models/commandLineArgs";
+import { StreamArgs } from "../models/streamArgs";
+import { MediaBlock } from "../models/mediaBlock";
 
 export function constructStream(
     config: Config,
-    options: CommandLineArgs,
+    options: StreamArgs,
     media: Media,
     transaltionTags: TranslationTag[] = loadTranslationTags(config.dataFolder + 'translationTags.json'),
     progression: MediaProgression[] = loadProgression(config.dataFolder + 'progression.json'),
     rightNow: number = (options.startTime === undefined) ? moment().unix() : options.startTime):
-    [string[], (Promo | Music | Commercial | Short | Episode | Movie)[]] {
+    MediaBlock[] {
+    console.log("Right Now: " + rightNow)
+    let streamBlocks: MediaBlock[] = [];
 
-    let streamPaths: string[] = []
-    let streamObjects: (Promo | Music | Commercial | Short | Episode | Movie)[] = [];
-
+    //Set which audience is being targeted with the stream
     setEnvironment(options);
 
+    //Get the media that is scheduled to be played from the api request
     let scheduledMedia: SelectedMedia[] = getScheduledMedia(options, media, progression);
 
+    //Get the media that is injected into the stream from the api request
+    //Get the end time of the stream
     let stagedMedia = new StagedMedia(
         scheduledMedia,
         getInjectedMovies(options, media.Movies),
         evaluateStreamEndTime(options, scheduledMedia)
     );
 
+    //Get genre tag from either directly selected tags in the request or from the scheduled media
     setProceduralTags(options, stagedMedia);
 
     let stagedStream: SelectedMedia[] = getStagedStream(rightNow, config, options, stagedMedia, media, progression);
     let prevBuffer: Media = new Media([], [], [], [], [], [], []);
 
     let initialBuffer = createBuffer(
-        options.tagsOR === undefined ? [] : options.tagsOR,
         stagedStream[0].Time - rightNow,
         options,
         media,
@@ -56,20 +56,22 @@ export function constructStream(
         transaltionTags,
         prevBuffer)
 
-    streamPaths.push(...initialBuffer[0].map(obj => obj.Path));
-    streamObjects.push(...initialBuffer[0]);
+    let hasInitialBuffer = initialBuffer[0].length > 0 ? true : false;
+    // console log the initial buffer remainder
     prevBuffer = initialBuffer[2];
 
     let remainder = initialBuffer[1];
     stagedStream.forEach((item, index) => {
         let lastItem = index === stagedStream.length - 1 ? true : false;
+
         if (item.Type == MediaType.Episode || item.Type == MediaType.Movie) {
+            let mediaBlock = new MediaBlock([], [], undefined);
             let mediaItem = item.Media;
-            streamPaths.push(mediaItem.Path);
-            streamObjects.push(mediaItem);
+            mediaBlock.MainBlock = mediaItem;
+            mediaBlock.StartTime = item.Time;
             let bufferDuration = mediaItem.DurationLimit - mediaItem.Duration
+
             let buffer = createBuffer(
-                options.tagsOR === undefined ? [] : options.tagsOR,
                 bufferDuration + remainder,
                 options,
                 media,
@@ -77,10 +79,20 @@ export function constructStream(
                 lastItem ? [] : stagedStream[index + 1].Tags,
                 transaltionTags,
                 prevBuffer);
+
+            //sum of all buffer durations
+            let totalDuration: number = 0;
+            for (const obj of buffer[0]) {
+                totalDuration += obj.Duration;
+            }
             prevBuffer = buffer[2];
-            streamPaths.push(...buffer[0].map(obj => obj.Path));
-            streamObjects.push(...buffer[0]);
+            mediaBlock.Buffer.push(...buffer[0]);
             remainder = buffer[1];
+            if (index === 0 && hasInitialBuffer) {
+                mediaBlock.InitialBuffer.push(...initialBuffer[0]);
+                hasInitialBuffer = false;
+            }
+            streamBlocks.push(mediaBlock);
         }
         //TODO
         // else if (item.Media instanceof Collection) {
@@ -95,80 +107,81 @@ export function constructStream(
         //     streamPaths.push(...collectionBlock[0]);
         //     remainder = collectionBlock[1];
         // }
-    })
-    return [streamPaths, streamObjects];
-}
 
-function createCollectionBlock(
-    collection: Collection,
-    progression: MediaProgression[],
-    options: any,
-    media: Media,
-    transaltionTags: TranslationTag[],
-    prevBuffer: Media): [string[], number] {
-    /* 
-    -- This logic is to determine if a show should be populated in the stream for a collection. If the show
-    runs longer than the alloted time block for that show, skip the show following it. 
-    Time remaining will be filled with buffer media 
-    */
-
-    /*
-    -- Author note:: A good example of this is with the summer 2000 broadcast of Toonami with Tenchi Muyo. 
-    Tenchi has a few episodes that are weirdly 45 minutes instead of 30 minutes randomly with no real rhyme 
-    or reason. To handle this randomness, Toonami in it's original broadcast pulled the episode of Batman the 
-    Animated series which usually followed Tenchi for that day only and populated the remainder of the 
-    15 minutes that would have normally been Batman with Power Puff Girl episodes instead. This allowed 
-    Toonami to keep the fidelity of a 3 hour block run time and decreasing dead time and keeping interest of the 
-    audience while staying within theme (Toonami being a series of mostly violence driven animated shows 
-    in which the only Cartoon Network licensed property that fit in the alloted time slot that was also 
-    themed correctly was PPG)
-    */
-    let remainder = 0;
-    let stream: string[] = [];
-    collection.Shows.forEach((show, index) => {
-        let lastShowEpisode = collection.Shows[index - 1].Episode;
-        if (lastShowEpisode) {
-            if (lastShowEpisode.Duration > lastShowEpisode.DurationLimit) {
-                ReduceProgression(collection.Title, show.LoadTitle, progression)
-            } else {
-                let episode = show.Episode;
-                if (episode) {
-                    stream.push(episode.Path)
-                    if (episode.Duration > episode.DurationLimit) {
-                        let nextShowEpisode = collection.Shows[index + 1].Episode;
-                        if (nextShowEpisode) {
-                            let overDurationLength = (nextShowEpisode.DurationLimit + episode.DurationLimit) - episode.Duration + remainder;
-                            let overBuffer = createBuffer(
-                                [],
-                                overDurationLength,
-                                options,
-                                media,
-                                [collection.LoadTitle],
-                                [collection.LoadTitle],
-                                transaltionTags,
-                                prevBuffer)
-                            stream.push(...overBuffer[0].map(obj => obj.Path));
-                            remainder = overBuffer[1];
-                        }
-                    } else {
-                        let underBuffer = createBuffer(
-                            [],
-                            episode.DurationLimit - episode.Duration,
-                            options,
-                            media,
-                            [collection.LoadTitle],
-                            [collection.LoadTitle],
-                            transaltionTags,
-                            prevBuffer)
-                        stream.push(...underBuffer[0].map(obj => obj.Path));
-                        remainder = underBuffer[1];
-                    }
-                }
-            }
-        }
     });
-    return [stream, remainder];
+    return streamBlocks;
 }
+
+// function createCollectionBlock(
+//     collection: Collection,
+//     progression: MediaProgression[],
+//     options: any,
+//     media: Media,
+//     transaltionTags: TranslationTag[],
+//     prevBuffer: Media): [string[], number] {
+//     /* 
+//     -- This logic is to determine if a show should be populated in the stream for a collection. If the show
+//     runs longer than the alloted time block for that show, skip the show following it. 
+//     Time remaining will be filled with buffer media 
+//     */
+
+//     /*
+//     -- Author note:: A good example of this is with the summer 2000 broadcast of Toonami with Tenchi Muyo. 
+//     Tenchi has a few episodes that are weirdly 45 minutes instead of 30 minutes randomly with no real rhyme 
+//     or reason. To handle this randomness, Toonami in it's original broadcast pulled the episode of Batman the 
+//     Animated series which usually followed Tenchi for that day only and populated the remainder of the 
+//     15 minutes that would have normally been Batman with Power Puff Girl episodes instead. This allowed 
+//     Toonami to keep the fidelity of a 3 hour block run time and decreasing dead time and keeping interest of the 
+//     audience while staying within theme (Toonami being a series of mostly violence driven animated shows 
+//     in which the only Cartoon Network licensed property that fit in the alloted time slot that was also 
+//     themed correctly was PPG)
+//     */
+//     let remainder = 0;
+//     let stream: string[] = [];
+//     collection.Shows.forEach((show, index) => {
+//         let lastShowEpisode = collection.Shows[index - 1].Episode;
+//         if (lastShowEpisode) {
+//             if (lastShowEpisode.Duration > lastShowEpisode.DurationLimit) {
+//                 ReduceProgression(collection.Title, show.LoadTitle, progression)
+//             } else {
+//                 let episode = show.Episode;
+//                 if (episode) {
+//                     stream.push(episode.Path)
+//                     if (episode.Duration > episode.DurationLimit) {
+//                         let nextShowEpisode = collection.Shows[index + 1].Episode;
+//                         if (nextShowEpisode) {
+//                             let overDurationLength = (nextShowEpisode.DurationLimit + episode.DurationLimit) - episode.Duration + remainder;
+//                             let overBuffer = createBuffer(
+//                                 [],
+//                                 overDurationLength,
+//                                 options,
+//                                 media,
+//                                 [collection.LoadTitle],
+//                                 [collection.LoadTitle],
+//                                 transaltionTags,
+//                                 prevBuffer)
+//                             stream.push(...overBuffer[0].map(obj => obj.Path));
+//                             remainder = overBuffer[1];
+//                         }
+//                     } else {
+//                         let underBuffer = createBuffer(
+//                             [],
+//                             episode.DurationLimit - episode.Duration,
+//                             options,
+//                             media,
+//                             [collection.LoadTitle],
+//                             [collection.LoadTitle],
+//                             transaltionTags,
+//                             prevBuffer)
+//                         stream.push(...underBuffer[0].map(obj => obj.Path));
+//                         remainder = underBuffer[1];
+//                     }
+//                 }
+//             }
+//         }
+//     });
+//     return [stream, remainder];
+// }
 
 export function getFirstProceduralDuration(rightNow: number, stagedMedia: StagedMedia): number {
     let firstTimePoint: number = stagedMedia.EndTime;
@@ -268,7 +281,7 @@ export function getStagedStream(
     return selectedMedia;
 }
 
-export function setProceduralTags(options: CommandLineArgs, stagedMedia: StagedMedia): void {
+export function setProceduralTags(options: StreamArgs, stagedMedia: StagedMedia): void {
     if (options.tagsAND === undefined
         && options.tagsOR === undefined) {
 
@@ -388,11 +401,11 @@ export function assignCollEpisodes(collection: Collection, shows: Show[], progre
     })
 }
 
-function setEnvironment(options: CommandLineArgs) {
+function setEnvironment(options: StreamArgs) {
     //TODO: Just all of this
     if (options.env !== undefined) {
-        options.env = 1;
+        options.env = "FC";
     } else {
-        options.env = 1;
+        options.env = "FC";
     }
 }
