@@ -6,8 +6,8 @@ import { setConfig } from "./src/services/streamService";
 import { cycleCheck, setEndOfDayMarker, setTomorrow } from "./src/services/backgroundService";
 import { connectToDB } from "./src/db/db";
 import { Config } from "./src/models/config";
-import { createShowValidationRules, deleteShowValidationRules, getShowValidationRules, updateShowValidationRules } from "./src/validators/dataValidator";
-import { createShowHandler, deleteShowHandler, getShowHandler, updateShowHandler } from "./src/controllers/adminController";
+import { createBufferValidationRules, createMovieValidationRules, createShowValidationRules, deleteBufferValidationRules, deleteMovieValidationRules, deleteShowValidationRules, getBufferValidationRules, getMovieValidationRules, getShowValidationRules, updateBufferValidationRules, updateMovieValidationRules, updateShowValidationRules } from "./src/validators/dataValidator";
+import { createBufferHandler, createMovieHandler, createShowHandler, deleteBufferHandler, deleteMovieHandler, deleteShowHandler, getBufferHandler, getMovieHandler, getShowHandler, updateBufferHandler, updateMovieHandler, updateShowHandler } from "./src/controllers/adminController";
 
 const config: Config = require('./config.json') as Config;
 setConfig(config);
@@ -27,10 +27,20 @@ connectToDB().then(() => {
 });
 
 //Stream Control
-app.post('/api/continuousStream', streamValidationRules, continuousStreamHandler);
+app.post('/api/continuous-stream', streamValidationRules, continuousStreamHandler);
 
 //Database Management
-app.post('/api/admin/createShow', createShowValidationRules, createShowHandler);
-app.delete('/api/admin/deleteShow', deleteShowValidationRules, deleteShowHandler);
-app.put('/api/admin/updateShow', updateShowValidationRules, updateShowHandler);
-app.get('/api/admin/getShow', getShowValidationRules, getShowHandler);
+app.post('/api/admin/create-show', createShowValidationRules, createShowHandler);
+app.delete('/api/admin/delete-show', deleteShowValidationRules, deleteShowHandler);
+app.put('/api/admin/update-show', updateShowValidationRules, updateShowHandler);
+app.get('/api/admin/get-show', getShowValidationRules, getShowHandler);
+
+app.post('/api/admin/create-movie', createMovieValidationRules, createMovieHandler);
+app.delete('/api/admin/delete-movie', deleteMovieValidationRules, deleteMovieHandler);
+app.put('/api/admin/update-movie', updateMovieValidationRules, updateMovieHandler);
+app.get('/api/admin/get-movie', getMovieValidationRules, getMovieHandler);
+
+app.post('/api/admin/create-buffer', createBufferValidationRules, createBufferHandler);
+app.delete('/api/admin/delete-buffer', deleteBufferValidationRules, deleteBufferHandler);
+app.put('/api/admin/update-buffer', updateBufferValidationRules, updateBufferHandler);
+app.get('/api/admin/get-buffer', getBufferValidationRules, getBufferHandler);

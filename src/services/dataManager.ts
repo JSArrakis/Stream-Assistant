@@ -15,15 +15,15 @@ const transaltionTags = require('../../data/translationTags.json');
 let media = new Media([], [], [], [], [], [], []);
 
 export function loadMedia(config: Config): void {
-    media = {
-        Shows: loadShowsFromJsonFile(config.dataFolder + 'showsList.json'),
-        Movies: loadMoviesFromJsonFile(config.dataFolder + 'moviesList.json'),
-        Shorts: loadShortsFromJsonFile(config.dataFolder + 'shortsList.json'),
-        Music: loadMusicFromJsonFile(config.dataFolder + 'musicList.json'),
-        Promos: loadPromosFromJsonFile(config.dataFolder + 'promosList.json'),
-        Commercials: loadCommercialsFromJsonFile(config.dataFolder + 'commercialsList.json'),
-        Collections: []
-    }
+    // media = {
+    //     Shows: loadShowsFromJsonFile(config.dataFolder + 'showsList.json'),
+    //     Movies: loadMoviesFromJsonFile(config.dataFolder + 'moviesList.json'),
+    //     Shorts: loadShortsFromJsonFile(config.dataFolder + 'shortsList.json'),
+    //     Music: loadMusicFromJsonFile(config.dataFolder + 'musicList.json'),
+    //     Promos: loadPromosFromJsonFile(config.dataFolder + 'promosList.json'),
+    //     Commercials: loadCommercialsFromJsonFile(config.dataFolder + 'commercialsList.json'),
+    //     Collections: []
+    // }
 }
 
 export function getMedia(): Media {
