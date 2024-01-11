@@ -3,8 +3,9 @@
 import { Request, Response } from 'express';
 import { validationResult } from 'express-validator';
 import { ShowModel } from '../models/show'; // Import the Show model
-import { transformMovieFromRequest, transformShowFromRequest } from '../services/dataTransformationService';
+import { transformBufferFromRequest, transformMovieFromRequest, transformShowFromRequest } from '../services/dataTransformationService';
 import { MovieModel } from '../models/movie';
+import { BufferMediaModel } from '../models/buffer';
 
 
 export async function createShowHandler(req: Request, res: Response): Promise<void> {
@@ -133,6 +134,57 @@ export async function createMovieHandler(req: Request, res: Response): Promise<v
     return;
 }
 
+export async function deleteMovieHandler(req: Request, res: Response): Promise<void> {
+    // Check for validation errors
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        res.status(400).json({ errors: errors.array() });
+        return;
+    }
+
+    // Retrieve movie from MongoDB using movie load title if it exists
+    const movie = await MovieModel.findOne({ LoadTitle: req.query.loadTitle });
+
+    // If it doesn't exist, return error
+    if (!movie) {
+        res.status(400).json({ message: "Movie does not exist" });
+        return;
+    }
+
+    // If it exists, delete it
+    await MovieModel.deleteOne({ _id: movie._id });
+
+    res.status(200).json({ message: "Movie Deleted" });
+    return;
+}
+
+export async function updateMovieHandler(req: Request, res: Response): Promise<void> {
+    // Check for validation errors
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        res.status(400).json({ errors: errors.array() });
+        return;
+    }
+
+    // Retrieve movie from MongoDB using movie load title if it exists
+    const movie = await MovieModel.findOne({ LoadTitle: req.body.loadTitle });
+
+    // If it doesn't exist, return error
+    if (!movie) {
+        res.status(400).json({ message: "Movie does not exist" });
+        return;
+    }
+
+    // If it exists, perform transformations
+    let updatedMovie = await transformMovieFromRequest(req.body);
+
+    // Update show in MongoDB
+    await MovieModel.updateOne({ _id: movie._id }, updatedMovie);
+
+    res.status(200).json({ message: "Movie Updated" });
+    return;
+}
+
 export async function getMovieHandler(req: Request, res: Response): Promise<void> {
     // Check for validation errors
     const errors = validationResult(req);
@@ -154,7 +206,7 @@ export async function getMovieHandler(req: Request, res: Response): Promise<void
     return;
 }
 
-export async function getShortHandler(req: Request, res: Response): Promise<void> {
+export async function createBufferHandler(req: Request, res: Response): Promise<void> {
     // Check for validation errors
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -162,20 +214,25 @@ export async function getShortHandler(req: Request, res: Response): Promise<void
         return;
     }
 
-    // Retrieve show from MongoDB using show load title if it exists using request params
-    const show = await ShowModel.findOne({ LoadTitle: req.query.loadTitle });
+    // Retrieve buffer media from MongoDB using buffer media load title if it exists
+    const buffer = await BufferMediaModel.findOne({ Path: req.body.path });
 
-    // If it doesn't exist, return error
-    if (!show) {
-        res.status(404).json({ message: "Show does not exist" });
+    // If it exists, return error
+    if (buffer) {
+        res.status(400).json({ message: "Buffer Media already exists" });
         return;
-    }
+    } 
+    // If it doesn't exist, perform transformations
+    let updatedBuffer = await transformBufferFromRequest(req.body);
 
-    res.status(200).json(show);
+    // Insert buffer media into MongoDB
+    await BufferMediaModel.create(updatedBuffer);
+
+    res.status(200).json({ message: "Buffer Media Created" });
     return;
 }
 
-export async function getMusicHandler(req: Request, res: Response): Promise<void> {
+export async function deleteBufferHandler(req: Request, res: Response): Promise<void> {
     // Check for validation errors
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -183,20 +240,23 @@ export async function getMusicHandler(req: Request, res: Response): Promise<void
         return;
     }
 
-    // Retrieve show from MongoDB using show load title if it exists using request params
-    const show = await ShowModel.findOne({ LoadTitle: req.query.loadTitle });
+    // Retrieve buffer media from MongoDB using buffer media load title if it exists
+    const buffer = await BufferMediaModel.findOne({ Path: req.query.path });
 
     // If it doesn't exist, return error
-    if (!show) {
-        res.status(404).json({ message: "Show does not exist" });
+    if (!buffer) {
+        res.status(400).json({ message: "Buffer Media does not exist" });
         return;
     }
 
-    res.status(200).json(show);
+    // If it exists, delete it
+    await BufferMediaModel.deleteOne({ _id: buffer._id });
+
+    res.status(200).json({ message: "Buffer Media Deleted" });
     return;
 }
 
-export async function getCommercialHandler(req: Request, res: Response): Promise<void> {
+export async function updateBufferHandler(req: Request, res: Response): Promise<void> {
     // Check for validation errors
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -204,20 +264,26 @@ export async function getCommercialHandler(req: Request, res: Response): Promise
         return;
     }
 
-    // Retrieve show from MongoDB using show load title if it exists using request params
-    const show = await ShowModel.findOne({ LoadTitle: req.query.loadTitle });
+    // Retrieve buffer media from MongoDB using buffer media load title if it exists
+    const buffer = await BufferMediaModel.findOne({ Path: req.body.path });
 
     // If it doesn't exist, return error
-    if (!show) {
-        res.status(404).json({ message: "Show does not exist" });
+    if (!buffer) {
+        res.status(400).json({ message: "Buffer Media does not exist" });
         return;
     }
 
-    res.status(200).json(show);
+    // If it exists, perform transformations
+    let updatedBuffer = await transformBufferFromRequest(req.body);
+
+    // Update buffer media in MongoDB
+    await BufferMediaModel.updateOne({ _id: buffer._id }, updatedBuffer);
+
+    res.status(200).json({ message: "Buffer Media Updated" });
     return;
 }
 
-export async function getPromoHandler(req: Request, res: Response): Promise<void> {
+export async function getBufferHandler(req: Request, res: Response): Promise<void> {
     // Check for validation errors
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -226,11 +292,11 @@ export async function getPromoHandler(req: Request, res: Response): Promise<void
     }
 
     // Retrieve show from MongoDB using show load title if it exists using request params
-    const show = await ShowModel.findOne({ LoadTitle: req.query.loadTitle });
+    const show = await ShowModel.findOne({ Path: req.query.path });
 
     // If it doesn't exist, return error
     if (!show) {
-        res.status(404).json({ message: "Show does not exist" });
+        res.status(404).json({ message: "Buffer Media does not exist" });
         return;
     }
 

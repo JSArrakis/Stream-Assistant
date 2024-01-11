@@ -1,6 +1,7 @@
 import * as ffmpeg from 'fluent-ffmpeg';
 import { Show } from "../models/show";
 import { Movie } from '../models/movie';
+import { BufferMedia } from '../models/buffer';
 
 export async function transformShowFromRequest(show: any): Promise<Show> {
     let parsedShow: Show = Show.fromRequestObject(show)
@@ -60,13 +61,28 @@ export async function transformMovieFromRequest(movie: any): Promise<Movie> {
     parsedMovie.LoadTitle = parsedMovie.Title.replace(/[^a-zA-Z0-9]/g, '').toLowerCase();
 
     parsedMovie.Alias = parsedMovie.LoadTitle;
-
+    if(parsedMovie.Duration > 0){
+        return parsedMovie;
+    } 
     console.log(`Getting duration for ${parsedMovie.Path}`);
     let durationInSeconds = await getMediaDuration(parsedMovie.Path);
     parsedMovie.Duration = durationInSeconds; // Update duration value
     parsedMovie.DurationLimit = (Math.floor(parsedMovie.Duration / 1800) * 1800) + ((parsedMovie.Duration % 1800 > 0) ? 1800 : 0);
 
     return parsedMovie;
+}
+
+export async function transformBufferFromRequest(buffer: any): Promise<BufferMedia> {
+    let parsedBuffer: BufferMedia = BufferMedia.fromRequestObject(buffer)
+
+    if(parsedBuffer.Duration > 0){
+        return parsedBuffer;
+    } 
+    console.log(`Getting duration for ${parsedBuffer.Path}`);
+    let durationInSeconds = await getMediaDuration(parsedBuffer.Path);
+    parsedBuffer.Duration = durationInSeconds; // Update duration value
+
+    return parsedBuffer;
 }
 
 async function getMediaDuration(filePath: string): Promise<number> {

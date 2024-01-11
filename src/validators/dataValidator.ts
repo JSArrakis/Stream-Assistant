@@ -181,7 +181,7 @@ export const deleteMovieValidationRules = [
 export const getMovieValidationRules = [
 ];
 
-export const createShortValidationRules = [
+export const createBufferValidationRules = [
     body('tags')
         .isArray({ min: 1 })
         .custom((value: string[]) => {
@@ -197,7 +197,7 @@ export const createShortValidationRules = [
         .notEmpty()
 ];
 
-export const updateShortValidationRules = [
+export const updateBufferValidationRules = [
     body('tags')
         .isArray({ min: 1 })
         .custom((value: string[]) => {
@@ -213,131 +213,8 @@ export const updateShortValidationRules = [
         .notEmpty()
 ];
 
-export const deleteShortValidationRules = [
+export const deleteBufferValidationRules = [
 ];
 
-export const getShortValidationRules = [
+export const getBufferValidationRules = [
 ];
-
-export const createMusicValidationRules = [
-    body('tags')
-        .isArray({ min: 1 })
-        .custom((value: string[]) => {
-            for (const item of value) {
-                if (typeof item !== 'string') {
-                    throw new Error('tags must be an array of strings');
-                }
-            }
-            return true;
-        }),
-    body('path')
-        .isString()
-        .notEmpty()
-];
-
-export const updateMusicValidationRules = [
-    body('tags')
-        .isArray({ min: 1 })
-        .custom((value: string[]) => {
-            for (const item of value) {
-                if (typeof item !== 'string') {
-                    throw new Error('tags must be an array of strings');
-                }
-            }
-            return true;
-        }),
-    body('path')
-        .isString()
-        .notEmpty()
-];
-
-export const deleteMusicValidationRules = [
-];
-
-export const getMusicValidationRules = [
-];
-
-export const createCommercialValidationRules = [
-    body('tags')
-        .isArray({ min: 1 })
-        .custom((value: string[]) => {
-            for (const item of value) {
-                if (typeof item !== 'string') {
-                    throw new Error('tags must be an array of strings');
-                }
-            }
-            return true;
-        }),
-    body('path')
-        .isString()
-        .notEmpty()
-];
-
-export const updateCommercialValidationRules = [
-    body('tags')
-        .isArray({ min: 1 })
-        .custom((value: string[]) => {
-            for (const item of value) {
-                if (typeof item !== 'string') {
-                    throw new Error('tags must be an array of strings');
-                }
-            }
-            return true;
-        }),
-    body('path')
-        .isString()
-        .notEmpty()
-];
-
-export const deleteCommercialValidationRules = [
-];
-
-export const getCommercialValidationRules = [
-];
-
-export const createPromoValidationRules = [
-    body('tags')
-        .isArray({ min: 1 })
-        .custom((value: string[]) => {
-            for (const item of value) {
-                if (typeof item !== 'string') {
-                    throw new Error('tags must be an array of strings');
-                }
-            }
-            return true;
-        }),
-    body('path')
-        .isString()
-        .notEmpty()
-];
-
-export const updatePromoValidationRules = [
-    body('tags')
-        .isArray({ min: 1 })
-        .custom((value: string[]) => {
-            for (const item of value) {
-                if (typeof item !== 'string') {
-                    throw new Error('tags must be an array of strings');
-                }
-            }
-            return true;
-        }),
-    body('path')
-        .isString()
-        .notEmpty()
-];
-
-export const deletePromoValidationRules = [
-];
-
-export const getPromoValidationRules = [
-];
-
-export const validate = (req: Request, res: Response, next: NextFunction) => {
-    // Run validation
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        return res.status(400).json({ errors: errors.array() });
-    }
-    next();
-};
