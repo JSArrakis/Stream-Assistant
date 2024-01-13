@@ -16,8 +16,10 @@ export async function createShowHandler(req: Request, res: Response): Promise<vo
         return;
     }
 
+    let loadTitle = req.body.title.replace(/[^a-zA-Z0-9]/g, '').toLowerCase();
+
     // Retrieve show from MongoDB using show load title if it exists
-    const show = await ShowModel.findOne({ LoadTitle: req.body.loadTitle });
+    const show = await ShowModel.findOne({ LoadTitle: loadTitle });
 
     // If it exists, return error
     if (show) {
@@ -25,7 +27,7 @@ export async function createShowHandler(req: Request, res: Response): Promise<vo
         return;
     }
     // If it doesn't exist, perform transformations
-    let createdShow = await transformShowFromRequest(req.body);
+    let createdShow = await transformShowFromRequest(req.body, loadTitle);
 
     // Insert show into MongoDB
     await ShowModel.create(createdShow);
@@ -68,8 +70,10 @@ export async function updateShowHandler(req: Request, res: Response): Promise<vo
         return;
     }
 
+    let loadTitle = req.body.title.replace(/[^a-zA-Z0-9]/g, '').toLowerCase();
+
     // Retrieve show from MongoDB using show load title if it exists
-    const show = await ShowModel.findOne({ LoadTitle: req.body.loadTitle });
+    const show = await ShowModel.findOne({ LoadTitle: loadTitle });
 
     // If it doesn't exist, return error
     if (!show) {
@@ -78,7 +82,7 @@ export async function updateShowHandler(req: Request, res: Response): Promise<vo
     }
 
     // If it exists, perform transformations
-    let updatedShow = await transformShowFromRequest(req.body);
+    let updatedShow = await transformShowFromRequest(req.body, loadTitle);
 
     // Update show in MongoDB
     await ShowModel.updateOne({ _id: show._id }, updatedShow);
@@ -116,8 +120,10 @@ export async function createMovieHandler(req: Request, res: Response): Promise<v
         return;
     }
 
+    let loadTitle = req.body.title.replace(/[^a-zA-Z0-9]/g, '').toLowerCase();
+
     // Retrieve movie from MongoDB using show load title if it exists
-    const movie = await MovieModel.findOne({ LoadTitle: req.body.loadTitle });
+    const movie = await MovieModel.findOne({ LoadTitle: loadTitle });
 
     // If it exists, return error
     if (movie) {
@@ -125,7 +131,7 @@ export async function createMovieHandler(req: Request, res: Response): Promise<v
         return;
     }
     // If it doesn't exist, perform transformations
-    let createdMovie = await transformMovieFromRequest(req.body);
+    let createdMovie = await transformMovieFromRequest(req.body, loadTitle);
 
     // Insert movie into MongoDB
     await MovieModel.create(createdMovie);
@@ -165,9 +171,9 @@ export async function updateMovieHandler(req: Request, res: Response): Promise<v
         res.status(400).json({ errors: errors.array() });
         return;
     }
-
+    let loadTitle = req.body.title.replace(/[^a-zA-Z0-9]/g, '').toLowerCase();
     // Retrieve movie from MongoDB using movie load title if it exists
-    const movie = await MovieModel.findOne({ LoadTitle: req.body.loadTitle });
+    const movie = await MovieModel.findOne({ LoadTitle: loadTitle });
 
     // If it doesn't exist, return error
     if (!movie) {
@@ -176,7 +182,7 @@ export async function updateMovieHandler(req: Request, res: Response): Promise<v
     }
 
     // If it exists, perform transformations
-    let updatedMovie = await transformMovieFromRequest(req.body);
+    let updatedMovie = await transformMovieFromRequest(req.body, loadTitle);
 
     // Update show in MongoDB
     await MovieModel.updateOne({ _id: movie._id }, updatedMovie);
@@ -221,7 +227,7 @@ export async function createBufferHandler(req: Request, res: Response): Promise<
     if (buffer) {
         res.status(400).json({ message: "Buffer Media already exists" });
         return;
-    } 
+    }
     // If it doesn't exist, perform transformations
     let updatedBuffer = await transformBufferFromRequest(req.body);
 

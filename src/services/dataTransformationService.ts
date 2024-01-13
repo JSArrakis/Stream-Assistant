@@ -3,10 +3,10 @@ import { Show } from "../models/show";
 import { Movie } from '../models/movie';
 import { BufferMedia } from '../models/buffer';
 
-export async function transformShowFromRequest(show: any): Promise<Show> {
+export async function transformShowFromRequest(show: any, loadTitle: string): Promise<Show> {
     let parsedShow: Show = Show.fromRequestObject(show)
 
-    parsedShow.LoadTitle = parsedShow.Title.replace(/[^a-zA-Z0-9]/g, '').toLowerCase();
+    parsedShow.LoadTitle = loadTitle
 
     parsedShow.Alias = parsedShow.LoadTitle;
 
@@ -55,15 +55,15 @@ export async function transformShowFromRequest(show: any): Promise<Show> {
     return parsedShow;
 }
 
-export async function transformMovieFromRequest(movie: any): Promise<Movie> {
+export async function transformMovieFromRequest(movie: any, loadTitle: string): Promise<Movie> {
     let parsedMovie: Movie = Movie.fromRequestObject(movie)
 
-    parsedMovie.LoadTitle = parsedMovie.Title.replace(/[^a-zA-Z0-9]/g, '').toLowerCase();
+    parsedMovie.LoadTitle = loadTitle
 
     parsedMovie.Alias = parsedMovie.LoadTitle;
-    if(parsedMovie.Duration > 0){
+    if (parsedMovie.Duration > 0) {
         return parsedMovie;
-    } 
+    }
     console.log(`Getting duration for ${parsedMovie.Path}`);
     let durationInSeconds = await getMediaDuration(parsedMovie.Path);
     parsedMovie.Duration = durationInSeconds; // Update duration value
@@ -75,9 +75,9 @@ export async function transformMovieFromRequest(movie: any): Promise<Movie> {
 export async function transformBufferFromRequest(buffer: any): Promise<BufferMedia> {
     let parsedBuffer: BufferMedia = BufferMedia.fromRequestObject(buffer)
 
-    if(parsedBuffer.Duration > 0){
+    if (parsedBuffer.Duration > 0) {
         return parsedBuffer;
-    } 
+    }
     console.log(`Getting duration for ${parsedBuffer.Path}`);
     let durationInSeconds = await getMediaDuration(parsedBuffer.Path);
     parsedBuffer.Duration = durationInSeconds; // Update duration value
