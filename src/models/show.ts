@@ -40,7 +40,10 @@ export const EpisodeSchema = new mongoose.Schema({
 
 export const ShowSchema = new mongoose.Schema({
     Title: String,
-    LoadTitle: String,
+    LoadTitle: {
+        type: String,
+        index: true,
+    },
     Alias: String,
     IMDB: String,
     DurationLimit: Number,

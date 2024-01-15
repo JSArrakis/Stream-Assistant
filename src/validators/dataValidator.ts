@@ -154,6 +154,9 @@ export const createMovieValidationRules = [
 
 ];
 
+export const bulkCreateMoviesValidationRules = [
+];
+
 export const updateMovieValidationRules = [
     body('title')
         .isString()

@@ -6,8 +6,8 @@ import { setConfig } from "./src/services/streamService";
 import { cycleCheck, setEndOfDayMarker, setTomorrow } from "./src/services/backgroundService";
 import { connectToDB } from "./src/db/db";
 import { Config } from "./src/models/config";
-import { createBufferValidationRules, createMovieValidationRules, createShowValidationRules, deleteBufferValidationRules, deleteMovieValidationRules, deleteShowValidationRules, getBufferValidationRules, getMovieValidationRules, getShowValidationRules, updateBufferValidationRules, updateMovieValidationRules, updateShowValidationRules } from "./src/validators/dataValidator";
-import { createBufferHandler, createMovieHandler, createShowHandler, deleteBufferHandler, deleteMovieHandler, deleteShowHandler, getBufferHandler, getMovieHandler, getShowHandler, updateBufferHandler, updateMovieHandler, updateShowHandler } from "./src/controllers/adminController";
+import { bulkCreateMoviesValidationRules, createBufferValidationRules, createMovieValidationRules, createShowValidationRules, deleteBufferValidationRules, deleteMovieValidationRules, deleteShowValidationRules, getBufferValidationRules, getMovieValidationRules, getShowValidationRules, updateBufferValidationRules, updateMovieValidationRules, updateShowValidationRules } from "./src/validators/dataValidator";
+import { bulkCreateMovieHandler, createBufferHandler, createMovieHandler, createShowHandler, deleteBufferHandler, deleteMovieHandler, deleteShowHandler, getBufferHandler, getMovieHandler, getShowHandler, updateBufferHandler, updateMovieHandler, updateShowHandler } from "./src/controllers/adminController";
 
 const config: Config = require('./config.json') as Config;
 setConfig(config);
@@ -36,6 +36,7 @@ app.put('/api/admin/update-show', updateShowValidationRules, updateShowHandler);
 app.get('/api/admin/get-show', getShowValidationRules, getShowHandler);
 
 app.post('/api/admin/create-movie', createMovieValidationRules, createMovieHandler);
+app.post('/api/admin/bulk-create-movies', bulkCreateMoviesValidationRules, bulkCreateMovieHandler);
 app.delete('/api/admin/delete-movie', deleteMovieValidationRules, deleteMovieHandler);
 app.put('/api/admin/update-movie', updateMovieValidationRules, updateMovieHandler);
 app.get('/api/admin/get-movie', getMovieValidationRules, getMovieHandler);
