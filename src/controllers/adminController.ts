@@ -153,12 +153,13 @@ export async function bulkCreateMovieHandler(req: Request, res: Response): Promi
     if (!Array.isArray(req.body)) {
         res.status(400).json({ message: "Request body must be an array" });
         return;
-    }9
+    }
     // Validate request body is an array of objects
     if (!req.body.every((item: any) => typeof item === 'object')) {
         res.status(400).json({ message: "Request body must be an array of movie objects" });
         return;
     }
+    let createdMovies: string[] = [];
     let responseErrors: LoadTitleError[] = [];
     for (const movieEntry of req.body) {
         let err = validateMovie(movieEntry);
@@ -166,27 +167,31 @@ export async function bulkCreateMovieHandler(req: Request, res: Response): Promi
             responseErrors.push(new LoadTitleError(movieEntry.title, err));
             continue;
         }
-
         let loadTitle = movieEntry.title.replace(/[^a-zA-Z0-9]/g, '').toLowerCase();
-        console.log("Load Title: " + loadTitle);
-        const movie = await MovieModel.findOne({ LoadTitle: loadTitle });
-        if (movie) {
-            // If it exists, return error
-            responseErrors.push(new LoadTitleError(loadTitle, `Movie ${movieEntry.title} already exists`));
-            continue;
-        }
+        try {
+            const movie = await MovieModel.findOne({ LoadTitle: loadTitle });
+            if (movie) {
+                // If it exists, return error
+                responseErrors.push(new LoadTitleError(loadTitle, `Movie ${movieEntry.title} already exists`));
+                continue;
+            }
 
-        let createdMovie = await transformMovieFromRequest(movieEntry, loadTitle);
-        await MovieModel.create(createdMovie);
+            let createdMovie = await transformMovieFromRequest(movieEntry, loadTitle);
+
+            await MovieModel.create(createdMovie);
+            createdMovies.push(createdMovie.LoadTitle);
+        } catch (err) {
+            responseErrors.push(new LoadTitleError(loadTitle, err as string));
+        }
     }
 
     if (responseErrors.length === req.body.length) {
-        res.status(400).json({ message: "Movies Not Created", errors: responseErrors });
+        res.status(400).json({ message: "Movies Not Created", createdMovies: [], errors: responseErrors });
         return;
     }
 
 
-    res.status(200).json({ message: "Movies Created", errors: responseErrors });
+    res.status(200).json({ message: "Movies Created", createdMovies: createdMovies, errors: responseErrors });
     return;
 }
 
