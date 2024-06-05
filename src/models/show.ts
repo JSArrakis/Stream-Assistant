@@ -55,6 +55,33 @@ export const ShowSchema = new mongoose.Schema({
     Episodes: [EpisodeSchema]
 });
 
+export class ShowData {
+    public Title: string;
+    public LoadTitle: string;
+    public Alias: string;
+    public IMDB: string;
+    public DurationLimit: number;
+    public OverDuration: boolean;
+    public FirstEpisodeOverDuration: boolean;
+    public Tags: string[];
+    public SecondaryTags: string[];
+    public EpisodeCount: number;
+
+    constructor(title: string, loadTitle: string, alias: string, imdb: string, durationLimit: number,
+        overDuration: boolean, firstEpisodeOverDuration: boolean, tags: string[], secondaryTags: string[], episodeCount: number, episodes: Episode[]) {
+        this.Title = title;
+        this.LoadTitle = loadTitle;
+        this.Alias = alias;
+        this.IMDB = imdb;
+        this.DurationLimit = durationLimit;
+        this.OverDuration = overDuration;
+        this.FirstEpisodeOverDuration = firstEpisodeOverDuration;
+        this.Tags = tags;
+        this.SecondaryTags = secondaryTags;
+        this.EpisodeCount = episodeCount;
+    }
+}
+
 export class Episode {
     public Season: number;
     public Episode: number;

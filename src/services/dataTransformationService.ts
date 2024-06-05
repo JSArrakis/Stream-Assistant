@@ -72,6 +72,14 @@ export async function transformMovieFromRequest(movie: any, loadTitle: string): 
     return parsedMovie;
 }
 
+export async function updateMovieFromRequest(update: any, movie: any): Promise<Movie> {
+    let parsedMovie: Movie = Movie.fromRequestObject(update)
+
+    movie.Tags = parsedMovie.Tags;
+
+    return movie;
+}
+
 export async function transformBufferFromRequest(buffer: any): Promise<BufferMedia> {
     let parsedBuffer: BufferMedia = BufferMedia.fromRequestObject(buffer)
 

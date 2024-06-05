@@ -2,8 +2,8 @@
 
 import e, { Request, Response } from 'express';
 import { validationResult } from 'express-validator';
-import { ShowModel } from '../models/show'; // Import the Show model
-import { transformBufferFromRequest, transformMovieFromRequest, transformShowFromRequest } from '../services/dataTransformationService';
+import { Show, ShowData, ShowModel } from '../models/show'; // Import the Show model
+import { transformBufferFromRequest, transformMovieFromRequest, transformShowFromRequest, updateMovieFromRequest } from '../services/dataTransformationService';
 import { MovieModel } from '../models/movie';
 import { BufferMediaModel } from '../models/buffer';
 import { LoadTitleError } from '../models/loadTitleError';
@@ -232,17 +232,17 @@ export async function updateMovieHandler(req: Request, res: Response): Promise<v
 
     // If it doesn't exist, return error
     if (!movie) {
-        res.status(400).json({ message: "Movie does not exist" });
+        res.status(404).json({ message: "Movie does not exist" });
         return;
     }
 
     // If it exists, perform transformations
-    let updatedMovie = await transformMovieFromRequest(req.body, loadTitle);
+    let updatedMovie = await updateMovieFromRequest(req.body, movie);
 
     // Update show in MongoDB
     await MovieModel.updateOne({ _id: movie._id }, updatedMovie);
 
-    res.status(200).json({ message: "Movie Updated" });
+    res.status(200).json({ message: "Movie Updated", movie: updatedMovie });
     return;
 }
 
@@ -264,6 +264,43 @@ export async function getMovieHandler(req: Request, res: Response): Promise<void
     }
 
     res.status(200).json(movie);
+    return;
+}
+
+export async function getAllMoviesHandler(req: Request, res: Response): Promise<void> {
+    const movies = await MovieModel.find();
+
+    if (!movies || movies.length === 0) {
+        res.status(404).json({ message: "No Movies Found" });
+        return;
+    }
+    res.status(200).json(movies);
+    return;
+}
+
+export async function getAllShowsDataHandler(req: Request, res: Response): Promise<void> {
+    const shows = await ShowModel.find();
+
+    if (!shows || shows.length === 0) {
+        res.status(404).json({ message: "No Shows Found" });
+        return;
+    }
+    let showsData = shows.map((show: any) => {
+        return {
+            title: show.Title,
+            loadTitle: show.LoadTitle,
+            alias: show.Alias,
+            imdb: show.IMDB,
+            durationLimit: show.DurationLimit,
+            overDuration: show.OverDuration,
+            firstEpisodeOverDuration: show.FirstEpisodeOverDuration,
+            tags: show.Tags,
+            secondaryTags: show.SecondaryTags,
+            episodeCount: show.EpisodeCount,
+        }
+    });
+
+    res.status(200).json(showsData);
     return;
 }
 
