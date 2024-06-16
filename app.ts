@@ -10,7 +10,11 @@ import { bulkCreateMoviesValidationRules, createBufferValidationRules, createMov
 import { bulkCreateMovieHandler, createBufferHandler, createMovieHandler, createShowHandler, deleteBufferHandler, deleteMovieHandler, deleteShowHandler, getAllMoviesHandler, getAllShowsDataHandler, getBufferHandler, getMovieHandler, getShowHandler, updateBufferHandler, updateMovieHandler, updateShowHandler } from "./src/controllers/adminController";
 
 const config: Config = require('./config.json') as Config;
+// Gets the config from the config.json file and sets it in the stream service
 setConfig(config);
+
+// Loads media from the JSON files
+// TODO - Load media from the database
 loadMedia(config);
 const app = express();
 const port = process.env.PORT || 3001;
@@ -19,14 +23,21 @@ app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });
 
+// Sets the end of day marker as 30 minutes before midnight on the day the service is started
+// This time is used to determine when the service should start preparing the stream for the next day
 setEndOfDayMarker();
+
+// Sets the unix timestamp for the start of the next day at midnight
 setTomorrow();
 
+// Connects to the database and starts the cycle check
+// The cycle check is a function that runs every 5 minutes to check if the stream should progress to the next media block
 connectToDB().then(() => {
     cycleCheck();
 });
 
 //Stream Control
+//Start Stream with the intention of playing continuously with no end time until stopped manually
 app.post('/api/continuous-stream', streamValidationRules, continuousStreamHandler);
 
 //Database Management

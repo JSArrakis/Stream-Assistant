@@ -15,18 +15,20 @@ const transaltionTags = require('../../data/translationTags.json');
 let media = new Media([], [], [], [], [], [], []);
 
 export function loadMedia(config: Config): void {
-    // media = {
-    //     Shows: loadShowsFromJsonFile(config.dataFolder + 'showsList.json'),
-    //     Movies: loadMoviesFromJsonFile(config.dataFolder + 'moviesList.json'),
-    //     Shorts: loadShortsFromJsonFile(config.dataFolder + 'shortsList.json'),
-    //     Music: loadMusicFromJsonFile(config.dataFolder + 'musicList.json'),
-    //     Promos: loadPromosFromJsonFile(config.dataFolder + 'promosList.json'),
-    //     Commercials: loadCommercialsFromJsonFile(config.dataFolder + 'commercialsList.json'),
-    //     Collections: []
-    // }
+    console.log("Loading media from JSON files...")
+    media = {
+        Shows: loadShowsFromJsonFile(config.dataFolder + 'showsList.json'),
+        Movies: loadMoviesFromJsonFile(config.dataFolder + 'moviesList.json'),
+        Shorts: loadShortsFromJsonFile(config.dataFolder + 'shortsList.json'),
+        Music: loadMusicFromJsonFile(config.dataFolder + 'musicList.json'),
+        Promos: loadPromosFromJsonFile(config.dataFolder + 'promosList.json'),
+        Commercials: loadCommercialsFromJsonFile(config.dataFolder + 'commercialsList.json'),
+        Collections: []
+    }
 }
 
 export function getMedia(): Media {
+    // All available media entries are loaded on service start up, this just returns the loaded media
     return media;
 }
 
@@ -93,7 +95,7 @@ export function loadShowsFromJsonFile(filePath: string): Show[] {
     try {
         const jsonString = fs.readFileSync(filePath, 'utf-8');
         const jsonParsed = JSON.parse(jsonString);
-
+        console.log("Loaded " + jsonParsed.length + " shows from JSON file " + filePath)
         // Validate that the JSON is an array
         if (!Array.isArray(jsonParsed)) {
             throw new Error('JSON data is not an array.');
@@ -102,7 +104,7 @@ export function loadShowsFromJsonFile(filePath: string): Show[] {
         // Map the JSON objects to Short instances
         const shows: Show[] = jsonParsed.map((item: any) => {
             let episodes = item.Episodes.map((episode: any) => {
-                return new Episode(
+                let ep = new Episode(
                     episode.Season,
                     episode.Episode,
                     episode.EpisodeNumber,
@@ -113,6 +115,7 @@ export function loadShowsFromJsonFile(filePath: string): Show[] {
                     episode.DurationLimit,
                     episode.Tags
                 );
+                return ep;
             });
 
             return new Show(

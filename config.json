@@ -1,8 +1,8 @@
 {
 	"vlcLocation": "C:\\Program Files\\VideoLAN\\VLC\\vlc.exe",
-	"destinationFolder": "C:\\Users\\pinea\\OneDrive\\Documents\\GitHub\\Stream-Assistant\\data\\",
-	"testFolder": "C:\\Users\\pinea\\OneDrive\\Documents\\GitHub\\Stream-Assistant\\data\\",
-	"dataFolder": "C:\\Users\\pinea\\OneDrive\\Documents\\GitHub\\Stream-Assistant\\data\\",
+	"destinationFolder": "C:\\Users\\Main\\Documents\\GitHub\\Stream-Assistant\\data\\",
+	"testFolder": "C:\\Users\\Main\\Documents\\GitHub\\Stream-Assistant\\data\\",
+	"dataFolder": "C:\\Users\\Main\\Documents\\GitHub\\Stream-Assistant\\data\\",
 	"playlistName": "Playlist",
 	"repeatInterval": 86400,
 	"interval": 1800,

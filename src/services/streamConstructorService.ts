@@ -22,26 +22,39 @@ export function constructStream(
     media: Media,
     transaltionTags: TranslationTag[] = loadTranslationTags(config.dataFolder + 'translationTags.json'),
     progression: MediaProgression[] = loadProgression(config.dataFolder + 'progression.json'),
+    // sets the time of the stream to the current time if no start time is provided
     rightNow: number = (options.startTime === undefined) ? moment().unix() : options.startTime):
     MediaBlock[] {
     console.log("Right Now: " + rightNow)
     let streamBlocks: MediaBlock[] = [];
 
-    //Set which audience is being targeted with the stream
+    // Set which audience is being targeted with the stream
     setEnvironment(options);
 
-    //Get the media that is scheduled to be played from the api request
+    // Get the media that is scheduled to be played from the api request (movies that are selected to be played at a specific time)
+    // This detects if a movie is scheduled to be played at a specific time and adds it to the stream
+    // The format of the string is "MovieTitle::Time" where time is the unix timestamp of when the movie is scheduled to be played
+    // TODO - Change the format of the scheduled movies request to be an array of objects with a title and time property for easier parsing
     let scheduledMedia: SelectedMedia[] = getScheduledMedia(options, media, progression);
 
-    //Get the media that is injected into the stream from the api request
-    //Get the end time of the stream
+    // Get the media that is specifically requested from the incoming http request and the end time of the stream to create a collection
+    // of media that is ordered by scheduled time and 'injected' media that is requested by the user
+    // The staged media object is used to determine the order of the stream. The scheduled media will always play at the time it is scheduled
+    // The injected media will fill the gaps between the scheduled media where the duration and time available allows
+    // Any further time that is available after the scheduled media is filled with procedural selected media based on tagging
+    // TODO - injected media for a continuous stream should take better consideration for the "genre walk" we want to create. 
+    // Due to the nature of the continuous stream, the injected media can and should be available to be played beyond just "today"
+    // and should be subject to the rules of the genre walk to give a better experience to the viewer, scheduling these movies beyond the initial stream day to allow for a smoother "walk"
+    // We might even want to consider removing the ability to inject media for a continuous stream and rely on the future API endpoints to inject movies manually
+    // Or we could remove Staged Media for a continuous stream entirely and only use tags for the base stream generation
     let stagedMedia = new StagedMedia(
+        // Movies 
         scheduledMedia,
         getInjectedMovies(options, media.Movies),
         evaluateStreamEndTime(options, scheduledMedia)
     );
 
-    //Get genre tag from either directly selected tags in the request or from the scheduled media
+    // Get genre tag from either user requested tags or from the media that is scheduled and injected if no tags are selected by the user
     setProceduralTags(options, stagedMedia);
 
     let stagedStream: SelectedMedia[] = getStagedStream(rightNow, config, options, stagedMedia, media, progression);
