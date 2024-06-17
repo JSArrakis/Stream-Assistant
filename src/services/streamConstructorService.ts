@@ -48,18 +48,28 @@ export function constructStream(
     // We might even want to consider removing the ability to inject media for a continuous stream and rely on the future API endpoints to inject movies manually
     // Or we could remove Staged Media for a continuous stream entirely and only use tags for the base stream generation
     let stagedMedia = new StagedMedia(
-        // Movies 
         scheduledMedia,
         getInjectedMovies(options, media.Movies),
         evaluateStreamEndTime(options, scheduledMedia)
     );
 
-    // Get genre tag from either user requested tags or from the media that is scheduled and injected if no tags are selected by the user
+    // Get genre tag from the media that is scheduled and injected if no tags are selected by the user
     setProceduralTags(options, stagedMedia);
 
+    // Using the scheduled media and injected media, create a stream of media blocks that will be played in order
+    // The stream is created by filling the time between the scheduled and injected media with procedural media based on the genre tags available
+    // These are only the main media items, the buffer media is added to the stream in the next step
     let stagedStream: SelectedMedia[] = getStagedStream(rightNow, config, options, stagedMedia, media, progression);
+    
+    // An Object that holds previously played media to prevent the same media from being played in the same stream before a certain interval
+    // Each media item in prevBuffer is added or removed based on its own rules. I.E. commercials are added if they are selected for a buffer but will be removed after the next
+    // buffer is created and be replaced by that buffer's commercials. There are exceptions and special circumstances when this is not the case
     let prevBuffer: Media = new Media([], [], [], [], [], [], []);
 
+    // Creates the buffer media to fill the time between when the stream is initilized and the first media item being played
+    // The first media item played should be timed to the first 30 minute or hour mark on the clock
+    // This initial buffer is created to ensure that the first media item is played at the correct time
+    // TODO - change initial buffer into an object instead of an array
     let initialBuffer = createBuffer(
         stagedStream[0].Time - rightNow,
         options,
@@ -69,21 +79,40 @@ export function constructStream(
         transaltionTags,
         prevBuffer)
 
+    // Boolean to be used later to determine if there is an initial buffer to be added to the stream
     let hasInitialBuffer = initialBuffer[0].length > 0 ? true : false;
-    // console log the initial buffer remainder
+    
+    // Adds the initial buffer to the prevBuffer object
     prevBuffer = initialBuffer[2];
 
+    // If there is any remaining time the initial buffer did not fill, that remaining time is assigned to the remainder variable
+    // This variable gets passed to the next buffer to correct the schedule and keep things on time
     let remainder = initialBuffer[1];
+
+    // Loops through the staged stream of media items and creates a media block for each item
+    // A media block is an object that holds the main media item and the buffer media that will be played after the main media item
     stagedStream.forEach((item, index) => {
+        // Boolean to determine if the current media item is the last item in the time frame for this stream (determined by the user or the end of the day)
         let lastItem = index === stagedStream.length - 1 ? true : false;
 
         if (item.Type == MediaType.Episode || item.Type == MediaType.Movie) {
-            let mediaBlock = new MediaBlock([], [], undefined);
+            let mediaBlock = new MediaBlock([], [], undefined, undefined);
+            // Add main media item to the media block
             let mediaItem = item.Media;
             mediaBlock.MainBlock = mediaItem;
+            // Adds the assigned start time for the main media item to the media block
             mediaBlock.StartTime = item.Time;
+
+            // Get the duration of the buffer media that will be played after the main media item
+            // TODO - this does not take into account OverDuration media items
+            // We will need a way to calculate the duration of the buffer using the length of the media item and when the next media item is scheduled to play or the end of the stream
             let bufferDuration = mediaItem.DurationLimit - mediaItem.Duration
 
+            // Creates the buffer media for this current block
+            // The buffer is selected based on the tags of the current media item and the next media item in the stream
+            // Unless the it is initial buffer or the last buffer of the stream, the buffer is split in half to allow for a smoother transition between media items
+            // The middle of the buffer in these cases will always be the promo item based on the environment of the stream
+            // The first half of the buffer will be themed to the media that aired befor the buffer, and the second half will be themed to the media that will air after the buffer
             let buffer = createBuffer(
                 bufferDuration + remainder,
                 options,
@@ -93,21 +122,35 @@ export function constructStream(
                 transaltionTags,
                 prevBuffer);
 
-            //sum of all buffer durations
+            // The sum of all selected media items in the buffer is added to the total duration of the Media Block
             let totalDuration: number = 0;
             for (const obj of buffer[0]) {
                 totalDuration += obj.Duration;
             }
+            // Replaces the stored previous buffer with the buffer that was just created to prevent these media items from being played during the next buffer
             prevBuffer = buffer[2];
+
+            // Adds the buffer media to the media block
             mediaBlock.Buffer.push(...buffer[0]);
+            // resets the remainder varliable to the new remainder from the buffer if any to be used in the next iteration of this loop
             remainder = buffer[1];
+            // If this is the first media item in the stream and there is an initial buffer, add the initial buffer to the media block
             if (index === 0 && hasInitialBuffer) {
                 mediaBlock.InitialBuffer.push(...initialBuffer[0]);
                 hasInitialBuffer = false;
             }
+            // Adds the media block to the stream blocks array, order matters here as this is the order the media will be played in
+            // as this array will be used as the upcoming stream variable used by the background service with shift() to add the next media item to the stream
             streamBlocks.push(mediaBlock);
         }
-        //TODO
+        //TODO - Collections
+        // Collections are not currently supported in the stream constructor due to old code before it was rewritten in Typescript
+        // Collections are a specific grouping of shows, movies or other specific media items that are played in a specific order
+        // This could be a series of movies that are played in order, a series of shows that are played in order, or a mix of both
+        // We will need to also consider music blocks and other media types that are not currently supported in the stream constructor
+        // The progression engine should keep track of each collections progression for each show in the collection, this functionality
+        // is meant to keep each collection progression siloed from each other and from the main stream progression 
+
         // else if (item.Media instanceof Collection) {
         //     let collection = item.Media;
         //     let collectionBlock = createCollectionBlock(
@@ -337,6 +380,8 @@ function compareSelectedEndTime(endTime: number, scheduledMedia: SelectedMedia[]
 
 export function getScheduledMedia(options: any, media: Media, progression: MediaProgression[]): SelectedMedia[] {
     let selectedMedia: SelectedMedia[] = [];
+    // Parses the incoming http request for scheduled movies and collections
+    // The format of the string is "MovieTitle::Time" where time is the unix timestamp of when the movie is scheduled to be played
     if (options.movies) {
         options.movies
             .filter((str: string) => str.includes('::'))
@@ -415,7 +460,15 @@ export function assignCollEpisodes(collection: Collection, shows: Show[], progre
 }
 
 function setEnvironment(options: StreamArgs) {
-    //TODO: Just all of this
+    //TODO: A default environment should be set in the config file
+    // As a part of the repo we will have to provide a location to download default videos for the default environment
+    // This will be a set of commercials Logoed as Stream Assistant (or whatever name we decide on) that will be used as buffer media
+    // This will be a promo and a set of commercial files of various lengths that will be used to fill the buffer time between media items
+    // We will have to get unlicensed music for the buffer media as well and make a video of the logo with the music in the background
+    // This will help people who do not have access to commercials, and we can use differing mustic to represent the different main genres that will be used
+    // By the default tag translation list (which we will also have to create, and provide a way for the user to edit or expand upon)
+    // To do reduce our work load we will only create a the most main movie genres: Action, Comedy, Drama, Horror, Sci-Fi, and Fantasy
+    // Most of those honestly could be covered by the same music, the exceptions being Horror and Action
     if (options.env !== undefined) {
         options.env = "FC";
     } else {
