@@ -384,21 +384,33 @@ export function getScheduledMedia(options: any, media: Media, progression: Media
     // The format of the string is "MovieTitle::Time" where time is the unix timestamp of when the movie is scheduled to be played
     if (options.movies) {
         options.movies
+            //Gets only the movies that have the time schedule delimiter "::"
             .filter((str: string) => str.includes('::'))
             .forEach((str: string) => {
+                // Splits the string into an array of strings with the movie title and the time it is scheduled to be played
                 let parsedMovie = str.split("::");
                 selectedMedia.push(getMovie(parsedMovie[0], media.Movies, parseInt(parsedMovie[1])));
             });
     }
 
+    // Blocks should be in the format "CollectionTitle::EpisodeNumber"
+    // TODO - Rename blocks to collections in the options object
+    // TODO - For continuous streams, we need to make sure that we have a way to specify the interval of days or weeks that a collection
+    // should be played. This will allow us to schedule collections to be played on specific days of the week or at specific intervals.
+    // This allows for things like the "Toonami Midnight Run" where a specific show is played at a specific time on a specific day of the week
+    // or Nickelodeons 90s Saturday Morning blocks. This will also allow us to schedule collections to be played on specific holidays or events
     if (options.blocks) {
         options.blocks
+            // Gets only the collections that have the time schedule delimiter "::"
+            // Sometimes a collection can just be added that doesnt need to be scheduled. Collections can also be marathons of movies or shows 
+            // that are played in order and do not need to be scheduled at a specific time
             .filter((str: string) => str.includes('::'))
             .forEach((str: string) => {
                 let parsedCollection = str.split("::");
                 selectedMedia.push(getCollection(parsedCollection[0], media, parseInt(parsedCollection[1]), progression));
             });
     }
+    // Sorts the the selected media based on the unix timestamp of when the media is scheduled to be played
     let sorted = selectedMedia.sort((a, b) => a.Time - b.Time);
     return sorted;
 }
@@ -416,13 +428,22 @@ export function getInjectedMovies(options: any, movies: Movie[]): SelectedMedia[
 }
 
 export function getMovie(loadTitle: string, movieList: Movie[], time: number): SelectedMedia {
+    // Check if the movie title is empty or undefined as these cannot be searched against the movie list
     if (loadTitle === "" || loadTitle === undefined) {
         throw loadTitle + "Empty movie titles are not a valid input";
     }
+    // Check if the movie title is in the movie list
+    // The load title is the title that is used to load the movie from the database and is unique to each movie
+    // The format of the load title is the title of the movie with spaces, special characters, and capitalization removed
+    // The movie object consists of the title of the movie, the duration of the movie, the tags associated with the movie, and the load title
     let selectedMovie: Movie | undefined = movieList.find(movie => movie.LoadTitle === loadTitle);
+
+    // TODO - We should perhaps instead send back some kind of error message through the response object of the http request
     if (selectedMovie === undefined) {
-        throw loadTitle + " is not a valid load title for a movie, re-check your spelling or make sure the title youre attempting to load exists.";
+        throw loadTitle + " load title, not found.";
     }
+
+    // Created a selected media object that holds the selected movie, the time it is scheduled to be played, the duration of the movie, the tags associated with the movie, and the type of media
     return new SelectedMedia(
         selectedMovie,
         "",
@@ -434,11 +455,18 @@ export function getMovie(loadTitle: string, movieList: Movie[], time: number): S
 }
 
 export function getCollection(loadTitle: string, media: Media, time: number, progression: MediaProgression[]): SelectedMedia {
+    // Check if the collection title is empty or undefined as these cannot be searched against the collection list
+    if (loadTitle === "" || loadTitle === undefined) {
+        throw loadTitle + "Empty collection titles are not a valid input";
+    }
+    
+    // Check if the collection title is in the collection list
     let selectedCollection: Collection | undefined = media.Collections.find(collection => collection.LoadTitle === loadTitle);
     if (selectedCollection === undefined) {
         throw loadTitle + " is not a valid load title for a collection, re-check your spelling or make sure the title youre attempting to load exists.";
     }
 
+    // If a collection has shows assigned to it, assign the episodes to the collection shows based on the progression of the shows
     assignCollEpisodes(selectedCollection, media.Shows, progression);
 
     return new SelectedMedia(
@@ -452,9 +480,16 @@ export function getCollection(loadTitle: string, media: Media, time: number, pro
 }
 
 export function assignCollEpisodes(collection: Collection, shows: Show[], progression: MediaProgression[]): void {
+    // Assigns the episodes to the collection shows based on the progression of the shows
+    // TODO - If the same show appears multiple times in a collection, we will need to figure out how to represent that in the collection
+    // so it can be ran through this loop, or we will have to how the loop works to account for that
+    // possibly just have the shows in the collection show array to have the possibility of multiple entries with their individual sequence numbers
     collection.Shows.forEach(collShow => {
+        // Find the show that matches the load title of the collection show
         let selectedShow = shows.filter(item => item.LoadTitle === collShow.LoadTitle)[0];
+        // Get the episode number that the show should be on based on the progression of the show
         let episodeNum = ManageProgression(collection.Title, "Collection", progression, selectedShow, 1)[0];
+        // Get the episode that matches the episode number from the progression
         collShow.Episode = selectedShow.Episodes.filter(ep => ep.EpisodeNumber === episodeNum)[0];
     })
 }
