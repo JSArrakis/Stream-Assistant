@@ -1,7 +1,10 @@
 import * as ffmpeg from 'fluent-ffmpeg';
 import { Show } from "../models/show";
 import { Movie } from '../models/movie';
-import { BufferMedia } from '../models/buffer';
+import { Commercial } from '../models/commercial';
+import { Music } from '../models/music';
+import { Promo } from '../models/promo';
+import { Short } from '../models/short';
 
 export async function transformShowFromRequest(show: any, loadTitle: string): Promise<Show> {
     let parsedShow: Show = Show.fromRequestObject(show)
@@ -80,17 +83,56 @@ export async function updateMovieFromRequest(update: any, movie: any): Promise<M
     return movie;
 }
 
-export async function transformBufferFromRequest(buffer: any): Promise<BufferMedia> {
-    let parsedBuffer: BufferMedia = BufferMedia.fromRequestObject(buffer)
+export async function transformCommercialFromRequest(buffer: any): Promise<Commercial> {
+    let parsedCommercial: Commercial = Commercial.fromRequestObject(buffer)
 
-    if (parsedBuffer.Duration > 0) {
-        return parsedBuffer;
+    if (parsedCommercial.Duration > 0) {
+        return parsedCommercial;
     }
-    console.log(`Getting duration for ${parsedBuffer.Path}`);
-    let durationInSeconds = await getMediaDuration(parsedBuffer.Path);
-    parsedBuffer.Duration = durationInSeconds; // Update duration value
+    console.log(`Getting duration for ${parsedCommercial.Path}`);
+    let durationInSeconds = await getMediaDuration(parsedCommercial.Path);
+    parsedCommercial.Duration = durationInSeconds; // Update duration value
 
-    return parsedBuffer;
+    return parsedCommercial;
+}
+
+export async function transformMusicFromRequest(buffer: any): Promise<Music> {
+    let parsedMusic: Music = Music.fromRequestObject(buffer)
+
+    if (parsedMusic.Duration > 0) {
+        return parsedMusic;
+    }
+    console.log(`Getting duration for ${parsedMusic.Path}`);
+    let durationInSeconds = await getMediaDuration(parsedMusic.Path);
+    parsedMusic.Duration = durationInSeconds; // Update duration value
+
+    return parsedMusic;
+}
+
+export async function transformPromoFromRequest(buffer: any): Promise<Promo> {
+    let parsedPromo: Promo = Promo.fromRequestObject(buffer)
+
+    if (parsedPromo.Duration > 0) {
+        return parsedPromo;
+    }
+    console.log(`Getting duration for ${parsedPromo.Path}`);
+    let durationInSeconds = await getMediaDuration(parsedPromo.Path);
+    parsedPromo.Duration = durationInSeconds; // Update duration value
+
+    return parsedPromo;
+}
+
+export async function transformShortFromRequest(buffer: any): Promise<Short> {
+    let parsedShort: Short = Short.fromRequestObject(buffer)
+
+    if (parsedShort.Duration > 0) {
+        return parsedShort;
+    }
+    console.log(`Getting duration for ${parsedShort.Path}`);
+    let durationInSeconds = await getMediaDuration(parsedShort.Path);
+    parsedShort.Duration = durationInSeconds; // Update duration value
+
+    return parsedShort;
 }
 
 async function getMediaDuration(filePath: string): Promise<number> {

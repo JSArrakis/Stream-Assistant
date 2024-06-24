@@ -9,6 +9,7 @@ import { playVLC, setVLCClient } from '../services/backgroundService';
 import { getMedia } from '../services/dataManager';
 
 export async function continuousStreamHandler(req: Request, res: Response): Promise<void> {
+    let streamError: string = "";
     // Check for errors in request
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -18,15 +19,15 @@ export async function continuousStreamHandler(req: Request, res: Response): Prom
 
     // TODO - Check if Continuous stream is already running, if so return error
     // Important until I can rewrite module of vlc client to include the ability to close the client
-    // Currently the only way to close the client is to close the application
+    // Currently the only way to close the client is to stop the Stream Assistant service
 
     // Set continuous stream value to true in the stream service, this value will be used by the background service to determine if the stream should continue at the end of the day
-    //TODO - Remove endtime from valid fields in validation rules
+    // TODO - Remove endtime from valid fields in validation rules
     setContinuousStream(true);
 
     // Set the continuous stream args to the values from the request
     // These values are stored in the stream service and used to determine the stream while it is running continuously
-    //TODO - remove endtime from map
+    // TODO - remove endtime from map
     setContinuousStreamArgs(mapStreamStartRequestToInputArgs(req));
 
     // Set the VLC client to the client created with the password from the request
@@ -34,7 +35,12 @@ export async function continuousStreamHandler(req: Request, res: Response): Prom
     setVLCClient(await createVLCClient(getContinuousStreamArgs().password));
 
     // Creates today's span of the stream filling the time until 12:00am using params from config, continuous stream args and available media
-    initializeStream(getConfig(), getContinuousStreamArgs(), getMedia());
+    streamError = initializeStream(getConfig(), getContinuousStreamArgs(), getMedia());
+    if (streamError !== "") {
+        console.log("Error initializing stream: " + streamError);
+        res.status(400).json({ message: streamError });
+        return;
+    }
 
     // Pulls the first two items from the initialized stream and adds them to the on deck stream, the on deck stream array is used to load vlc with the next media block
     // This is done to for a future feature which will function in tandem with a user being able to change or rearrange an upcoming stream's media items.

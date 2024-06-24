@@ -24,7 +24,8 @@ export function constructStream(
     progression: MediaProgression[] = loadProgression(config.dataFolder + 'progression.json'),
     // sets the time of the stream to the current time if no start time is provided
     rightNow: number = (options.startTime === undefined) ? moment().unix() : options.startTime):
-    MediaBlock[] {
+    [MediaBlock[], string] {
+    let error: string = "";
     console.log("Right Now: " + rightNow)
     let streamBlocks: MediaBlock[] = [];
 
@@ -59,8 +60,13 @@ export function constructStream(
     // Using the scheduled media and injected media, create a stream of media blocks that will be played in order
     // The stream is created by filling the time between the scheduled and injected media with procedural media based on the genre tags available
     // These are only the main media items, the buffer media is added to the stream in the next step
-    let stagedStream: SelectedMedia[] = getStagedStream(rightNow, config, options, stagedMedia, media, progression);
-    
+    let stagedStreamResponse: [SelectedMedia[], string] = getStagedStream(rightNow, config, options, stagedMedia, media, progression);
+    if (stagedStreamResponse[1] !== "") {
+        error = stagedStreamResponse[1];
+        return [[], error];
+    }
+    let stagedStream = stagedStreamResponse[0];
+
     // An Object that holds previously played media to prevent the same media from being played in the same stream before a certain interval
     // Each media item in prevBuffer is added or removed based on its own rules. I.E. commercials are added if they are selected for a buffer but will be removed after the next
     // buffer is created and be replaced by that buffer's commercials. There are exceptions and special circumstances when this is not the case
@@ -81,7 +87,7 @@ export function constructStream(
 
     // Boolean to be used later to determine if there is an initial buffer to be added to the stream
     let hasInitialBuffer = initialBuffer[0].length > 0 ? true : false;
-    
+
     // Adds the initial buffer to the prevBuffer object
     prevBuffer = initialBuffer[2];
 
@@ -143,7 +149,7 @@ export function constructStream(
             // as this array will be used as the upcoming stream variable used by the background service with shift() to add the next media item to the stream
             streamBlocks.push(mediaBlock);
         }
-        //TODO - Collections
+        // TODO - Collections
         // Collections are not currently supported in the stream constructor due to old code before it was rewritten in Typescript
         // Collections are a specific grouping of shows, movies or other specific media items that are played in a specific order
         // This could be a series of movies that are played in order, a series of shows that are played in order, or a mix of both
@@ -165,7 +171,7 @@ export function constructStream(
         // }
 
     });
-    return streamBlocks;
+    return [streamBlocks, error];
 }
 
 // function createCollectionBlock(
@@ -269,11 +275,12 @@ export function getStagedStream(
     options: any,
     stagedMedia: StagedMedia,
     media: Media,
-    progression: MediaProgression[]): SelectedMedia[] {
+    progression: MediaProgression[]): [selectedMedia: SelectedMedia[], error: string] {
+    let error: string = "";
 
     let firstProceduralDuration = getFirstProceduralDuration(rightNow, stagedMedia);
     if (firstProceduralDuration < 0) {
-        throw "Time of first movie, collection, or selected end time needs to be in the future.";
+        error = "Time of first movie, collection, or selected end time needs to be in the future.";
     }
 
     let interval = config.interval;
@@ -334,7 +341,7 @@ export function getStagedStream(
         }
     }
 
-    return selectedMedia;
+    return [selectedMedia, error];
 }
 
 export function setProceduralTags(options: StreamArgs, stagedMedia: StagedMedia): void {
@@ -459,7 +466,7 @@ export function getCollection(loadTitle: string, media: Media, time: number, pro
     if (loadTitle === "" || loadTitle === undefined) {
         throw loadTitle + "Empty collection titles are not a valid input";
     }
-    
+
     // Check if the collection title is in the collection list
     let selectedCollection: Collection | undefined = media.Collections.find(collection => collection.LoadTitle === loadTitle);
     if (selectedCollection === undefined) {

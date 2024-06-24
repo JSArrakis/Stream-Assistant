@@ -1,4 +1,4 @@
-import mongoose, { Document, Model } from 'mongoose';
+import mongoose, { Model } from 'mongoose';
 
 export interface IMovie {
     Title: string;

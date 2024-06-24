@@ -1,5 +1,3 @@
-// src/services/streamService.ts
-
 import { MediaBlock } from '../models/mediaBlock';
 import { constructStream } from './streamConstructorService';
 import { Config } from '../models/config';
@@ -15,12 +13,17 @@ let continuousStreamArgs: StreamArgs;
 let config: Config;
 let streamVarianceInSeconds = 0;
 
-function initializeStream(config: Config, continuousStreamArgs: StreamArgs, media: Media): void {
+function initializeStream(config: Config, continuousStreamArgs: StreamArgs, media: Media): string {
     // Constructs the stream based on the config, continuous stream args, and available media
     // The stream is assigned to upcoming stream which the background service will use to populate the on deck stream
     // The stream is constructed to fill the time until 12:00am
     // The background service will run construct stream again 30 minutes before the end of the day to fill the time until 12:00am the next day
-    upcomingStream = constructStream(config, continuousStreamArgs, media);
+    let upcomingStreamResponse: [MediaBlock[], string] = constructStream(config, continuousStreamArgs, media);
+    if (upcomingStreamResponse[1] !== "") {
+        return upcomingStreamResponse[1];
+    }
+    upcomingStream = upcomingStreamResponse[0];
+    return "";
 }
 
 function initializeOnDeckStream(): void {

@@ -1,5 +1,3 @@
-// src/services/vlcClient.ts
-
 import * as VLC from 'vlc-client';
 import { execSync } from 'child_process';
 
@@ -38,7 +36,7 @@ async function createVLCClient(password: string): Promise<VLC.Client> {
     // Get a list of all running processes
     const currentProcesses = listRunningProcesses();
 
-    //Checks if VLC is running, if it is not it will start VLC
+    // Checks if VLC is running, if it is not it will start VLC
     if (!isVLCRunning(currentProcesses)) {
         await startVLC();
     }

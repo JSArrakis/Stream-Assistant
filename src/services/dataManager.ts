@@ -9,20 +9,20 @@ import { Commercial } from '../models/commercial';
 import { Music } from '../models/music';
 import { Promo } from '../models/promo';
 import { Episode, Show } from '../models/show';
-const progression = require('../../data/progression.json');
-const transaltionTags = require('../../data/translationTags.json');
+import * as db from '../db/db';
 
 let media = new Media([], [], [], [], [], [], []);
 
-export function loadMedia(config: Config): void {
-    console.log("Loading media from JSON files...")
+export async function loadMedia(config: Config): Promise<void> {
+    console.log("Loading media entries from DB...")
+    // TODO - Do a promise.all for all the load functions to speed up the process
     media = {
-        Shows: loadShowsFromJsonFile(config.dataFolder + 'showsList.json'),
-        Movies: loadMoviesFromJsonFile(config.dataFolder + 'moviesList.json'),
-        Shorts: loadShortsFromJsonFile(config.dataFolder + 'shortsList.json'),
-        Music: loadMusicFromJsonFile(config.dataFolder + 'musicList.json'),
-        Promos: loadPromosFromJsonFile(config.dataFolder + 'promosList.json'),
-        Commercials: loadCommercialsFromJsonFile(config.dataFolder + 'commercialsList.json'),
+        Shows: await db.LoadShows(),
+        Movies: await db.LoadMovies(),
+        Shorts: await db.LoadShorts(),
+        Music: await db.LoadMusic(),
+        Promos: await db.LoadPromos(),
+        Commercials: await db.LoadCommercials(),
         Collections: []
     }
 }
@@ -181,7 +181,7 @@ export function loadShortsFromJsonFile(filePath: string): Short[] {
 
         // Map the JSON objects to Short instances
         const shorts: Short[] = jsonParsed.map((item: any) => {
-            return new Short(item.Title, item.Duration, item.Path, item.Type, item.Tags);
+            return new Short(item.Title, item.LoadTitle, item.Duration, item.Path, item.Type, item.Tags);
         });
 
         return shorts;
@@ -202,7 +202,7 @@ export function loadCommercialsFromJsonFile(filePath: string): Commercial[] {
 
         // Map the JSON objects to Short instances
         const commercials: Commercial[] = jsonParsed.map((item: any) => {
-            return new Commercial(item.Title, item.Duration, item.Path, item.Type, item.Tags);
+            return new Commercial(item.Title, item.LoadTitle, item.Duration, item.Path, item.Type, item.Tags);
         });
 
         return commercials;
@@ -223,7 +223,7 @@ export function loadMusicFromJsonFile(filePath: string): Music[] {
 
         // Map the JSON objects to Short instances
         const music: Music[] = jsonParsed.map((item: any) => {
-            return new Music(item.Title, item.Path, item.Duration, item.Type, item.Tags);
+            return new Music(item.Title, item.LoadTitle, item.Path, item.Duration, item.Type, item.Tags);
         });
 
         return music;
@@ -244,7 +244,7 @@ export function loadPromosFromJsonFile(filePath: string): Promo[] {
 
         // Map the JSON objects to Short instances
         const promos: Promo[] = jsonParsed.map((item: any) => {
-            return new Promo(item.Title, item.Duration, item.Path, item.Type, item.Tags);
+            return new Promo(item.Title, item.LoadTitle, item.Duration, item.Path, item.Type, item.Tags);
         });
 
         return promos;

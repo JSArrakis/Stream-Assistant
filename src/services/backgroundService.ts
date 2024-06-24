@@ -1,5 +1,3 @@
-// src/services/backgroundService.ts
-
 import moment from 'moment';
 import { constructStream } from './streamConstructorService';
 import { StreamArgs } from '../models/streamArgs';
@@ -102,9 +100,9 @@ async function cycleCheck() {
             tomorrowsContinuousStreamArgs.tagsOR = continuousStreamArgs.tagsOR;
             tomorrowsContinuousStreamArgs.startTime = tomorrow
             // Constructs the stream for the next day and adds it to the upcoming stream
-            const stream = constructStream(getConfig(), tomorrowsContinuousStreamArgs, getMedia());
+            const stream: [MediaBlock[], string] = constructStream(getConfig(), tomorrowsContinuousStreamArgs, getMedia());
             // TODO - I do not remember why I added this as it looks like it adds the entirety of tomorrow's stream to the on deck stream, this might need to be reworked
-            addToOnDeckStream(stream);
+            addToOnDeckStream(stream[0]);
         }
     }
 

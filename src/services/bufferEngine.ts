@@ -91,7 +91,7 @@ export function createBuffer(
 
     // Sets the duration of the buffer to be the duration of the buffer minus the duration of the promo
     let remDur: number = duration - promo.Duration;
-    
+
     // variables to hold the duration of the first half of the buffer and the second half of the buffer
     let halfA: number = 0;
     let halfB: number = 0;
@@ -101,7 +101,7 @@ export function createBuffer(
         // There is no Half A, so the entire buffer is Half B (themed to the show that is about to play)
         halfB = remDur;
 
-    // If there is no subsequent show or movie (such as when the stream is ending and there is no subsequent show or movie and we are creating the final buffer)
+        // If there is no subsequent show or movie (such as when the stream is ending and there is no subsequent show or movie and we are creating the final buffer)
     } else if (convertedSubTags.MainTags.length === 0 && convertedSubTags.EraTags.length === 0) {
         // There is no Half B, so the entire buffer is Half A (themed to the show that just played)
         halfA = remDur;
@@ -348,8 +348,8 @@ function selectShortOrMusic(
     const useShort = Math.random() < 0.5; // 50% chance of selecting a short
 
     if (useShort && availableShorts.length > 0) {
-        // TODO - Currently we pick the first short available, we might want to randomize this
-        const selectedShort = availableShorts[0];
+        // Select a random short from the available shorts
+        const selectedShort = availableShorts[Math.floor(Math.random() * availableShorts.length)]
         // Update the remaining duration and add the title of the selected short to the used short titles list
         remainingDuration -= selectedShort.Duration;
         usedShortTitles.push(selectedShort.Title);
@@ -357,8 +357,8 @@ function selectShortOrMusic(
         return selectedShort;
 
     } else if (availableMusic.length > 0) {
-        // TODO - Currently we pick the first music available, we might want to randomize this
-        const selectedMusic = availableMusic[0];
+        // Select a random music video from the available music
+        const selectedMusic = availableMusic[Math.floor(Math.random() * availableShorts.length)];
         // Update the remaining duration and add the title of the selected music to the used music titles list
         remainingDuration -= selectedMusic.Duration;
         usedMusicTitles.push(selectedMusic.Title);
