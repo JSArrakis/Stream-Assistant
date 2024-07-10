@@ -1,5 +1,5 @@
 import { MediaBlock } from '../models/mediaBlock';
-import { constructStream } from './streamConstructorService';
+import { constructStream } from './streamConstructor';
 import { Config } from '../models/config';
 import { StreamArgs } from '../models/streamArgs';
 import { Media } from '../models/media';

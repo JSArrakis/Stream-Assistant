@@ -3,7 +3,7 @@
 import { Request, Response } from 'express';
 import { validationResult } from 'express-validator';
 import { StreamArgs } from '../models/streamArgs';
-import { addInitialMediaBlocks, getConfig, getContinuousStreamArgs, initializeOnDeckStream, initializeStream, mapStreamStartRequestToInputArgs, setContinuousStream, setContinuousStreamArgs } from '../services/streamService';
+import { addInitialMediaBlocks, getConfig, getContinuousStreamArgs, initializeOnDeckStream, initializeStream, mapStreamStartRequestToInputArgs, setContinuousStream, setContinuousStreamArgs } from '../services/streamManager';
 import { createVLCClient } from '../services/vlcClient';
 import { playVLC, setVLCClient } from '../services/backgroundService';
 import { getMedia } from '../services/dataManager';
