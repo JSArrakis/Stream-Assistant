@@ -86,22 +86,9 @@ export function addProgression(title: string, type: string, progression: MediaPr
     }
 }
 
-// export function deepCopy(obj) {
-//     if (typeof obj !== 'object' || obj === null) {
-//         return obj; // primitive value or null
-//     }
-
-//     if (Array.isArray(obj)) {
-//         return obj.map(deepCopy); // array
-//     }
-
-//     const result = {};
-//     for (const [key, value] of Object.entries(obj)) {
-//         result[key] = deepCopy(value); // object
-//     }
-
-//     return result;
-// }
+export function keyNormalizer(key: string): string {
+    return key.replace(/[^a-zA-Z0-9]/g, '').toLowerCase()
+}
 
 export function deepCopy<T>(obj: T): T {
     if (typeof obj !== 'object' || obj === null) {
