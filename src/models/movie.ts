@@ -9,8 +9,8 @@ export interface IMovie {
     Path: string;
     Duration: number;
     DurationLimit: number;
-    Collection: string[];
-    CollectionSequence: number;
+    Anthology: string;
+    Chapter: number;
 }
 
 export const MovieSchema = new mongoose.Schema({
@@ -22,8 +22,8 @@ export const MovieSchema = new mongoose.Schema({
     Path: String,
     Duration: Number,
     DurationLimit: Number,
-    Collection: [String],
-    CollectionSequence: Number
+    Anthology: String,
+    Chapter: Number
 });
 
 export class Movie {
@@ -35,8 +35,8 @@ export class Movie {
     Path: string;
     Duration: number;
     DurationLimit: number;
-    Collection: string;
-    CollectionSequence: number;
+    Anthology: string;
+    Chapter: number;
 
     constructor(
         title: string,
@@ -47,8 +47,8 @@ export class Movie {
         path: string,
         duration: number,
         durationLimit: number,
-        collection: string,
-        collectionSequence: number
+        anthology: string,
+        chapter: number
     ) {
 
         this.Title = title;
@@ -59,8 +59,8 @@ export class Movie {
         this.Path = path;
         this.Duration = duration;
         this.DurationLimit = durationLimit;
-        this.Collection = collection;
-        this.CollectionSequence = collectionSequence;
+        this.Anthology = anthology;
+        this.Chapter = chapter;
     }
 
     static fromMongoObject(mongoObject: any): Movie {
@@ -73,8 +73,8 @@ export class Movie {
             mongoObject.path,
             mongoObject.duration,
             mongoObject.durationLimit,
-            mongoObject.collection,
-            mongoObject.collectionSequence
+            mongoObject.anthology,
+            mongoObject.chapter
         );
     }
 
@@ -88,8 +88,8 @@ export class Movie {
             path: movie.Path,
             duration: movie.Duration,
             durationLimit: movie.DurationLimit,
-            collection: movie.Collection,
-            collectionSequence: movie.CollectionSequence
+            anthology: movie.Anthology,
+            chapter: movie.Chapter
         };
     }
 
@@ -103,8 +103,8 @@ export class Movie {
             requestObject.path,
             requestObject.duration,
             requestObject.durationLimit,
-            requestObject.collection,
-            requestObject.collectionSequence
+            requestObject.anthology,
+            requestObject.chapter
         );
     }
 }

@@ -1,12 +1,12 @@
 import { Config } from "../models/config";
 import { MediaType } from "../models/enum/mediaTypes";
 import { Media } from "../models/media";
-import { MediaProgression, ShowProgression } from "../models/mediaProgression";
 import { Movie } from "../models/movie";
 import { SelectedMedia } from "../models/selectedMedia";
 import { Episode, Show } from "../models/show";
 import { StagedMedia } from "../models/stagedMedia";
-import { ManageProgression } from "../utils/utilities";
+import { IStreamRequest } from "../models/v1/streamRequest";
+import { ManageShowProgression } from "./progressionManager";
 
 export function getProceduralBlock(
     config: Config,
@@ -14,7 +14,6 @@ export function getProceduralBlock(
     stagedMedia: StagedMedia,
     media: Media,
     prevMovies: Movie[],
-    progression: MediaProgression[],
     duration: number,
     latestTimePoint: number
 ): SelectedMedia[] {
@@ -36,7 +35,7 @@ export function getProceduralBlock(
             //the entire stream duration. So if we have multiple gaps that have tags where a movie that is part of an anthology
             //can be selected, we will want to select the movie that is next in the anthology. When an anthology movie is selected,
             //we will want to check against an anthology object array to see if this anthology has already been selected, and if so,
-            //we will want to select the next movie in the anthology. If the anthology has not been selected, 
+            //we will want to select the next movie in the anthology. If the anthology has not been selected, we will want to add it
             let injMovie = injDurMovies[Math.floor(Math.random() * injDurMovies.length)];
             let indexInInjectedMovies: number = stagedMedia.InjectedMovies.indexOf(injMovie);
 
@@ -58,7 +57,7 @@ export function getProceduralBlock(
                     currDur = currDur + selectedMovie.DurationLimit;
                     currentTimePoint = currentTimePoint + selectedMovie.DurationLimit;
                 } else {
-                    let result = selectShowUnderDuration(options, media.Shows, progression, durRemainder);
+                    let result = selectShowUnderDuration(options, media.Shows, durRemainder);
                     result[0].forEach(episode => {
 
                         selectedMedia.push(new SelectedMedia(episode, result[1], MediaType.Episode, currentTimePoint, episode.DurationLimit, episode.Tags));
@@ -68,7 +67,7 @@ export function getProceduralBlock(
                 }
             } else {
                 //Show
-                let result = selectShowUnderDuration(options, media.Shows, progression, durRemainder);
+                let result = selectShowUnderDuration(options, media.Shows, durRemainder);
                 result[0].forEach(episode => {
                     selectedMedia.push(new SelectedMedia(episode, result[1], MediaType.Episode, currentTimePoint, episode.DurationLimit, episode.Tags));
                     currDur = currDur + episode.DurationLimit;
@@ -96,10 +95,10 @@ export function selectMovieUnderDuration(options: any, movies: Movie[], prevMovi
     return selectedMovie;
 }
 
-export function selectShowUnderDuration(options: any, shows: Show[], progression: MediaProgression[], duration: number): [Episode[], string] {
+export function selectShowUnderDuration(options: IStreamRequest, shows: Show[], duration: number): [Episode[], string] {
     let episodes: Episode[] = [];
     let filteredShows: Show[] = shows.filter(show =>
-        show.Tags.some(tag => options.tagsOR.includes(tag)) &&
+        show.Tags.some(tag => options.Tags?.includes(tag)) &&
         show.DurationLimit <= duration
     );
 
@@ -109,20 +108,20 @@ export function selectShowUnderDuration(options: any, shows: Show[], progression
             "Something went wrong when selecting a show by Duration"
         );
     }
-
+    let numberOFEpisodes: number = 0;
     let episodeIdx: number[] = [];
 
     if (duration >= 3600) {
         if (selectedShow.OverDuration || selectedShow.DurationLimit > 1800) {
             //select 1
-            episodeIdx = ManageProgression("Main", "Main", progression, selectedShow, 1);
+            episodeIdx = ManageShowProgression(selectedShow, 1);
         } else {
             //select 2
-            episodeIdx = ManageProgression("Main", "Main", progression, selectedShow, 2);
+            episodeIdx = ManageShowProgression(selectedShow, 2);
         }
     } else {
         //select 1
-        episodeIdx = ManageProgression("Main", "Main", progression, selectedShow, 1);
+        episodeIdx = ManageShowProgression(selectedShow, 1);
     }
 
     episodeIdx.forEach(idx => {

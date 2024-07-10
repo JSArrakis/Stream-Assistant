@@ -1,6 +1,5 @@
 import { Config } from "../models/config";
-import { MediaProgression } from "../models/mediaProgression"
-import { loadProgression, loadTranslationTags } from "./dataManager";
+import { loadTranslationTags } from "./dataManager";
 import { Media } from "../models/media";
 import { Movie } from "../models/movie";
 import { Collection } from "../models/collection";
@@ -9,34 +8,31 @@ import { MediaType } from "../models/enum/mediaTypes";
 import { SelectedMedia } from "../models/selectedMedia";
 import { StagedMedia } from "../models/stagedMedia";
 import { getProceduralBlock } from "./proceduralEngine";
-import { Episode, Show } from "../models/show";
-import { ManageProgression, ReduceProgression } from "../utils/utilities";
+import { Show } from "../models/show";
 import { TranslationTag } from "../models/translationTag";
 import { createBuffer } from "./bufferEngine";
-import { StreamArgs } from "../models/streamArgs";
 import { MediaBlock } from "../models/mediaBlock";
+import { IStreamRequest } from "../models/v1/streamRequest";
+import { ManageShowProgression } from "./progressionManager";
 
 export function constructStream(
     config: Config,
-    options: StreamArgs,
+    options: IStreamRequest,
     media: Media,
-    transaltionTags: TranslationTag[] = loadTranslationTags(config.dataFolder + 'translationTags.json'),
-    progression: MediaProgression[] = loadProgression(config.dataFolder + 'progression.json'),
-    // sets the time of the stream to the current time if no start time is provided
-    rightNow: number = (options.startTime === undefined) ? moment().unix() : options.startTime):
+    transaltionTags: TranslationTag[] = loadTranslationTags(config.DataFolder + 'translationTags.json')):
     [MediaBlock[], string] {
+    let rightNow: number = moment().unix()
     let error: string = "";
     console.log("Right Now: " + rightNow)
     let streamBlocks: MediaBlock[] = [];
 
     // Set which audience is being targeted with the stream
-    setEnvironment(options);
 
     // Get the media that is scheduled to be played from the api request (movies that are selected to be played at a specific time)
     // This detects if a movie is scheduled to be played at a specific time and adds it to the stream
     // The format of the string is "MovieTitle::Time" where time is the unix timestamp of when the movie is scheduled to be played
     // TODO - Change the format of the scheduled movies request to be an array of objects with a title and time property for easier parsing
-    let scheduledMedia: SelectedMedia[] = getScheduledMedia(options, media, progression);
+    let scheduledMedia: SelectedMedia[] = getScheduledMedia(options, media);
 
     // Get the media that is specifically requested from the incoming http request and the end time of the stream to create a collection
     // of media that is ordered by scheduled time and 'injected' media that is requested by the user
@@ -60,7 +56,7 @@ export function constructStream(
     // Using the scheduled media and injected media, create a stream of media blocks that will be played in order
     // The stream is created by filling the time between the scheduled and injected media with procedural media based on the genre tags available
     // These are only the main media items, the buffer media is added to the stream in the next step
-    let stagedStreamResponse: [SelectedMedia[], string] = getStagedStream(rightNow, config, options, stagedMedia, media, progression);
+    let stagedStreamResponse: [SelectedMedia[], string] = getStagedStream(rightNow, config, options, stagedMedia, media);
     if (stagedStreamResponse[1] !== "") {
         error = stagedStreamResponse[1];
         return [[], error];
@@ -274,8 +270,7 @@ export function getStagedStream(
     config: Config,
     options: any,
     stagedMedia: StagedMedia,
-    media: Media,
-    progression: MediaProgression[]): [selectedMedia: SelectedMedia[], error: string] {
+    media: Media): [selectedMedia: SelectedMedia[], error: string] {
     let error: string = "";
 
     let firstProceduralDuration = getFirstProceduralDuration(rightNow, stagedMedia);
@@ -283,7 +278,7 @@ export function getStagedStream(
         error = "Time of first movie, collection, or selected end time needs to be in the future.";
     }
 
-    let interval = config.interval;
+    let interval = config.Interval;
     let { preMediaDuration, initialProceduralBlockDuration } = setProceduralBlockDurations(interval, firstProceduralDuration);
     let selectedMedia: SelectedMedia[] = [];
     let prevMovies: Movie[] = [];
@@ -295,7 +290,6 @@ export function getStagedStream(
             stagedMedia,
             media,
             prevMovies,
-            progression,
             initialProceduralBlockDuration,
             rightNow + preMediaDuration
         );
@@ -313,7 +307,6 @@ export function getStagedStream(
                     stagedMedia,
                     media,
                     prevMovies,
-                    progression,
                     procDuration,
                     stagedMedia.ScheduledMedia[index].Time + stagedMedia.ScheduledMedia[index].Duration
                 );
@@ -333,7 +326,6 @@ export function getStagedStream(
                 stagedMedia,
                 media,
                 prevMovies,
-                progression,
                 endProcDuration,
                 stagedMedia.ScheduledMedia[stagedMedia.ScheduledMedia.length - 1].Time + stagedMedia.ScheduledMedia[stagedMedia.ScheduledMedia.length - 1].Duration
             );
@@ -344,9 +336,9 @@ export function getStagedStream(
     return [selectedMedia, error];
 }
 
-export function setProceduralTags(options: StreamArgs, stagedMedia: StagedMedia): void {
-    if (options.tagsAND === undefined
-        && options.tagsOR === undefined) {
+export function setProceduralTags(options: IStreamRequest, stagedMedia: StagedMedia): void {
+    if (options.MultiTags === undefined
+        && options.Tags === undefined) {
 
         let tagList: string[] = [];
         stagedMedia.InjectedMovies.forEach(inj => tagList.push(...inj.Media.Tags));
@@ -357,7 +349,7 @@ export function setProceduralTags(options: StreamArgs, stagedMedia: StagedMedia)
                 uniquetags.push(tagList[i]);
             }
         }
-        options.tagsOR = uniquetags;
+        options.Tags = uniquetags;
         //TODO: v1.4 Create different combos of block tags for tagsAND to give a more streamlined experience
     }
 }
@@ -385,7 +377,8 @@ function compareSelectedEndTime(endTime: number, scheduledMedia: SelectedMedia[]
     })
 }
 
-export function getScheduledMedia(options: any, media: Media, progression: MediaProgression[]): SelectedMedia[] {
+export function getScheduledMedia(options: any, media: Media): SelectedMedia[] {
+
     let selectedMedia: SelectedMedia[] = [];
     // Parses the incoming http request for scheduled movies and collections
     // The format of the string is "MovieTitle::Time" where time is the unix timestamp of when the movie is scheduled to be played
@@ -414,7 +407,7 @@ export function getScheduledMedia(options: any, media: Media, progression: Media
             .filter((str: string) => str.includes('::'))
             .forEach((str: string) => {
                 let parsedCollection = str.split("::");
-                selectedMedia.push(getCollection(parsedCollection[0], media, parseInt(parsedCollection[1]), progression));
+                selectedMedia.push(getCollection(parsedCollection[0], media, parseInt(parsedCollection[1])));
             });
     }
     // Sorts the the selected media based on the unix timestamp of when the media is scheduled to be played
@@ -461,7 +454,7 @@ export function getMovie(loadTitle: string, movieList: Movie[], time: number): S
     )
 }
 
-export function getCollection(loadTitle: string, media: Media, time: number, progression: MediaProgression[]): SelectedMedia {
+export function getCollection(loadTitle: string, media: Media, time: number): SelectedMedia {
     // Check if the collection title is empty or undefined as these cannot be searched against the collection list
     if (loadTitle === "" || loadTitle === undefined) {
         throw loadTitle + "Empty collection titles are not a valid input";
@@ -474,7 +467,7 @@ export function getCollection(loadTitle: string, media: Media, time: number, pro
     }
 
     // If a collection has shows assigned to it, assign the episodes to the collection shows based on the progression of the shows
-    assignCollEpisodes(selectedCollection, media.Shows, progression);
+    assignCollEpisodes(selectedCollection, media.Shows);
 
     return new SelectedMedia(
         selectedCollection,
@@ -486,34 +479,18 @@ export function getCollection(loadTitle: string, media: Media, time: number, pro
     )
 }
 
-export function assignCollEpisodes(collection: Collection, shows: Show[], progression: MediaProgression[]): void {
+export function assignCollEpisodes(collection: Collection, shows: Show[]): void {
     // Assigns the episodes to the collection shows based on the progression of the shows
     // TODO - If the same show appears multiple times in a collection, we will need to figure out how to represent that in the collection
     // so it can be ran through this loop, or we will have to how the loop works to account for that
     // possibly just have the shows in the collection show array to have the possibility of multiple entries with their individual sequence numbers
     collection.Shows.forEach(collShow => {
+        //TODO: This is a very basic implementation of show progression, we will need to add more functionality to this to account for shows that have multiple episodes
         // Find the show that matches the load title of the collection show
         let selectedShow = shows.filter(item => item.LoadTitle === collShow.LoadTitle)[0];
         // Get the episode number that the show should be on based on the progression of the show
-        let episodeNum = ManageProgression(collection.Title, "Collection", progression, selectedShow, 1)[0];
+        let episodeNum = ManageShowProgression(selectedShow, 1, collection.Title)
         // Get the episode that matches the episode number from the progression
-        collShow.Episode = selectedShow.Episodes.filter(ep => ep.EpisodeNumber === episodeNum)[0];
+        collShow.Episode = selectedShow.Episodes.filter(ep => ep.EpisodeNumber === episodeNum[0])[0];
     })
-}
-
-function setEnvironment(options: StreamArgs) {
-    //TODO: A default environment should be set in the config file
-    // As a part of the repo we will have to provide a location to download default videos for the default environment
-    // This will be a set of commercials Logoed as Stream Assistant (or whatever name we decide on) that will be used as buffer media
-    // This will be a promo and a set of commercial files of various lengths that will be used to fill the buffer time between media items
-    // We will have to get unlicensed music for the buffer media as well and make a video of the logo with the music in the background
-    // This will help people who do not have access to commercials, and we can use differing mustic to represent the different main genres that will be used
-    // By the default tag translation list (which we will also have to create, and provide a way for the user to edit or expand upon)
-    // To do reduce our work load we will only create a the most main movie genres: Action, Comedy, Drama, Horror, Sci-Fi, and Fantasy
-    // Most of those honestly could be covered by the same music, the exceptions being Horror and Action
-    if (options.env !== undefined) {
-        options.env = "FC";
-    } else {
-        options.env = "FC";
-    }
 }
