@@ -1,7 +1,7 @@
 // src/controllers/streamController.ts
 
-import { Request, Response } from 'express';
-import { validationResult } from 'express-validator';
+import { NextFunction, Request, Response } from 'express';
+import { body, validationResult } from 'express-validator';
 import { StreamArgs } from '../models/streamArgs';
 import { addInitialMediaBlocks, getConfig, getContinuousStreamArgs, initializeOnDeckStream, initializeStream, mapStreamStartRequestToInputArgs, setContinuousStream, setContinuousStreamArgs } from '../services/streamManager';
 import { createVLCClient } from '../services/vlcClient';
@@ -78,3 +78,81 @@ export async function adHocStreamHandler(req: Request, res: Response): Promise<v
     res.status(200).json({ message: "Stream Starting" });
     return;
 }
+
+export const contStreamValidationRules = [
+    (req: Request, res: Response, next: Function) => {
+        // Ensure only allowed fields are present
+        const streamAllowedFields = ['env', 'movies', 'tags', 'multiTags', 'password'];
+        const requestBody: Record<string, any> = req.body;
+
+        const extraFields = Object.keys(requestBody).filter((field) => !streamAllowedFields.includes(field));
+        if (extraFields.length > 0) {
+            return res.status(400).json({ error: `Invalid fields: ${extraFields.join(', ')}` });
+        }
+        next();
+    },
+
+    // Validate the 'env' field
+    body('env')
+        .optional()
+        .isString(),
+
+    // Validate the 'movies' field
+    body('movies')
+        .optional()
+        .isArray()
+        .custom((value: string[]) => {
+            for (const item of value) {
+                if (typeof item !== 'string') {
+                    throw new Error('movies must be an array of strings');
+                }
+                if (item.includes('::')) {
+                    const [firstPart, secondPart] = item.split('::');
+                    // Check the first part for only letters and numbers
+                    if (!/^[a-zA-Z0-9]+$/.test(firstPart)) {
+                        throw new Error('The first part of movies must contain only letters and numbers');
+                    }
+
+                    // Check the second part for ISO 8601 date format with 30-minute increments
+                    const isoDateRegex = /^(\d{4}-\d{2}-\d{2}T(?:[01]\d|2[0-3]):(?:00|30))$/;
+                    if (!isoDateRegex.test(secondPart)) {
+                        throw new Error('The second part of movies must be in the format YYYY-MM-DDTHH:MM with 30-minute increments in 24-hour time');
+                    }
+                } else {
+                    // If no "::" found, check for only letters and numbers
+                    if (!/^[a-zA-Z0-9]+$/.test(item)) {
+                        throw new Error('movies must be in the format "string" or "string::ISO8601 date" with allowed characters');
+                    }
+                }
+            }
+            return true;
+        }),
+
+    // Validate the 'tagsOR' field
+    body('tags')
+        .optional()
+        .isArray()
+        .withMessage('tags must be an array')
+        .custom((value: string[]) => {
+            // Check if all elements in the array are strings
+            for (const item of value) {
+                if (typeof item !== 'string') {
+                    throw new Error('tags must be an array of strings');
+                }
+            }
+            return true;
+        }),
+
+    // Validate the 'password' field
+    body('password')
+        .isString()
+];
+
+export const validate = (req: Request, res: Response, next: NextFunction) => {
+    // Run validation
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+    }
+    next();
+};

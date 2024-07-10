@@ -1,7 +1,5 @@
 import { loadMedia } from "./src/services/dataManager";
 import express from 'express';
-import { continuousStreamHandler } from "./src/controllers/streamControllers";
-import { streamValidationRules } from "./src/validators/streamValidator";
 import { setConfig } from "./src/services/streamManager";
 import { cycleCheck, setEndOfDayMarker, setTomorrow } from "./src/services/backgroundService";
 import { connectToDB } from "./src/db/db";
@@ -13,6 +11,7 @@ import * as commCont from "./src/controllers/commercialControllers";
 import * as shortCont from "./src/controllers/shortControllers";
 import * as musicCont from "./src/controllers/musicControllers";
 import * as promoCont from "./src/controllers/promoControllers";
+import * as streamCont from "./src/controllers/streamControllers";
 
 const config: Config = require('./config.json') as Config;
 // Gets the config from the config.json file and sets it in the stream service
@@ -46,7 +45,7 @@ connectToDB().then(() => {
         //              STREAM CONTROL
         // ===========================================
         //Start Stream with the intention of playing continuously with no end time until stopped manually
-        app.post('/api/continuous-stream', streamValidationRules, continuousStreamHandler);
+        app.post('/api/continuous-stream', streamCont.contStreamValidationRules, streamCont.continuousStreamHandler);
 
         // ===========================================
         //            DATABASE MANAGEMENT
