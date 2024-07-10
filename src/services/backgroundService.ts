@@ -1,7 +1,7 @@
 import moment from 'moment';
-import { constructStream } from './streamConstructorService';
+import { constructStream } from './streamConstructor';
 import { StreamArgs } from '../models/streamArgs';
-import { addToOnDeckStream, getConfig, getContinuousStreamArgs, getOnDeckStream, isContinuousStream, removeFromOnDeckStream, removeFromUpcomingStream } from './streamService';
+import { addToOnDeckStream, getConfig, getContinuousStreamArgs, getOnDeckStream, isContinuousStream, removeFromOnDeckStream, removeFromUpcomingStream } from './streamManager';
 import { MediaBlock } from '../models/mediaBlock';
 import * as VLC from 'vlc-client';
 import { getMedia } from './dataManager';
