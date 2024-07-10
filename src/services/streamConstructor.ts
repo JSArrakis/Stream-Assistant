@@ -20,8 +20,8 @@ export function constructStream(
     config: Config,
     options: StreamArgs,
     media: Media,
-    transaltionTags: TranslationTag[] = loadTranslationTags(config.dataFolder + 'translationTags.json'),
-    progression: MediaProgression[] = loadProgression(config.dataFolder + 'progression.json'),
+    transaltionTags: TranslationTag[] = loadTranslationTags(config.DataFolder + 'translationTags.json'),
+    progression: MediaProgression[] = loadProgression(config.DataFolder + 'progression.json'),
     // sets the time of the stream to the current time if no start time is provided
     rightNow: number = (options.startTime === undefined) ? moment().unix() : options.startTime):
     [MediaBlock[], string] {
@@ -283,7 +283,7 @@ export function getStagedStream(
         error = "Time of first movie, collection, or selected end time needs to be in the future.";
     }
 
-    let interval = config.interval;
+    let interval = config.Interval;
     let { preMediaDuration, initialProceduralBlockDuration } = setProceduralBlockDurations(interval, firstProceduralDuration);
     let selectedMedia: SelectedMedia[] = [];
     let prevMovies: Movie[] = [];

@@ -1,10 +1,4 @@
 {
-	"vlcLocation": "C:\\Program Files\\VideoLAN\\VLC\\vlc.exe",
-	"destinationFolder": "C:\\Users\\Main\\Documents\\GitHub\\Stream-Assistant\\data\\",
-	"testFolder": "C:\\Users\\Main\\Documents\\GitHub\\Stream-Assistant\\data\\",
 	"dataFolder": "C:\\Users\\Main\\Documents\\GitHub\\Stream-Assistant\\data\\",
-	"playlistName": "Playlist",
-	"repeatInterval": 86400,
-	"interval": 1800,
-	"backgroundInterval": 300
+	"interval": 1800
 }

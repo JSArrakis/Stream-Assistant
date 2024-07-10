@@ -1,6 +1,6 @@
 import { loadMedia } from "./src/services/dataManager";
 import express from 'express';
-import { continuousStreamHandler } from "./src/controllers/streamController";
+import { continuousStreamHandler } from "./src/controllers/streamControllers";
 import { streamValidationRules } from "./src/validators/streamValidator";
 import { setConfig } from "./src/services/streamManager";
 import { cycleCheck, setEndOfDayMarker, setTomorrow } from "./src/services/backgroundService";
