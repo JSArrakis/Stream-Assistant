@@ -5,6 +5,7 @@ import { PromoModel, Promo } from '../models/promo';
 import { CommercialModel, Commercial } from '../models/commercial';
 import { MusicModel, Music } from '../models/music';
 import { ShortModel, Short } from '../models/short';
+import { EnvConfigurationModel, EnvConfiguration } from "../models/envConfiguration";
 
 const uri: string = "mongodb://127.0.0.1:27017/streamAssistantMedia";
 export async function connectToDB() {
@@ -80,4 +81,36 @@ export async function LoadShorts(): Promise<Short[]> {
     }
     console.log(shorts.length + " Shorts loaded");
     return shorts;
+}
+
+export async function GetDefaultEnvConfig(defaultPromo: string): Promise<EnvConfiguration> {
+    // Check if default env config exists
+    const defaultEnvConfig = await EnvConfigurationModel.findOne({ LoadTitle: "default" });
+    if (defaultEnvConfig) {
+        console.log("Default Env Configuration already exists");
+        return defaultEnvConfig;
+    }
+
+    const envConfig = new EnvConfigurationModel({
+        Title: "Default",
+        LoadTitle: "default",
+        Favorites: [],
+        BlackList: [],
+        DefaultPromo: defaultPromo
+    });
+
+    await envConfig.save();
+    console.log("Default Env Configuration Created");
+    return envConfig;
+}
+
+export async function LoadEnvConfigList(): Promise<EnvConfiguration[]> {
+    const envConfigs = await EnvConfigurationModel.find();
+
+    if (!envConfigs || envConfigs.length === 0) {
+        console.log("No Env Configurations Found");
+        return [];
+    }
+    console.log(envConfigs.length + " Env Configurations loaded");
+    return envConfigs;
 }
