@@ -1,12 +1,13 @@
 import { Config } from "../models/config";
 import { MediaType } from "../models/enum/mediaTypes";
 import { Media } from "../models/media";
-import { MediaProgression, ShowProgression } from "../models/mediaProgression";
 import { Movie } from "../models/movie";
 import { SelectedMedia } from "../models/selectedMedia";
 import { Episode, Show } from "../models/show";
 import { StagedMedia } from "../models/stagedMedia";
-import { ManageProgression } from "../utils/utilities";
+import { ManageShowProgression } from "./progressionManager";
+import { StreamType } from "../models/enum/streamTypes";
+
 
 export function getProceduralBlock(
     config: Config,
@@ -14,9 +15,9 @@ export function getProceduralBlock(
     stagedMedia: StagedMedia,
     media: Media,
     prevMovies: Movie[],
-    progression: MediaProgression[],
     duration: number,
-    latestTimePoint: number
+    latestTimePoint: number,
+    streamType: StreamType
 ): SelectedMedia[] {
     let currDur: number = 0;
     let selectedMedia: SelectedMedia[] = [];
@@ -58,7 +59,7 @@ export function getProceduralBlock(
                     currDur = currDur + selectedMovie.DurationLimit;
                     currentTimePoint = currentTimePoint + selectedMovie.DurationLimit;
                 } else {
-                    let result = selectShowUnderDuration(options, media.Shows, progression, durRemainder);
+                    let result = selectShowUnderDuration(options, media.Shows, durRemainder, streamType);
                     result[0].forEach(episode => {
 
                         selectedMedia.push(new SelectedMedia(episode, result[1], MediaType.Episode, currentTimePoint, episode.DurationLimit, episode.Tags));
@@ -68,7 +69,7 @@ export function getProceduralBlock(
                 }
             } else {
                 //Show
-                let result = selectShowUnderDuration(options, media.Shows, progression, durRemainder);
+                let result = selectShowUnderDuration(options, media.Shows, durRemainder, streamType);
                 result[0].forEach(episode => {
                     selectedMedia.push(new SelectedMedia(episode, result[1], MediaType.Episode, currentTimePoint, episode.DurationLimit, episode.Tags));
                     currDur = currDur + episode.DurationLimit;
@@ -96,10 +97,10 @@ export function selectMovieUnderDuration(options: any, movies: Movie[], prevMovi
     return selectedMovie;
 }
 
-export function selectShowUnderDuration(options: any, shows: Show[], progression: MediaProgression[], duration: number): [Episode[], string] {
+export function selectShowUnderDuration(args: any, shows: Show[], duration: number, streamType: StreamType): [Episode[], string] {
     let episodes: Episode[] = [];
     let filteredShows: Show[] = shows.filter(show =>
-        show.Tags.some(tag => options.tagsOR.includes(tag)) &&
+        show.Tags.some(tag => args.tagsOR.includes(tag)) &&
         show.DurationLimit <= duration
     );
 
@@ -110,19 +111,24 @@ export function selectShowUnderDuration(options: any, shows: Show[], progression
         );
     }
 
+
+    // So this part gets the correct index for the correct episode number assigned to each episode of a show in the list
+    // of episodes. This is done by checking the progression of the show and selecting the next episode in the list, which
+    // also updates the WatchRecord object for the show in the ProgressionContext object. This is done against a local copy
+    // of the progression and the DB is only updated if the media has finished playing in the stream.
     let episodeIdx: number[] = [];
 
     if (duration >= 3600) {
         if (selectedShow.OverDuration || selectedShow.DurationLimit > 1800) {
             //select 1
-            episodeIdx = ManageProgression("Main", "Main", progression, selectedShow, 1);
+            episodeIdx = ManageShowProgression(selectedShow, 1, args, streamType);
         } else {
             //select 2
-            episodeIdx = ManageProgression("Main", "Main", progression, selectedShow, 2);
+            episodeIdx = ManageShowProgression(selectedShow, 2, args, streamType);
         }
     } else {
         //select 1
-        episodeIdx = ManageProgression("Main", "Main", progression, selectedShow, 1);
+        episodeIdx = ManageShowProgression(selectedShow, 1, args, streamType);
     }
 
     episodeIdx.forEach(idx => {

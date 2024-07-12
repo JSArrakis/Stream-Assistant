@@ -1,10 +1,13 @@
 import moment from 'moment';
 import { constructStream } from './streamConstructor';
 import { StreamArgs } from '../models/streamArgs';
-import { addToOnDeckStream, getConfig, getContinuousStreamArgs, getOnDeckStream, isContinuousStream, removeFromOnDeckStream, removeFromUpcomingStream } from './streamManager';
+import * as streamMan from './streamManager';
+import * as dataMan from './dataManager';
 import { MediaBlock } from '../models/mediaBlock';
 import * as VLC from 'vlc-client';
 import { getMedia } from './dataManager';
+import { ContStreamRequest } from '../models/streamRequest';
+import { StreamType } from '../models/enum/streamTypes';
 
 const intervalInSeconds: number = 300;
 let vlc: VLC.Client;
@@ -37,7 +40,7 @@ async function cycleCheck() {
     console.log(`Current Unix Timestamp: ${currentUnixTimestamp}`);
 
     // Gets the items currently loaded into the on deck array
-    let onDeck: MediaBlock[] = getOnDeckStream()
+    let onDeck: MediaBlock[] = streamMan.getOnDeckStream()
 
     // Logging statement to show when the next item in the on deck stream is scheduled to start
     if (onDeck.length >= 2) {
@@ -53,18 +56,18 @@ async function cycleCheck() {
 
     // This is the mechanism that will remove the first item from the on deck stream and add the next item from the upcoming stream
     // This operation will only initiate if the stream is continuous and there are at least 2 items in the on deck stream
-    if (isContinuousStream() && onDeck.length >= 2) {
+    if (streamMan.isContinuousStream() && onDeck.length >= 2) {
 
         // If there is a second item in the on deck stream and the current time is greater than or equal to the start time of the second item
         if (onDeck[1].StartTime && currentUnixTimestamp >= onDeck[1].StartTime) {
             // Remove the first item from the on deck stream
-            let removed = removeFromOnDeckStream();
+            let removed = streamMan.removeFromOnDeckStream();
             // Logs the item that was removed from the on deck stream
             if (removed != null || removed != undefined) {
                 console.log("Removing " + removed.MainBlock?.Title + " and post buffer from On Deck Stream");
             }
             // Gets amd removes the first item from the upcoming stream
-            let added = removeFromUpcomingStream();
+            let added = streamMan.removeFromUpcomingStream();
 
             // Logs the item that will be added to the on deck stream
             if (added != null || added != undefined) {
@@ -73,7 +76,7 @@ async function cycleCheck() {
             // If the item is not null or undefined, add it to the on deck stream and the VLC playlist
             if (added != null || added != undefined) {
                 // The item must be in an array to be added to the on deck stream (to reuse the addToOnDeckStream function)
-                addToOnDeckStream([added]);
+                streamMan.addToOnDeckStream([added]);
                 // Adds the block (the media item and its buffer) to the VLC playlist
                 await addMediaBlock(added);
             }
@@ -90,19 +93,24 @@ async function cycleCheck() {
         // Sets the new end of day marker to the next instance of 11:30pm (this is important to ensure this operation does not run multiple times in a day)
         setEndOfDayMarker();
         // If the stream is continuous, prepare the next day's stream
-        if (isContinuousStream()) {
+        if (dataMan.getStreamType() === StreamType.Cont) {
+            //
             // Get the current continuous stream arguments from the stream service
-            let continuousStreamArgs = getContinuousStreamArgs();
+            let continuousStreamArgs: ContStreamRequest = streamMan.getContinuousStreamArgs();
             // Create a new StreamArgs object with the same password as the current continuous stream arguments
             // This piece is here for future development to allow for different arguments for the next day's stream if we so choose
-            let tomorrowsContinuousStreamArgs = new StreamArgs(continuousStreamArgs.password);
-            tomorrowsContinuousStreamArgs.env = continuousStreamArgs.env;
-            tomorrowsContinuousStreamArgs.tagsOR = continuousStreamArgs.tagsOR;
-            tomorrowsContinuousStreamArgs.startTime = tomorrow
+            let tomorrowsContinuousStreamArgs = new ContStreamRequest(continuousStreamArgs.Password);
+            tomorrowsContinuousStreamArgs.Title = continuousStreamArgs.Title;
+            tomorrowsContinuousStreamArgs.Env = continuousStreamArgs.Env;
+            tomorrowsContinuousStreamArgs.Movies = continuousStreamArgs.Movies;
+            tomorrowsContinuousStreamArgs.Tags = continuousStreamArgs.Tags;
+            tomorrowsContinuousStreamArgs.MultiTags = continuousStreamArgs.MultiTags;
+            tomorrowsContinuousStreamArgs.Collections = continuousStreamArgs.Collections;
+            tomorrowsContinuousStreamArgs.StartTime = tomorrow
             // Constructs the stream for the next day and adds it to the upcoming stream
-            const stream: [MediaBlock[], string] = constructStream(getConfig(), tomorrowsContinuousStreamArgs, getMedia());
+            const stream: [MediaBlock[], string] = constructStream(dataMan.getConfig(), tomorrowsContinuousStreamArgs, getMedia(), dataMan.getStreamType());
             // TODO - I do not remember why I added this as it looks like it adds the entirety of tomorrow's stream to the on deck stream, this might need to be reworked
-            addToOnDeckStream(stream[0]);
+            streamMan.addToOnDeckStream(stream[0]);
         }
     }
 

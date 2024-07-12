@@ -1,6 +1,5 @@
-import { loadMedia } from "./src/services/dataManager";
+import * as dataMan from "./src/services/dataManager";
 import express from 'express';
-import { setConfig } from "./src/services/streamManager";
 import { cycleCheck, setEndOfDayMarker, setTomorrow } from "./src/services/backgroundService";
 import { connectToDB } from "./src/db/db";
 import { Config } from "./src/models/config";
@@ -15,14 +14,14 @@ import * as streamCont from "./src/controllers/streamControllers";
 
 const config: Config = require('./config.json') as Config;
 // Gets the config from the config.json file and sets it in the stream service
-setConfig(config);
+dataMan.setConfig(config);
 
 // Loads media from the JSON files
 // TODO - Load media from the database
 // TODO - Due to media being loaded as an async function, we will need to ensure all media is loaded before the service starts
 // TODO - Restructure this for clean code
 connectToDB().then(() => {
-    loadMedia(config).then(() => {
+    dataMan.loadMedia(config).then(() => {
 
         const app = express();
         const port = process.env.PORT || 3001;

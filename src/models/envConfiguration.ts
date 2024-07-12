@@ -5,6 +5,7 @@ export interface IEnvConfiguration {
     LoadTitle: string;
     Favorites: string[];
     BlackList: string[];
+    DefaultTags: string[];
     DefaultPromo: string;
 }
 
@@ -16,6 +17,7 @@ export const EnvConfigurationSchema = new mongoose.Schema({
     },
     Favorites: [String],
     BlackList: [String],
+    DefaultTags: [String],
     DefaultPromo: String
 });
 
@@ -24,6 +26,7 @@ export class EnvConfiguration {
     LoadTitle: string;
     Favorites: string[];
     BlackList: string[];
+    DefaultTags: string[];
     DefaultPromo: string;
 
     constructor(
@@ -31,6 +34,7 @@ export class EnvConfiguration {
         loadTitle: string,
         favorites: string[],
         blackList: string[],
+        defaultTags: string[],
         defaultPromo: string,
     ) {
 
@@ -38,6 +42,7 @@ export class EnvConfiguration {
         this.LoadTitle = loadTitle;
         this.Favorites = favorites;
         this.BlackList = blackList;
+        this.DefaultTags = defaultTags
         this.DefaultPromo = defaultPromo;
     }
 
@@ -47,6 +52,7 @@ export class EnvConfiguration {
             mongoObject.loadTitle,
             mongoObject.favorites,
             mongoObject.blackList,
+            mongoObject.defaultTags,
             mongoObject.defaultPromo,
         );
     }
@@ -55,9 +61,10 @@ export class EnvConfiguration {
         return {
             title: envConfig.Title,
             loadTitle: envConfig.LoadTitle,
-            alias: envConfig.Favorites,
-            imdb: envConfig.BlackList,
-            tags: envConfig.DefaultPromo
+            favorites: envConfig.Favorites,
+            blackList: envConfig.BlackList,
+            defaultTags: envConfig.DefaultTags,
+            defaultPromo: envConfig.DefaultPromo
         };
     }
 
@@ -67,6 +74,7 @@ export class EnvConfiguration {
             requestObject.loadTitle,
             requestObject.favorites,
             requestObject.blackList,
+            requestObject.defaultTags,
             requestObject.defaultPromo
         );
     }

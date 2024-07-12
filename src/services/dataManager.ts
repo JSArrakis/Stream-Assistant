@@ -5,10 +5,41 @@ import { TranslationTag } from "../models/translationTag";
 import { Config } from '../models/config';
 import * as db from '../db/db';
 import { SetEnvConfig } from './environmentManager';
+import { StreamType } from '../models/enum/streamTypes';
+import { IStreamRequest } from '../models/streamRequest';
 
 let media = new Media([], [], [], [], [], [], []);
+let streamType: StreamType;
+let config: Config;
+let args: IStreamRequest
+
+export function setConfig(value: Config): void {
+    config = value;
+}
+
+export function getConfig(): Config {
+    return config;
+}
+
+export function setStreamType(value: StreamType): void {
+    streamType = value;
+}
+
+export function getStreamType(): StreamType {
+    return streamType;
+}
+
+export function setArgs(value: IStreamRequest): void {
+    args = value;
+}
+
+export function getArgs(): IStreamRequest {
+    return args;
+}
 
 export async function loadMedia(config: Config): Promise<void> {
+    
+
     console.log("Loading media entries from DB...")
     // TODO - Do a promise.all for all the load functions to speed up the process
     media = {
@@ -28,41 +59,6 @@ export async function loadMedia(config: Config): Promise<void> {
 export function getMedia(): Media {
     // All available media entries are loaded on service start up, this just returns the loaded media
     return media;
-}
-
-export function loadProgression(filePath: string): MediaProgression[] {
-    try {
-        const jsonString = fs.readFileSync(filePath, 'utf-8');
-        const jsonParsed = JSON.parse(jsonString);
-
-        // Validate that the JSON is an array
-        if (!Array.isArray(jsonParsed)) {
-            throw new Error('JSON data is not an array.');
-        }
-
-
-        const mediaProgression: MediaProgression[] = jsonParsed.map((item: any) => {
-            let progShows = item.Shows.map((showprog: any) => {
-                return new ShowProgression(
-                    showprog.LoadTitle,
-                    showprog.Episode
-                );
-            });
-            return new MediaProgression(
-                item.Title,
-                item.Type,
-                progShows
-            );
-        });
-
-        if (mediaProgression.filter(prog => prog.Title === "Main").length === 0) {
-            mediaProgression.push(new MediaProgression("Main", "Main", []))
-        }
-
-        return mediaProgression;
-    } catch (error) {
-        throw new Error(`Error loading translation tags from JSON file ${filePath}: ${error}`);
-    }
 }
 
 export function loadTranslationTags(filePath: string): TranslationTag[] {

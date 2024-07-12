@@ -6,6 +6,8 @@ import { CommercialModel, Commercial } from '../models/commercial';
 import { MusicModel, Music } from '../models/music';
 import { ShortModel, Short } from '../models/short';
 import { EnvConfigurationModel, EnvConfiguration } from "../models/envConfiguration";
+import * as dataTrans from "../services/dataTransformer";
+import { MediaType } from "../models/enum/mediaTypes";
 
 const uri: string = "mongodb://127.0.0.1:27017/streamAssistantMedia";
 export async function connectToDB() {
@@ -104,6 +106,17 @@ export async function GetDefaultEnvConfig(defaultPromo: string): Promise<EnvConf
     return envConfig;
 }
 
+export async function GetEnvConfig(loadTitle: string): Promise<[EnvConfiguration, string]>{
+    const envConfig = await EnvConfigurationModel.findOne({ LoadTitle: loadTitle });
+    // If it doesn't exist, return error
+    if (!envConfig) {
+        console.log("Env Configuration does not exist");
+        return [new EnvConfiguration("", "", [], [], [], ""), "Specified Environment Configuration does not exist, please create it through the admin panel or use the default configuration."];
+    }
+    console.log("Env Configuration Found");
+    return [envConfig, ""];
+}
+
 export async function LoadEnvConfigList(): Promise<EnvConfiguration[]> {
     const envConfigs = await EnvConfigurationModel.find();
 
@@ -113,4 +126,29 @@ export async function LoadEnvConfigList(): Promise<EnvConfiguration[]> {
     }
     console.log(envConfigs.length + " Env Configurations loaded");
     return envConfigs;
+}
+
+export async function CreateDefaultPromo(promoPath: string): Promise<void> {
+    // Check if default promo exists in the database
+    const defaultPromo = await PromoModel.findOne({ LoadTitle: "default" });
+    // If it exists, return
+    if (defaultPromo) {
+        console.log("Default Promo already exists");
+        return;
+    }
+
+    // Check if the promo path exists and get the duration
+    let duration = await dataTrans.getMediaDuration(promoPath);
+
+    // Create default promo
+    const promo = new PromoModel({
+        Title: "Default",
+        LoadTitle: "default",
+        Duration: duration,
+        Path: promoPath,
+        Type: MediaType.Promo,
+        Tags: ["default"]
+    });
+    // Save the default promo to the database
+    await promo.save();
 }

@@ -5,20 +5,23 @@ import { StreamArgs } from '../models/streamArgs';
 import { Media } from '../models/media';
 import { Request } from 'express';
 import { addMediaBlock } from './backgroundService';
+import { IStreamRequest } from '../models/streamRequest';
+import { StreamType } from '../models/enum/streamTypes';
 
 let upcomingStream: MediaBlock[] = [];
 let onDeckStream: MediaBlock[] = [];
 let continuousStream = false;
 let continuousStreamArgs: StreamArgs;
 let config: Config;
+let args: IStreamRequest
 let streamVarianceInSeconds = 0;
 
-function initializeStream(config: Config, continuousStreamArgs: StreamArgs, media: Media): string {
+function initializeStream(config: Config, streamArgs: IStreamRequest, media: Media, streamType: StreamType): string {
     // Constructs the stream based on the config, continuous stream args, and available media
     // The stream is assigned to upcoming stream which the background service will use to populate the on deck stream
     // The stream is constructed to fill the time until 12:00am
     // The background service will run construct stream again 30 minutes before the end of the day to fill the time until 12:00am the next day
-    let upcomingStreamResponse: [MediaBlock[], string] = constructStream(config, continuousStreamArgs, media);
+    let upcomingStreamResponse: [MediaBlock[], string] = constructStream(config, streamArgs, media, streamType);
     if (upcomingStreamResponse[1] !== "") {
         return upcomingStreamResponse[1];
     }
@@ -37,13 +40,6 @@ function initializeOnDeckStream(): void {
     }
 }
 
-function setConfig(value: Config): void {
-    config = value;
-}
-
-function getConfig(): Config {
-    return config;
-}
 
 function addToOnDeckStream(mediaBlocks: MediaBlock[]): void {
     onDeckStream.push(...mediaBlocks);
@@ -77,12 +73,12 @@ function setContinuousStream(value: boolean): void {
     continuousStream = value;
 }
 
-function getContinuousStreamArgs(): StreamArgs {
-    return continuousStreamArgs;
+function getContinuousStreamArgs(): IStreamRequest {
+    return args;
 }
 
-function setContinuousStreamArgs(value: StreamArgs): void {
-    continuousStreamArgs = value;
+function setContinuousStreamArgs(value: IStreamRequest): void {
+    args = value;
 }
 
 function convertISOToUnix(isoDateTime: string): number {
@@ -173,8 +169,6 @@ export {
     setContinuousStreamArgs,
     addInitialMediaBlocks,
     removeFromUpcomingStream,
-    setConfig,
-    getConfig,
     setStreamVariationInSeconds,
     getStreamVariationInSeconds
 };

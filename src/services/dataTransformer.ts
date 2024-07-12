@@ -135,7 +135,7 @@ export async function transformShortFromRequest(buffer: any): Promise<Short> {
     return parsedShort;
 }
 
-async function getMediaDuration(filePath: string): Promise<number> {
+export async function getMediaDuration(filePath: string): Promise<number> {
     return new Promise((resolve, reject) => {
         ffmpeg.ffprobe(filePath, (err, metadata) => {
             if (!err) {

@@ -1,4 +1,5 @@
 {
 	"dataFolder": "C:\\Users\\Main\\Documents\\GitHub\\Stream-Assistant\\data\\",
-	"interval": 1800
+	"interval": 1800,
+	"defaultPromo": "E:\\Media\\Promos\\PROMO.Halloween.BatesFCTV.mp4"
 }

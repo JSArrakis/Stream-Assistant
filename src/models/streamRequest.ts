@@ -7,6 +7,7 @@ export interface IStreamRequest {
     Tags: string[];
     MultiTags: string[][];
     Collections: string[];
+    StartTime: number;
     Password: string;
 }
 
@@ -17,19 +18,17 @@ export class ContStreamRequest implements IStreamRequest {
     Tags: string[];
     MultiTags: string[][];
     Collections: string[];
-    StartTIme: number;
-    EndTime: number;
+    StartTime: number;
     Password: string;
 
-    constructor(password: string, title: string = "Default", env: string = "default", movies: string[] = [], tags: string[] = [], multiTags: string[][] = [], collections: string[] = [], startTime: number = 0, endTime: number = 0) {
+    constructor(password: string, title: string = "Default", env: string = "default", movies: string[] = [], tags: string[] = [], multiTags: string[][] = [], collections: string[] = [], startTime: number = 0) {
         this.Title = title;
         this.Env = keyNormalizer(env);
         this.Movies = movies;
         this.Tags = tags;
         this.MultiTags = multiTags;
         this.Collections = collections;
-        this.StartTIme = startTime;
-        this.EndTime = endTime;
+        this.StartTime = startTime;
         this.Password = password
     }
 
@@ -42,7 +41,6 @@ export class ContStreamRequest implements IStreamRequest {
             requestObject.multiTags || [],
             requestObject.collections || [],
             requestObject.startTime || 0,
-            requestObject.endTime || 0,
             requestObject.password
         );
     }
@@ -55,16 +53,18 @@ export class AdhocStreamRequest implements IStreamRequest {
     Tags: string[];
     MultiTags: string[][];
     Collections: string[];
+    StartTime: number;
     EndTime?: number;
     Password: string;
 
-    constructor(password: string, title: string = "Default", env: string = "default", movies: string[] = [], tags: string[] = [], multiTags: string[][] = [], collections: string[] = [], endtime: number = 0) {
+    constructor(password: string, title: string = "Default", env: string = "default", movies: string[] = [], tags: string[] = [], multiTags: string[][] = [], collections: string[] = [], startTime: number = 0, endtime: number = 0) {
         this.Title = title;
         this.Env = keyNormalizer(env);
         this.Movies = movies;
         this.Tags = tags;
         this.MultiTags = multiTags;
         this.Collections = collections;
+        this.StartTime = startTime
         this.EndTime = endtime;
         this.Password = password
     }

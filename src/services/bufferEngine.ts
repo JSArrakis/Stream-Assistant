@@ -5,6 +5,8 @@ import { Eras } from "../models/const/eras";
 import { Commercial } from "../models/commercial";
 import { Short } from "../models/short";
 import { Music } from "../models/music";
+import { IStreamRequest } from "../models/streamRequest";
+import { keyNormalizer } from "../utils/utilities";
 
 export class TranslatedTags {
     EraTags: string[];
@@ -32,7 +34,7 @@ class SelectedMedia {
 
 export function createBuffer(
     duration: number,
-    options: any,
+    options: IStreamRequest,
     media: Media,
     precedingTags: string[],
     subsequentTags: string[],
@@ -54,25 +56,25 @@ export function createBuffer(
     // And we will also need to make sure that other holidays or special events unique to the user can be themed as such
     // TODO - not sure why Im even checking MainTags here, it might not be necessary
     if (convertedPreTags.MainTags.length > 0) {
-        if (options.tagsOR.includes("halloween")) {
+        if (options.Tags.includes("halloween")) {
             convertedPreTags.MainTags = ["halloween"];
         }
-        if (options.tagsOR.includes("christmas")) {
+        if (options.Tags.includes("christmas")) {
             convertedPreTags.MainTags = ["christmas"];
         }
     }
 
     if (convertedSubTags.MainTags.length > 0) {
-        if (options.tagsOR.includes("halloween")) {
+        if (options.Tags.includes("halloween")) {
             convertedSubTags.MainTags = ["halloween"];
         }
-        if (options.tagsOR.includes("christmas")) {
+        if (options.Tags.includes("christmas")) {
             convertedSubTags.MainTags = ["christmas"];
         }
     }
 
     // Get the promos for the environment
-    let envPromos: Promo[] = media.Promos.filter(promo => promo.Tags.includes(options.env));
+    let envPromos: Promo[] = media.Promos.filter(promo => promo.Tags.includes(keyNormalizer(options.Env)));
 
     // Get the promos that are less than or equal to the duration of the buffer, the target duration of a promo is 15 seconds normally,
     // however we need to allow for users to upload promos that are longer than 15 seconds
