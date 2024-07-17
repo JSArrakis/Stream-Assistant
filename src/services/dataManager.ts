@@ -38,7 +38,8 @@ export function getArgs(): IStreamRequest {
 }
 
 export async function loadMedia(config: Config): Promise<void> {
-    
+    db.CreateDefaultCommercials(config);
+    db.CreateDefaultPromo(config);
 
     console.log("Loading media entries from DB...")
     // TODO - Do a promise.all for all the load functions to speed up the process
