@@ -1,6 +1,6 @@
 {
 	"dataFolder": "C:\\Users\\Main\\Documents\\GitHub\\Stream-Assistant\\data\\",
 	"interval": 1800,
-	"defaultPromo": "E:\\Media\\default\\promo\\Promo1Lite.mp4",
-	"defaultCommercialFolder": "E:\\Media\\default\\promo"
+	"defaultPromo": "E:\\Media\\Project\\resources\\v1\\promo\\defaultpromo.mp4",
+	"defaultCommercialFolder": "E:\\Media\\Project\\resources\\v1\\buffer"
 }

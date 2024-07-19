@@ -1,6 +1,5 @@
 import * as fs from 'fs';
 import { Media } from "../models/media";
-import { MediaProgression, ShowProgression } from "../models/mediaProgression";
 import { TranslationTag } from "../models/translationTag";
 import { Config } from '../models/config';
 import * as db from '../db/db';
@@ -14,7 +13,9 @@ let config: Config;
 let args: IStreamRequest
 
 export function setConfig(value: Config): void {
+    console.log("Setting config to: ", value);
     config = value;
+    console.log("Config set to: ", config);
 }
 
 export function getConfig(): Config {
@@ -38,8 +39,8 @@ export function getArgs(): IStreamRequest {
 }
 
 export async function loadMedia(config: Config): Promise<void> {
-    db.CreateDefaultCommercials(config);
-    db.CreateDefaultPromo(config);
+    await db.CreateDefaultCommercials(config);
+    await db.CreateDefaultPromo(config);
 
     console.log("Loading media entries from DB...")
     // TODO - Do a promise.all for all the load functions to speed up the process

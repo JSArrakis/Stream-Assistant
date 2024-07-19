@@ -10,7 +10,7 @@ import * as dataTrans from "../services/dataTransformer";
 import { MediaType } from "../models/enum/mediaTypes";
 import { Config } from "../models/config";
 import { keyNormalizer } from "../utils/utilities";
-import fs from "fs";
+import fs from 'fs/promises';
 
 const uri: string = "mongodb://127.0.0.1:27017/streamAssistantMedia";
 export async function connectToDB() {
@@ -139,6 +139,8 @@ export async function CreateDefaultPromo(config: Config): Promise<void> {
         console.log("Default Promo already exists");
         return;
     }
+    console.log("Creating Default Promo");
+    console.log("Default Promo Path: " + config.DefaultPromo);
 
     // Check if the promo path exists and get the duration
     let duration = await dataTrans.getMediaDuration(config.DefaultPromo);
@@ -175,20 +177,21 @@ export async function CreateDefaultCommercials(config: Config): Promise<void> {
         return;
     }
 
+    console.log("Default Commercials do not exist in the database, creating them");
+
     // If there are no default commercials, get the default commercial folder from the config
     const defaultCommercialFolder = config.DefaultCommercialFolder;
-    // For each file in the folder
-    fs.readdir(defaultCommercialFolder, async (err: any, files: any) => {
-        if (err) {
-            console.log("Error reading default commercial folder");
-            return;
-        }
 
-        for (let i = 0; i < files.length; i++) {
-            let file = files[i];
-            let path = defaultCommercialFolder + "/" + file;
+    console.log("Default Commercial Folder: " + defaultCommercialFolder);
+
+    // For each file in the folder
+    try {
+        const files = await fs.readdir(defaultCommercialFolder);
+
+        for (let file of files) {
+            let path = `${defaultCommercialFolder}/${file}`;
             let duration = await dataTrans.getMediaDuration(path);
-            // Create a new commercial object
+
             // Create commercial name from file name removing the extension
             let commercialName = file.replace(/\.[^/.]+$/, "");
 
@@ -202,49 +205,52 @@ export async function CreateDefaultCommercials(config: Config): Promise<void> {
                 ["default"]
             ));
         }
-    });
 
-    // Check if the default commercials are viable
-    if (CheckBufferViability(commercialList)) {
-        // Save the default commercials to the database
-        for (let i = 0; i < commercialList.length; i++) {
-            let commercial = commercialList[i];
-            const newCommercial = new CommercialModel({
-                Title: commercial.Title,
-                LoadTitle: commercial.LoadTitle,
-                Duration: commercial.Duration,
-                Path: commercial.Path,
-                Type: commercial.Type,
-                Tags: commercial.Tags
-            });
-            await newCommercial.save();
+        // Check if the default commercials are viable
+        if (CheckBufferViability(commercialList)) {
+            // Save the default commercials to the database
+            for (let commercial of commercialList) {
+                const newCommercial = new CommercialModel({
+                    Title: commercial.Title,
+                    LoadTitle: commercial.LoadTitle,
+                    Duration: commercial.Duration,
+                    Path: commercial.Path,
+                    Type: commercial.Type,
+                    Tags: commercial.Tags
+                });
+                await newCommercial.save();
+            }
+            console.log("Default Commercials Created");
+        } else {
+            console.log("Default Commercials from Default Commercial Folder are not viable");
+            throw new Error("Default Commercials from Default Commercial Folder are not viable");
         }
-        console.log("Default Commercials Created");
-    } else {
-        console.log("Default Commercials from Default Commercial Folder are not viable");
-        throw new Error("Default Commercials from Default Commercial Folder are not viable");
+    } catch (err) {
+        console.error("Error processing commercials:", err);
     }
 }
 
 export function CheckBufferViability(commercialList: Commercial[]): boolean {
 
     // Get list of unique commercial durations
-    let uniqueDurations: number[] = [...new Set(commercialList.map(c => c.Duration))];
     let isViable = false;
-    // For each number from 15 to 150
-    for (let i = 15; i <= 29; i++) {
-        // Where i is the duration needing to be filled with commercials
-        // First try to find a commercial duration from the uniqueDurations list that is exactly i seconds long
-        let duration = uniqueDurations.find(d => d === i);
 
-        // If commmercial is found, go to next iteration
-        if (duration) {
+    // for each number in an array of numbers
+    let durationLimitsList = [15, 16, 17, 18, 19, 20, 30]
+
+    // For each duration in the duration limits list 
+    durationLimitsList.forEach(durationLimit => {
+        // Check if there is a commercial with a duration limit that is equal to the duration limit
+        let commercial = commercialList.find(c => c.Duration === durationLimit);
+        // If there is a commercial with a duration that is equal to the duration limit, set isViable to true
+        if (commercial) {
             isViable = true;
         } else {
-            console.log("No commercial found for " + i + " seconds");
-            break;
+            // If there is no commercial with a duration that is equal to the duration limit, set isViable to false and return the function
+            isViable = false;
+            return isViable;
         }
-    }
+    });
 
     return isViable;
 }

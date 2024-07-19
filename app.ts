@@ -1,3 +1,5 @@
+import * as fs from 'fs';
+import * as path from 'path';
 import * as dataMan from "./src/services/dataManager";
 import express from 'express';
 import { cycleCheck, setEndOfDayMarker, setTomorrow } from "./src/services/backgroundService";
@@ -12,7 +14,20 @@ import * as musicCont from "./src/controllers/musicControllers";
 import * as promoCont from "./src/controllers/promoControllers";
 import * as streamCont from "./src/controllers/streamControllers";
 
-const config: Config = require('./config.json') as Config;
+// Define the path to the config file
+const configFilePath = path.join(__dirname, 'config.json');
+
+// Read and parse the config file
+const rawConfigData = fs.readFileSync(configFilePath, 'utf-8');
+console.log("Raw Config Data: ");
+console.log(rawConfigData);
+const configData = JSON.parse(rawConfigData);
+console.log("Parsed Config Data: ");
+console.log(configData);
+const config = Config.fromJsonObject(configData);
+console.log("Config Object: ");
+console.log(config);
+
 // Gets the config from the config.json file and sets it in the stream service
 dataMan.setConfig(config);
 
@@ -21,7 +36,7 @@ dataMan.setConfig(config);
 // TODO - Due to media being loaded as an async function, we will need to ensure all media is loaded before the service starts
 // TODO - Restructure this for clean code
 connectToDB().then(() => {
-    dataMan.loadMedia(config).then(() => {
+    dataMan.loadMedia(dataMan.getConfig()).then(() => {
 
         const app = express();
         const port = process.env.PORT || 3001;

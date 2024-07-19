@@ -20,18 +20,6 @@ export class TranslatedTags {
     }
 }
 
-class SelectedMedia {
-    selectedMedia: (Promo | Music | Short | Commercial)[];
-    chosenMedia: Media;
-    remainingDuration: number;
-
-    constructor(selectedMedia: (Promo | Music | Short | Commercial)[], chosenMedia: Media, remainingDuration: number) {
-        this.selectedMedia = selectedMedia;
-        this.chosenMedia = chosenMedia;
-        this.remainingDuration = remainingDuration;
-    }
-}
-
 export function createBuffer(
     duration: number,
     options: IStreamRequest,
@@ -219,12 +207,18 @@ export function tagTranslator(tags: string[], translationTags: TranslationTag[])
 function filterMediaByMainTags(media: Media, tags: TranslatedTags): [Commercial[], Music[], Short[]] {
     const { MainTags } = tags;
 
-    const filteredCommercials: Commercial[] = [];
-    const filteredMusic: Music[] = [];
-    const filteredShorts: Short[] = [];
+    let filteredCommercials: Commercial[] = [];
+    let filteredMusic: Music[] = [];
+    let filteredShorts: Short[] = [];
 
     // TODO - We might need to do this for Era tags, and check if Secondary Tags would be need as well
     // TODO - We also might need to make this faster in the future if there are a lot of media items
+
+    // Add Default commercials that have the "default" tag
+    media.Commercials.filter(commercial => commercial.Tags.includes("default"))
+        .forEach(commercial => {
+            filteredCommercials.push(commercial)
+        });
 
     // Filter Commercials
     media.Commercials.forEach((commercial) => {
@@ -247,7 +241,12 @@ function filterMediaByMainTags(media: Media, tags: TranslatedTags): [Commercial[
         }
     });
 
-    return [filteredCommercials, filteredMusic, filteredShorts];
+    //dedupe each array by loadTitle
+    let selectedCommercials = filteredCommercials.filter((v, i, a) => a.findIndex(t => (t.Title === v.Title)) === i);
+    let selectedMusic = filteredMusic.filter((v, i, a) => a.findIndex(t => (t.Title === v.Title)) === i);
+    let selectedShorts = filteredShorts.filter((v, i, a) => a.findIndex(t => (t.Title === v.Title)) === i);
+
+    return [selectedCommercials, selectedMusic, selectedShorts];
 }
 
 // Define a function to select commercials
@@ -269,12 +268,19 @@ function selectCommercials(
         // commercial block duration
         // TODO - we might want to set this as === remaining duration instead of <= remaining duration
         // Or we could have two different checks, one for if there are any commercials that fit the remaining duration and one for if there are any commercials that fit the commercial block
-        availableCommercials = filteredCommercials.filter(
-            (commercial) =>
-                commercial.Duration <= remainingDuration &&
-                commercial.Duration === commercialBlock &&
-                !usedCommercialTitles.includes(commercial.Title)
-        );
+        if (remainingDuration > commercialBlock) {
+            availableCommercials = filteredCommercials.filter(
+                (commercial) =>
+                    commercial.Duration === commercialBlock &&
+                    !usedCommercialTitles.includes(commercial.Title)
+            );
+        } else {
+            availableCommercials = filteredCommercials.filter(
+                (commercial) =>
+                    commercial.Duration === remainingDuration &&
+                    !usedCommercialTitles.includes(commercial.Title)
+            );
+        }
 
         // If there are no commercials that fit the remaining duration and are equal to the commercial block, select commercials that are below the remaining duration and the duration of the commercial block
         if (availableCommercials.length === 0) {

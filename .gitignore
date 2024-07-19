@@ -125,3 +125,11 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+# Ignore all files in /data/buffer but keep the directory structure
+/data/buffer/*
+!/data/buffer/.gitkeep
+
+# Ignore all files in /data/promo but keep the directory structure
+/data/promo/*
+!/data/promo/.gitkeep
