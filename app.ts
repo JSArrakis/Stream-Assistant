@@ -60,57 +60,57 @@ connectToDB().then(() => {
         //              STREAM CONTROL
         // ===========================================
         //Start Stream with the intention of playing continuously with no end time until stopped manually
-        app.post('/api/continuous-stream', streamCont.contStreamValidationRules, streamCont.continuousStreamHandler);
+        app.post('/api/v1/continuous-stream', streamCont.contStreamValidationRules, streamCont.continuousStreamHandler);
 
         // ===========================================
         //            DATABASE MANAGEMENT
         // ===========================================
 
         //Show Management
-        app.post('/api/admin/create-show', showCont.createShowValidationRules, showCont.createShowHandler);
-        app.delete('/api/admin/delete-show', showCont.deleteShowValidationRules, showCont.deleteShowHandler);
-        app.put('/api/admin/update-show', showCont.updateShowValidationRules, showCont.updateShowHandler);
-        app.get('/api/admin/get-show', showCont.getShowValidationRules, showCont.getShowHandler);
-        app.get('/api/admin/get-all-show-data', showCont.getShowValidationRules, showCont.getAllShowsDataHandler);
+        app.post('/api/admin/v1/create-show', showCont.createShowValidationRules, showCont.createShowHandler);
+        app.delete('/api/admin/v1/delete-show', showCont.deleteShowValidationRules, showCont.deleteShowHandler);
+        app.put('/api/admin/v1/update-show', showCont.updateShowValidationRules, showCont.updateShowHandler);
+        app.get('/api/admin/v1/get-show', showCont.getShowValidationRules, showCont.getShowHandler);
+        app.get('/api/admin/v1/get-all-show-data', showCont.getShowValidationRules, showCont.getAllShowsDataHandler);
 
         //Movie Management
-        app.post('/api/admin/create-movie', movCont.createMovieValidationRules, movCont.createMovieHandler);
-        app.post('/api/admin/bulk-create-movies', movCont.bulkCreateMoviesValidationRules, movCont.bulkCreateMovieHandler);
-        app.delete('/api/admin/delete-movie', movCont.deleteMovieValidationRules, movCont.deleteMovieHandler);
-        app.put('/api/admin/update-movie', movCont.updateMovieValidationRules, movCont.updateMovieHandler);
-        app.get('/api/admin/get-movie', movCont.getMovieValidationRules, movCont.getMovieHandler);
-        app.get('/api/admin/get-all-movies', movCont.getMovieValidationRules, movCont.getAllMoviesHandler);
+        app.post('/api/admin/v1/create-movie', movCont.createMovieValidationRules, movCont.createMovieHandler);
+        app.post('/api/admin/v1/bulk-create-movies', movCont.bulkCreateMoviesValidationRules, movCont.bulkCreateMovieHandler);
+        app.delete('/api/admin/v1/delete-movie', movCont.deleteMovieValidationRules, movCont.deleteMovieHandler);
+        app.put('/api/admin/v1/update-movie', movCont.updateMovieValidationRules, movCont.updateMovieHandler);
+        app.get('/api/admin/v1/get-movie', movCont.getMovieValidationRules, movCont.getMovieHandler);
+        app.get('/api/admin/v1/get-all-movies', movCont.getMovieValidationRules, movCont.getAllMoviesHandler);
 
         //Commercial Management
-        app.post('/api/admin/create-commercial', commonCont.createBufferValidationRules, commCont.createCommercialHandler);
-        app.post('/api/admin/bulk-create-commercials', commonCont.bulkCreateBufferValidationRules, commCont.bulkCreateCommercialHandler);
-        app.delete('/api/admin/delete-commercial', commonCont.deleteBufferValidationRules, commCont.deleteCommercialHandler);
-        app.put('/api/admin/update-commercial', commonCont.updateBufferValidationRules, commCont.updateCommercialHandler);
-        app.get('/api/admin/get-commercial', commonCont.getBufferValidationRules, commCont.getCommercialHandler);
-        app.get('/api/admin/get-all-commercials', commonCont.getBufferValidationRules, commCont.getAllCommercialsHandler);
+        app.post('/api/admin/v1/create-commercial', commonCont.createBufferValidationRules, commCont.createCommercialHandler);
+        app.post('/api/admin/v1/bulk-create-commercials', commonCont.bulkCreateBufferValidationRules, commCont.bulkCreateCommercialHandler);
+        app.delete('/api/admin/v1/delete-commercial', commonCont.deleteBufferValidationRules, commCont.deleteCommercialHandler);
+        app.put('/api/admin/v1/update-commercial', commonCont.updateBufferValidationRules, commCont.updateCommercialHandler);
+        app.get('/api/admin/v1/get-commercial', commonCont.getBufferValidationRules, commCont.getCommercialHandler);
+        app.get('/api/admin/v1/get-all-commercials', commonCont.getBufferValidationRules, commCont.getAllCommercialsHandler);
 
         //Short Management
-        app.post('/api/admin/create-short', commonCont.createBufferValidationRules, shortCont.createShortHandler);
-        app.post('/api/admin/bulk-create-shorts', commonCont.bulkCreateBufferValidationRules, shortCont.bulkCreateShortHandler);
-        app.delete('/api/admin/delete-short', commonCont.deleteBufferValidationRules, shortCont.deleteShortHandler);
-        app.put('/api/admin/update-short', commonCont.updateBufferValidationRules, shortCont.updateShortHandler);
-        app.get('/api/admin/get-short', commonCont.getBufferValidationRules, shortCont.getShortHandler);
-        app.get('/api/admin/get-all-shorts', commonCont.getBufferValidationRules, shortCont.getAllShortsHandler);
+        app.post('/api/admin/v1/create-short', commonCont.createBufferValidationRules, shortCont.createShortHandler);
+        app.post('/api/admin/v1/bulk-create-shorts', commonCont.bulkCreateBufferValidationRules, shortCont.bulkCreateShortHandler);
+        app.delete('/api/admin/v1/delete-short', commonCont.deleteBufferValidationRules, shortCont.deleteShortHandler);
+        app.put('/api/admin/v1/update-short', commonCont.updateBufferValidationRules, shortCont.updateShortHandler);
+        app.get('/api/admin/v1/get-short', commonCont.getBufferValidationRules, shortCont.getShortHandler);
+        app.get('/api/admin/v1/get-all-shorts', commonCont.getBufferValidationRules, shortCont.getAllShortsHandler);
 
         //Music Management
-        app.post('/api/admin/create-music', commonCont.createBufferValidationRules, musicCont.createMusicHandler);
-        app.post('/api/admin/bulk-create-music', commonCont.bulkCreateBufferValidationRules, musicCont.bulkCreateMusicHandler);
-        app.delete('/api/admin/delete-music', commonCont.deleteBufferValidationRules, musicCont.deleteMusicHandler);
-        app.put('/api/admin/update-music', commonCont.updateBufferValidationRules, musicCont.updateMusicHandler);
-        app.get('/api/admin/get-music', commonCont.getBufferValidationRules, musicCont.getMusicHandler);
-        app.get('/api/admin/get-all-music', commonCont.getBufferValidationRules, musicCont.getAllMusicHandler);
+        app.post('/api/admin/v1/create-music', commonCont.createBufferValidationRules, musicCont.createMusicHandler);
+        app.post('/api/admin/v1/bulk-create-music', commonCont.bulkCreateBufferValidationRules, musicCont.bulkCreateMusicHandler);
+        app.delete('/api/admin/v1/delete-music', commonCont.deleteBufferValidationRules, musicCont.deleteMusicHandler);
+        app.put('/api/admin/v1/update-music', commonCont.updateBufferValidationRules, musicCont.updateMusicHandler);
+        app.get('/api/admin/v1/get-music', commonCont.getBufferValidationRules, musicCont.getMusicHandler);
+        app.get('/api/admin/v1/get-all-music', commonCont.getBufferValidationRules, musicCont.getAllMusicHandler);
 
         //Promo Management
-        app.post('/api/admin/create-promo', commonCont.createBufferValidationRules, promoCont.createPromoHandler);
-        app.post('/api/admin/bulk-create-promos', commonCont.bulkCreateBufferValidationRules, promoCont.bulkCreatePromoHandler);
-        app.delete('/api/admin/delete-promo', commonCont.deleteBufferValidationRules, promoCont.deletePromoHandler);
-        app.put('/api/admin/update-promo', commonCont.updateBufferValidationRules, promoCont.updatePromoHandler);
-        app.get('/api/admin/get-promo', commonCont.getBufferValidationRules, promoCont.getPromoHandler);
-        app.get('/api/admin/get-all-promos', commonCont.getBufferValidationRules, promoCont.getAllPromosHandler);
+        app.post('/api/admin/v1/create-promo', commonCont.createBufferValidationRules, promoCont.createPromoHandler);
+        app.post('/api/admin/v1/bulk-create-promos', commonCont.bulkCreateBufferValidationRules, promoCont.bulkCreatePromoHandler);
+        app.delete('/api/admin/v1/delete-promo', commonCont.deleteBufferValidationRules, promoCont.deletePromoHandler);
+        app.put('/api/admin/v1/update-promo', commonCont.updateBufferValidationRules, promoCont.updatePromoHandler);
+        app.get('/api/admin/v1/get-promo', commonCont.getBufferValidationRules, promoCont.getPromoHandler);
+        app.get('/api/admin/v1/get-all-promos', commonCont.getBufferValidationRules, promoCont.getAllPromosHandler);
     });
 });
