@@ -1,3 +1,4 @@
+import path from 'path';
 import mongoose from "mongoose";
 import { ShowModel, Show } from '../models/show';
 import { MovieModel, Movie } from '../models/movie';
@@ -132,6 +133,8 @@ export async function LoadEnvConfigList(): Promise<EnvConfiguration[]> {
 }
 
 export async function CreateDefaultPromo(config: Config): Promise<void> {
+
+    const resolvedPromoPath = path.resolve(__dirname, '../../', config.DefaultPromo);
     // Check if default promo exists in the database
     const defaultPromo = await PromoModel.findOne({ LoadTitle: "default" });
     // If it exists, return
@@ -140,17 +143,17 @@ export async function CreateDefaultPromo(config: Config): Promise<void> {
         return;
     }
     console.log("Creating Default Promo");
-    console.log("Default Promo Path: " + config.DefaultPromo);
+    console.log("Default Promo Path: " + resolvedPromoPath);
 
     // Check if the promo path exists and get the duration
-    let duration = await dataTrans.getMediaDuration(config.DefaultPromo);
+    let duration = await dataTrans.getMediaDuration(resolvedPromoPath);
 
     // Create default promo
     const promo = new PromoModel({
         Title: "Default",
         LoadTitle: "default",
         Duration: duration,
-        Path: config.DefaultPromo,
+        Path: resolvedPromoPath,
         Type: MediaType.Promo,
         Tags: ["default"]
     });
@@ -159,6 +162,8 @@ export async function CreateDefaultPromo(config: Config): Promise<void> {
 }
 
 export async function CreateDefaultCommercials(config: Config): Promise<void> {
+
+    const resolvedCommercialFolder = path.resolve(__dirname, '../../', config.DefaultCommercialFolder);
     // Get all commercials that have the tag "default"
     const defaultCommercials = await CommercialModel.find({ Tags: "default" });
     let commercialList: Commercial[] = [];
@@ -178,18 +183,19 @@ export async function CreateDefaultCommercials(config: Config): Promise<void> {
     }
 
     console.log("Default Commercials do not exist in the database, creating them");
-
-    // If there are no default commercials, get the default commercial folder from the config
-    const defaultCommercialFolder = config.DefaultCommercialFolder;
-
-    console.log("Default Commercial Folder: " + defaultCommercialFolder);
+    console.log("Default Commercial Folder: " + resolvedCommercialFolder);
 
     // For each file in the folder
     try {
-        const files = await fs.readdir(defaultCommercialFolder);
+        const files = await fs.readdir(resolvedCommercialFolder);
+        console.log("Files in Default Commercial Folder: ", files);
 
         for (let file of files) {
-            let path = `${defaultCommercialFolder}/${file}`;
+            // If the file is not one of the supported file types, skip it
+            if (!file.endsWith(".mp4") && !file.endsWith(".mov") && !file.endsWith(".avi")) {
+                continue;
+            }
+            let path = `${resolvedCommercialFolder}/${file}`;
             let duration = await dataTrans.getMediaDuration(path);
 
             // Create commercial name from file name removing the extension

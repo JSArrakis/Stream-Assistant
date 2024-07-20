@@ -24,6 +24,7 @@ console.log(rawConfigData);
 const configData = JSON.parse(rawConfigData);
 console.log("Parsed Config Data: ");
 console.log(configData);
+// TODO - Validate the config data
 const config = Config.fromJsonObject(configData);
 console.log("Config Object: ");
 console.log(config);
