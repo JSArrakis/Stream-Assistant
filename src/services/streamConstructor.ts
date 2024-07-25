@@ -263,14 +263,24 @@ export function constructStream(
 //     return [stream, remainder];
 // }
 
-export function getFirstProceduralDuration(rightNow: number, stagedMedia: StagedMedia): number {
+export function getInitialProceduralTimepoint(rightNow: number, stagedMedia: StagedMedia): [number, string] {
+    let error = "";
+
+    //Sets the first time point to the end time of the stream if there are no scheduled media items
     let firstTimePoint: number = stagedMedia.EndTime;
 
+    //If there are scheduled media items, the first time point is set to the time of the first scheduled media item
     if (stagedMedia.ScheduledMedia.length > 0) {
         firstTimePoint = stagedMedia.ScheduledMedia[0].Time;
     }
 
-    return firstTimePoint - rightNow;
+    //If the first time point is in the past, an error is returned
+    if (firstTimePoint - rightNow < 0) {
+        error = "Time of first movie, collection, or selected end time needs to be in the future.";
+        return [0, error];
+    }
+
+    return [firstTimePoint, error];
 }
 
 export function setInitialBlockDuration(interval: number, firstProceduralDuration: number) {
@@ -284,7 +294,7 @@ export function setInitialBlockDuration(interval: number, firstProceduralDuratio
         preMediaDuration = firstProceduralDuration;
     }
 
-    return { preMediaDuration, initialProceduralBlockDuration };
+    return [preMediaDuration, initialProceduralBlockDuration];
 }
 
 export function getStagedStream(
@@ -296,13 +306,13 @@ export function getStagedStream(
     streamType: StreamType): [selectedMedia: SelectedMedia[], error: string] {
     let error: string = "";
 
-    let firstProceduralDuration = getFirstProceduralDuration(rightNow, stagedMedia);
-    if (firstProceduralDuration < 0) {
-        error = "Time of first movie, collection, or selected end time needs to be in the future.";
+    let [firstProceduralDuration, intialError] = getInitialProceduralTimepoint(rightNow, stagedMedia);
+    if (intialError !== "") {
+        error = intialError;
+        return [[], error];
     }
 
-    let interval = config.Interval;
-    let { preMediaDuration, initialProceduralBlockDuration } = setInitialBlockDuration(interval, firstProceduralDuration);
+    let [preMediaDuration, initialProceduralBlockDuration] = setInitialBlockDuration(config.Interval, firstProceduralDuration);
     let selectedMedia: SelectedMedia[] = [];
     let prevMovies: Movie[] = [];
 

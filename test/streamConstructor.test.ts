@@ -444,6 +444,49 @@ describe('setProceduralTags', () => {
     });
 });
 
-describe('setProceduralBlockDurations', () => {
-    
+describe('getInitialProceduralTimepoint', () => {
+    it('should return the start time of the first scheduled media', () => {
+        const rightNow = 1656546397
+
+        const selected = [
+            new SelectedMedia(inception, '', MediaType.Movie, 1656547200, 9000, ["Sci-Fi"]),
+            new SelectedMedia(matrix, '', MediaType.Movie, 1656633600, 10800, ["Action"])
+        ];
+
+        const stagedMedia = new StagedMedia(selected, [], 1656633600 + 10800);
+
+        const [result, error] = streamCon.getInitialProceduralTimepoint(rightNow, stagedMedia);
+
+        expect(result).to.equal(1656547200);
+        expect(error).to.equal('');
+    });
+
+    it('should return the staged media end time if no media is scheduled', () => {
+        const rightNow = 1656546397
+
+        const selected: SelectedMedia[] = [];
+
+        const stagedMedia = new StagedMedia(selected, [], 1656633600);
+
+        const [result, error] = streamCon.getInitialProceduralTimepoint(rightNow, stagedMedia);
+
+        expect(result).to.equal(1656633600);
+        expect(error).to.equal('');
+    });
+
+    it('should return an error if the first scheduled media is in the past', () => {
+        const rightNow = 1656547201
+
+        const selected = [
+            new SelectedMedia(inception, '', MediaType.Movie, 1656547200, 9000, ["Sci-Fi"]),
+            new SelectedMedia(matrix, '', MediaType.Movie, 1656633600, 10800, ["Action"])
+        ];
+
+        const stagedMedia = new StagedMedia(selected, [], 1656633600 + 10800);
+
+        const [result, error] = streamCon.getInitialProceduralTimepoint(rightNow, stagedMedia);
+
+        expect(result).to.equal(0);
+        expect(error).to.equal('Time of first movie, collection, or selected end time needs to be in the future.');
+    });
 });
