@@ -38,12 +38,12 @@ export class Commercial {
 
     static fromMongoObject(mongoObject: any): Commercial {
         return new Commercial(
-            mongoObject.title,
-            mongoObject.loadTitle,
-            mongoObject.duration,
-            mongoObject.path,
-            mongoObject.type,
-            mongoObject.tags,
+            mongoObject.Title,
+            mongoObject.LoadTitle,
+            mongoObject.Duration,
+            mongoObject.Path,
+            MediaType.Commercial,
+            mongoObject.Tags,
         );
     }
 

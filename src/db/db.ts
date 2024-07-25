@@ -243,6 +243,8 @@ export function CheckBufferViability(commercialList: Commercial[]): boolean {
 
     // for each number in an array of numbers
     let durationLimitsList = [15, 16, 17, 18, 19, 20, 30]
+    console.log("This is the commercial list");
+    console.log(commercialList);
 
     // For each duration in the duration limits list 
     durationLimitsList.forEach(durationLimit => {

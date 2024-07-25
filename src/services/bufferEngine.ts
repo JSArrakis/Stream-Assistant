@@ -11,12 +11,12 @@ import { keyNormalizer } from "../utils/utilities";
 export class TranslatedTags {
     EraTags: string[];
     MainTags: string[];
-    SecondaryTags: string[];
+    TranslatedTags: string[];
 
     constructor(eraTags: string[], mainTags: string[], secondaryTags: string[]) {
         this.EraTags = eraTags;
         this.MainTags = mainTags;
-        this.SecondaryTags = secondaryTags;
+        this.TranslatedTags = secondaryTags;
     }
 }
 
@@ -178,13 +178,13 @@ export function tagTranslator(tags: string[], translationTags: TranslationTag[])
             let translationTag = translationTags.find(tt => tt.Tag === tag) ?? null;
             if (translationTag) {
                 //if it does, add the translation to the secondary tags
-                translatedTags.SecondaryTags.push(...translationTag.Translation);
+                translatedTags.TranslatedTags.push(...translationTag.Translation);
             }
         }
     });
 
     //unique tags
-    translatedTags.SecondaryTags = Array.from(new Set(translatedTags.SecondaryTags));
+    translatedTags.TranslatedTags = Array.from(new Set(translatedTags.TranslatedTags));
 
     return translatedTags;
 }

@@ -34,7 +34,7 @@ export function constructStream(
     // This detects if a movie is scheduled to be played at a specific time and adds it to the stream
     // The format of the string is "MovieTitle::Time" where time is the unix timestamp of when the movie is scheduled to be played
     // TODO - Change the format of the scheduled movies request to be an array of objects with a title and time property for easier parsing
-    let scheduledMedia: SelectedMedia[] = getScheduledMedia(args, media, args);
+    let scheduledMedia: SelectedMedia[] = getScheduledMedia(media, args);
 
     // Get the media that is specifically requested from the incoming http request and the end time of the stream to create a collection
     // of media that is ordered by scheduled time and 'injected' media that is requested by the user
@@ -383,12 +383,12 @@ function compareSelectedEndTime(endTime: number, scheduledMedia: SelectedMedia[]
     })
 }
 
-export function getScheduledMedia(options: any, media: Media, args: IStreamRequest): SelectedMedia[] {
+export function getScheduledMedia(media: Media, args: IStreamRequest): SelectedMedia[] {
     let selectedMedia: SelectedMedia[] = [];
     // Parses the incoming http request for scheduled movies and collections
     // The format of the string is "MovieTitle::Time" where time is the unix timestamp of when the movie is scheduled to be played
-    if (options.movies) {
-        options.movies
+    if (args.Movies) {
+        args.Movies
             //Gets only the movies that have the time schedule delimiter "::"
             .filter((str: string) => str.includes('::'))
             .forEach((str: string) => {
@@ -398,23 +398,23 @@ export function getScheduledMedia(options: any, media: Media, args: IStreamReque
             });
     }
 
+    // TODO - handle collections
     // Blocks should be in the format "CollectionTitle::EpisodeNumber"
-    // TODO - Rename blocks to collections in the options object
     // TODO - For continuous streams, we need to make sure that we have a way to specify the interval of days or weeks that a collection
     // should be played. This will allow us to schedule collections to be played on specific days of the week or at specific intervals.
     // This allows for things like the "Toonami Midnight Run" where a specific show is played at a specific time on a specific day of the week
     // or Nickelodeons 90s Saturday Morning blocks. This will also allow us to schedule collections to be played on specific holidays or events
-    if (options.blocks) {
-        options.blocks
-            // Gets only the collections that have the time schedule delimiter "::"
-            // Sometimes a collection can just be added that doesnt need to be scheduled. Collections can also be marathons of movies or shows 
-            // that are played in order and do not need to be scheduled at a specific time
-            .filter((str: string) => str.includes('::'))
-            .forEach((str: string) => {
-                let parsedCollection = str.split("::");
-                selectedMedia.push(getCollection(parsedCollection[0], media, parseInt(parsedCollection[1]), args));
-            });
-    }
+    // if (args.Collections) {
+    //     args.Collections
+    //         // Gets only the collections that have the time schedule delimiter "::"
+    //         // Sometimes a collection can just be added that doesnt need to be scheduled. Collections can also be marathons of movies or shows 
+    //         // that are played in order and do not need to be scheduled at a specific time
+    //         .filter((str: string) => str.includes('::'))
+    //         .forEach((str: string) => {
+    //             let parsedCollection = str.split("::");
+    //             selectedMedia.push(getCollection(parsedCollection[0], media, parseInt(parsedCollection[1]), args));
+    //         });
+    // }
     // Sorts the the selected media based on the unix timestamp of when the media is scheduled to be played
     let sorted = selectedMedia.sort((a, b) => a.Time - b.Time);
     return sorted;

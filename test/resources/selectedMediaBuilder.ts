@@ -1,64 +1,52 @@
-import { Collection } from "../../models/collection";
-import { MediaType } from "../../models/enum/mediaTypes";
-import { Movie } from "../../models/movie";
-import { SelectedMedia } from "../../models/selectedMedia";
-import { Episode } from "../../models/show";
+import test from "node:test";
+import { Movie } from "../../src/models/movie";
+import { getMovie } from "../../src/services/streamConstructor";
 import { MovieBuilder } from "./movieBuilder";
+import { SelectedMedia } from "../../src/models/selectedMedia";
+import { MediaType } from "../../src/models/enum/mediaTypes";
 
-export class SelectedMediaBuilder {
-    private media: (Movie | Collection | Episode);
-    private showTitle: string;
-    private type: MediaType;
-    private time: number;
-    private duration: number;
-    private tags: string[];
 
-    constructor() {
-        this.media = new MovieBuilder().build();
-        this.type = MediaType.Movie;
-        this.time = 0;
-        this.duration = 0;
-        this.tags = [];
-    }
+describe('getMovie', () => {
+    let movieList: Movie[];
 
-    public withMedia(media: (Movie | Collection | Episode)): SelectedMediaBuilder {
-        this.media = media
-        return this;
-    }
+    beforeEach(() => {
+        movieList = [
+            new MovieBuilder()
+                .setTitle('Movie One')
+                .setLoadTitle('movieone')
+                .setDuration(120)
+                .setDurationLimit(120)
+                .setTags(['action', 'thriller'])
+                .build(),
+            new MovieBuilder()
+                .setTitle('Movie Two')
+                .setLoadTitle('movietwo')
+                .setDuration(90)
+                .setDurationLimit(90)
+                .setTags(['comedy'])
+                .build(),
+        ];
+    });
 
-    public withType(type: MediaType): SelectedMediaBuilder {
-        this.type = type
-        return this;
-    }
+    test('should throw an error if the loadTitle is empty', () => {
+        expect(() => getMovie('', movieList, 1609459200)).toThrow('Empty movie titles are not a valid input');
+    });
 
-    public withTime(time: number): SelectedMediaBuilder {
-        this.time = time
-        return this;
-    }
+    test('should throw an error if the loadTitle is undefined', () => {
+        expect(() => getMovie(undefined as unknown as string, movieList, 1609459200)).toThrow('Empty movie titles are not a valid input');
+    });
 
-    public withDuration(duration: number): SelectedMediaBuilder {
-        this.duration = duration
-        return this;
-    }
+    test('should throw an error if the loadTitle is not found in the movie list', () => {
+        expect(() => getMovie('unknownmovie', movieList, 1609459200)).toThrow('unknownmovie load title, not found.');
+    });
 
-    public withTags(tags: string[]): SelectedMediaBuilder {
-        this.tags = tags
-        return this;
-    }
-
-    public addTag(tag: string): SelectedMediaBuilder {
-        this.tags.push(tag)
-        return this;
-    }
-
-    public build(): SelectedMedia {
-        return new SelectedMedia(
-            this.media,
-            this.showTitle,
-            this.type,
-            this.time,
-            this.duration,
-            this.tags
-        );
-    }
-}
+    test('should return a SelectedMedia object for a valid loadTitle', () => {
+        const selectedMedia = getMovie('movieone', movieList, 1609459200);
+        expect(selectedMedia).toBeInstanceOf(SelectedMedia);
+        expect(selectedMedia.Media.LoadTitle).toBe('movieone');
+        expect(selectedMedia.Type).toBe(MediaType.Movie);
+        expect(selectedMedia.Time).toBe(1609459200);
+        expect(selectedMedia.Duration).toBe(120);
+        expect(selectedMedia.Tags).toEqual(['action', 'thriller']);
+    });
+});
