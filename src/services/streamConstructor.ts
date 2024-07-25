@@ -15,7 +15,8 @@ import { StreamArgs } from "../models/streamArgs";
 import { MediaBlock } from "../models/mediaBlock";
 import { StreamType } from "../models/enum/streamTypes";
 import { ManageShowProgression } from "./progressionManager";
-import { IStreamRequest } from "../models/streamRequest";
+import { AdhocStreamRequest, IStreamRequest } from "../models/streamRequest";
+import { error } from "console";
 
 export function constructStream(
     config: Config,
@@ -34,7 +35,11 @@ export function constructStream(
     // This detects if a movie is scheduled to be played at a specific time and adds it to the stream
     // The format of the string is "MovieTitle::Time" where time is the unix timestamp of when the movie is scheduled to be played
     // TODO - Change the format of the scheduled movies request to be an array of objects with a title and time property for easier parsing
-    let scheduledMedia: SelectedMedia[] = getScheduledMedia(media, args);
+    let [scheduledMedia, selectError] = getScheduledMedia(media, args);
+    if (selectError !== "") {
+        error = selectError;
+        return [[], error];
+    }
 
     // Get the media that is specifically requested from the incoming http request and the end time of the stream to create a collection
     // of media that is ordered by scheduled time and 'injected' media that is requested by the user
@@ -46,10 +51,26 @@ export function constructStream(
     // and should be subject to the rules of the genre walk to give a better experience to the viewer, scheduling these movies beyond the initial stream day to allow for a smoother "walk"
     // We might even want to consider removing the ability to inject media for a continuous stream and rely on the future API endpoints to inject movies manually
     // Or we could remove Staged Media for a continuous stream entirely and only use tags for the base stream generation
+    let [injectedMovies, injectError] = getInjectedMovies(args, media.Movies);
+    if (injectError !== "") {
+        error = injectError
+        return [[], error];
+    }
+
+    //TODO - If the scheduled media is beyond the end of the day today, set the end time as the end of the day.
+    // We will need to design and construct a feature that handles the scheduling of media beyond the current day
+    // as each day is generated as a new stream construction block. This will allow us to schedule media for specific days of the week.
+
+    let [streamEndTime, evalError] = evaluateStreamEndTime(args, scheduledMedia);
+    if (evalError !== "") {
+        error = evalError;
+        return [[], error];
+    }
+
     let stagedMedia = new StagedMedia(
         scheduledMedia,
-        getInjectedMovies(args, media.Movies),
-        evaluateStreamEndTime(args, scheduledMedia)
+        injectedMovies,
+        streamEndTime
     );
 
     // Get genre tag from the media that is scheduled and injected if no tags are selected by the user
@@ -58,12 +79,11 @@ export function constructStream(
     // Using the scheduled media and injected media, create a stream of media blocks that will be played in order
     // The stream is created by filling the time between the scheduled and injected media with procedural media based on the genre tags available
     // These are only the main media items, the buffer media is added to the stream in the next step
-    let stagedStreamResponse: [SelectedMedia[], string] = getStagedStream(rightNow, config, args, stagedMedia, media, streamType);
-    if (stagedStreamResponse[1] !== "") {
-        error = stagedStreamResponse[1];
+    let [stagedStream, stagedError] = getStagedStream(rightNow, config, args, stagedMedia, media, streamType);
+    if (stagedError !== "") {
+        error = stagedError;
         return [[], error];
     }
-    let stagedStream = stagedStreamResponse[0];
 
     // An Object that holds previously played media to prevent the same media from being played in the same stream before a certain interval
     // Each media item in prevBuffer is added or removed based on its own rules. I.E. commercials are added if they are selected for a buffer but will be removed after the next
@@ -253,7 +273,7 @@ export function getFirstProceduralDuration(rightNow: number, stagedMedia: Staged
     return firstTimePoint - rightNow;
 }
 
-export function setProceduralBlockDurations(interval: number, firstProceduralDuration: number) {
+export function setInitialBlockDuration(interval: number, firstProceduralDuration: number) {
     let preMediaDuration = 0;
     let initialProceduralBlockDuration = 0;
 
@@ -282,7 +302,7 @@ export function getStagedStream(
     }
 
     let interval = config.Interval;
-    let { preMediaDuration, initialProceduralBlockDuration } = setProceduralBlockDurations(interval, firstProceduralDuration);
+    let { preMediaDuration, initialProceduralBlockDuration } = setInitialBlockDuration(interval, firstProceduralDuration);
     let selectedMedia: SelectedMedia[] = [];
     let prevMovies: Movie[] = [];
 
@@ -343,8 +363,8 @@ export function getStagedStream(
 }
 
 export function setProceduralTags(options: IStreamRequest, stagedMedia: StagedMedia): void {
-    if (options.MultiTags === undefined
-        && options.Tags === undefined) {
+    if (options.MultiTags.length === 0
+        && options.Tags.length === 0) {
 
         let tagList: string[] = [];
         stagedMedia.InjectedMovies.forEach(inj => tagList.push(...inj.Media.Tags));
@@ -357,36 +377,45 @@ export function setProceduralTags(options: IStreamRequest, stagedMedia: StagedMe
         }
         options.Tags = uniquetags;
         //TODO: v1.4 Create different combos of block tags for tagsAND to give a more streamlined experience
+
+        //TODO - If no tags are present at all, we should default to all base genre tags
     }
 }
 
-export function evaluateStreamEndTime(options: any, scheduledMedia: SelectedMedia[]): number {
+export function evaluateStreamEndTime(options: IStreamRequest, scheduledMedia: SelectedMedia[]): [number, string] {
     let endTime: number = moment().startOf('day').add(1, "days").unix();
+    let error: string = "";
 
-    if (options.endTime) {
-        let selectedEndTime = parseInt(options.endTime);
-        compareSelectedEndTime(selectedEndTime, scheduledMedia);
-        endTime = selectedEndTime;
-    } else if (scheduledMedia.length > 0) {
+    if (options instanceof AdhocStreamRequest && options.EndTime) {
+        error = compareSelectedEndTime(options.EndTime, scheduledMedia);
+        if (error !== "") {
+            return [0, error];
+        }
+        endTime = options.EndTime;
+    } else if (options instanceof AdhocStreamRequest && scheduledMedia.length > 0) {
         let lastScheduledMedia = scheduledMedia[scheduledMedia.length - 1];
         endTime = lastScheduledMedia.Time + lastScheduledMedia.Media.DurationLimit;
     }
 
-    return endTime;
+    return [endTime, error];
 }
 
-function compareSelectedEndTime(endTime: number, scheduledMedia: SelectedMedia[]) {
+export function compareSelectedEndTime(endTime: number, scheduledMedia: SelectedMedia[]): string {
+    let error: string = "";
     scheduledMedia.forEach(item => {
         if (item.Time + item.Media.DurationLimit > endTime) {
-            throw "Scheduled time for " + item.Media.LoadTitle + " exceeds selected endTime";
+            error = "Scheduled time for " + item.Media.LoadTitle + " exceeds selected endTime";
+            return error;
         }
     })
+    return error;
 }
 
-export function getScheduledMedia(media: Media, args: IStreamRequest): SelectedMedia[] {
+export function getScheduledMedia(media: Media, args: IStreamRequest): [SelectedMedia[], string] {
     let selectedMedia: SelectedMedia[] = [];
     // Parses the incoming http request for scheduled movies and collections
     // The format of the string is "MovieTitle::Time" where time is the unix timestamp of when the movie is scheduled to be played
+    let error: string = "";
     if (args.Movies) {
         args.Movies
             //Gets only the movies that have the time schedule delimiter "::"
@@ -394,7 +423,13 @@ export function getScheduledMedia(media: Media, args: IStreamRequest): SelectedM
             .forEach((str: string) => {
                 // Splits the string into an array of strings with the movie title and the time it is scheduled to be played
                 let parsedMovie = str.split("::");
-                selectedMedia.push(getMovie(parsedMovie[0], media.Movies, parseInt(parsedMovie[1])));
+                let [movie, movieError] = getMovie(parsedMovie[0], media.Movies, parseInt(parsedMovie[1]));
+                if (movieError !== "") {
+                    error = movieError;
+                    return [[], error];
+                } else {
+                    selectedMedia.push(movie);
+                }
             });
     }
 
@@ -417,25 +452,32 @@ export function getScheduledMedia(media: Media, args: IStreamRequest): SelectedM
     // }
     // Sorts the the selected media based on the unix timestamp of when the media is scheduled to be played
     let sorted = selectedMedia.sort((a, b) => a.Time - b.Time);
-    return sorted;
+    return [sorted, error];
 }
 
-export function getInjectedMovies(options: any, movies: Movie[]): SelectedMedia[] {
+export function getInjectedMovies(options: IStreamRequest, movies: Movie[]): [SelectedMedia[], string] {
     let selectedMedia: SelectedMedia[] = [];
-    if (options.movies !== undefined) {
-        options.movies
+    let error: string = "";
+    if (options.Movies !== undefined) {
+        options.Movies
             .filter((str: string) => !str.includes('::'))
             .forEach((str: string) => {
-                selectedMedia.push(getMovie(str, movies, 0));
+                let [movie, movieError] = getMovie(str, movies, 0);
+                if (movieError !== "") {
+                    error = movieError;
+                    return [[], error];
+                }
+                selectedMedia.push(movie);
             });
     }
-    return selectedMedia;
+    return [selectedMedia, error];
 }
 
-export function getMovie(loadTitle: string, movieList: Movie[], time: number): SelectedMedia {
+export function getMovie(loadTitle: string, movieList: Movie[], time: number): [SelectedMedia, string] {
+    let selectedMedia: SelectedMedia = new SelectedMedia(new Movie("", "", "", "", [], "", 0, 0, "", 0), "", MediaType.Movie, 0, 0, []);
     // Check if the movie title is empty or undefined as these cannot be searched against the movie list
     if (loadTitle === "" || loadTitle === undefined) {
-        throw loadTitle + "Empty movie titles are not a valid input";
+        return [selectedMedia, "Empty movie titles are not a valid input"];
     }
     // Check if the movie title is in the movie list
     // The load title is the title that is used to load the movie from the database and is unique to each movie
@@ -445,11 +487,10 @@ export function getMovie(loadTitle: string, movieList: Movie[], time: number): S
 
     // TODO - We should perhaps instead send back some kind of error message through the response object of the http request
     if (selectedMovie === undefined) {
-        throw loadTitle + " load title, not found.";
+        return [selectedMedia, loadTitle + " load title, not found."];
     }
 
-    // Created a selected media object that holds the selected movie, the time it is scheduled to be played, the duration of the movie, the tags associated with the movie, and the type of media
-    return new SelectedMedia(
+    selectedMedia = new SelectedMedia(
         selectedMovie,
         "",
         MediaType.Movie,
@@ -457,6 +498,8 @@ export function getMovie(loadTitle: string, movieList: Movie[], time: number): S
         selectedMovie.DurationLimit,
         selectedMovie.Tags
     )
+    // Created a selected media object that holds the selected movie, the time it is scheduled to be played, the duration of the movie, the tags associated with the movie, and the type of media
+    return [selectedMedia, ""];
 }
 
 export function getCollection(loadTitle: string, media: Media, time: number, args: IStreamRequest): SelectedMedia {
@@ -497,21 +540,4 @@ export function assignCollEpisodes(args: IStreamRequest, collection: Collection,
         // Get the episode that matches the episode number from the progression
         collShow.Episode = selectedShow.Episodes.filter(ep => ep.EpisodeNumber === episodeNum)[0];
     })
-}
-
-function setEnvironment(options: StreamArgs) {
-    //TODO: A default environment should be set in the config file
-    // As a part of the repo we will have to provide a location to download default videos for the default environment
-    // This will be a set of commercials Logoed as Stream Assistant (or whatever name we decide on) that will be used as buffer media
-    // This will be a promo and a set of commercial files of various lengths that will be used to fill the buffer time between media items
-    // We will have to get unlicensed music for the buffer media as well and make a video of the logo with the music in the background
-    // This will help people who do not have access to commercials, and we can use differing mustic to represent the different main genres that will be used
-    // By the default tag translation list (which we will also have to create, and provide a way for the user to edit or expand upon)
-    // To do reduce our work load we will only create a the most main movie genres: Action, Comedy, Drama, Horror, Sci-Fi, and Fantasy
-    // Most of those honestly could be covered by the same music, the exceptions being Horror and Action
-    if (options.env !== undefined) {
-        options.env = "FC";
-    } else {
-        options.env = "FC";
-    }
 }
