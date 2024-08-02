@@ -27,49 +27,49 @@ export function ManageShowProgression(
     // Array to hold the episode numbers
     let episodeNumbers: number[] = [];
     // Get the stream args to determine the correct media progression to pull the show progression from
-    let mediaLoadTitle = keyNormalizer(args.Title);
+    let progressionContextLoadTitle = keyNormalizer(args.Title);
     // Find the media progression in the media progression list
-    let mediaProgression: ProgressionContext;
+    let progressionContext: ProgressionContext;
     if (collection !== "") {
-        mediaProgression = GetProgressionContext(collection, keyNormalizer(collection), args.Env, StreamType.Collection);
+        progressionContext = GetProgressionContext(collection, keyNormalizer(collection), args.Env, StreamType.Collection);
     } else {
-        mediaProgression = GetProgressionContext(args.Title, mediaLoadTitle, args.Env, streamType);
+        progressionContext = GetProgressionContext(args.Title, progressionContextLoadTitle, args.Env, streamType);
     }
 
     // Find the show progression in the media progression
-    let showProgression = GetWatchRecord(mediaProgression, show.Title);
+    let showProgression = GetWatchRecord(progressionContext, show);
 
     // Get the episodes to add to the stream queue
-    episodeNumbers = GetEpisodeNumbers(mediaLoadTitle, show, showProgression, numberOfEpisodes);
+    episodeNumbers = GetEpisodeNumbers(progressionContextLoadTitle, show, showProgression, numberOfEpisodes);
     return episodeNumbers;
 
 }
 
-export function GetProgressionContext(mediaTitle: string, mediaLoadTitle: string, environment: string, type: StreamType): ProgressionContext {
+export function GetProgressionContext(progressionContextTitle: string, progressionContextLoadTitle: string, environment: string, type: StreamType): ProgressionContext {
     // Find the media progression in the list
-    let progressionContext = progressionContextList.find((prog) => prog.LoadTitle === mediaLoadTitle);
+    let progressionContext = progressionContextList.find((prog) => prog.LoadTitle === progressionContextLoadTitle);
     // If the media progression is not found, create a new one
     if (!progressionContext) {
-        progressionContext = new ProgressionContext(mediaTitle, mediaLoadTitle, environment, type, []);
+        progressionContext = new ProgressionContext(progressionContextTitle, progressionContextLoadTitle, environment, type, []);
         progressionContextList.push(progressionContext);
     }
 
     return progressionContext;
 }
 
-export function GetWatchRecord(mediaProgression: ProgressionContext, title: string): WatchRecord {
+export function GetWatchRecord(progressionContext: ProgressionContext, show: Show): WatchRecord {
     // Find the progression in the media progression
-    let progression = mediaProgression.WatchRecords.find((prog) => prog.LoadTitle === keyNormalizer(title));
+    let watchRecord = progressionContext.WatchRecords.find((wr) => wr.LoadTitle === keyNormalizer(show.Title));
     // If the progression is not found, create a new one in the media progression list
-    if (!progression) {
-        progression = new WatchRecord(title, keyNormalizer(title), 0, 0);
+    if (!watchRecord) {
+        watchRecord = new WatchRecord(show.Title, keyNormalizer(show.Title), 0, 0, GetEpisodeDurLimit(show, 1));
         // Find the media progression index
-        let mediaProgressionIndex = progressionContextList.findIndex((prog) => prog.LoadTitle === mediaProgression.LoadTitle);
+        let progressionContextIdx = progressionContextList.findIndex((prog) => prog.LoadTitle === progressionContext.LoadTitle);
         // Add the progression to the media progression list
-        progressionContextList[mediaProgressionIndex].WatchRecords.push(progression);
+        progressionContextList[progressionContextIdx].WatchRecords.push(watchRecord);
     }
 
-    return progression;
+    return watchRecord;
 }
 
 export function GetEpisodeNumbers(progressionContextLoadTitle: string, show: Show, watchRecord: WatchRecord, numberOfEpisodes: number): number[] {
@@ -87,10 +87,10 @@ export function GetEpisodeNumbers(progressionContextLoadTitle: string, show: Sho
                     episodeNumber = 1;
                 }
                 episodeNumbers.push(episodeNumber);
-                IncrementWatchRecord(progressionContextLoadTitle, watchRecord.LoadTitle, episodeNumber)
+                IncrementWatchRecord(progressionContextLoadTitle, watchRecord.LoadTitle, episodeNumber, show)
             } else {
                 episodeNumbers.push(i);
-                IncrementWatchRecord(progressionContextLoadTitle, watchRecord.LoadTitle, i)
+                IncrementWatchRecord(progressionContextLoadTitle, watchRecord.LoadTitle, i, show)
             }
         }
     } else {
@@ -105,10 +105,10 @@ export function GetEpisodeNumbers(progressionContextLoadTitle: string, show: Sho
                     episodeNumber = 1;
                 }
                 episodeNumbers.push(episodeNumber);
-                IncrementWatchRecord(progressionContextLoadTitle, watchRecord.LoadTitle, episodeNumber)
+                IncrementWatchRecord(progressionContextLoadTitle, watchRecord.LoadTitle, episodeNumber, show)
             } else {
                 episodeNumbers.push(episodeNumber);
-                IncrementWatchRecord(progressionContextLoadTitle, watchRecord.LoadTitle, episodeNumber)
+                IncrementWatchRecord(progressionContextLoadTitle, watchRecord.LoadTitle, episodeNumber, show)
             }
         }
     }
@@ -116,25 +116,49 @@ export function GetEpisodeNumbers(progressionContextLoadTitle: string, show: Sho
     return episodeNumbers;
 }
 
-export function IncrementWatchRecord(progressionContext: string, loadTitle: string, episode: number): void {
+export function IncrementWatchRecord(progressionContext: string, loadTitle: string, episode: number, show: Show): void {
     //Sets local progression to the next episode
     // Find the media progression index
     let progressionContextIdx = progressionContextList.findIndex((prog) => prog.LoadTitle === progressionContext);
     // Find the progression index
-    let watchRecordIdx = progressionContextList[progressionContextIdx].WatchRecords.findIndex((prog) => prog.LoadTitle === loadTitle);
+    let watchRecordIdx = progressionContextList[progressionContextIdx].WatchRecords.findIndex((wr) => wr.LoadTitle === loadTitle);
     // Increment the episode number
     progressionContextList[progressionContextIdx].WatchRecords[watchRecordIdx].Episode = episode;
+    let nextEpisode = episode + 1;
+    if (nextEpisode + 1 > show.EpisodeCount) {
+        nextEpisode = 1;
+    }
+
+    // Set the next episode duration limit
+    progressionContextList[progressionContextIdx].WatchRecords[watchRecordIdx].NextEpisodeDurLimit = GetEpisodeDurLimit(show, nextEpisode);
 }
 
 export function AddAnthologyProgression(title: string, type: string, progressions: ProgressionContext[], anthology: string) {
     // TODO
 }
 
-// export function GetFilteredShowProgressions(shows: Show[]): WatchRecord[] {
-//     // Get all WatchRecords that have a load title that matches the show load title
-//     // If a show is not found in the progression list, it is assumed that the show has not been played
-//     // and a watch record is not added to the returned list
-//     let watchRecords: WatchRecord[] = [];
+export function GetShowListWatchRecords(args: IStreamRequest, shows: Show[], streamType: StreamType): WatchRecord[] {
+    // Get all WatchRecords records for show list
+    let watchRecords: WatchRecord[] = [];
+    shows.forEach((show) => {
+        let progressionContext = GetProgressionContext(args.Title, keyNormalizer(args.Title), args.Env, streamType);
+        if (progressionContext) {
+            let watchRecord = GetWatchRecord(progressionContext, show);
+            if (watchRecord) {
+                watchRecords.push(watchRecord);
+            }
+        }
+    });
+    return watchRecords;
+}
 
-
-// }
+export function GetEpisodeDurLimit(show: Show, episodeNumber: number): number {
+    let durationLimit = 0;
+    if (show.Episodes) {
+        let episode = show.Episodes.find((ep) => ep.EpisodeNumber === episodeNumber);
+        if (episode) {
+            durationLimit = episode.DurationLimit;
+        }
+    }
+    return durationLimit;
+}

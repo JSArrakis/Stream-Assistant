@@ -47,12 +47,14 @@ export class WatchRecord {
     LoadTitle: string;
     Episode: number;
     LastPlayed: number;
+    NextEpisodeDurLimit: number;
 
-    constructor(title: string, loadTitle: string, episode: number, lastPlayed: number) {
+    constructor(title: string, loadTitle: string, episode: number, lastPlayed: number, nextEpisodeDurLimit: number) {
         this.Title = title;
         this.LoadTitle = loadTitle;
         this.Episode = episode;
-        this.LastPlayed = lastPlayed
+        this.LastPlayed = lastPlayed;
+        this.NextEpisodeDurLimit = nextEpisodeDurLimit;
     }
 
     static fromMongoObject(mongoObject: any): WatchRecord {
@@ -60,7 +62,8 @@ export class WatchRecord {
             mongoObject.title,
             mongoObject.loadTitle,
             mongoObject.episode,
-            mongoObject.lastPlayed
+            mongoObject.lastPlayed,
+            mongoObject.nextEpisodeDurLimit
         );
     }
 
@@ -69,7 +72,8 @@ export class WatchRecord {
             title: progression.Title,
             loadTitle: progression.LoadTitle,
             episode: progression.Episode,
-            lastPlayed: progression.LastPlayed
+            lastPlayed: progression.LastPlayed,
+            nextEpisodeDurLimit: progression.NextEpisodeDurLimit
         };
     }
 }

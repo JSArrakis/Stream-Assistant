@@ -1,9 +1,7 @@
-import { after } from 'node:test';
 import { StreamType } from '../src/models/enum/streamTypes';
 import { ProgressionContext, WatchRecord } from '../src/models/progressionContext';
 import * as proMan from '../src/services/progressionManager';
 import { Episode, Show } from '../src/models/show';
-import { watch } from 'node:fs';
 import { ContStreamRequest } from '../src/models/streamRequest';
 
 const sailor = new Show('Sailor Moon', 'sailormoon', 'sailormoon', 'tt0103369', 1800, false, false, ['fantasy', 'action'], [], 5, [
@@ -49,7 +47,7 @@ const batman = new Show('Batman: The Animated Series', 'batmantheanimatedseries'
     new Episode(1, 5, 5, '/path/batman5.mp4', "Pretty Poison", "", 1340, 1800, [])
 ]);
 const startrek = new Show('Star Trek: The Next Generation', 'startrek', 'startrek', 'tt0092455', 3600, true, true, ['scifi', 'adventure'], [], 5, [
-    new Episode(1, 1, 1, '/path/startrek1.mp4', "Encounter at Farpoint", "", 5484, 3600, []),
+    new Episode(1, 1, 1, '/path/startrek1.mp4', "Encounter at Farpoint", "", 5484, 7200, []),
     new Episode(1, 2, 2, '/path/startrek2.mp4', "The Naked Now", "", 2763, 3600, []),
     new Episode(1, 3, 3, '/path/startrek3.mp4', "Code of Honor", "", 2763, 3600, []),
     new Episode(1, 4, 4, '/path/startrek4.mp4', "The Last Outpost", "", 2763, 3600, []),
@@ -65,12 +63,12 @@ const farscape = new Show('Farscape', 'farscape', 'farscape', 'tt0187636', 3600,
 
 ]);
 
-const sailorWatchRecord = new WatchRecord('Sailor Moon', 'sailormoon', 0, 0);
-const rebootWatchRecord = new WatchRecord('Reboot', 'reboot', 1, 0);
-const gundamWatchRecord = new WatchRecord('Gundam Wing', 'gundamwing', 3, 0);
-const tenchiWatchRecord = new WatchRecord('Tenchi Muyo', 'tenchimuyo', 4, 0);
-const batmanWatchRecord = new WatchRecord('Batman: The Animated Series', 'batmantheanimatedseries', 5, 0);
-const startrekWatchRecord = new WatchRecord('Star Trek: The Next Generation', 'startrekthenextgeneration', 0, 0);
+const sailorWatchRecord = new WatchRecord('Sailor Moon', 'sailormoon', 0, 0, 1800);
+const rebootWatchRecord = new WatchRecord('Reboot', 'reboot', 1, 0, 1800);
+const gundamWatchRecord = new WatchRecord('Gundam Wing', 'gundamwing', 3, 0, 1800);
+const tenchiWatchRecord = new WatchRecord('Tenchi Muyo', 'tenchimuyo', 4, 0, 1800);
+const batmanWatchRecord = new WatchRecord('Batman: The Animated Series', 'batmantheanimatedseries', 5, 0, 1800);
+const startrekWatchRecord = new WatchRecord('Star Trek: The Next Generation', 'startrekthenextgeneration', 0, 0, 7200);
 
 const continuousProgression = new ProgressionContext('Continuous', 'continuous', 'Test', 0, [
     sailorWatchRecord,
@@ -103,6 +101,60 @@ describe('GetProgressionContext', () => {
     });
 });
 
+describe('GetEpisodeDurLimit', () => {
+    it('should return 0 if the episode is not found', () => {
+        let durationLimit = proMan.GetEpisodeDurLimit(sailor, 6);
+
+        expect(durationLimit).toEqual(0);
+    });
+
+    it('should return the correct duration limit for the episode requested (scenario 1)', () => {
+        let durationLimit = proMan.GetEpisodeDurLimit(sailor, 1);
+
+        expect(durationLimit).toEqual(1800);
+    });
+
+    it('should return the correct duration limit for the episode requested (scenario 2)', () => {
+        let durationLimit = proMan.GetEpisodeDurLimit(sailor, 3);
+
+        expect(durationLimit).toEqual(1800);
+    });
+
+    it('should return the correct duration limit for the episode requested (scenario 2)', () => {
+        let durationLimit = proMan.GetEpisodeDurLimit(startrek, 1);
+
+        expect(durationLimit).toEqual(7200);
+    });
+});
+
+describe('GetShowListWatchRecords', () => {
+    const args = new ContStreamRequest('securePassword', continuousProgression.Title, continuousProgression.Environment);
+
+    beforeEach(() => {
+        proMan.SetLocalProgressionContextList(
+            JSON.parse(JSON.stringify([continuousProgression]))
+        );
+    });
+
+    it('should return a list of watch records for the show list (scenario 1)', () => {
+        let watchRecords = proMan.GetShowListWatchRecords(args, [sailor, reboot, gundam, tenchi, batman, startrek], StreamType.Cont);
+
+        expect(watchRecords).toEqual([sailorWatchRecord, rebootWatchRecord, gundamWatchRecord, tenchiWatchRecord, batmanWatchRecord, startrekWatchRecord]);
+    });
+
+    it('should return a list of watch records for the show list (scenario 2)', () => {
+        let watchRecords = proMan.GetShowListWatchRecords(args, [startrek, sailor], StreamType.Cont);
+
+        expect(watchRecords).toEqual([startrekWatchRecord, sailorWatchRecord]);
+    });
+
+    it('should return a list of watch records for the show list (scenario 3)', () => {
+        const dragonballzWatchRecord = new WatchRecord('Dragon Ball Z', 'dragonballz', 0, 0, 1800);
+        let watchRecords = proMan.GetShowListWatchRecords(args, [dragonballz, gundam], StreamType.Cont);
+
+        expect(watchRecords).toEqual([dragonballzWatchRecord, gundamWatchRecord]);
+    });
+});
 
 describe('GetWatchRecord', () => {
     beforeEach(() => {
@@ -112,14 +164,14 @@ describe('GetWatchRecord', () => {
     });
 
     it('should return a new watch record if one does not exist', () => {
-        let watchRecord = proMan.GetWatchRecord(continuousProgression, 'Test');
-        let expectedWatchRecord = new WatchRecord('Test', 'test', 0, 0);
+        let watchRecord = proMan.GetWatchRecord(continuousProgression, dragonballz);
+        let expectedWatchRecord = new WatchRecord(dragonballz.Title, dragonballz.LoadTitle, 0, 0, 1800);
 
         expect(watchRecord).toEqual(expectedWatchRecord);
     });
 
     it('should return an existing watch record if one exists', () => {
-        let watchRecord = proMan.GetWatchRecord(continuousProgression, sailor.Title);
+        let watchRecord = proMan.GetWatchRecord(continuousProgression, sailor);
 
         expect(watchRecord).toEqual(sailorWatchRecord);
     });
@@ -132,9 +184,9 @@ describe('IncrementWatchRecord', () => {
         );
     });
     it('should increment the watch record episode by 1', () => {
-        proMan.IncrementWatchRecord(continuousProgression.LoadTitle, sailorWatchRecord.LoadTitle, 1);
+        proMan.IncrementWatchRecord(continuousProgression.LoadTitle, sailorWatchRecord.LoadTitle, 1, sailor);
         let contProg = proMan.GetProgressionContext(continuousProgression.Title, continuousProgression.LoadTitle, continuousProgression.Environment, StreamType.Cont);
-        let watchRecord = proMan.GetWatchRecord(contProg, sailor.Title);
+        let watchRecord = proMan.GetWatchRecord(contProg, sailor);
 
         expect(watchRecord.Episode).toEqual(1);
     });
@@ -149,14 +201,14 @@ describe('GetEpisodeNumbers', () => {
 
     it('should return the first episode for a show that has not been watched before with one episode requested', () => {
         let contProg = proMan.GetProgressionContext(continuousProgression.Title, continuousProgression.LoadTitle, continuousProgression.Environment, StreamType.Cont);
-        let watchRecord = proMan.GetWatchRecord(contProg, sailor.Title);
+        let watchRecord = proMan.GetWatchRecord(contProg, sailor);
         let episodes = proMan.GetEpisodeNumbers(contProg.LoadTitle, sailor, watchRecord, 1);
         expect(episodes).toEqual([1]);
     });
 
     it('should return the correct number of episodes for a show that has not been watched (scenario 1)', () => {
         let contProg = proMan.GetProgressionContext(continuousProgression.Title, continuousProgression.LoadTitle, continuousProgression.Environment, StreamType.Cont);
-        let watchRecord = proMan.GetWatchRecord(contProg, sailor.Title);
+        let watchRecord = proMan.GetWatchRecord(contProg, sailor);
         let episodes = proMan.GetEpisodeNumbers(contProg.LoadTitle, sailor, watchRecord, 3);
 
         expect(episodes).toEqual([1, 2, 3]);
@@ -164,7 +216,7 @@ describe('GetEpisodeNumbers', () => {
 
     it('should return the correct number of episodes for a show that has not been watched (scenario 2)', () => {
         let contProg = proMan.GetProgressionContext(continuousProgression.Title, continuousProgression.LoadTitle, continuousProgression.Environment, StreamType.Cont);
-        let watchRecord = proMan.GetWatchRecord(contProg, sailor.Title);
+        let watchRecord = proMan.GetWatchRecord(contProg, sailor);
         let episodes = proMan.GetEpisodeNumbers(contProg.LoadTitle, sailor, watchRecord, 6);
 
         expect(episodes).toEqual([1, 2, 3, 4, 5, 1]);
@@ -172,7 +224,7 @@ describe('GetEpisodeNumbers', () => {
 
     it('should return the correct number of episodes for a show that has not been watched (scenario 3)', () => {
         let contProg = proMan.GetProgressionContext(continuousProgression.Title, continuousProgression.LoadTitle, continuousProgression.Environment, StreamType.Cont);
-        let watchRecord = proMan.GetWatchRecord(contProg, sailor.Title);
+        let watchRecord = proMan.GetWatchRecord(contProg, sailor);
         let episodes = proMan.GetEpisodeNumbers(contProg.LoadTitle, sailor, watchRecord, 12);
 
         expect(episodes).toEqual([1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2]);
@@ -180,7 +232,7 @@ describe('GetEpisodeNumbers', () => {
 
     it('should return one episode for a show that has been watched before with one episode requested', () => {
         let contProg = proMan.GetProgressionContext(continuousProgression.Title, continuousProgression.LoadTitle, continuousProgression.Environment, StreamType.Cont);
-        let watchRecord = proMan.GetWatchRecord(contProg, reboot.Title);
+        let watchRecord = proMan.GetWatchRecord(contProg, reboot);
         let episodes = proMan.GetEpisodeNumbers(contProg.LoadTitle, reboot, watchRecord, 1);
 
         expect(episodes).toEqual([2]);
@@ -188,7 +240,7 @@ describe('GetEpisodeNumbers', () => {
 
     it('should return the correct number of episodes for a show that has been watched (scenario 1)', () => {
         let contProg = proMan.GetProgressionContext(continuousProgression.Title, continuousProgression.LoadTitle, continuousProgression.Environment, StreamType.Cont);
-        let watchRecord = proMan.GetWatchRecord(contProg, reboot.Title);
+        let watchRecord = proMan.GetWatchRecord(contProg, reboot);
         let episodes = proMan.GetEpisodeNumbers(contProg.LoadTitle, reboot, watchRecord, 2);
 
         expect(episodes).toEqual([2, 3]);
@@ -196,7 +248,7 @@ describe('GetEpisodeNumbers', () => {
 
     it('should return the correct number of episodes for a show that has been watched (scenario 2)', () => {
         let contProg = proMan.GetProgressionContext(continuousProgression.Title, continuousProgression.LoadTitle, continuousProgression.Environment, StreamType.Cont);
-        let watchRecord = proMan.GetWatchRecord(contProg, reboot.Title);
+        let watchRecord = proMan.GetWatchRecord(contProg, reboot);
         let episodes = proMan.GetEpisodeNumbers(contProg.LoadTitle, reboot, watchRecord, 12);
 
         expect(episodes).toEqual([2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3]);
@@ -204,7 +256,7 @@ describe('GetEpisodeNumbers', () => {
 
     it('should return the correct number of episodes for a show that has been watched completely (scenario 1)', () => {
         let contProg = proMan.GetProgressionContext(continuousProgression.Title, continuousProgression.LoadTitle, continuousProgression.Environment, StreamType.Cont);
-        let watchRecord = proMan.GetWatchRecord(contProg, batman.Title);
+        let watchRecord = proMan.GetWatchRecord(contProg, batman);
         let episodes = proMan.GetEpisodeNumbers(contProg.LoadTitle, batman, watchRecord, 1);
 
         expect(episodes).toEqual([1]);
@@ -212,7 +264,7 @@ describe('GetEpisodeNumbers', () => {
 
     it('should return the correct number of episodes for a show that has been watched completely (scenario 2)', () => {
         let contProg = proMan.GetProgressionContext(continuousProgression.Title, continuousProgression.LoadTitle, continuousProgression.Environment, StreamType.Cont);
-        let watchRecord = proMan.GetWatchRecord(contProg, batman.Title);
+        let watchRecord = proMan.GetWatchRecord(contProg, batman);
         let episodes = proMan.GetEpisodeNumbers(contProg.LoadTitle, batman, watchRecord, 3);
 
         expect(episodes).toEqual([1, 2, 3]);
@@ -220,7 +272,7 @@ describe('GetEpisodeNumbers', () => {
 
     it('should return the correct number of episodes for a show that has been watched completely (scenario 3)', () => {
         let contProg = proMan.GetProgressionContext(continuousProgression.Title, continuousProgression.LoadTitle, continuousProgression.Environment, StreamType.Cont);
-        let watchRecord = proMan.GetWatchRecord(contProg, batman.Title);
+        let watchRecord = proMan.GetWatchRecord(contProg, batman);
         let episodes = proMan.GetEpisodeNumbers(contProg.LoadTitle, batman, watchRecord, 12);
 
         expect(episodes).toEqual([1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2]);
@@ -244,8 +296,8 @@ describe('ManageShowProgression', () => {
             continuousProgression.Environment,
             continuousProgression.Type
         );
-        let watchRecord = proMan.GetWatchRecord(contProg, sailor.Title);
-        let expectedWatchRecord = new WatchRecord(sailor.Title, sailor.LoadTitle, 1, 0);
+        let watchRecord = proMan.GetWatchRecord(contProg, sailor);
+        let expectedWatchRecord = new WatchRecord(sailor.Title, sailor.LoadTitle, 1, 0, 1800);
 
         expect(watchRecord).toEqual(expectedWatchRecord);
         expect(episodeNumbers).toEqual([1]);
@@ -259,8 +311,8 @@ describe('ManageShowProgression', () => {
             continuousProgression.Environment,
             continuousProgression.Type
         );
-        let watchRecord = proMan.GetWatchRecord(contProg, sailor.Title);
-        let expectedWatchRecord = new WatchRecord(sailor.Title, sailor.LoadTitle, 2, 0);
+        let watchRecord = proMan.GetWatchRecord(contProg, sailor);
+        let expectedWatchRecord = new WatchRecord(sailor.Title, sailor.LoadTitle, 2, 0, 1800);
 
         expect(watchRecord).toEqual(expectedWatchRecord);
         expect(episodeNumbers).toEqual([1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2]);
@@ -274,8 +326,8 @@ describe('ManageShowProgression', () => {
             continuousProgression.Environment,
             continuousProgression.Type
         );
-        let watchRecord = proMan.GetWatchRecord(contProg, reboot.Title);
-        let expectedWatchRecord = new WatchRecord(reboot.Title, reboot.LoadTitle, 2, 0);
+        let watchRecord = proMan.GetWatchRecord(contProg, reboot);
+        let expectedWatchRecord = new WatchRecord(reboot.Title, reboot.LoadTitle, 2, 0, 1800);
 
         expect(watchRecord).toEqual(expectedWatchRecord);
         expect(episodeNumbers).toEqual([2]);
@@ -289,8 +341,8 @@ describe('ManageShowProgression', () => {
             continuousProgression.Environment,
             continuousProgression.Type
         );
-        let watchRecord = proMan.GetWatchRecord(contProg, reboot.Title);
-        let expectedWatchRecord = new WatchRecord(reboot.Title, reboot.LoadTitle, 3, 0);
+        let watchRecord = proMan.GetWatchRecord(contProg, reboot);
+        let expectedWatchRecord = new WatchRecord(reboot.Title, reboot.LoadTitle, 3, 0, 1800);
 
         expect(watchRecord).toEqual(expectedWatchRecord);
         expect(episodeNumbers).toEqual([2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3]);
@@ -304,8 +356,8 @@ describe('ManageShowProgression', () => {
             continuousProgression.Environment,
             continuousProgression.Type
         );
-        let watchRecord = proMan.GetWatchRecord(contProg, batman.Title);
-        let expectedWatchRecord = new WatchRecord(batman.Title, batman.LoadTitle, 1, 0);
+        let watchRecord = proMan.GetWatchRecord(contProg, batman);
+        let expectedWatchRecord = new WatchRecord(batman.Title, batman.LoadTitle, 1, 0, 1800);
 
         expect(watchRecord).toEqual(expectedWatchRecord);
         expect(episodeNumbers).toEqual([1]);
@@ -319,8 +371,8 @@ describe('ManageShowProgression', () => {
             continuousProgression.Environment,
             continuousProgression.Type
         );
-        let watchRecord = proMan.GetWatchRecord(contProg, batman.Title);
-        let expectedWatchRecord = new WatchRecord(batman.Title, batman.LoadTitle, 2, 0);
+        let watchRecord = proMan.GetWatchRecord(contProg, batman);
+        let expectedWatchRecord = new WatchRecord(batman.Title, batman.LoadTitle, 2, 0, 1800);
 
         expect(watchRecord).toEqual(expectedWatchRecord);
         expect(episodeNumbers).toEqual([1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2]);
