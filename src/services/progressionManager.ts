@@ -11,10 +11,10 @@ import { StreamType } from "../models/enum/streamTypes";
 // While this module is a singleton, it is meant to not save state bewtween executions of the service. The progression is loaded from the database on startup and should consider shows and movies played after then have been played by the background service.
 // The progression is used mainly to prepopulate the on deck stream with movies and show episodes in order. As long as the stream is running, the progression will be maintained.
 
-let mediaProgressionList: ProgressionContext[] = [];
+let progressionContextList: ProgressionContext[] = [];
 
-export function SetProgression(prog: ProgressionContext[]) {
-    mediaProgressionList = prog;
+export function SetLocalProgressionContextList(prog: ProgressionContext[]) {
+    progressionContextList = prog;
 }
 
 export function ManageShowProgression(
@@ -31,72 +31,84 @@ export function ManageShowProgression(
     // Find the media progression in the media progression list
     let mediaProgression: ProgressionContext;
     if (collection !== "") {
-        mediaProgression = GetMediaProgression(collection, keyNormalizer(collection), args.Env, StreamType.Collection);
+        mediaProgression = GetProgressionContext(collection, keyNormalizer(collection), args.Env, StreamType.Collection);
     } else {
-        mediaProgression = GetMediaProgression(args.Title, mediaLoadTitle, args.Env, streamType);
+        mediaProgression = GetProgressionContext(args.Title, mediaLoadTitle, args.Env, streamType);
     }
 
     // Find the show progression in the media progression
-    let showProgression = GetProgression(mediaProgression, show.Title);
+    let showProgression = GetWatchRecord(mediaProgression, show.Title);
 
-    // Get the episodes to play
-    episodeNumbers = GetEpisodesToPlay(mediaLoadTitle, show, showProgression, numberOfEpisodes);
+    // Get the episodes to add to the stream queue
+    episodeNumbers = GetEpisodeNumbers(mediaLoadTitle, show, showProgression, numberOfEpisodes);
     return episodeNumbers;
 
 }
 
-export function GetMediaProgression(mediaTitle: string, mediaLoadTitle: string, environment: string, type: StreamType): ProgressionContext {
+export function GetProgressionContext(mediaTitle: string, mediaLoadTitle: string, environment: string, type: StreamType): ProgressionContext {
     // Find the media progression in the list
-    let mediaProgression = mediaProgressionList.find((prog) => prog.LoadTitle === mediaLoadTitle);
+    let progressionContext = progressionContextList.find((prog) => prog.LoadTitle === mediaLoadTitle);
     // If the media progression is not found, create a new one
-    if (!mediaProgression) {
-        mediaProgression = new ProgressionContext(mediaTitle, mediaLoadTitle, environment, type, []);
-        mediaProgressionList.push(mediaProgression);
+    if (!progressionContext) {
+        progressionContext = new ProgressionContext(mediaTitle, mediaLoadTitle, environment, type, []);
+        progressionContextList.push(progressionContext);
     }
 
-    return mediaProgression;
+    return progressionContext;
 }
 
-export function GetProgression(mediaProgression: ProgressionContext, title: string): WatchRecord {
+export function GetWatchRecord(mediaProgression: ProgressionContext, title: string): WatchRecord {
     // Find the progression in the media progression
-    let progression = mediaProgression.Progressions.find((prog) => prog.LoadTitle === title);
+    let progression = mediaProgression.WatchRecords.find((prog) => prog.LoadTitle === keyNormalizer(title));
     // If the progression is not found, create a new one in the media progression list
     if (!progression) {
-        progression = new WatchRecord(title, keyNormalizer(title), 1, 0);
+        progression = new WatchRecord(title, keyNormalizer(title), 0, 0);
         // Find the media progression index
-        let mediaProgressionIndex = mediaProgressionList.findIndex((prog) => prog.LoadTitle === mediaProgression.LoadTitle);
+        let mediaProgressionIndex = progressionContextList.findIndex((prog) => prog.LoadTitle === mediaProgression.LoadTitle);
         // Add the progression to the media progression list
-        mediaProgressionList[mediaProgressionIndex].Progressions.push(progression);
+        progressionContextList[mediaProgressionIndex].WatchRecords.push(progression);
     }
 
     return progression;
 }
 
-export function GetEpisodesToPlay(mediaLoadTitle: string, show: Show, progression: WatchRecord, numberOfEpisodes: number): number[] {
+export function GetEpisodeNumbers(progressionContextLoadTitle: string, show: Show, watchRecord: WatchRecord, numberOfEpisodes: number): number[] {
     // Array to hold the episode numbers
     let episodeNumbers: number[] = [];
     // If the show has not been played, start from the first episode
-    if (progression.Episode === 0) {
+    let episodeNumber = 0;
+    if (watchRecord.Episode === 0) {
+        //Loop for number of episodes requested
         for (let i = 1; i <= numberOfEpisodes; i++) {
-            // If the episode number selected exceeds the number of episodes, set the episode number to the first episode
+            // If the episode number selected exceeds the number of episodes, iterate through the episodes from the beginning again
             if (i > show.EpisodeCount) {
-                episodeNumbers.push(1);
-                IncrementProgression(mediaLoadTitle, progression.LoadTitle, 1)
+                episodeNumber++;
+                if (episodeNumber > show.EpisodeCount) {
+                    episodeNumber = 1;
+                }
+                episodeNumbers.push(episodeNumber);
+                IncrementWatchRecord(progressionContextLoadTitle, watchRecord.LoadTitle, episodeNumber)
             } else {
                 episodeNumbers.push(i);
-                IncrementProgression(mediaLoadTitle, progression.LoadTitle, i)
+                IncrementWatchRecord(progressionContextLoadTitle, watchRecord.LoadTitle, i)
             }
         }
     } else {
         // If the show has been played, start from the next episode
-        for (let i = progression.Episode + 1; i <= numberOfEpisodes; i++) {
-            // If the episode number selected exceeds the number of episodes, set the episode number to the first episode
-            if (i > show.EpisodeCount) {
-                episodeNumbers.push(1);
-                IncrementProgression(mediaLoadTitle, progression.LoadTitle, 1)
+        //Loop for number of episodes requested
+        episodeNumber = watchRecord.Episode;
+        for (let i = 1; i <= numberOfEpisodes; i++) {
+            episodeNumber++;
+            // If the episode number selected exceeds the number of episodes, iterate through the episodes from the beginning again
+            if (episodeNumber > show.EpisodeCount) {
+                if (episodeNumber > show.EpisodeCount) {
+                    episodeNumber = 1;
+                }
+                episodeNumbers.push(episodeNumber);
+                IncrementWatchRecord(progressionContextLoadTitle, watchRecord.LoadTitle, episodeNumber)
             } else {
-                episodeNumbers.push(i);
-                IncrementProgression(mediaLoadTitle, progression.LoadTitle, i)
+                episodeNumbers.push(episodeNumber);
+                IncrementWatchRecord(progressionContextLoadTitle, watchRecord.LoadTitle, episodeNumber)
             }
         }
     }
@@ -104,17 +116,25 @@ export function GetEpisodesToPlay(mediaLoadTitle: string, show: Show, progressio
     return episodeNumbers;
 }
 
-export function IncrementProgression(mediaLoadTitle: string, loadTitle: string, episode: number): void {
+export function IncrementWatchRecord(progressionContext: string, loadTitle: string, episode: number): void {
     //Sets local progression to the next episode
     // Find the media progression index
-    let mediaProgressionIndex = mediaProgressionList.findIndex((prog) => prog.LoadTitle === mediaLoadTitle);
+    let progressionContextIdx = progressionContextList.findIndex((prog) => prog.LoadTitle === progressionContext);
     // Find the progression index
-    let progressionIndex = mediaProgressionList[mediaProgressionIndex].Progressions.findIndex((prog) => prog.LoadTitle === loadTitle);
+    let watchRecordIdx = progressionContextList[progressionContextIdx].WatchRecords.findIndex((prog) => prog.LoadTitle === loadTitle);
     // Increment the episode number
-    mediaProgressionList[mediaProgressionIndex].Progressions[progressionIndex].Episode = episode;
-
+    progressionContextList[progressionContextIdx].WatchRecords[watchRecordIdx].Episode = episode;
 }
 
-export function AddAnthologyProgression(title: string, type: string, progression: ProgressionContext[], anthology: string) {
-
+export function AddAnthologyProgression(title: string, type: string, progressions: ProgressionContext[], anthology: string) {
+    // TODO
 }
+
+// export function GetFilteredShowProgressions(shows: Show[]): WatchRecord[] {
+//     // Get all WatchRecords that have a load title that matches the show load title
+//     // If a show is not found in the progression list, it is assumed that the show has not been played
+//     // and a watch record is not added to the returned list
+//     let watchRecords: WatchRecord[] = [];
+
+
+// }

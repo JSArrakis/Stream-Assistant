@@ -1,4 +1,3 @@
-import { expect } from 'chai';
 import { MediaType } from "../src/models/enum/mediaTypes";
 import { Movie } from "../src/models/movie";
 import { SelectedMedia } from "../src/models/selectedMedia";
@@ -6,13 +5,12 @@ import * as streamCon from "../src/services/streamConstructor";
 import { MovieBuilder } from "./resources/movieBuilder";
 import { Media } from '../src/models/media';
 import { AdhocStreamRequest, ContStreamRequest, IStreamRequest } from '../src/models/streamRequest';
-import exp from 'constants';
 import moment from 'moment';
 import { StagedMedia } from '../src/models/stagedMedia';
 
-const inception = new Movie('Inception', 'inception', 'inception', 'tt1375666', ['Sci-Fi'], '/path/inception.mp4', 8880, 9000, '', 0);
-const matrix = new Movie('The Matrix', 'thematrix', 'matrix', 'tt0133093', ['Action'], '/path/matrix.mp4', 8160, 9000, '', 0);
-const interstellar = new Movie('Interstellar', 'interstellar', 'interstellar', 'tt0816692', ['Sci-Fi'], '/path/interstellar.mp4', 10140, 10800, '', 0);
+const inception = new Movie('Inception', 'inception', 'inception', 'tt1375666', ['scifi'], '/path/inception.mp4', 8880, 9000, '', 0);
+const matrix = new Movie('The Matrix', 'thematrix', 'matrix', 'tt0133093', ['action'], '/path/matrix.mp4', 8160, 9000, '', 0);
+const interstellar = new Movie('Interstellar', 'interstellar', 'interstellar', 'tt0816692', ['scifi'], '/path/interstellar.mp4', 10140, 10800, '', 0);
 
 const media = new Media(
     [], // Shows
@@ -52,36 +50,36 @@ describe('getMovie', () => {
 
     it('should return an error if the loadTitle is empty', () => {
         let movie = streamCon.getMovie('', movieList, 1609459200)
-        expect(movie[0]).to.be.instanceOf(SelectedMedia);
-        expect(movie[0].Media.LoadTitle).to.equal('');
-        expect(movie[1]).to.equal('Empty movie titles are not a valid input');
+        expect(movie[0]).toBeInstanceOf(SelectedMedia);
+        expect(movie[0].Media.LoadTitle).toBe('');
+        expect(movie[1]).toBe('Empty movie titles are not a valid input');
 
     });
 
     it('should return an error if the loadTitle is undefined', () => {
         let movie = streamCon.getMovie(undefined as unknown as string, movieList, 1609459200)
-        expect(movie[0]).to.be.instanceOf(SelectedMedia);
-        expect(movie[0].Media.LoadTitle).to.equal('');
-        expect(movie[1]).to.equal('Empty movie titles are not a valid input');
+        expect(movie[0]).toBeInstanceOf(SelectedMedia);
+        expect(movie[0].Media.LoadTitle).toBe('');
+        expect(movie[1]).toBe('Empty movie titles are not a valid input');
     });
 
     it('should return an error if the loadTitle is not found in the movie list', () => {
         let movie = streamCon.getMovie('unknownmovie', movieList, 1609459200)
-        expect(movie[0]).to.be.instanceOf(SelectedMedia);
-        expect(movie[0].Media.LoadTitle).to.equal('');
-        expect(movie[1]).to.equal('unknownmovie load title, not found.');
+        expect(movie[0]).toBeInstanceOf(SelectedMedia);
+        expect(movie[0].Media.LoadTitle).toBe('');
+        expect(movie[1]).toBe('unknownmovie load title, not found.');
     });
 
     it('should return a SelectedMedia object for a valid loadTitle', () => {
         const time = 1609459200;
         const selectedMedia = streamCon.getMovie('movieone', movieList, time);
-        expect(selectedMedia[1]).to.equal('');
-        expect(selectedMedia[0]).to.be.instanceOf(SelectedMedia);
-        expect(selectedMedia[0].Media.LoadTitle).to.equal('movieone');
-        expect(selectedMedia[0].Type).to.equal(MediaType.Movie);
-        expect(selectedMedia[0].Time).to.equal(time);
-        expect(selectedMedia[0].Duration).to.equal(120);
-        expect(selectedMedia[0].Tags).to.deep.equal(['action', 'thriller']);
+        expect(selectedMedia[1]).toBe('');
+        expect(selectedMedia[0]).toBeInstanceOf(SelectedMedia);
+        expect(selectedMedia[0].Media.LoadTitle).toBe('movieone');
+        expect(selectedMedia[0].Type).toBe(MediaType.Movie);
+        expect(selectedMedia[0].Time).toBe(time);
+        expect(selectedMedia[0].Duration).toBe(120);
+        expect(selectedMedia[0].Tags).toEqual(['action', 'thriller']);
     });
 });
 
@@ -99,14 +97,14 @@ describe('getScheduledMedia', () => {
         };
 
         const expected = [
-            new SelectedMedia(inception, '', MediaType.Movie, 1656547200, 9000, ["Sci-Fi"]),
-            new SelectedMedia(interstellar, '', MediaType.Movie, 1656633600, 10800, ["Sci-Fi"])
+            new SelectedMedia(inception, '', MediaType.Movie, 1656547200, 9000, ["scifi"]),
+            new SelectedMedia(interstellar, '', MediaType.Movie, 1656633600, 10800, ["scifi"])
         ];
 
         const result = streamCon.getScheduledMedia(media, args);
 
-        expect(result[0]).to.deep.equal(expected);
-        expect(result[1]).to.equal('');
+        expect(result[0]).toEqual(expected);
+        expect(result[1]).toBe('');
     });
 
     it('should ignore movies without the "::" delimiter', () => {
@@ -122,13 +120,13 @@ describe('getScheduledMedia', () => {
         };
 
         const expected = [
-            new SelectedMedia(inception, '', MediaType.Movie, 1656547200, 9000, ["Sci-Fi"])
+            new SelectedMedia(inception, '', MediaType.Movie, 1656547200, 9000, ["scifi"])
         ];
 
         const result = streamCon.getScheduledMedia(media, args);
 
-        expect(result[0]).to.deep.equal(expected);
-        expect(result[1]).to.equal('');
+        expect(result[0]).toEqual(expected);
+        expect(result[1]).toBe('');
     });
 
     it('should return an error when a movie is not found', () => {
@@ -145,8 +143,8 @@ describe('getScheduledMedia', () => {
 
         const result = streamCon.getScheduledMedia(media, args);
 
-        expect(result[0]).to.deep.equal([]);
-        expect(result[1]).to.equal('unknownmovie load title, not found.');
+        expect(result[0]).toEqual([]);
+        expect(result[1]).toBe('unknownmovie load title, not found.');
     });
 
     it('should return an empty array when no movies are provided', () => {
@@ -163,7 +161,7 @@ describe('getScheduledMedia', () => {
 
         const result = streamCon.getScheduledMedia(media, args);
 
-        expect(result[0]).to.deep.equal([]);
+        expect(result[0]).toEqual([]);
     });
 
     it('should sort the selected media based on time', () => {
@@ -179,14 +177,14 @@ describe('getScheduledMedia', () => {
         };
 
         const expected = [
-            new SelectedMedia(inception, '', MediaType.Movie, 1656547200, 9000, ["Sci-Fi"]),
-            new SelectedMedia(interstellar, '', MediaType.Movie, 1656633600, 10800, ["Sci-Fi"])
+            new SelectedMedia(inception, '', MediaType.Movie, 1656547200, 9000, ["scifi"]),
+            new SelectedMedia(interstellar, '', MediaType.Movie, 1656633600, 10800, ["scifi"])
         ];
 
         const result = streamCon.getScheduledMedia(media, args);
 
-        expect(result[0]).to.deep.equal(expected);
-        expect(result[1]).to.equal('');
+        expect(result[0]).toEqual(expected);
+        expect(result[1]).toBe('');
     });
 
     it('should handle multiple types of stream requests', () => {
@@ -214,22 +212,22 @@ describe('getScheduledMedia', () => {
         );
 
         const contExpected = [
-            new SelectedMedia(inception, '', MediaType.Movie, 1656547200, 9000, ["Sci-Fi"]),
-            new SelectedMedia(matrix, '', MediaType.Movie, 1656633600, 9000, ["Action"]),
+            new SelectedMedia(inception, '', MediaType.Movie, 1656547200, 9000, ["scifi"]),
+            new SelectedMedia(matrix, '', MediaType.Movie, 1656633600, 9000, ["action"]),
         ];
 
         const adhocExpected = [
-            new SelectedMedia(inception, '', MediaType.Movie, 1656547200, 9000, ["Sci-Fi"]),
-            new SelectedMedia(interstellar, '', MediaType.Movie, 1656633600, 10800, ["Sci-Fi"]),
+            new SelectedMedia(inception, '', MediaType.Movie, 1656547200, 9000, ["scifi"]),
+            new SelectedMedia(interstellar, '', MediaType.Movie, 1656633600, 10800, ["scifi"]),
         ];
 
         const contResult = streamCon.getScheduledMedia(media, contArgs);
         const adhocResult = streamCon.getScheduledMedia(media, adhocArgs);
 
-        expect(contResult[0]).to.deep.equal(contExpected);
-        expect(contResult[1]).to.equal('');
-        expect(adhocResult[0]).to.deep.equal(adhocExpected);
-        expect(adhocResult[1]).to.equal('');
+        expect(contResult[0]).toEqual(contExpected);
+        expect(contResult[1]).toBe('');
+        expect(adhocResult[0]).toEqual(adhocExpected);
+        expect(adhocResult[1]).toBe('');
     });
 });
 
@@ -248,7 +246,7 @@ describe('getInjectedMovies', () => {
 
         const result = streamCon.getInjectedMovies(args, media.Movies);
 
-        expect(result[0]).to.deep.equal([]);
+        expect(result[0]).toEqual([]);
     });
 
     it('should return an error when any loadtitle provided does is not found', () => {
@@ -265,8 +263,8 @@ describe('getInjectedMovies', () => {
 
         const result = streamCon.getInjectedMovies(args, media.Movies);
 
-        expect(result[0]).to.deep.equal([]);
-        expect(result[1]).to.equal('unknownmovie load title, not found.');
+        expect(result[0]).toEqual([]);
+        expect(result[1]).toBe('unknownmovie load title, not found.');
     });
 
     it('should return an empty array when no movies are provided without the "::" delimiter', () => {
@@ -283,8 +281,8 @@ describe('getInjectedMovies', () => {
 
         const result = streamCon.getInjectedMovies(args, media.Movies);
 
-        expect(result[0]).to.deep.equal([]);
-        expect(result[1]).to.equal('');
+        expect(result[0]).toEqual([]);
+        expect(result[1]).toBe('');
     });
 
     it('should return the movies that match the provided load titles', () => {
@@ -300,38 +298,38 @@ describe('getInjectedMovies', () => {
         };
 
         const expected = [
-            new SelectedMedia(inception, '', MediaType.Movie, 0, 9000, ["Sci-Fi"]),
-            new SelectedMedia(interstellar, '', MediaType.Movie, 0, 10800, ["Sci-Fi"])
+            new SelectedMedia(inception, '', MediaType.Movie, 0, 9000, ["scifi"]),
+            new SelectedMedia(interstellar, '', MediaType.Movie, 0, 10800, ["scifi"])
         ];
 
         const result = streamCon.getInjectedMovies(args, media.Movies);
 
-        expect(result[0]).to.deep.equal(expected);
-        expect(result[1]).to.equal('');
+        expect(result[0]).toEqual(expected);
+        expect(result[1]).toBe('');
     });
 });
 
 describe('compareSelectedEndTime', () => {
     it('should not return an error if the end time is greater than the last scheduled media plus its duration', () => {
         const selected = [
-            new SelectedMedia(inception, '', MediaType.Movie, 1656547200, 9000, ["Sci-Fi"]),
-            new SelectedMedia(interstellar, '', MediaType.Movie, 1656633600, 10800, ["Sci-Fi"])
+            new SelectedMedia(inception, '', MediaType.Movie, 1656547200, 9000, ["scifi"]),
+            new SelectedMedia(interstellar, '', MediaType.Movie, 1656633600, 10800, ["scifi"])
         ];
 
         const error = streamCon.compareSelectedEndTime(1656644400, selected);
 
-        expect(error).to.equal('');
+        expect(error).toBe('');
     });
 
     it('should return an error if the end time is less than the last scheduled media plus its duration', () => {
         const selected = [
-            new SelectedMedia(inception, '', MediaType.Movie, 1656547200, 9000, ["Sci-Fi"]),
-            new SelectedMedia(interstellar, '', MediaType.Movie, 1656633600, 10800, ["Sci-Fi"])
+            new SelectedMedia(inception, '', MediaType.Movie, 1656547200, 9000, ["scifi"]),
+            new SelectedMedia(interstellar, '', MediaType.Movie, 1656633600, 10800, ["scifi"])
         ];
 
         const error = streamCon.compareSelectedEndTime(1656633600, selected);
 
-        expect(error).to.equal('Scheduled time for interstellar exceeds selected endTime');
+        expect(error).toBe('Scheduled time for interstellar exceeds selected endTime');
     });
 });
 
@@ -349,14 +347,14 @@ describe('evaluateStreamEndTime', () => {
             1656647200
         );
         const selected = [
-            new SelectedMedia(inception, '', MediaType.Movie, 1656547200, 9000, ["Sci-Fi"]),
-            new SelectedMedia(interstellar, '', MediaType.Movie, 1656633600, 10800, ["Sci-Fi"])
+            new SelectedMedia(inception, '', MediaType.Movie, 1656547200, 9000, ["scifi"]),
+            new SelectedMedia(interstellar, '', MediaType.Movie, 1656633600, 10800, ["scifi"])
         ];
 
         const result = streamCon.evaluateStreamEndTime(adhocArgs, selected);
 
-        expect(result[0]).to.equal(1656647200);
-        expect(result[1]).to.equal('');
+        expect(result[0]).toBe(1656647200);
+        expect(result[1]).toBe('');
     });
 
     it('should return the scheduled time plus the duration of the last scheduled media if no endTime was submitted', () => {
@@ -371,14 +369,14 @@ describe('evaluateStreamEndTime', () => {
             0
         );
         const selected = [
-            new SelectedMedia(inception, '', MediaType.Movie, 1656547200, 9000, ["Sci-Fi"]),
-            new SelectedMedia(matrix, '', MediaType.Movie, 1656633600, 9000, ["Action"]),
+            new SelectedMedia(inception, '', MediaType.Movie, 1656547200, 9000, ["scifi"]),
+            new SelectedMedia(matrix, '', MediaType.Movie, 1656633600, 9000, ["action"]),
         ];
 
         const result = streamCon.evaluateStreamEndTime(adhocArgs, selected);
 
-        expect(result[0]).to.equal(1656633600 + 9000);
-        expect(result[1]).to.equal('');
+        expect(result[0]).toBe(1656633600 + 9000);
+        expect(result[1]).toBe('');
     });
 
     it('should return the end of the day today if no endTime was submitted and no media was scheduled', () => {
@@ -396,8 +394,8 @@ describe('evaluateStreamEndTime', () => {
 
         const result = streamCon.evaluateStreamEndTime(adhocArgs, selected);
 
-        expect(result[0]).to.equal(moment().startOf('day').add(1, "days").unix());
-        expect(result[1]).to.equal('');
+        expect(result[0]).toBe(moment().startOf('day').add(1, "days").unix());
+        expect(result[1]).toBe('');
     });
 
     it('should return the end of the day today if it is a continuous stream', () => {
@@ -414,8 +412,8 @@ describe('evaluateStreamEndTime', () => {
 
         const result = streamCon.evaluateStreamEndTime(contArgs, []);
 
-        expect(result[0]).to.equal(moment().startOf('day').add(1, "days").unix());
-        expect(result[1]).to.equal('');
+        expect(result[0]).toBe(moment().startOf('day').add(1, "days").unix());
+        expect(result[1]).toBe('');
     });
 });
 
@@ -433,14 +431,14 @@ describe('setProceduralTags', () => {
         };
 
         const selected = [
-            new SelectedMedia(inception, '', MediaType.Movie, 1656547200, 9000, ["Sci-Fi"]),
-            new SelectedMedia(matrix, '', MediaType.Movie, 1656633600, 10800, ["Action"])
+            new SelectedMedia(inception, '', MediaType.Movie, 1656547200, 9000, ["scifi"]),
+            new SelectedMedia(matrix, '', MediaType.Movie, 1656633600, 10800, ["action"])
         ];
 
         const stagedMedia = new StagedMedia(selected, [], 1656633600 + 10800);
         streamCon.setProceduralTags(args, stagedMedia);
 
-        expect(args.Tags).to.deep.equal(["Sci-Fi", "Action"]);
+        expect(args.Tags).toEqual(["scifi", "action"]);
     });
 });
 
@@ -449,16 +447,16 @@ describe('getInitialProceduralTimepoint', () => {
         const rightNow = 1656546397
 
         const selected = [
-            new SelectedMedia(inception, '', MediaType.Movie, 1656547200, 9000, ["Sci-Fi"]),
-            new SelectedMedia(matrix, '', MediaType.Movie, 1656633600, 10800, ["Action"])
+            new SelectedMedia(inception, '', MediaType.Movie, 1656547200, 9000, ["scifi"]),
+            new SelectedMedia(matrix, '', MediaType.Movie, 1656633600, 10800, ["action"])
         ];
 
         const stagedMedia = new StagedMedia(selected, [], 1656633600 + 10800);
 
         const [result, error] = streamCon.getInitialProceduralTimepoint(rightNow, stagedMedia);
 
-        expect(result).to.equal(1656547200);
-        expect(error).to.equal('');
+        expect(result).toBe(1656547200);
+        expect(error).toBe('');
     });
 
     it('should return the staged media end time if no media is scheduled', () => {
@@ -470,23 +468,23 @@ describe('getInitialProceduralTimepoint', () => {
 
         const [result, error] = streamCon.getInitialProceduralTimepoint(rightNow, stagedMedia);
 
-        expect(result).to.equal(1656633600);
-        expect(error).to.equal('');
+        expect(result).toBe(1656633600);
+        expect(error).toBe('');
     });
 
     it('should return an error if the first scheduled media is in the past', () => {
         const rightNow = 1656547201
 
         const selected = [
-            new SelectedMedia(inception, '', MediaType.Movie, 1656547200, 9000, ["Sci-Fi"]),
-            new SelectedMedia(matrix, '', MediaType.Movie, 1656633600, 10800, ["Action"])
+            new SelectedMedia(inception, '', MediaType.Movie, 1656547200, 9000, ["scifi"]),
+            new SelectedMedia(matrix, '', MediaType.Movie, 1656633600, 10800, ["action"])
         ];
 
         const stagedMedia = new StagedMedia(selected, [], 1656633600 + 10800);
 
         const [result, error] = streamCon.getInitialProceduralTimepoint(rightNow, stagedMedia);
 
-        expect(result).to.equal(0);
-        expect(error).to.equal('Time of first movie, collection, or selected end time needs to be in the future.');
+        expect(result).toBe(0);
+        expect(error).toBe('Time of first movie, collection, or selected end time needs to be in the future.');
     });
 });

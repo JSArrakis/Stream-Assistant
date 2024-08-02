@@ -4,8 +4,7 @@
   "description": "Stream creation and shuffler assistant",
   "main": "index.js",
   "scripts": {
-    "test": "ts-mocha test/**/*.test.ts",
-    "targetTest": "mocha --require ts-node/register test/**/*.test.ts",
+    "test": "jest",
     "start": "ts-node-dev --respawn --transpile-only app.ts"
   },
   "author": "",
@@ -36,10 +35,12 @@
     "@types/chai": "^4.3.5",
     "@types/fluent-ffmpeg": "^2.1.21",
     "@types/jasmine": "^4.3.1",
+    "@types/jest": "^29.5.12",
     "@types/minimist": "^1.2.2",
     "@types/node": "^18.17.17",
     "@types/yargs": "^17.0.24",
     "jasmine": "^4.6.0",
+    "jest": "^29.7.0",
     "karma-chrome-launcher": "^3.2.0",
     "karma-coverage": "^2.2.0",
     "karma-coverage-istanbul-reporter": "^3.0.3",
@@ -47,8 +48,9 @@
     "karma-jasmine-html-reporter": "^2.0.0",
     "karma-typescript": "^5.5.3",
     "karma-typescript-es6-transform": "^5.5.3",
+    "ts-jest": "^29.2.3",
     "ts-mocha": "^10.0.0",
     "ts-node-dev": "^2.0.0",
-    "typescript": "^5.3.3"
+    "typescript": "^5.5.4"
   }
 }

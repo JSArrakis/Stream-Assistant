@@ -7,6 +7,7 @@ import { Episode, Show } from "../models/show";
 import { StagedMedia } from "../models/stagedMedia";
 import { ManageShowProgression } from "./progressionManager";
 import { StreamType } from "../models/enum/streamTypes";
+import { IStreamRequest } from "../models/streamRequest";
 
 
 export function getProceduralBlock(
@@ -28,7 +29,7 @@ export function getProceduralBlock(
         let injDurMovies = stagedMedia.InjectedMovies.filter(inj => inj.Duration <= durRemainder);
         let procDurMovies = media.Movies.filter(mov => mov.Duration <= durRemainder && !isMovieSelected(mov, prevMovies));
         if (injDurMovies.length > 0) {
-            //TODO: Add logic to select injected movie based on tags
+            //TODO: Add logic to select injected movie based on genre walk (when designed and constructed)
             //separate movies that share tags with all scheduled movies that have gaps big enough to fit the duration
             //of the injected movies in the selection (so gaps that are 2 hours or more)
             //first match up all injected movies available with the adjacent tags into the appropriate gaps, then
@@ -82,9 +83,9 @@ export function getProceduralBlock(
     return selectedMedia;
 }
 
-export function selectMovieUnderDuration(options: any, movies: Movie[], prevMovies: Movie[], duration: number): Movie {
+export function selectMovieUnderDuration(options: IStreamRequest, movies: Movie[], prevMovies: Movie[], duration: number): Movie {
     let filteredMovies: Movie[] = movies.filter(movie =>
-        movie.Tags.some(tag => options.tagsOR.includes(tag)) &&
+        movie.Tags.some(tag => options.Tags.includes(tag)) &&
         movie.DurationLimit <= duration
     );
 
@@ -104,13 +105,19 @@ export function selectShowUnderDuration(args: any, shows: Show[], duration: numb
         show.DurationLimit <= duration
     );
 
+    // Sometimes a show will have a duration that is longer than the duration limit. Since we use the duration limit as the number to compare against the
+    // duration available, this could potentially yeild a show that would run longer than the time slot available. Thus we need to see which shows have a duration
+    // that is longer than the duration available. The WatchRecord of a show will have a boolean value determining that the next episode of a show is over its normal
+    // duration limit, this value will be used in determining if the show can be selected or not for the selected duration slot.    
+    // let showProgressions = GetFilteredShowProgressions(filteredShows, streamType);
+
     let selectedShow = selectShowByDuration(duration, filteredShows);
     if (selectedShow === undefined) {
+        // TODO - If no shows at all are found for the duration available, then the duration slot will be filled with buffer media.
         throw new Error(
             "Something went wrong when selecting a show by Duration"
         );
     }
-
 
     // So this part gets the correct index for the correct episode number assigned to each episode of a show in the list
     // of episodes. This is done by checking the progression of the show and selecting the next episode in the list, which
@@ -143,12 +150,13 @@ export function selectShowUnderDuration(args: any, shows: Show[], duration: numb
     return [episodes, selectedShow.Title];
 }
 
-function isMovieSelected(movie: Movie, prevMovies: Movie[]): boolean {
+export function isMovieSelected(movie: Movie, prevMovies: Movie[]): boolean {
     return prevMovies.some(prevMovie => prevMovie.Title === movie.Title);
 }
 
-function selectShowByDuration(duration: number, shows: Show[]): Show | undefined {
+export function selectShowByDuration(duration: number, shows: Show[]): Show | undefined {
     let filteredShows: Show[] = shows.filter(show => {
+        // If the duration is less than an hour, pick a basic 30 minute show
         if (duration < 3600) {
             return !show.OverDuration && show.DurationLimit <= duration;
         } else {

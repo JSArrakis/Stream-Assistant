@@ -6,14 +6,14 @@ export class ProgressionContext {
     LoadTitle: string;
     Environment: string;
     Type: StreamType;
-    Progressions: WatchRecord[];
+    WatchRecords: WatchRecord[];
 
     constructor(title: string, loadTitle: string, environment: string, type: StreamType, progressions: WatchRecord[]) {
         this.Title = title;
         this.LoadTitle = loadTitle;
         this.Environment = environment;
         this.Type = type;
-        this.Progressions = progressions;
+        this.WatchRecords = progressions;
     }
 
     static fromMongoObject(mongoObject: any): ProgressionContext {
@@ -34,7 +34,7 @@ export class ProgressionContext {
             loadTitle: mediaProgression.LoadTitle,
             environment: mediaProgression.Environment,
             type: mediaProgression.Type,
-            episodes: mediaProgression.Progressions.map((progression: WatchRecord) =>
+            episodes: mediaProgression.WatchRecords.map((progression: WatchRecord) =>
                 WatchRecord.toMongoObject(progression)
             )
         };
