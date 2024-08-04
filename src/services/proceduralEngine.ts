@@ -78,7 +78,6 @@ export function getProceduralBlock(
             }
         }
     }
-
     return selectedMedia;
 }
 

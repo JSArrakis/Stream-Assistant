@@ -383,7 +383,7 @@ export function setProceduralTags(options: IStreamRequest, stagedMedia: StagedMe
             }
         }
         options.Tags = uniquetags;
-        //TODO: v1.4 Create different combos of block tags for tagsAND to give a more streamlined experience
+        //TODO: v1.4 Create different combos of tags for multitags to give a more streamlined experience
 
         //TODO - If no tags are present at all, we should default to all base genre tags
     }

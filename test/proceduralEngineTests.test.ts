@@ -59,7 +59,7 @@ const batman = new Show('Batman: The Animated Series', 'batmantheanimatedseries'
     new Episode(1, 5, 5, '/path/batman5.mp4', "Pretty Poison", "", 1340, 1800, [])
 ]);
 const startrek = new Show('Star Trek: The Next Generation', 'startrekthenextgeneration', 'startrek', 'tt0092455', 3600, true, true, ['scifi', 'adventure'], [], 5, [
-    new Episode(1, 1, 1, '/path/startrek1.mp4', "Encounter at Farpoint", "", 5484, 3600, []),
+    new Episode(1, 1, 1, '/path/startrek1.mp4', "Encounter at Farpoint", "", 5484, 7200, []),
     new Episode(1, 2, 2, '/path/startrek2.mp4', "The Naked Now", "", 2763, 3600, []),
     new Episode(1, 3, 3, '/path/startrek3.mp4', "Code of Honor", "", 2763, 3600, []),
     new Episode(1, 4, 4, '/path/startrek4.mp4', "The Last Outpost", "", 2763, 3600, []),
@@ -483,44 +483,177 @@ describe('getProceduralBlock', () => {
         randomSpy.mockRestore();
     });
 
-    // it('should fill the procedural block with available media (scenario 6)', () => {
-    //     let stagedMedia = new StagedMedia([], [], 0);
-    //     let media = new Media(
-    //         [reboot, farscape, startrek],
-    //         [inception, matrix, interstellar, dune],
-    //         [], [], [], [], []
-    //     );
-    //     let prevMovies: Movie[] = [];
-    //     let latestTimePoint = 1722816000;
-    //     const randomSpy = jest.spyOn(Math, 'random').mockReturnValue(0.99);
+    it('should fill the procedural block with available media (scenario 6)', () => {
+        let stagedMedia = new StagedMedia([], [], 0);
+        let media = new Media(
+            [reboot, farscape, startrek],
+            [inception, matrix, interstellar, dune],
+            [], [], [], [], []
+        );
+        let prevMovies: Movie[] = [];
+        let latestTimePoint = 1722816000;
+        const randomSpy = jest.spyOn(Math, 'random').mockReturnValue(0.99);
 
-    //     let proceduralBlock = proEng.getProceduralBlock(args, stagedMedia, media, prevMovies, 7200, latestTimePoint, StreamType.Cont);
+        let proceduralBlock = proEng.getProceduralBlock(args, stagedMedia, media, prevMovies, 7200, latestTimePoint, StreamType.Cont);
 
-    //     let expected: SelectedMedia[] = [
-    //         new SelectedMedia(startrek.Episodes[0], startrek.Title, MediaType.Episode, latestTimePoint, 7200, ['scifi', 'adventure']),
-    //     ];
+        let expected: SelectedMedia[] = [
+            new SelectedMedia(startrek.Episodes[0], startrek.Title, MediaType.Episode, latestTimePoint, 7200, ['scifi', 'adventure']),
+        ];
 
-    //     expect(proceduralBlock).toEqual(expected);
-    //     randomSpy.mockRestore();
-    // });
+        expect(proceduralBlock).toEqual(expected);
+        randomSpy.mockRestore();
+    });
 
-    // it('should fill the procedural block with available media (scenario 7)', () => {
-    //     let stagedMedia = new StagedMedia([], [], 0);
-    //     let media = new Media(
-    //         [reboot, farscape, startrek],
-    //         [inception, matrix, interstellar, dune],
-    //         [], [], [], [], []
-    //     );
-    //     let prevMovies: Movie[] = [];
-    //     let latestTimePoint = 1722816000;
-    //     const randomSpy = jest.spyOn(Math, 'random').mockReturnValue(0.01);
+    it('should fill the procedural block with available media (scenario 7)', () => {
+        let stagedMedia = new StagedMedia([], [], 0);
+        let media = new Media(
+            [reboot, farscape, startrek],
+            [inception, matrix, interstellar, dune],
+            [], [], [], [], []
+        );
+        let prevMovies: Movie[] = [];
+        let latestTimePoint = 1722816000;
+        const randomSpy = jest.spyOn(Math, 'random').mockReturnValue(0.99);
 
-    //     let proceduralBlock = proEng.getProceduralBlock(args, stagedMedia, media, prevMovies, 5400, latestTimePoint, StreamType.Cont);
+        let proceduralBlock = proEng.getProceduralBlock(args, stagedMedia, media, prevMovies, 9000, latestTimePoint, StreamType.Cont);
 
-    //     let expected: SelectedMedia[] = [
-    //     ];
+        let expected: SelectedMedia[] = [
+            new SelectedMedia(matrix, "", MediaType.Movie, latestTimePoint, 9000, ['action']),
+        ];
 
-    //     expect(proceduralBlock).toEqual(expected);
-    //     randomSpy.mockRestore();
-    // });
+        expect(proceduralBlock).toEqual(expected);
+        randomSpy.mockRestore();
+    });
+
+    it('should fill the procedural block with available media (scenario 8)', () => {
+        let stagedMedia = new StagedMedia([], [], 0);
+        let media = new Media(
+            [reboot, farscape, startrek],
+            [inception, matrix, interstellar, dune],
+            [], [], [], [], []
+        );
+        let prevMovies: Movie[] = [];
+        let latestTimePoint = 1722816000;
+        const randomSpy = jest.spyOn(Math, 'random').mockReturnValue(0.99);
+
+        let proceduralBlock = proEng.getProceduralBlock(args, stagedMedia, media, prevMovies, 10800, latestTimePoint, StreamType.Cont);
+
+        let expected: SelectedMedia[] = [
+            new SelectedMedia(dune, "", MediaType.Movie, latestTimePoint, 10800, ['scifi']),
+        ];
+
+        expect(proceduralBlock).toEqual(expected);
+        randomSpy.mockRestore();
+    });
+
+    it('should fill the procedural block with available media (scenario 9)', () => {
+        let stagedMedia = new StagedMedia([], [], 0);
+        let media = new Media(
+            [reboot, farscape, startrek],
+            [inception, matrix, interstellar, dune],
+            [], [], [], [], []
+        );
+        let prevMovies: Movie[] = [dune];
+        let latestTimePoint = 1722816000;
+        const randomSpy = jest.spyOn(Math, 'random').mockReturnValue(0.99);
+
+        let proceduralBlock = proEng.getProceduralBlock(args, stagedMedia, media, prevMovies, 10800, latestTimePoint, StreamType.Cont);
+
+        let expected: SelectedMedia[] = [
+            new SelectedMedia(interstellar, "", MediaType.Movie, latestTimePoint, 10800, ['scifi']),
+        ];
+
+        expect(proceduralBlock).toEqual(expected);
+        randomSpy.mockRestore();
+    });
+
+    it('should fill the procedural block with available media (scenario 9)', () => {
+        let stagedMedia = new StagedMedia([], [], 0);
+        let media = new Media(
+            [reboot, farscape, startrek],
+            [inception, matrix, interstellar, dune],
+            [], [], [], [], []
+        );
+        let prevMovies: Movie[] = [interstellar, dune];
+        let latestTimePoint = 1722816000;
+        const randomSpy = jest.spyOn(Math, 'random').mockReturnValue(0.99);
+
+        let proceduralBlock = proEng.getProceduralBlock(args, stagedMedia, media, prevMovies, 10800, latestTimePoint, StreamType.Cont);
+
+        let expected: SelectedMedia[] = [
+            new SelectedMedia(matrix, "", MediaType.Movie, latestTimePoint, 9000, ['action']),
+            new SelectedMedia(reboot.Episodes[1], reboot.Title, MediaType.Episode, latestTimePoint + 9000, 1800, ['scifi', 'adventure']),
+        ];
+
+        expect(proceduralBlock).toEqual(expected);
+        randomSpy.mockRestore();
+    });
+
+    it('should fill the procedural block with available media (scenario 9)', () => {
+        let stagedMedia = new StagedMedia([], [], 0);
+        let media = new Media(
+            [reboot, farscape, startrek],
+            [inception, matrix, interstellar, dune],
+            [], [], [], [], []
+        );
+        let prevMovies: Movie[] = [inception, matrix, interstellar, dune];
+        let latestTimePoint = 1722816000;
+        const randomSpy = jest.spyOn(Math, 'random').mockReturnValue(0.99);
+
+        let proceduralBlock = proEng.getProceduralBlock(args, stagedMedia, media, prevMovies, 10800, latestTimePoint, StreamType.Cont);
+
+        let expected: SelectedMedia[] = [
+            new SelectedMedia(startrek.Episodes[0], startrek.Title, MediaType.Episode, latestTimePoint, 7200, ['scifi', 'adventure']),
+            new SelectedMedia(startrek.Episodes[1], startrek.Title, MediaType.Episode, latestTimePoint + 7200, 3600, ['scifi', 'adventure']),
+        ];
+
+        expect(proceduralBlock).toEqual(expected);
+        randomSpy.mockRestore();
+    });
+
+    it('should fill the procedural block with available media (scenario 10)', () => {
+        let stagedMedia = new StagedMedia([], [], 0);
+        let media = new Media(
+            [reboot, farscape, startrek],
+            [inception, matrix, interstellar, dune],
+            [], [], [], [], []
+        );
+        let prevMovies: Movie[] = [interstellar, dune];
+        let latestTimePoint = 1722816000;
+        const randomSpy = jest.spyOn(Math, 'random').mockReturnValue(0.99);
+
+        let proceduralBlock = proEng.getProceduralBlock(args, stagedMedia, media, prevMovies, 18000, latestTimePoint, StreamType.Cont);
+
+        let expected: SelectedMedia[] = [
+            new SelectedMedia(matrix, "", MediaType.Movie, latestTimePoint, 9000, ['action']),
+            new SelectedMedia(inception, "", MediaType.Movie, latestTimePoint + 9000, 9000, ['scifi']),
+        ];
+
+        expect(proceduralBlock).toEqual(expected);
+        randomSpy.mockRestore();
+    });
+
+    it('should fill the procedural block with available media (scenario 11)', () => {
+        let stagedMedia = new StagedMedia([], [], 0);
+        let media = new Media(
+            [reboot, farscape, startrek],
+            [inception, matrix, interstellar, dune],
+            [], [], [], [], []
+        );
+        let prevMovies: Movie[] = [interstellar, dune];
+        let latestTimePoint = 1722816000;
+        const randomSpy = jest.spyOn(Math, 'random').mockReturnValue(0.99);
+
+        let proceduralBlock = proEng.getProceduralBlock(args, stagedMedia, media, prevMovies, 27000, latestTimePoint, StreamType.Cont);
+
+        let expected: SelectedMedia[] = [
+            new SelectedMedia(matrix, "", MediaType.Movie, latestTimePoint, 9000, ['action']),
+            new SelectedMedia(inception, "", MediaType.Movie, latestTimePoint + 9000, 9000, ['scifi']),
+            new SelectedMedia(startrek.Episodes[0], startrek.Title, MediaType.Episode, latestTimePoint + 18000, 7200, ['scifi', 'adventure']),
+            new SelectedMedia(reboot.Episodes[1], reboot.Title, MediaType.Episode, latestTimePoint + 25200, 1800, ['scifi', 'adventure']),
+        ];
+
+        expect(proceduralBlock).toEqual(expected);
+        randomSpy.mockRestore();
+    });
 });
