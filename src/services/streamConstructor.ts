@@ -318,7 +318,6 @@ export function getStagedStream(
 
     if (initialProceduralBlockDuration > 0) {
         let firstProceduralBlock = getProceduralBlock(
-            config,
             options,
             stagedMedia,
             media,
@@ -336,7 +335,6 @@ export function getStagedStream(
             let procDuration = stagedMedia.ScheduledMedia[index + 1].Time - stagedMedia.ScheduledMedia[index].Time - stagedMedia.ScheduledMedia[index].Duration;
             if (procDuration > 0) {
                 let intermediateProcBlock = getProceduralBlock(
-                    config,
                     options,
                     stagedMedia,
                     media,
@@ -356,7 +354,6 @@ export function getStagedStream(
         let endProcDuration = scheduledEndTime - lastScheduledMedia.Time - lastScheduledMedia.Duration;
         if (endProcDuration > 0) {
             let endProcBlock = getProceduralBlock(
-                config,
                 options,
                 stagedMedia,
                 media,

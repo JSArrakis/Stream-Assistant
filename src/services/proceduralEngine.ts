@@ -1,18 +1,17 @@
-import { Config } from "../models/config";
 import { MediaType } from "../models/enum/mediaTypes";
 import { Media } from "../models/media";
 import { Movie } from "../models/movie";
 import { SelectedMedia } from "../models/selectedMedia";
 import { Episode, Show } from "../models/show";
 import { StagedMedia } from "../models/stagedMedia";
-import { ManageShowProgression } from "./progressionManager";
 import { StreamType } from "../models/enum/streamTypes";
 import { IStreamRequest } from "../models/streamRequest";
+import { WatchRecord } from "../models/progressionContext";
+import { ManageShowProgression, GetShowListWatchRecords } from "./progressionManager";
 
 
 export function getProceduralBlock(
-    config: Config,
-    options: any,
+    args: IStreamRequest,
     stagedMedia: StagedMedia,
     media: Media,
     prevMovies: Movie[],
@@ -49,10 +48,10 @@ export function getProceduralBlock(
             currentTimePoint = currentTimePoint + injMovie.Duration
             currDur = currDur + injMovie.Duration;
         } else {
-            if (durRemainder > 5400) {
+            if (durRemainder >= 5400) {
                 //Movie or Show
-                let selectedMovie = selectMovieUnderDuration(options, media.Movies, prevMovies, durRemainder);
-                if (Math.random() < 0.5 && procDurMovies.length > 0 && selectedMovie !== undefined) {
+                let selectedMovie = selectMovieUnderDuration(args, media.Movies, prevMovies, durRemainder);
+                if (Math.random() > 0.5 && procDurMovies.length > 0 && selectedMovie !== undefined) {
                     let selectedMediaItem: SelectedMedia = new SelectedMedia(selectedMovie, "", MediaType.Movie, currentTimePoint, selectedMovie.DurationLimit, selectedMovie.Tags)
                     selectedMedia.push(selectedMediaItem);
                     prevMovies.push(selectedMovie);
@@ -60,7 +59,7 @@ export function getProceduralBlock(
                     currDur = currDur + selectedMovie.DurationLimit;
                     currentTimePoint = currentTimePoint + selectedMovie.DurationLimit;
                 } else {
-                    let result = selectShowUnderDuration(options, media.Shows, durRemainder, streamType);
+                    let result = getEpisodesUnderDuration(args, media.Shows, durRemainder, streamType);
                     result[0].forEach(episode => {
 
                         selectedMedia.push(new SelectedMedia(episode, result[1], MediaType.Episode, currentTimePoint, episode.DurationLimit, episode.Tags));
@@ -70,7 +69,7 @@ export function getProceduralBlock(
                 }
             } else {
                 //Show
-                let result = selectShowUnderDuration(options, media.Shows, durRemainder, streamType);
+                let result = getEpisodesUnderDuration(args, media.Shows, durRemainder, streamType);
                 result[0].forEach(episode => {
                     selectedMedia.push(new SelectedMedia(episode, result[1], MediaType.Episode, currentTimePoint, episode.DurationLimit, episode.Tags));
                     currDur = currDur + episode.DurationLimit;
@@ -98,10 +97,10 @@ export function selectMovieUnderDuration(options: IStreamRequest, movies: Movie[
     return selectedMovie;
 }
 
-export function selectShowUnderDuration(args: any, shows: Show[], duration: number, streamType: StreamType): [Episode[], string] {
+export function getEpisodesUnderDuration(args: IStreamRequest, shows: Show[], duration: number, streamType: StreamType): [Episode[], string] {
     let episodes: Episode[] = [];
     let filteredShows: Show[] = shows.filter(show =>
-        show.Tags.some(tag => args.tagsOR.includes(tag)) &&
+        show.Tags.some(tag => args.Tags.includes(tag)) &&
         show.DurationLimit <= duration
     );
 
@@ -111,7 +110,7 @@ export function selectShowUnderDuration(args: any, shows: Show[], duration: numb
     // duration limit, this value will be used in determining if the show can be selected or not for the selected duration slot.    
     // let showProgressions = GetFilteredShowProgressions(filteredShows, streamType);
 
-    let selectedShow = selectShowByDuration(duration, filteredShows);
+    let [selectedShow, numberOfEpisodes] = selectShowByDuration(args, duration, filteredShows, streamType);
     if (selectedShow === undefined) {
         // TODO - If no shows at all are found for the duration available, then the duration slot will be filled with buffer media.
         throw new Error(
@@ -119,26 +118,13 @@ export function selectShowUnderDuration(args: any, shows: Show[], duration: numb
         );
     }
 
-    // So this part gets the correct index for the correct episode number assigned to each episode of a show in the list
+    // So this part gets the correct indicies for the correct episode number assigned to each episode of a show in the list
     // of episodes. This is done by checking the progression of the show and selecting the next episode in the list, which
     // also updates the WatchRecord object for the show in the ProgressionContext object. This is done against a local copy
     // of the progression and the DB is only updated if the media has finished playing in the stream.
-    let episodeIdx: number[] = [];
+    let episodeIndicies = ManageShowProgression(selectedShow, numberOfEpisodes, args, streamType);
 
-    if (duration >= 3600) {
-        if (selectedShow.OverDuration || selectedShow.DurationLimit > 1800) {
-            //select 1
-            episodeIdx = ManageShowProgression(selectedShow, 1, args, streamType);
-        } else {
-            //select 2
-            episodeIdx = ManageShowProgression(selectedShow, 2, args, streamType);
-        }
-    } else {
-        //select 1
-        episodeIdx = ManageShowProgression(selectedShow, 1, args, streamType);
-    }
-
-    episodeIdx.forEach(idx => {
+    episodeIndicies.forEach(idx => {
         if (selectedShow !== undefined) {
             let episode = selectedShow.Episodes[idx - 1]
             //add selectedShow tags to episode tags that dont already exist
@@ -154,20 +140,76 @@ export function isMovieSelected(movie: Movie, prevMovies: Movie[]): boolean {
     return prevMovies.some(prevMovie => prevMovie.Title === movie.Title);
 }
 
-export function selectShowByDuration(duration: number, shows: Show[]): Show | undefined {
-    let filteredShows: Show[] = shows.filter(show => {
-        // If the duration is less than an hour, pick a basic 30 minute show
-        if (duration < 3600) {
-            return !show.OverDuration && show.DurationLimit <= duration;
-        } else {
-            return show.DurationLimit <= duration;
-        }
-    });
+export function selectShowByDuration(args: IStreamRequest, duration: number, shows: Show[], streamType: StreamType): [Show | undefined, number] {
+    let watchRecords: WatchRecord[] = GetShowListWatchRecords(args, shows, streamType);
 
-    if (filteredShows.length === 0) {
-        return undefined;
+    let selectedShows: Show[] = [];
+
+    let numberOfEpisodes: number = 0;
+
+    if (duration < 3600) {
+        // Find all shows that have a next episode duration limit of 1800 using the watchRecords
+        let minWatchRecords: WatchRecord[] = watchRecords.filter(wr => wr.NextEpisodeDurLimit === 1800);
+        minWatchRecords.forEach(wr => {
+            let show = shows.find(s => s.LoadTitle === wr.LoadTitle);
+            if (show !== undefined) {
+                selectedShows.push(show);
+            }
+        });
+        numberOfEpisodes = 1;
+    } else {
+        // Find all watch records that have a next episode duration limit of 1800
+        let minWatchRecords: WatchRecord[] = watchRecords.filter(wr => wr.NextEpisodeDurLimit === 1800);
+        // Refine minWatchRecords to only include shows where the next two episodes have a duration limit of 1800
+        minWatchRecords = minWatchRecords.filter(wr => {
+            let show = shows.find(s => s.LoadTitle === wr.LoadTitle);
+            if (show !== undefined) {
+                let episodeNumber: number = wr.Episode + 2;
+                if (episodeNumber > show.EpisodeCount) {
+                    episodeNumber = episodeNumber - show.EpisodeCount;
+                }
+                let nextNextEpisode = show.Episodes.find(ep => ep.EpisodeNumber === episodeNumber);
+                if (nextNextEpisode !== undefined) {
+                    return nextNextEpisode.DurationLimit === 1800;
+                }
+            }
+            return false;
+        });
+
+        // Find all watch record that have a next episode duration limit under the duration that are not in the minWatchRecords
+        let allWatchRecords: WatchRecord[] = watchRecords.filter(wr => wr.NextEpisodeDurLimit <= duration && wr.NextEpisodeDurLimit > 1800);
+        let selectedWatchRecords: WatchRecord[] = [];
+        if (allWatchRecords.length > 0 && minWatchRecords.length > 0) {
+            //Flip a coin to determine which set of watch records to use
+            if (Math.random() < 0.5) {
+                selectedWatchRecords = minWatchRecords;
+                numberOfEpisodes = 2;
+            } else {
+                selectedWatchRecords = allWatchRecords;
+                numberOfEpisodes = 1;
+            }
+        } else if (allWatchRecords.length === 0 && minWatchRecords.length === 0) {
+            return [undefined, 0];
+        } else if (allWatchRecords.length === 0) {
+            selectedWatchRecords = minWatchRecords;
+            numberOfEpisodes = 2;
+        } else if (minWatchRecords.length === 0) {
+            selectedWatchRecords = allWatchRecords;
+            numberOfEpisodes = 1;
+        }
+
+        selectedWatchRecords.forEach(wr => {
+            let show = shows.find(s => s.LoadTitle === wr.LoadTitle);
+            if (show !== undefined) {
+                selectedShows.push(show);
+            }
+        });
     }
 
-    const randomIndex = Math.floor(Math.random() * filteredShows.length);
-    return filteredShows[randomIndex];
+    if (selectedShows.length === 0) {
+        return [undefined, 0];
+    }
+
+    const randomIndex = Math.floor(Math.random() * selectedShows.length);
+    return [selectedShows[randomIndex], numberOfEpisodes];
 }

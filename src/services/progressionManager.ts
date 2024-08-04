@@ -116,10 +116,10 @@ export function GetEpisodeNumbers(progressionContextLoadTitle: string, show: Sho
     return episodeNumbers;
 }
 
-export function IncrementWatchRecord(progressionContext: string, loadTitle: string, episode: number, show: Show): void {
+export function IncrementWatchRecord(progressionContextLoadTitle: string, loadTitle: string, episode: number, show: Show): void {
     //Sets local progression to the next episode
     // Find the media progression index
-    let progressionContextIdx = progressionContextList.findIndex((prog) => prog.LoadTitle === progressionContext);
+    let progressionContextIdx = progressionContextList.findIndex((prog) => prog.LoadTitle === progressionContextLoadTitle);
     // Find the progression index
     let watchRecordIdx = progressionContextList[progressionContextIdx].WatchRecords.findIndex((wr) => wr.LoadTitle === loadTitle);
     // Increment the episode number
@@ -128,7 +128,6 @@ export function IncrementWatchRecord(progressionContext: string, loadTitle: stri
     if (nextEpisode + 1 > show.EpisodeCount) {
         nextEpisode = 1;
     }
-
     // Set the next episode duration limit
     progressionContextList[progressionContextIdx].WatchRecords[watchRecordIdx].NextEpisodeDurLimit = GetEpisodeDurLimit(show, nextEpisode);
 }
