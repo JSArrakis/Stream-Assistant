@@ -266,6 +266,21 @@ export function constructStream(
 export function getInitialProceduralTimepoint(rightNow: number, stagedMedia: StagedMedia): [number, string] {
     let error = "";
 
+    //The EndTime must be set in the future AND after the last scheduled media time + its duration
+    if (stagedMedia.EndTime - rightNow < 0) {
+        error = "End time needs to be in the future.";
+        return [0, error];
+    }
+
+    if (stagedMedia.ScheduledMedia.length > 0) {
+        let lastScheduledMedia = stagedMedia.ScheduledMedia[stagedMedia.ScheduledMedia.length - 1];
+        if (stagedMedia.EndTime - (lastScheduledMedia.Time + lastScheduledMedia.Duration) < 0) {
+            error = "End time needs to be after the last scheduled media item.";
+            return [0, error];
+        }
+    }
+
+
     //Sets the first time point to the end time of the stream if there are no scheduled media items
     let firstTimePoint: number = stagedMedia.EndTime;
 
@@ -276,14 +291,14 @@ export function getInitialProceduralTimepoint(rightNow: number, stagedMedia: Sta
 
     //If the first time point is in the past, an error is returned
     if (firstTimePoint - rightNow < 0) {
-        error = "Time of first movie, collection, or selected end time needs to be in the future.";
+        error = "Time of first scheduled movie, or collection needs to be in the future.";
         return [0, error];
     }
 
     return [firstTimePoint, error];
 }
 
-export function setInitialBlockDuration(interval: number, firstProceduralDuration: number) {
+export function setInitialBlockDuration(interval: number, firstProceduralDuration: number): [number, number] {
     let preMediaDuration = 0;
     let initialProceduralBlockDuration = 0;
 
@@ -300,25 +315,29 @@ export function setInitialBlockDuration(interval: number, firstProceduralDuratio
 export function getStagedStream(
     rightNow: number,
     config: Config,
-    options: any,
+    args: IStreamRequest,
     stagedMedia: StagedMedia,
     media: Media,
-    streamType: StreamType): [selectedMedia: SelectedMedia[], error: string] {
+    streamType: StreamType
+): [selectedMedia: SelectedMedia[], error: string] {
     let error: string = "";
 
-    let [firstProceduralDuration, intialError] = getInitialProceduralTimepoint(rightNow, stagedMedia);
+    let [firstTimePoint, intialError] = getInitialProceduralTimepoint(rightNow, stagedMedia);
     if (intialError !== "") {
         error = intialError;
         return [[], error];
     }
 
-    let [preMediaDuration, initialProceduralBlockDuration] = setInitialBlockDuration(config.Interval, firstProceduralDuration);
+    let firstDuration = firstTimePoint - rightNow;
+
+    let [preMediaDuration, initialProceduralBlockDuration] = setInitialBlockDuration(config.Interval, firstDuration);
     let selectedMedia: SelectedMedia[] = [];
     let prevMovies: Movie[] = [];
+    stagedMedia.ScheduledMedia.forEach(item => prevMovies.push(item.Media as Movie));
 
     if (initialProceduralBlockDuration > 0) {
         let firstProceduralBlock = getProceduralBlock(
-            options,
+            args,
             stagedMedia,
             media,
             prevMovies,
@@ -335,7 +354,7 @@ export function getStagedStream(
             let procDuration = stagedMedia.ScheduledMedia[index + 1].Time - stagedMedia.ScheduledMedia[index].Time - stagedMedia.ScheduledMedia[index].Duration;
             if (procDuration > 0) {
                 let intermediateProcBlock = getProceduralBlock(
-                    options,
+                    args,
                     stagedMedia,
                     media,
                     prevMovies,
@@ -354,7 +373,7 @@ export function getStagedStream(
         let endProcDuration = scheduledEndTime - lastScheduledMedia.Time - lastScheduledMedia.Duration;
         if (endProcDuration > 0) {
             let endProcBlock = getProceduralBlock(
-                options,
+                args,
                 stagedMedia,
                 media,
                 prevMovies,

@@ -25,8 +25,8 @@ export function getProceduralBlock(
 
     while (currDur < duration) {
         let durRemainder = duration - currDur;
-        let injDurMovies = stagedMedia.InjectedMovies.filter(inj => inj.Duration <= durRemainder);
-        let procDurMovies = media.Movies.filter(mov => mov.Duration <= durRemainder && !isMovieSelected(mov, prevMovies));
+        let injDurMovies = stagedMedia.InjectedMovies.filter(inj => inj.Duration <= durRemainder && !isMoviePreviouslySelected(inj.Media as Movie, prevMovies));
+        let procDurMovies = media.Movies.filter(mov => mov.Duration <= durRemainder && !isMoviePreviouslySelected(mov, prevMovies));
         if (injDurMovies.length > 0) {
             //TODO: Add logic to select injected movie based on genre walk (when designed and constructed)
             //separate movies that share tags with all scheduled movies that have gaps big enough to fit the duration
@@ -135,7 +135,7 @@ export function getEpisodesUnderDuration(args: IStreamRequest, shows: Show[], du
     return [episodes, selectedShow.Title];
 }
 
-export function isMovieSelected(movie: Movie, prevMovies: Movie[]): boolean {
+export function isMoviePreviouslySelected(movie: Movie, prevMovies: Movie[]): boolean {
     return prevMovies.some(prevMovie => prevMovie.Title === movie.Title);
 }
 

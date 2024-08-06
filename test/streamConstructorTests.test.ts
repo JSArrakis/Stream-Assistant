@@ -2,49 +2,22 @@ import { MediaType } from "../src/models/enum/mediaTypes";
 import { Movie } from "../src/models/movie";
 import { SelectedMedia } from "../src/models/selectedMedia";
 import * as streamCon from "../src/services/streamConstructor";
-import { MovieBuilder } from "./resources/movieBuilder";
 import { Media } from '../src/models/media';
 import { AdhocStreamRequest, ContStreamRequest, IStreamRequest } from '../src/models/streamRequest';
 import moment from 'moment';
 import { StagedMedia } from '../src/models/stagedMedia';
-
-const inception = new Movie('Inception', 'inception', 'inception', 'tt1375666', ['scifi'], '/path/inception.mp4', 8880, 9000, '', 0);
-const matrix = new Movie('The Matrix', 'thematrix', 'matrix', 'tt0133093', ['action'], '/path/matrix.mp4', 8160, 9000, '', 0);
-const interstellar = new Movie('Interstellar', 'interstellar', 'interstellar', 'tt0816692', ['scifi'], '/path/interstellar.mp4', 10140, 10800, '', 0);
-
-const media = new Media(
-    [], // Shows
-    [
-        inception,
-        matrix,
-        interstellar
-    ],
-    [], // Shorts
-    [], // Music
-    [], // Promos
-    [], // Commercials
-    []  // Collections
-);
+import * as td from './data/testData';
+import * as proMan from '../src/services/progressionManager';
+import { Config } from "../src/models/config";
+import { StreamType } from "../src/models/enum/streamTypes";
 
 describe('getMovie', () => {
     let movieList: Movie[];
 
     beforeEach(() => {
         movieList = [
-            new MovieBuilder()
-                .setTitle('Movie One')
-                .setLoadTitle('movieone')
-                .setDuration(120)
-                .setDurationLimit(120)
-                .setTags(['action', 'thriller'])
-                .build(),
-            new MovieBuilder()
-                .setTitle('Movie Two')
-                .setLoadTitle('movietwo')
-                .setDuration(90)
-                .setDurationLimit(90)
-                .setTags(['comedy'])
-                .build(),
+            td.inception,
+            td.matrix
         ];
     });
 
@@ -72,18 +45,32 @@ describe('getMovie', () => {
 
     it('should return a SelectedMedia object for a valid loadTitle', () => {
         const time = 1609459200;
-        const selectedMedia = streamCon.getMovie('movieone', movieList, time);
+        const selectedMedia = streamCon.getMovie(movieList[0].LoadTitle, movieList, time);
         expect(selectedMedia[1]).toBe('');
         expect(selectedMedia[0]).toBeInstanceOf(SelectedMedia);
-        expect(selectedMedia[0].Media.LoadTitle).toBe('movieone');
+        expect(selectedMedia[0].Media.LoadTitle).toBe(movieList[0].LoadTitle);
         expect(selectedMedia[0].Type).toBe(MediaType.Movie);
         expect(selectedMedia[0].Time).toBe(time);
-        expect(selectedMedia[0].Duration).toBe(120);
-        expect(selectedMedia[0].Tags).toEqual(['action', 'thriller']);
+        expect(selectedMedia[0].Duration).toBe(9000);
+        expect(selectedMedia[0].Tags).toEqual(['scifi']);
     });
 });
 
 describe('getScheduledMedia', () => {
+    const media = new Media(
+        [], // Shows
+        [
+            td.inception,
+            td.matrix,
+            td.interstellar
+        ],
+        [], // Shorts
+        [], // Music
+        [], // Promos
+        [], // Commercials
+        []  // Collections
+    );
+
     it('should schedule movies based on the provided timestamps', () => {
         const args: IStreamRequest = {
             Title: "Example Title",
@@ -97,8 +84,8 @@ describe('getScheduledMedia', () => {
         };
 
         const expected = [
-            new SelectedMedia(inception, '', MediaType.Movie, 1656547200, 9000, ["scifi"]),
-            new SelectedMedia(interstellar, '', MediaType.Movie, 1656633600, 10800, ["scifi"])
+            new SelectedMedia(td.inception, '', MediaType.Movie, 1656547200, 9000, ["scifi"]),
+            new SelectedMedia(td.interstellar, '', MediaType.Movie, 1656633600, 10800, ["scifi"])
         ];
 
         const result = streamCon.getScheduledMedia(media, args);
@@ -120,7 +107,7 @@ describe('getScheduledMedia', () => {
         };
 
         const expected = [
-            new SelectedMedia(inception, '', MediaType.Movie, 1656547200, 9000, ["scifi"])
+            new SelectedMedia(td.inception, '', MediaType.Movie, 1656547200, 9000, ["scifi"])
         ];
 
         const result = streamCon.getScheduledMedia(media, args);
@@ -177,8 +164,8 @@ describe('getScheduledMedia', () => {
         };
 
         const expected = [
-            new SelectedMedia(inception, '', MediaType.Movie, 1656547200, 9000, ["scifi"]),
-            new SelectedMedia(interstellar, '', MediaType.Movie, 1656633600, 10800, ["scifi"])
+            new SelectedMedia(td.inception, '', MediaType.Movie, 1656547200, 9000, ["scifi"]),
+            new SelectedMedia(td.interstellar, '', MediaType.Movie, 1656633600, 10800, ["scifi"])
         ];
 
         const result = streamCon.getScheduledMedia(media, args);
@@ -212,13 +199,13 @@ describe('getScheduledMedia', () => {
         );
 
         const contExpected = [
-            new SelectedMedia(inception, '', MediaType.Movie, 1656547200, 9000, ["scifi"]),
-            new SelectedMedia(matrix, '', MediaType.Movie, 1656633600, 9000, ["action"]),
+            new SelectedMedia(td.inception, '', MediaType.Movie, 1656547200, 9000, ["scifi"]),
+            new SelectedMedia(td.matrix, '', MediaType.Movie, 1656633600, 9000, ["action"]),
         ];
 
         const adhocExpected = [
-            new SelectedMedia(inception, '', MediaType.Movie, 1656547200, 9000, ["scifi"]),
-            new SelectedMedia(interstellar, '', MediaType.Movie, 1656633600, 10800, ["scifi"]),
+            new SelectedMedia(td.inception, '', MediaType.Movie, 1656547200, 9000, ["scifi"]),
+            new SelectedMedia(td.interstellar, '', MediaType.Movie, 1656633600, 10800, ["scifi"]),
         ];
 
         const contResult = streamCon.getScheduledMedia(media, contArgs);
@@ -232,6 +219,20 @@ describe('getScheduledMedia', () => {
 });
 
 describe('getInjectedMovies', () => {
+    const media = new Media(
+        [], // Shows
+        [
+            td.inception,
+            td.matrix,
+            td.interstellar
+        ],
+        [], // Shorts
+        [], // Music
+        [], // Promos
+        [], // Commercials
+        []  // Collections
+    );
+
     it('should return an empty array when no movies are provided', () => {
         const args: IStreamRequest = {
             Title: "Example Title",
@@ -298,8 +299,8 @@ describe('getInjectedMovies', () => {
         };
 
         const expected = [
-            new SelectedMedia(inception, '', MediaType.Movie, 0, 9000, ["scifi"]),
-            new SelectedMedia(interstellar, '', MediaType.Movie, 0, 10800, ["scifi"])
+            new SelectedMedia(td.inception, '', MediaType.Movie, 0, 9000, ["scifi"]),
+            new SelectedMedia(td.interstellar, '', MediaType.Movie, 0, 10800, ["scifi"])
         ];
 
         const result = streamCon.getInjectedMovies(args, media.Movies);
@@ -312,8 +313,8 @@ describe('getInjectedMovies', () => {
 describe('compareSelectedEndTime', () => {
     it('should not return an error if the end time is greater than the last scheduled media plus its duration', () => {
         const selected = [
-            new SelectedMedia(inception, '', MediaType.Movie, 1656547200, 9000, ["scifi"]),
-            new SelectedMedia(interstellar, '', MediaType.Movie, 1656633600, 10800, ["scifi"])
+            new SelectedMedia(td.inception, '', MediaType.Movie, 1656547200, 9000, ["scifi"]),
+            new SelectedMedia(td.interstellar, '', MediaType.Movie, 1656633600, 10800, ["scifi"])
         ];
 
         const error = streamCon.compareSelectedEndTime(1656644400, selected);
@@ -323,8 +324,8 @@ describe('compareSelectedEndTime', () => {
 
     it('should return an error if the end time is less than the last scheduled media plus its duration', () => {
         const selected = [
-            new SelectedMedia(inception, '', MediaType.Movie, 1656547200, 9000, ["scifi"]),
-            new SelectedMedia(interstellar, '', MediaType.Movie, 1656633600, 10800, ["scifi"])
+            new SelectedMedia(td.inception, '', MediaType.Movie, 1656547200, 9000, ["scifi"]),
+            new SelectedMedia(td.interstellar, '', MediaType.Movie, 1656633600, 10800, ["scifi"])
         ];
 
         const error = streamCon.compareSelectedEndTime(1656633600, selected);
@@ -347,8 +348,8 @@ describe('evaluateStreamEndTime', () => {
             1656647200
         );
         const selected = [
-            new SelectedMedia(inception, '', MediaType.Movie, 1656547200, 9000, ["scifi"]),
-            new SelectedMedia(interstellar, '', MediaType.Movie, 1656633600, 10800, ["scifi"])
+            new SelectedMedia(td.inception, '', MediaType.Movie, 1656547200, 9000, ["scifi"]),
+            new SelectedMedia(td.interstellar, '', MediaType.Movie, 1656633600, 10800, ["scifi"])
         ];
 
         const result = streamCon.evaluateStreamEndTime(adhocArgs, selected);
@@ -369,8 +370,8 @@ describe('evaluateStreamEndTime', () => {
             0
         );
         const selected = [
-            new SelectedMedia(inception, '', MediaType.Movie, 1656547200, 9000, ["scifi"]),
-            new SelectedMedia(matrix, '', MediaType.Movie, 1656633600, 9000, ["action"]),
+            new SelectedMedia(td.inception, '', MediaType.Movie, 1656547200, 9000, ["scifi"]),
+            new SelectedMedia(td.matrix, '', MediaType.Movie, 1656633600, 9000, ["action"]),
         ];
 
         const result = streamCon.evaluateStreamEndTime(adhocArgs, selected);
@@ -431,8 +432,8 @@ describe('setProceduralTags', () => {
         };
 
         const selected = [
-            new SelectedMedia(inception, '', MediaType.Movie, 1656547200, 9000, ["scifi"]),
-            new SelectedMedia(matrix, '', MediaType.Movie, 1656633600, 10800, ["action"])
+            new SelectedMedia(td.inception, '', MediaType.Movie, 1656547200, 9000, ["scifi"]),
+            new SelectedMedia(td.matrix, '', MediaType.Movie, 1656633600, 10800, ["action"])
         ];
 
         const stagedMedia = new StagedMedia(selected, [], 1656633600 + 10800);
@@ -447,8 +448,8 @@ describe('getInitialProceduralTimepoint', () => {
         const rightNow = 1656546397
 
         const selected = [
-            new SelectedMedia(inception, '', MediaType.Movie, 1656547200, 9000, ["scifi"]),
-            new SelectedMedia(matrix, '', MediaType.Movie, 1656633600, 10800, ["action"])
+            new SelectedMedia(td.inception, '', MediaType.Movie, 1656547200, 9000, ["scifi"]),
+            new SelectedMedia(td.matrix, '', MediaType.Movie, 1656633600, 10800, ["action"])
         ];
 
         const stagedMedia = new StagedMedia(selected, [], 1656633600 + 10800);
@@ -476,8 +477,8 @@ describe('getInitialProceduralTimepoint', () => {
         const rightNow = 1656547201
 
         const selected = [
-            new SelectedMedia(inception, '', MediaType.Movie, 1656547200, 9000, ["scifi"]),
-            new SelectedMedia(matrix, '', MediaType.Movie, 1656633600, 10800, ["action"])
+            new SelectedMedia(td.inception, '', MediaType.Movie, 1656547200, 9000, ["scifi"]),
+            new SelectedMedia(td.matrix, '', MediaType.Movie, 1656633600, 10800, ["action"])
         ];
 
         const stagedMedia = new StagedMedia(selected, [], 1656633600 + 10800);
@@ -485,6 +486,381 @@ describe('getInitialProceduralTimepoint', () => {
         const [result, error] = streamCon.getInitialProceduralTimepoint(rightNow, stagedMedia);
 
         expect(result).toBe(0);
-        expect(error).toBe('Time of first movie, collection, or selected end time needs to be in the future.');
+        expect(error).toBe('Time of first scheduled movie, or collection needs to be in the future.');
+    });
+});
+
+describe('setInitialBlockDuration', () => {
+    it('should return the duration of the first procedural block (scenario 1)', () => {
+        const rightNow = 1651750471
+        const firstTimePoint = 1651752000
+        const duration = firstTimePoint - rightNow
+
+        let [preMediaDuration, initialProceduralBlockDuration] = streamCon.setInitialBlockDuration(1800, duration);
+        expect(preMediaDuration).toBe(1529);
+        expect(initialProceduralBlockDuration).toBe(0);
+    });
+
+    it('should return the duration of the first procedural block (scenario 2)', () => {
+        const rightNow = 1651750471
+        const firstTimePoint = 1651755600
+        const duration = firstTimePoint - rightNow
+
+        let [preMediaDuration, initialProceduralBlockDuration] = streamCon.setInitialBlockDuration(1800, duration);
+        expect(preMediaDuration).toBe(1529);
+        expect(initialProceduralBlockDuration).toBe(3600);
+    });
+
+    it('should return the duration of the first procedural block (scenario 3)', () => {
+        const rightNow = 1651752000
+        const firstTimePoint = 1651755600
+        const duration = firstTimePoint - rightNow
+
+        let [preMediaDuration, initialProceduralBlockDuration] = streamCon.setInitialBlockDuration(1800, duration);
+        expect(preMediaDuration).toBe(0);
+        expect(initialProceduralBlockDuration).toBe(3600);
+    });
+});
+
+describe('getStagedStream', () => {
+    beforeEach(() => {
+        proMan.SetLocalProgressionContextList(
+            JSON.parse(JSON.stringify([td.continuousProgression]))
+        );
+    });
+
+    const rightNow = 1651750471
+    const config = new Config("", 1800, "", "");
+    const args = new ContStreamRequest('securePassword', td.continuousProgression.Title, td.continuousProgression.Environment, [], ['scifi', 'action']);
+
+    it('should return a list of selected media and an empty error message (scenario 1)', () => {
+        let stagedMedia = new StagedMedia(
+            [],
+            [new SelectedMedia(td.matrix, "", MediaType.Movie, 0, 9000, ["action"])],
+            1651753800
+        );
+
+        let media = new Media(
+            [
+                td.reboot,
+                td.farscape,
+                td.startrek
+            ],
+            [
+                td.inception,
+                td.matrix,
+                td.interstellar,
+                td.dune
+            ],
+            [], [], [], [], []
+        );
+        const randomSpy = jest.spyOn(Math, 'random').mockReturnValue(0.99);
+
+        let [selectedMedia, error] = streamCon.getStagedStream(rightNow, config, args, stagedMedia, media, StreamType.Cont)
+        let expected = [
+            new SelectedMedia(td.reboot.Episodes[1], td.reboot.Title, MediaType.Episode, 1651752000, 1800, ["scifi", "adventure"])
+        ];
+
+        expect(selectedMedia).toEqual(expected);
+        expect(error).toBe('');
+
+        randomSpy.mockRestore();
+    });
+
+    it('should return a list of selected media and an empty error message (scenario 2)', () => {
+        let stagedMedia = new StagedMedia(
+            [],
+            [new SelectedMedia(td.matrix, "", MediaType.Movie, 0, 9000, ["action"])],
+            1651761000
+        );
+        let media = new Media(
+            [
+                td.reboot,
+                td.farscape,
+                td.startrek
+            ],
+            [
+                td.inception,
+                td.matrix,
+                td.interstellar,
+                td.dune
+            ],
+            [], [], [], [], []
+        );
+        const randomSpy = jest.spyOn(Math, 'random').mockReturnValue(0.99);
+
+        let [selectedMedia, error] = streamCon.getStagedStream(rightNow, config, args, stagedMedia, media, StreamType.Cont)
+        let expected = [
+            new SelectedMedia(td.matrix, "", MediaType.Movie, 1651752000, 9000, ["action"])
+        ];
+
+        expect(selectedMedia).toEqual(expected);
+        expect(error).toBe('');
+
+        randomSpy.mockRestore();
+    });
+
+    it('should return a list of selected media and an empty error message (scenario 3)', () => {
+        let stagedMedia = new StagedMedia(
+            [],
+            [new SelectedMedia(td.matrix, "", MediaType.Movie, 0, 9000, ["action"])],
+            1651762800
+        );
+        let media = new Media(
+            [
+                td.reboot,
+                td.farscape,
+                td.startrek
+            ],
+            [
+                td.inception,
+                td.matrix,
+                td.interstellar,
+                td.dune
+            ],
+            [], [], [], [], []
+        );
+        const randomSpy = jest.spyOn(Math, 'random').mockReturnValue(0.99);
+
+        let [selectedMedia, error] = streamCon.getStagedStream(rightNow, config, args, stagedMedia, media, StreamType.Cont)
+        let expected = [
+            new SelectedMedia(td.matrix, "", MediaType.Movie, 1651752000, 9000, ["action"]),
+            new SelectedMedia(td.reboot.Episodes[1], td.reboot.Title, MediaType.Episode, 1651761000, 1800, ["scifi", "adventure"])
+        ];
+
+        expect(selectedMedia).toEqual(expected);
+        expect(error).toBe('');
+
+        randomSpy.mockRestore();
+    });
+
+    it('should return a list of selected media and an empty error message (scenario 4)', () => {
+        let stagedMedia = new StagedMedia(
+            [new SelectedMedia(td.matrix, "", MediaType.Movie, 1651753800, 9000, ["action"])],
+            [],
+            1651762800
+        );
+        let media = new Media(
+            [
+                td.reboot,
+                td.farscape,
+                td.startrek
+            ],
+            [
+                td.inception,
+                td.matrix,
+                td.interstellar,
+                td.dune
+            ],
+            [], [], [], [], []
+        );
+        const randomSpy = jest.spyOn(Math, 'random').mockReturnValue(0.99);
+
+        let [selectedMedia, error] = streamCon.getStagedStream(rightNow, config, args, stagedMedia, media, StreamType.Cont)
+        let expected = [
+            new SelectedMedia(td.reboot.Episodes[1], td.reboot.Title, MediaType.Episode, 1651752000, 1800, ["scifi", "adventure"]),
+            new SelectedMedia(td.matrix, "", MediaType.Movie, 1651753800, 9000, ["action"])
+        ];
+
+        expect(selectedMedia).toEqual(expected);
+        expect(error).toBe('');
+
+        randomSpy.mockRestore();
+    });
+
+    it('should return a list of selected media and an empty error message (scenario 5)', () => {
+        let stagedMedia = new StagedMedia(
+            [new SelectedMedia(td.matrix, "", MediaType.Movie, 1651753800, 9000, ["action"])],
+            [new SelectedMedia(td.inception, "", MediaType.Movie, 0, 9000, ["scifi"])],
+            1651764600
+        );
+        let media = new Media(
+            [
+                td.reboot,
+                td.farscape,
+                td.startrek
+            ],
+            [
+                td.inception,
+                td.matrix,
+                td.interstellar,
+                td.dune
+            ],
+            [], [], [], [], []
+        );
+        const randomSpy = jest.spyOn(Math, 'random').mockReturnValue(0.99);
+
+        let [selectedMedia, error] = streamCon.getStagedStream(rightNow, config, args, stagedMedia, media, StreamType.Cont)
+        let expected = [
+            new SelectedMedia(td.reboot.Episodes[1], td.reboot.Title, MediaType.Episode, 1651752000, 1800, ["scifi", "adventure"]),
+            new SelectedMedia(td.matrix, "", MediaType.Movie, 1651753800, 9000, ["action"]),
+            new SelectedMedia(td.reboot.Episodes[2], td.reboot.Title, MediaType.Episode, 1651762800, 1800, ["scifi", "adventure"]),
+        ];
+
+        expect(selectedMedia).toEqual(expected);
+        expect(error).toBe('');
+
+        randomSpy.mockRestore();
+    });
+
+    it('should return a list of selected media and an empty error message (scenario 6)', () => {
+        let stagedMedia = new StagedMedia(
+            [
+                new SelectedMedia(td.matrix, "", MediaType.Movie, 1651753800, 9000, ["action"]),
+                new SelectedMedia(td.interstellar, "", MediaType.Movie, 1651766400, 10800, ["scifi"])
+            ],
+            [
+                new SelectedMedia(td.inception, "", MediaType.Movie, 0, 9000, ["scifi"]),
+            ],
+            1651777200
+        );
+        let media = new Media(
+            [
+                td.reboot,
+                td.farscape,
+                td.startrek
+            ],
+            [
+                td.inception,
+                td.matrix,
+                td.interstellar,
+                td.dune
+            ],
+            [], [], [], [], []
+        );
+        const randomSpy = jest.spyOn(Math, 'random').mockReturnValue(0.99);
+
+        let [selectedMedia, error] = streamCon.getStagedStream(rightNow, config, args, stagedMedia, media, StreamType.Cont)
+
+        let expected: SelectedMedia[] = [
+            new SelectedMedia(td.reboot.Episodes[1], td.reboot.Title, MediaType.Episode, 1651752000, 1800, ["scifi", "adventure"]),
+            new SelectedMedia(td.matrix, "", MediaType.Movie, 1651753800, 9000, ["action"]),
+            new SelectedMedia(td.farscape.Episodes[0], td.farscape.Title, MediaType.Episode, 1651762800, 3600, ["scifi", "adventure"]),
+            new SelectedMedia(td.interstellar, "", MediaType.Movie, 1651766400, 10800, ["scifi"]),
+        ];
+
+        expect(selectedMedia).toEqual(expected);
+        expect(error).toBe('');
+
+        randomSpy.mockRestore();
+    });
+
+    it('should return a list of selected media and an empty error message (scenario 7)', () => {
+        let stagedMedia = new StagedMedia(
+            [
+                new SelectedMedia(td.matrix, "", MediaType.Movie, 1651753800, 9000, ["action"]),
+                new SelectedMedia(td.interstellar, "", MediaType.Movie, 1651766400, 10800, ["scifi"])
+            ],
+            [
+                new SelectedMedia(td.inception, "", MediaType.Movie, 0, 9000, ["scifi"]),
+            ],
+            1651795200
+        );
+        let media = new Media(
+            [
+                td.reboot,
+                td.farscape,
+                td.startrek
+            ],
+            [
+                td.inception,
+                td.matrix,
+                td.interstellar,
+                td.dune
+            ],
+            [], [], [], [], []
+        );
+        const randomSpy = jest.spyOn(Math, 'random').mockReturnValue(0.99);
+
+        let [selectedMedia, error] = streamCon.getStagedStream(rightNow, config, args, stagedMedia, media, StreamType.Cont)
+
+        let expected = [
+            new SelectedMedia(td.reboot.Episodes[1], td.reboot.Title, MediaType.Episode, 1651752000, 1800, ["scifi", "adventure"]),
+            new SelectedMedia(td.matrix, "", MediaType.Movie, 1651753800, 9000, ["action"]),
+            new SelectedMedia(td.farscape.Episodes[0], td.farscape.Title, MediaType.Episode, 1651762800, 3600, ["scifi", "adventure"]),
+            new SelectedMedia(td.interstellar, "", MediaType.Movie, 1651766400, 10800, ["scifi"]),
+            new SelectedMedia(td.inception, "", MediaType.Movie, 1651777200, 9000, ["scifi"]),
+            new SelectedMedia(td.startrek.Episodes[0], td.startrek.Title, MediaType.Episode, 1651786200, 7200, ["scifi", "adventure"]),
+            new SelectedMedia(td.reboot.Episodes[2], td.reboot.Title, MediaType.Episode, 1651793400, 1800, ["scifi", "adventure"]),
+        ];
+
+        expect(selectedMedia).toEqual(expected);
+        expect(error).toBe('');
+
+        randomSpy.mockRestore();
+    });
+
+    it('should return a list of selected media and an empty error message (scenario 8)', () => {
+        let stagedMedia = new StagedMedia(
+            [
+                new SelectedMedia(td.matrix, "", MediaType.Movie, 1651753800, 9000, ["action"]),
+                new SelectedMedia(td.interstellar, "", MediaType.Movie, 1651766400, 10800, ["scifi"])
+            ],
+            [
+                new SelectedMedia(td.inception, "", MediaType.Movie, 0, 9000, ["scifi"]),
+            ],
+            1651750200
+        );
+        let media = new Media(
+            [
+                td.reboot,
+                td.farscape,
+                td.startrek
+            ],
+            [
+                td.inception,
+                td.matrix,
+                td.interstellar,
+                td.dune
+            ],
+            [], [], [], [], []
+        );
+        const randomSpy = jest.spyOn(Math, 'random').mockReturnValue(0.99);
+
+        let [selectedMedia, error] = streamCon.getStagedStream(rightNow, config, args, stagedMedia, media, StreamType.Cont)
+
+        let expected: SelectedMedia[] = [];
+
+        expect(selectedMedia).toEqual(expected);
+        expect(error).toBe("End time needs to be in the future.");
+
+        randomSpy.mockRestore();
+    });
+
+    it('should return a list of selected media and an empty error message (scenario 8)', () => {
+        let stagedMedia = new StagedMedia(
+            [
+                new SelectedMedia(td.matrix, "", MediaType.Movie, 1651753800, 9000, ["action"]),
+                new SelectedMedia(td.interstellar, "", MediaType.Movie, 1651766400, 10800, ["scifi"])
+            ],
+            [
+                new SelectedMedia(td.inception, "", MediaType.Movie, 0, 9000, ["scifi"]),
+            ],
+            1651766400
+        );
+        let media = new Media(
+            [
+                td.reboot,
+                td.farscape,
+                td.startrek
+            ],
+            [
+                td.inception,
+                td.matrix,
+                td.interstellar,
+                td.dune
+            ],
+            [], [], [], [], []
+        );
+        const randomSpy = jest.spyOn(Math, 'random').mockReturnValue(0.99);
+
+        let [selectedMedia, error] = streamCon.getStagedStream(rightNow, config, args, stagedMedia, media, StreamType.Cont)
+
+        let expected: SelectedMedia[] = [];
+
+        expect(selectedMedia).toEqual(expected);
+        expect(error).toBe("End time needs to be after the last scheduled media item.");
+
+        randomSpy.mockRestore();
     });
 });

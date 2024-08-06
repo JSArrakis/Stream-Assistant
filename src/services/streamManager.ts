@@ -11,8 +11,6 @@ import { StreamType } from '../models/enum/streamTypes';
 let upcomingStream: MediaBlock[] = [];
 let onDeckStream: MediaBlock[] = [];
 let continuousStream = false;
-let continuousStreamArgs: StreamArgs;
-let config: Config;
 let args: IStreamRequest
 let streamVarianceInSeconds = 0;
 
