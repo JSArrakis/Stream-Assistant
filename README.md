@@ -4,7 +4,7 @@ TODO: Template and then format this
 
 Allows you to create playlists of media with your own locally hosted media files and then execute that play list with a local media player on your machine
 
-Allows you to stream via Discord or Plex or other platorm with streaming capabilities.
+Allows you to stream via Jellyfin or Plex or other platorm with streaming capabilities.
 
 Without any user defined input, Stream Assistant will create a stream procedurally using the media on your own machine.
 
