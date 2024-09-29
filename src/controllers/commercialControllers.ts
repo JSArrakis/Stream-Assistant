@@ -171,6 +171,21 @@ export async function getAllCommercialsHandler(req: Request, res: Response): Pro
     return;
 }
 
+// ===========================================
+//        DEFAULT COMMERCIAL HANDLERS
+// ===========================================
+
+export async function getAllDefaultCommercialsHandler(req: Request, res: Response): Promise<void> {
+    const commercials = await CommercialModel.find({});
+
+    if (!commercials || commercials.length === 0) {
+        res.status(404).json({ message: "No Default Commercials Found" });
+        return;
+    }
+    res.status(200).json(commercials);
+    return;
+}
+
 export async function transformCommercialFromRequest(commercial: any, loadTitle: string): Promise<Commercial> {
     let parsedCommercial: Commercial = Commercial.fromRequestObject(commercial)
 
@@ -185,3 +200,4 @@ export async function transformCommercialFromRequest(commercial: any, loadTitle:
 
     return parsedCommercial;
 }
+

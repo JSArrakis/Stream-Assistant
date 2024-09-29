@@ -1,7 +1,8 @@
 import mongoose, { Document, Model } from 'mongoose';
 import { MediaType } from './enum/mediaTypes';
+import { BaseMedia } from './mediaInterface';
 
-export interface IShort {
+export interface IShort extends BaseMedia {
     Title: string;
     LoadTitle: string;
     Duration: number;

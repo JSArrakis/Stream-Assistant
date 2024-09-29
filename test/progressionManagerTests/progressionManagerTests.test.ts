@@ -1,8 +1,8 @@
-import { StreamType } from '../src/models/enum/streamTypes';
-import { ProgressionContext, WatchRecord } from '../src/models/progressionContext';
-import * as proMan from '../src/services/progressionManager';
-import { ContStreamRequest } from '../src/models/streamRequest';
-import * as td from './data/testData';
+import { StreamType } from '../../src/models/enum/streamTypes';
+import { ProgressionContext, WatchRecord } from '../../src/models/progressionContext';
+import * as proMan from '../../src/services/progressionManager';
+import { ContStreamRequest } from '../../src/models/streamRequest';
+import * as td from '../testData/testData';
 
 describe('GetProgressionContext', () => {
     beforeEach(() => {

@@ -1,4 +1,5 @@
 import mongoose, { Document, Model } from 'mongoose';
+import { BaseMedia } from './mediaInterface';
 
 export interface IEpisode {
     Season: number;
@@ -12,7 +13,7 @@ export interface IEpisode {
     Tags: string[];
 }
 
-export interface IShow extends Document {
+export interface IShow extends Document, BaseMedia {
     Title: string;
     LoadTitle: string;
     Alias: string;

@@ -5,6 +5,10 @@ import { Commercial } from '../models/commercial';
 import { Music } from '../models/music';
 import { Promo } from '../models/promo';
 import { Short } from '../models/short';
+import { SegmentedTags } from '../models/segmentedTags';
+import { Eras } from '../models/const/eras';
+import { MainGenres } from '../models/const/mainGenres';
+import { AgeGroups } from '../models/const/ageGroups';
 
 export async function transformShowFromRequest(show: any, loadTitle: string): Promise<Show> {
     let parsedShow: Show = Show.fromRequestObject(show)
@@ -146,4 +150,28 @@ export async function getMediaDuration(filePath: string): Promise<number> {
             }
         });
     });
+}
+
+export function segmentTags(tags: string[]): SegmentedTags {
+    let segmentedTags: SegmentedTags = new SegmentedTags([], [], [], [], []);
+
+    tags.forEach(tag => {
+        if (Object.values(Eras).includes(tag)) {
+            segmentedTags.EraTags.push(tag);
+        } else if (Object.values(MainGenres).includes(tag)) {
+            segmentedTags.GenreTags.push(tag);
+        } else if (Object.values(AgeGroups).includes(tag)) {
+            segmentedTags.AgeGroupTags.push(tag);
+        } else {
+            segmentedTags.SpecialtyTags.push(tag);
+        }
+    });
+
+    segmentedTags.EraTags = [...new Set(segmentedTags.EraTags)];
+    segmentedTags.GenreTags = [...new Set(segmentedTags.GenreTags)];
+    segmentedTags.SpecialtyTags = [...new Set(segmentedTags.SpecialtyTags)];
+    segmentedTags.AgeGroupTags = [...new Set(segmentedTags.AgeGroupTags)];
+    segmentedTags.HolidayTags = [...new Set(segmentedTags.HolidayTags)];
+
+    return segmentedTags;
 }

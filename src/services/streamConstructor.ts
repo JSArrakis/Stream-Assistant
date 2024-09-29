@@ -1,5 +1,4 @@
 import { Config } from "../models/config";
-import { loadTranslationTags } from "./dataManager";
 import { Media } from "../models/media";
 import { Movie } from "../models/movie";
 import { Collection } from "../models/collection";
@@ -9,21 +8,17 @@ import { SelectedMedia } from "../models/selectedMedia";
 import { StagedMedia } from "../models/stagedMedia";
 import { getProceduralBlock } from "./proceduralEngine";
 import { Show } from "../models/show";
-import { TranslationTag } from "../models/translationTag";
 import { createBuffer } from "./bufferEngine";
-import { StreamArgs } from "../models/streamArgs";
 import { MediaBlock } from "../models/mediaBlock";
 import { StreamType } from "../models/enum/streamTypes";
 import { ManageShowProgression } from "./progressionManager";
 import { AdhocStreamRequest, IStreamRequest } from "../models/streamRequest";
-import { error } from "console";
 
 export function constructStream(
     config: Config,
     args: IStreamRequest,
     media: Media,
     streamType: StreamType,
-    transaltionTags: TranslationTag[] = loadTranslationTags(config.DataFolder + 'translationTags.json'),
     // sets the time of the stream to the current time if no start time is provided
     rightNow: number = (args.StartTime === undefined) ? moment().unix() : args.StartTime):
     [MediaBlock[], string] {
@@ -88,7 +83,7 @@ export function constructStream(
     // An Object that holds previously played media to prevent the same media from being played in the same stream before a certain interval
     // Each media item in prevBuffer is added or removed based on its own rules. I.E. commercials are added if they are selected for a buffer but will be removed after the next
     // buffer is created and be replaced by that buffer's commercials. There are exceptions and special circumstances when this is not the case
-    let prevBuffer: Media = new Media([], [], [], [], [], [], []);
+    let prevBuffer: Media = new Media([], [], [], [], [], [], [], [], []);
 
     // Creates the buffer media to fill the time between when the stream is initilized and the first media item being played
     // The first media item played should be timed to the first 30 minute or hour mark on the clock
@@ -100,7 +95,6 @@ export function constructStream(
         media,
         [],
         stagedStream[0].Tags,
-        transaltionTags,
         prevBuffer)
 
     // Boolean to be used later to determine if there is an initial buffer to be added to the stream
@@ -143,7 +137,6 @@ export function constructStream(
                 media,
                 stagedStream[index].Tags,
                 lastItem ? [] : stagedStream[index + 1].Tags,
-                transaltionTags,
                 prevBuffer);
 
             // The sum of all selected media items in the buffer is added to the total duration of the Media Block

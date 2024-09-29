@@ -12,7 +12,9 @@ export class Media {
     Shorts: Short[];
     Music: Music[];
     Promos: Promo[];
+    DefaultPromos: Promo[];
     Commercials: Commercial[];
+    DefaultCommercials: Commercial[];
     Collections: Collection[];
 
     constructor(shows: Show[],
@@ -20,7 +22,9 @@ export class Media {
         shorts: Short[],
         music: Music[],
         promos: Promo[],
+        defaultPromos: Promo[],
         commercials: Commercial[],
+        defaultCommercials: Commercial[],
         collections: Collection[]
     ) {
 
@@ -29,7 +33,9 @@ export class Media {
         this.Shorts = shorts;
         this.Music = music;
         this.Promos = promos;
+        this.DefaultPromos = defaultPromos;
         this.Commercials = commercials;
+        this.DefaultCommercials = defaultCommercials;
         this.Collections = collections;
     }
 }

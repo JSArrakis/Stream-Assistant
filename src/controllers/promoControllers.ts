@@ -171,6 +171,21 @@ export async function getAllPromosHandler(req: Request, res: Response): Promise<
     return;
 }
 
+// ===========================================
+//          DEFAULT PROMO HANDLERS
+// ===========================================  
+
+export async function getAllDefaultPromosHandler(req: Request, res: Response): Promise<void> {
+    const promos = await PromoModel.find({});
+
+    if (!promos || promos.length === 0) {
+        res.status(404).json({ message: "Default No Promos Found" });
+        return;
+    }
+    res.status(200).json(promos);
+    return;
+}
+
 export async function transformPromoFromRequest(promo: any, loadTitle: string): Promise<Promo> {
     let parsedPromo: Promo = Promo.fromRequestObject(promo)
 

@@ -1,8 +1,7 @@
 import mongoose, { Model } from 'mongoose';
 import { MediaType } from './enum/mediaTypes';
-import { BaseMedia } from './mediaInterface';
 
-export interface IMusic extends BaseMedia{
+export interface IDefaultPromo {
     Title: string;
     LoadTitle: string;
     Duration: number;
@@ -11,7 +10,7 @@ export interface IMusic extends BaseMedia{
     Tags: string[];
 }
 
-export const MusicSchema = new mongoose.Schema({
+export const DefaultPromoSchema = new mongoose.Schema({
     Title: String,
     LoadTitle: String,
     Duration: Number,
@@ -20,7 +19,7 @@ export const MusicSchema = new mongoose.Schema({
     Tags: [String],
 });
 
-export class Music {
+export class DefaultPromo {
     Title: string;
     LoadTitle: string;
     Duration: number;
@@ -37,8 +36,8 @@ export class Music {
         this.Tags = tags;
     }
 
-    static fromMongoObject(mongoObject: any): Music {
-        return new Music(
+    static fromMongoObject(mongoObject: any): DefaultPromo {
+        return new DefaultPromo(
             mongoObject.title,
             mongoObject.loadTitle,
             mongoObject.duration,
@@ -48,7 +47,7 @@ export class Music {
         );
     }
 
-    static toMongoObject(movie: Music): any {
+    static toMongoObject(movie: DefaultPromo): any {
         return {
             title: movie.Title,
             loadTitle: movie.LoadTitle,
@@ -59,16 +58,16 @@ export class Music {
         };
     }
 
-    static fromRequestObject(requestObject: any): Music {
-        return new Music(
+    static fromRequestObject(requestObject: any): DefaultPromo {
+        return new DefaultPromo(
             requestObject.title,
             requestObject.loadTitle,
             requestObject.duration,
             requestObject.path,
-            MediaType.Music,
+            MediaType.Promo,
             requestObject.tags,
         );
     }
 }
 
-export const MusicModel: Model<IMusic> = mongoose.model<IMusic>('Music', MusicSchema);
+export const DefaultPromoModel: Model<IDefaultPromo> = mongoose.model<IDefaultPromo>('DefaultPromo', DefaultPromoSchema);

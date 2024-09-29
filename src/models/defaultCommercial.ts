@@ -2,7 +2,7 @@ import mongoose, { Model } from 'mongoose';
 import { MediaType } from "./enum/mediaTypes";
 import { BaseMedia } from './mediaInterface';
 
-export interface ICommercial extends BaseMedia{
+export interface IDefaultCommercial extends BaseMedia {
     Title: string;
     LoadTitle: string;
     Duration: number;
@@ -11,7 +11,7 @@ export interface ICommercial extends BaseMedia{
     Tags: string[];
 }
 
-export const CommercialSchema = new mongoose.Schema({
+export const DefaultCommercialSchema = new mongoose.Schema({
     Title: String,
     LoadTitle: String,
     Duration: Number,
@@ -20,7 +20,7 @@ export const CommercialSchema = new mongoose.Schema({
     Tags: [String],
 });
 
-export class Commercial {
+export class DefaultCommercial {
     Title: string;
     LoadTitle: string;
     Duration: number;
@@ -37,8 +37,8 @@ export class Commercial {
         this.Tags = tags;
     }
 
-    static fromMongoObject(mongoObject: any): Commercial {
-        return new Commercial(
+    static fromMongoObject(mongoObject: any): DefaultCommercial {
+        return new DefaultCommercial(
             mongoObject.Title,
             mongoObject.LoadTitle,
             mongoObject.Duration,
@@ -48,7 +48,7 @@ export class Commercial {
         );
     }
 
-    static toMongoObject(commercial: Commercial): any {
+    static toMongoObject(commercial: DefaultCommercial): any {
         return {
             title: commercial.Title,
             loadTitle: commercial.LoadTitle,
@@ -59,8 +59,8 @@ export class Commercial {
         };
     }
 
-    static fromRequestObject(requestObject: any): Commercial {
-        return new Commercial(
+    static fromRequestObject(requestObject: any): DefaultCommercial {
+        return new DefaultCommercial(
             requestObject.title,
             requestObject.loadTitle,
             requestObject.duration,
@@ -71,4 +71,4 @@ export class Commercial {
     }
 }
 
-export const CommercialModel: Model<ICommercial> = mongoose.model<ICommercial>('Commercial', CommercialSchema);
+export const DefaultCommercialModel: Model<IDefaultCommercial> = mongoose.model<IDefaultCommercial>('DefaultCommercial', DefaultCommercialSchema);

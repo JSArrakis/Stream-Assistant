@@ -1,6 +1,7 @@
 import mongoose, { Model } from 'mongoose';
+import { BaseMedia } from './mediaInterface';
 
-export interface IMovie {
+export interface IMovie extends BaseMedia{
     Title: string;
     LoadTitle: string;
     Alias: string;

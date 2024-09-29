@@ -12,6 +12,9 @@ import { MediaType } from "../models/enum/mediaTypes";
 import { Config } from "../models/config";
 import { keyNormalizer } from "../utils/utilities";
 import fs from 'fs/promises';
+import { HolidayModel, Holiday } from '../models/holiday';
+import { DefaultCommercialModel, DefaultCommercial } from '../models/defaultCommercial';
+import { DefaultPromoModel } from '../models/defaultPromo';
 
 const uri: string = "mongodb://127.0.0.1:27017/streamAssistantMedia";
 export async function connectToDB() {
@@ -56,6 +59,17 @@ export async function LoadPromos(): Promise<Promo[]> {
     return promos;
 }
 
+export async function LoadDefaultPromos(): Promise<Promo[]> {
+    const promos = await DefaultPromoModel.find() as Promo[];
+
+    if (!promos || promos.length === 0) {
+        console.log("No Default Promos Found");
+        return [];
+    }
+    console.log(promos.length + " Default Promos loaded");
+    return promos;
+}
+
 export async function LoadCommercials(): Promise<Commercial[]> {
     const commercials = await CommercialModel.find() as Commercial[];
 
@@ -64,6 +78,17 @@ export async function LoadCommercials(): Promise<Commercial[]> {
         return [];
     }
     console.log(commercials.length + " Commercials loaded");
+    return commercials;
+}
+
+export async function LoadDefaultCommercials(): Promise<Commercial[]> {
+    const commercials = await DefaultCommercialModel.find() as Commercial[];
+
+    if (!commercials || commercials.length === 0) {
+        console.log("No Default Commercials Found");
+        return [];
+    }
+    console.log(commercials.length + " Default Commercials loaded");
     return commercials;
 }
 
@@ -87,6 +112,17 @@ export async function LoadShorts(): Promise<Short[]> {
     }
     console.log(shorts.length + " Shorts loaded");
     return shorts;
+}
+
+export async function LoadHolidays(): Promise<Holiday[]> {
+    const holidays = await HolidayModel.find();
+
+    if (!holidays || holidays.length === 0) {
+        console.log("No Holidays Found");
+        return [];
+    }
+    console.log(holidays.length + " Holidays loaded");
+    return holidays;
 }
 
 export async function GetDefaultEnvConfig(defaultPromo: string): Promise<EnvConfiguration> {
@@ -133,10 +169,9 @@ export async function LoadEnvConfigList(): Promise<EnvConfiguration[]> {
 }
 
 export async function CreateDefaultPromo(config: Config): Promise<void> {
-
     const resolvedPromoPath = path.resolve(__dirname, '../../', config.DefaultPromo);
     // Check if default promo exists in the database
-    const defaultPromo = await PromoModel.findOne({ LoadTitle: "default" });
+    const defaultPromo = await DefaultPromoModel.findOne({ LoadTitle: "default" });
     // If it exists, return
     if (defaultPromo) {
         console.log("Default Promo already exists");
@@ -149,7 +184,7 @@ export async function CreateDefaultPromo(config: Config): Promise<void> {
     let duration = await dataTrans.getMediaDuration(resolvedPromoPath);
 
     // Create default promo
-    const promo = new PromoModel({
+    const promo = new DefaultPromoModel({
         Title: "Default",
         LoadTitle: "default",
         Duration: duration,
@@ -165,10 +200,10 @@ export async function CreateDefaultCommercials(config: Config): Promise<void> {
 
     const resolvedCommercialFolder = path.resolve(__dirname, '../../', config.DefaultCommercialFolder);
     // Get all commercials that have the tag "default"
-    const defaultCommercials = await CommercialModel.find({ Tags: "default" });
-    let commercialList: Commercial[] = [];
+    const defaultCommercials = await DefaultCommercialModel.find({ Tags: "default" });
+    let commercialList: DefaultCommercial[] = [];
     for (let i = 0; i < defaultCommercials.length; i++) {
-        commercialList.push(Commercial.fromMongoObject(defaultCommercials[i]));
+        commercialList.push(DefaultCommercial.fromMongoObject(defaultCommercials[i]));
     }
     // If there are default commercials, return
     if (defaultCommercials.length > 0) {
@@ -202,7 +237,7 @@ export async function CreateDefaultCommercials(config: Config): Promise<void> {
             let commercialName = file.replace(/\.[^/.]+$/, "");
 
             // Create commercial object and add it to commercial list
-            commercialList.push(new Commercial(
+            commercialList.push(new DefaultCommercial(
                 commercialName,
                 keyNormalizer(commercialName),
                 duration,
@@ -216,7 +251,7 @@ export async function CreateDefaultCommercials(config: Config): Promise<void> {
         if (CheckBufferViability(commercialList)) {
             // Save the default commercials to the database
             for (let commercial of commercialList) {
-                const newCommercial = new CommercialModel({
+                const newCommercial = new DefaultCommercialModel({
                     Title: commercial.Title,
                     LoadTitle: commercial.LoadTitle,
                     Duration: commercial.Duration,

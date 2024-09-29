@@ -1,3 +1,5 @@
+import { Commercial } from "../../src/models/commercial";
+import { MediaType } from "../../src/models/enum/mediaTypes";
 import { Movie } from "../../src/models/movie";
 import { ProgressionContext, WatchRecord } from "../../src/models/progressionContext";
 import { Episode, Show } from "../../src/models/show";
@@ -81,3 +83,67 @@ export const continuousProgression = new ProgressionContext('Continuous', 'conti
     batmanWatchRecord,
     startrekWatchRecord
 ]);
+
+export const jurassicparktoys1 = new Commercial('Jurassic Park Toys 1', 'jurassicparktoys1', 10, '/path/jurassicparktoys1.mp4', MediaType.Commercial, ["action", "1990s", "kids", "jurassicpark"]);
+export const marvelvsstreetfighter98 = new Commercial('98 Marvel vs StreetFighter', '98marvelvsstreetfighter', 15, '/path/98marvelvsstreetfighter.mp4', MediaType.Commercial, ["marvel", "streetfighter", "1990s", "action", "1990s", "kids"]);
+export const wildones = new Commercial('Wild Ones', 'wildones', 15, '/path/wildones.mp4', MediaType.Commercial, ["action", "1990s", "kids"]);
+export const dreambuilders = new Commercial('Dream Builders', 'dreambuilders', 15, '/path/dreambuilders.mp4', MediaType.Commercial, ["1990s", "kids"]);
+export const jurrassicparktoys2 = new Commercial('93 Jurassic Park Toys 2', '93 jurassicparktoys2', 15, '/path/jurassicparktoys2.mp4', MediaType.Commercial, ["action", "1990s", "kids", "jurassicpark"]);
+export const jurrassicparktoys3 = new Commercial('93 Jurassic Park Toys 3', '93 jurassicparktoys3', 15, '/path/jurassicparktoys3.mp4', MediaType.Commercial, ["action", "1990s", "kids", "jurassicpark"]);
+export const littleoopsiedaisy = new Commercial('Little Oopsie Daisy', 'littleoopsiedaisy', 15, '/path/littleoopsiedaisy.mp4', MediaType.Commercial, ["1990s", "kids"]);
+export const meninblacktoys97 = new Commercial('97 Men in Black Toys', '97meninblacktoys', 15, '/path/97meninblacktoys.mp4', MediaType.Commercial, ["action", "scifi", "1990s", "kids", "meninblack"]);
+export const monsterfacetoy = new Commercial('Monster Face Toy', 'monsterfacetoy', 15, '/path/monsterfacetoy.mp4', MediaType.Commercial, ["horror", "1990s", "kids", "halloween"]);
+export const newbluemms = new Commercial('New Blue M&Ms', 'newbluemms', 15, '/path/newbluemms.mp4', MediaType.Commercial, ["1990s"]);
+export const superduperdoublelooper = new Commercial('Super Duper Double Looper', 'superduperdoublelooper', 15, '/path/superduperdoublelooper.mp4', MediaType.Commercial, ["action", "1990s", "kids"]);
+export const transformersbeastwarstoys = new Commercial('Transformers Beast Wars Toys', 'transformersbeastwarstoys', 15, '/path/transformersbeastwarstoys.mp4', MediaType.Commercial, ["action", "scifi", "1990s", "kids", "transformers"]);
+export const gamegear1 = new Commercial('Game Gear 1', 'gamegear1', 26, '/path/gamegear1.mp4', MediaType.Commercial, ["1990s", "kids"]);
+export const sonicandknuckles1 = new Commercial('Sonic and Knuckles 1', 'sonicandknuckles1', 30, '/path/sonicandknuckles1.mp4', MediaType.Commercial, ["1990s", "kids"]);
+export const banjokazooie1 = new Commercial('Banjo Kazooie 1', 'banjokazooie1', 30, '/path/banjokazooie1.mp4', MediaType.Commercial, ["1990s", "kids"]);
+export const fzero1 = new Commercial('F-Zero 1', 'fzero1', 30, '/path/fzero1.mp4', MediaType.Commercial, ["1990s", "kids"]);
+export const gauntletlegends1 = new Commercial('Gauntlet Legends 1', 'gauntletlegends1', 30, '/path/gauntletlegends1.mp4', MediaType.Commercial, ["1990s", "kids"]);
+export const halloween711 = new Commercial('Halloween 7-11', 'halloween711', 30, '/path/halloween711.mp4', MediaType.Commercial, ["1990s", "halloween"]);
+export const alientrailer1 = new Commercial('Alien Trailer 1', 'alientrailer1', 30, '/path/alientrailer1.mp4', MediaType.Commercial, ["scifi", "horror", "1970s", "alien"]);
+export const americanwerewolfinlondontrailer1 = new Commercial('American Werewolf in London Trailer 1', 'americanwerewolfinlondontrailer1', 30, '/path/americanwerewolfinlondontrailer1.mp4', MediaType.Commercial, ["horror", "1980s"]);
+export const beetlejuicetrailer1 = new Commercial('Beetlejuice Trailer 1', 'beetlejuicetrailer1', 30, '/path/beetlejuicetrailer1.mp4', MediaType.Commercial, ["horror", "comedy", "1980s"]);
+export const ocarinaoftimetrailer1 = new Commercial('Ocarina of Time Trailer 1', 'ocarinaoftimetrailer1', 62, '/path/ocarinaoftimetrailer1.mp4', MediaType.Commercial, ["1990s", "kids"]);
+export const ijustshippedmybed = new Commercial('I Just Shipped My Bed', 'ijustshippedmybed', 69, '/path/ijustshippedmybed.mp4', MediaType.Commercial, ["comedy", "2010s"]);
+export const cornpopsgolf = new Commercial('Corn Pops Golf', 'cornpopsgolf', 30, '/path/cornpopsgolf.mp4', MediaType.Commercial, ["1990s", "kids"]);
+export const blacktronlegomaniac = new Commercial('Blacktron Lego Maniac', 'blacktronlegomaniac', 30, '/path/blacktronlegomaniac.mp4', MediaType.Commercial, ["1990s", "kids", "lego"]);
+export const starttrektoys = new Commercial('Star Trek Toys', 'starttrektoys', 30, '/path/starttrektoys.mp4', MediaType.Commercial, ["scifi", "1990s", "kids", "startrek"]);
+export const sharkbitesfruitsnacks = new Commercial('Shark Bites Fruit Snacks', 'sharkbitesfruitsnacks', 30, '/path/sharkbitesfruitsnacks.mp4', MediaType.Commercial, ["1990s", "kids"]);
+export const ricecrispiescerealtalks = new Commercial('Rice Crispies Cereal Talks', 'ricecrispiescerealtalks', 30, '/path/ricecrispiescerealtalks.mp4', MediaType.Commercial, ["1990s", "kids"]);
+export const pizzahutxmen = new Commercial('Pizza Hut X-Men', 'pizzahutxmen', 30, '/path/pizzahutxmen.mp4', MediaType.Commercial, ["action", "1990s", "kids", "xmen", "marvel"]);
+export const mcdonaldscrush = new Commercial('McDonalds Crush', 'mcdonaldscrush', 30, '/path/mcdonaldscrush.mp4', MediaType.Commercial, ["1990s", "kids"]);
+
+export const commercials = [
+    jurassicparktoys1,
+    marvelvsstreetfighter98,
+    wildones,
+    dreambuilders,
+    jurrassicparktoys2,
+    jurrassicparktoys3,
+    littleoopsiedaisy,
+    meninblacktoys97,
+    monsterfacetoy,
+    newbluemms,
+    superduperdoublelooper,
+    transformersbeastwarstoys,
+    gamegear1,
+    sonicandknuckles1,
+    banjokazooie1,
+    fzero1,
+    gauntletlegends1,
+    halloween711,
+    alientrailer1,
+    americanwerewolfinlondontrailer1,
+    beetlejuicetrailer1,
+    ocarinaoftimetrailer1,
+    ijustshippedmybed,
+    cornpopsgolf,
+    blacktronlegomaniac,
+    starttrektoys,
+    sharkbitesfruitsnacks,
+    ricecrispiescerealtalks,
+    pizzahutxmen,
+    mcdonaldscrush
+];
