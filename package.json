@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
+    "test:verbose": "jest --verbose --runInBand --silent=false",
     "start": "ts-node-dev --respawn --transpile-only app.ts"
   },
   "author": "",

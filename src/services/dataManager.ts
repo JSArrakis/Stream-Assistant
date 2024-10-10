@@ -196,69 +196,44 @@ function getMediaByAgeAndEra(media: BaseMedia[], tags: string[], age: string): B
     return selectedMedia
 }
 
-function getMediaByTagHeriarchy(
+export function getMediaByTagHeriarchy(
     alreadySelectedMedia: BaseMedia[],
     age: string, media: BaseMedia[],
     segmentedTags: SegmentedTags,
     duration: number): BaseMedia[] {
     let selectedMedia: BaseMedia[] = [];
     let sumDuration: number = 0;
-    // 1. If there is not enough media to fill the duration: Specialty and Genre Tag Chain
-    if (segmentedTags.SpecialtyTags.length > 0 && segmentedTags.GenreTags.length > 0) {
-        let comboTags = [...segmentedTags.SpecialtyTags, ...segmentedTags.GenreTags];
-        // 1a. Get all media that matches all tags first
-        selectedMedia.push(
-            ...getContextMedia(
-                alreadySelectedMedia,
-                media,
-                comboTags,
-                segmentedTags.EraTags,
-                age,
-                duration - sumDuration));
-
-        // 1b. If there is not enough media to fill the duration: Specialty and Genre Tag Chain
-        sumDuration = sumMediaDuration(selectedMedia);
-        // Only evaluate combo tags if there are 3 or less due to indivudal tag evaluation if there are
-        // more than 4 in the tag group heirarchy function
-        if (comboTags.length <= 3 && sumDuration < duration) {
-            selectedMedia.push(
-                ...getMediaByTagGroupHeirarchy(
-                    alreadySelectedMedia,
-                    media,
-                    comboTags,
-                    segmentedTags.EraTags,
-                    age,
-                    duration - sumDuration));
-        }
-    }
-
-    // 2. If there is not enough media to fill the duration: Specialty Tag Chain
+    let contextAlreadySelectedMedia: BaseMedia[] = alreadySelectedMedia.map((m) => m);
+    // 1. Get enough media to fill the duration: Specialty Tag Chain
+    // TODO: Will users ever segment a specialty tag by using genre tags?
+    // Can we think of media where that would be true, considering a specialty
+    // tag is anything a user enters as a tag that is not one of the genre tags?
+    // Does this even matter for the buffer media?
     if (segmentedTags.SpecialtyTags.length > 0) {
-        sumDuration = sumMediaDuration(selectedMedia);
-        if (sumDuration < duration) {
-            selectedMedia.push(
-                ...getMediaByTagGroupHeirarchy(
-                    alreadySelectedMedia,
-                    media,
-                    segmentedTags.SpecialtyTags,
-                    segmentedTags.EraTags,
-                    age,
-                    duration - sumDuration));
-        }
+        const tagGroupMedia = getMediaByTagGroupHeirarchy(
+            contextAlreadySelectedMedia,
+            media,
+            segmentedTags.SpecialtyTags,
+            segmentedTags.EraTags,
+            age,
+            duration);
+        selectedMedia.push(...tagGroupMedia);
+        contextAlreadySelectedMedia.push(...tagGroupMedia);
     }
 
-    // 3. If there is not enough media to fill the duration: Genre Tag Chain
+    // 2. If there is not enough media to fill the duration: Genre Tag Chain
     if (segmentedTags.GenreTags.length > 0) {
         sumDuration = sumMediaDuration(selectedMedia);
         if (sumDuration < duration) {
-            selectedMedia.push(
-                ...getMediaByTagGroupHeirarchy(
-                    alreadySelectedMedia,
-                    media,
-                    segmentedTags.GenreTags,
-                    segmentedTags.EraTags,
-                    age,
-                    duration - sumDuration));
+            const tagGroupMedia = getMediaByTagGroupHeirarchy(
+                contextAlreadySelectedMedia,
+                media,
+                segmentedTags.GenreTags,
+                segmentedTags.EraTags,
+                age,
+                duration);
+            selectedMedia.push(...tagGroupMedia);
+            contextAlreadySelectedMedia.push(...tagGroupMedia);
         }
     }
     return selectedMedia;
@@ -276,7 +251,7 @@ export function sumMediaDuration(media: BaseMedia[]): number {
     return media.reduce((acc, val) => acc + val.Duration, 0);
 }
 
-function createTagGroups(tags: string[]): string[][] {
+export function createTagGroups(tags: string[]): string[][] {
     let biGenreGroups: string[][] = [];
     // Create groups of 2 genre tags
     for (let i = 0; i < tags.length; i++) {
@@ -316,7 +291,7 @@ export function getOutOfEraMedia(
     });
 }
 
-function getMediaWithEraConsiderations(
+export function getMediaWithEraConsiderations(
     alreadySelectedMedia: BaseMedia[],
     allTagMediaInEra: BaseMedia[],
     allTagMediaOutOfEra: BaseMedia[],
@@ -324,10 +299,8 @@ function getMediaWithEraConsiderations(
     duration: number): BaseMedia[] {
     let selectedMedia: BaseMedia[] = [];
     if (eraTags.length > 0) {
-        let mediaByEra: BaseMedia[] = fillMediaByEra(allTagMediaInEra, allTagMediaOutOfEra, duration)
-        selectedMedia.push(...mediaByEra.filter((m) => !alreadySelectedMedia.includes(m)));
+        selectedMedia.push(...fillMediaByEra(alreadySelectedMedia, allTagMediaInEra, allTagMediaOutOfEra, duration));
     } else {
-
         selectedMedia.push(...allTagMediaInEra.filter((m) => !alreadySelectedMedia.includes(m)));
     }
 
@@ -335,14 +308,16 @@ function getMediaWithEraConsiderations(
 }
 
 export function fillMediaByEra(
+    alreadySelectedMedia: BaseMedia[],
     eraMedia: BaseMedia[],
     nonEraMedia: BaseMedia[],
     duration: number): BaseMedia[] {
-    let selectedMedia: BaseMedia[] = eraMedia;
+    let selectedMedia: BaseMedia[] = eraMedia.filter((m) => !alreadySelectedMedia.includes(m));
 
     // If there is not enough media to fill the duration: Get all media that matches any era tags
-    if (sumMediaDuration(selectedMedia) < duration) {
-        selectedMedia.push(...nonEraMedia);
+    const sumDuration = sumMediaDuration(selectedMedia);
+    if (sumDuration < duration) {
+        selectedMedia.push(...nonEraMedia.filter((m) => !alreadySelectedMedia.includes(m)));
     }
 
     return selectedMedia;
@@ -373,75 +348,86 @@ export function getAllTagMedia(
     return { allTagMediaInEra: inEra, allTagMediaOutOfEra: outOfEra };
 }
 
-function getMediaByTagGroupHeirarchy(
+export function getMediaByTagGroupHeirarchy(
     alreadySelectedMedia: BaseMedia[],
     media: BaseMedia[],
     selectedTags: string[],
     eraTags: string[],
     age: string,
     duration: number): BaseMedia[] {
+    
+    //Create a list of base media to put already selected media in and make it so when the list is added to it doesnt modify the original list
+    let contextAlreadySelectedMedia: BaseMedia[] = alreadySelectedMedia.map((m) => m);
+    
     let selectedMedia: BaseMedia[] = [];
     let sumDuration: number = duration
     // If there are 3 or less genre tags, create groups of genre tags in combinations of 2
     if (selectedTags.length <= 3) {
         // Create groups of 2 genre tags
         // a. Try to get media that matches all genre tags first
-        selectedMedia.push(
-            ...getContextMedia(
-                alreadySelectedMedia,
-                media,
-                selectedTags,
-                eraTags,
-                age,
-                duration));
-
+        const contextMedia = getContextMedia(
+            contextAlreadySelectedMedia,
+            media,
+            selectedTags,
+            eraTags,
+            age,
+            duration);
+        selectedMedia.push(...contextMedia);
+        contextAlreadySelectedMedia.push(...contextMedia);
         // b. If summed duration is still less than the duration, get media that matches all tags in each of the biGenreGroups
+        // If there are only 2 genre tags, it is the same as the previous attempt to get media with all tags
         sumDuration = sumMediaDuration(selectedMedia);
-        if (sumDuration < duration) {
+        if (sumDuration < duration && selectedTags.length === 3) {
             let biTagGroups = createTagGroups(selectedTags);
             biTagGroups.forEach((tagGroup) => {
-                selectedMedia.push(
-                    ...getContextMedia(
-                        alreadySelectedMedia,
-                        media,
-                        tagGroup,
-                        eraTags,
-                        age,
-                        duration - sumDuration));
+                const contextMedia = getContextMedia(
+                    contextAlreadySelectedMedia,
+                    media,
+                    tagGroup,
+                    eraTags,
+                    age,
+                    duration - sumDuration)
+                selectedMedia.push(...contextMedia);
+                contextAlreadySelectedMedia.push(...contextMedia);
             });
         }
 
         sumDuration = sumMediaDuration(selectedMedia);
         // c. If summed duration is still less than the duration, get media that matches any of the genre tags that have not already been added to the selected media list
         if (sumDuration < duration) {
+            // We dont update the duration here for each loop because we want
+            // and equal chance of selecting media that matches any of the tags
+            // Including out of era media
             selectedTags.forEach((tag) => {
-                selectedMedia.push(
-                    ...getContextMedia(
-                        alreadySelectedMedia,
-                        media,
-                        [tag],
-                        eraTags,
-                        age,
-                        duration - sumDuration));
+                const contextMedia = getContextMedia(
+                    contextAlreadySelectedMedia,
+                    media,
+                    [tag],
+                    eraTags,
+                    age,
+                    duration - sumDuration)
+                selectedMedia.push(...contextMedia);
+                contextAlreadySelectedMedia.push(...contextMedia);
             });
         }
     } else {
         // If there are more than 3 genre tags, get media that matches any of the genre tags
         selectedTags.forEach((tag) => {
-            selectedMedia.push(
-                ...getContextMedia(
-                    alreadySelectedMedia,
+            const contextMedia = getContextMedia(
+                    contextAlreadySelectedMedia,
                     media,
                     [tag],
                     eraTags,
                     age,
-                    duration - sumDuration));
+                    duration - sumDuration)
+            selectedMedia.push(...contextMedia);
+            contextAlreadySelectedMedia.push(...contextMedia);
         });
     }
     return selectedMedia;
 }
 
-function getContextMedia(
+export function getContextMedia(
     alreadySelectedMedia: BaseMedia[],
     media: BaseMedia[],
     tags: string[],
