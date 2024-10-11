@@ -144,10 +144,13 @@ export function getMedia(): Media {
 // a very specific experience if they so choose.
 export function getMediaByAgeGroupHierarchy(
     media: BaseMedia[],
+    alreadySelectedMedia: BaseMedia[],
     tags: SegmentedTags,
     duration: number): BaseMedia[] {
     let selectedMedia: BaseMedia[] = [];
     let sumDuration: number = 0;
+
+    let contextAlreadySelectedMedia: BaseMedia[] = alreadySelectedMedia.map((m) => m);
 
     let hasAgeGroupTags = tags.AgeGroupTags.length > 0;
     let hasSpecialtyTags = tags.SpecialtyTags.length > 0;
@@ -155,39 +158,51 @@ export function getMediaByAgeGroupHierarchy(
     let hasEraTags = tags.EraTags.length > 0;
 
     if (hasAgeGroupTags) {
-        let index = categoryIndexMap.get(getHighestAgeGroupTag(tags.AgeGroupTags));
-        if (index) {
-            for (let i = index; i > 0; i--) {
-                let age = categoryMap.get(i) as string;
+        let ageGroups = getAgeGroupAdjacencyTags(tags.AgeGroupTags);
+        ageGroups.forEach((age) => {
+            sumDuration = sumMediaDuration(selectedMedia);
+            if (sumDuration < duration) {
                 if (hasSpecialtyTags || hasGenreTags) {
-                    selectedMedia = getMediaByTagHeriarchy(selectedMedia, age, media, tags, duration);
+                    const mediaByTags = getMediaByTagHeriarchy(contextAlreadySelectedMedia, age, media, tags, duration);
+                    selectedMedia.push(...mediaByTags);
+                    contextAlreadySelectedMedia.push(...mediaByTags);
                 } else if (hasEraTags) {
-                    selectedMedia = getMediaByAgeAndEra(media, tags.EraTags, age);
+                    const mediaByEra = getMediaByAgeAndEra(media, tags.EraTags, age);
+                    selectedMedia.push(...mediaByEra);
+                    contextAlreadySelectedMedia.push(...mediaByEra);
                 } else {
-                    selectedMedia = getMediaByEra(media, tags.EraTags, age);
+                    const mediaByAge = getMediaByAge(media, age);
+                    selectedMedia.push(...mediaByAge);
+                    contextAlreadySelectedMedia.push(...mediaByAge);
                 }
             }
-        }
+        });
     }
 
     sumDuration = sumMediaDuration(selectedMedia);
     if (sumDuration < duration) {
         if (hasSpecialtyTags || hasGenreTags) {
-            selectedMedia.push(...getMediaByTagHeriarchy(selectedMedia, AgeGroups.AllAges, media, tags, duration));
+            const mediaByTags = getMediaByTagHeriarchy(contextAlreadySelectedMedia, AgeGroups.AllAges, media, tags, duration);
+            selectedMedia.push(...mediaByTags);
+            contextAlreadySelectedMedia.push(...mediaByTags);
         } else if (hasEraTags) {
-            selectedMedia.push(...getMediaByAgeAndEra(media, tags.EraTags, AgeGroups.AllAges));
+            const mediaByEra = getMediaByAgeAndEra(media, tags.EraTags, AgeGroups.AllAges);
+            selectedMedia.push(...mediaByEra);
+            contextAlreadySelectedMedia.push(...mediaByEra);
         } else {
-            selectedMedia.push(...getMediaByEra(media, tags.EraTags, AgeGroups.AllAges));
+            const mediaByAge = getMediaByAge(media, AgeGroups.AllAges);
+            selectedMedia.push(...mediaByAge);
+            contextAlreadySelectedMedia.push(...mediaByAge);
         }
     }
 
     return selectedMedia;
 }
 
-function getMediaByAgeAndEra(media: BaseMedia[], tags: string[], age: string): BaseMedia[] {
+export function getMediaByAgeAndEra(media: BaseMedia[], eras: string[], age: string): BaseMedia[] {
     let selectedMedia: BaseMedia[] = [];
 
-    tags.forEach((era) => {
+    eras.forEach((era) => {
         selectedMedia.push(...media.filter((m) => {
             return m.Tags.includes(era) && m.Tags.includes(age);
         }));
@@ -207,7 +222,8 @@ export function getMediaByTagHeriarchy(
     // 1. Get enough media to fill the duration: Specialty Tag Chain
     // TODO: Will users ever segment a specialty tag by using genre tags?
     // Can we think of media where that would be true, considering a specialty
-    // tag is anything a user enters as a tag that is not one of the genre tags?
+    // tag is anything a user enters as a tag that is not one of the genre tags, and 
+    // usually things like star wars, jurassic park, etc are pretty insular in their themeing?
     // Does this even matter for the buffer media?
     if (segmentedTags.SpecialtyTags.length > 0) {
         const tagGroupMedia = getMediaByTagGroupHeirarchy(
@@ -239,12 +255,8 @@ export function getMediaByTagHeriarchy(
     return selectedMedia;
 }
 
-function getMediaByEra(media: BaseMedia[], tags: string[], age: string): BaseMedia[] {
-    let selectedMedia: BaseMedia[] = [];
-    tags.forEach((tag) => {
-        selectedMedia.push(...getMediaByTags(media, [tag, age]));
-    });
-    return selectedMedia;
+export function getMediaByAge(media: BaseMedia[], age: string): BaseMedia[] {
+    return media.filter((m) => m.Tags.includes(age));
 }
 
 export function sumMediaDuration(media: BaseMedia[]): number {
@@ -447,6 +459,35 @@ export function getContextMedia(
             eraTags,
             duration));
     return selectedMedia;
+}
+
+export function getAgeGroupAdjacencyTags(tags: string[]): string[] {
+    let adjacencyTags: string[] = [];
+    tags.forEach((tag) => {
+        if (tag === AgeGroups.Kids) {
+            adjacencyTags.push(AgeGroups.Kids);
+            adjacencyTags.push(AgeGroups.Family);
+        }
+        if (tag === AgeGroups.Family) {
+            adjacencyTags.push(AgeGroups.Family);
+            adjacencyTags.push(AgeGroups.Kids);
+            if (!tags.includes(AgeGroups.Kids)) {
+                adjacencyTags.push(AgeGroups.YoungAdult);
+            }
+        }
+        if (tag === AgeGroups.YoungAdult) {
+            adjacencyTags.push(AgeGroups.YoungAdult);
+            adjacencyTags.push(AgeGroups.Family);
+            if (!tags.includes(AgeGroups.Family)) {
+                adjacencyTags.push(AgeGroups.Mature);
+            }
+        }
+        if (tag === AgeGroups.Mature) {
+            adjacencyTags.push(AgeGroups.Mature);
+            adjacencyTags.push(AgeGroups.YoungAdult);
+        }
+    });
+    return adjacencyTags.filter((tag, index) => adjacencyTags.indexOf(tag) === index);
 }
 
 export function getHighestAgeGroupTag(tags: string[]): string {
