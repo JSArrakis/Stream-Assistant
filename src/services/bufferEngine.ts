@@ -9,6 +9,7 @@ import { SegmentedTags } from "../models/segmentedTags";
 import { segmentTags } from "./dataTransformer";
 import { getMediaByAgeGroupHierarchy } from "./dataManager";
 import { BaseMedia } from "../models/mediaInterface";
+import { sumMediaDuration } from "./dataManager";
 
 export function createBuffer(
     duration: number,
@@ -209,22 +210,19 @@ export function createBuffer(
     }
 }
 
-function selectFullDurationMedia(
+export function selectFullDurationMedia(
     media: BaseMedia[],
-    previouslyUsedMedia: BaseMedia[],
     currentlySelectedMedia: BaseMedia[],
     duration: number): BaseMedia[] {
     return media.filter(
         (media: BaseMedia) =>
             media.Duration === duration &&
-            !previouslyUsedMedia.includes(media) &&
             !currentlySelectedMedia.includes(media)
     );
 }
 
-function selectUnderDuratonMedia(
+export function selectUnderDuratonMedia(
     media: BaseMedia[],
-    previouslyUsedMedia: BaseMedia[],
     currentlySelectedMedia: BaseMedia[],
     duration: number,
     blockDuration: number): BaseMedia[] {
@@ -232,19 +230,83 @@ function selectUnderDuratonMedia(
         (media) =>
             media.Duration <= duration &&
             media.Duration <= blockDuration &&
-            !previouslyUsedMedia.includes(media) &&
             !currentlySelectedMedia.includes(media)
     );
 }
 
+export function selectAvailableCommercials(
+    commercials: Commercial[],
+    defaultCommercials: Commercial[],
+    selectedCommercials: Commercial[],
+    duration: number,
+    blockDuration: number): Commercial[] {
+    let availableCommercials: Commercial[] = [];
+    // Get the commercials that fit the remaining duration
+    availableCommercials =
+        selectFullDurationMedia(
+            commercials,
+            selectedCommercials,
+            duration
+        ) as Commercial[];
+    // Get the commercials that are less than or equal to both the 
+    // remaining duration and the commercial block
+    if (availableCommercials.length === 0) {
+        availableCommercials =
+            selectUnderDuratonMedia(
+                commercials,
+                selectedCommercials,
+                duration,
+                blockDuration
+            ) as Commercial[];
+    }
+    // Get the default commercials that fit the remaining duration
+    // Only add them to the available commercials instead of assigning them
+    // this way it still is a higher chance of selecting a commercial that is
+    // not a default commercial
+    if (sumMediaDuration(availableCommercials) < duration) {
+        availableCommercials.push(...
+            selectFullDurationMedia(
+                defaultCommercials,
+                [],
+                duration
+            ) as Commercial[]);
+    }
+    // Get the default commercials that are less than or equal to both the remaining duration
+    // and the commercial block
+    let summedDuration = sumMediaDuration(availableCommercials);
+    if (summedDuration < duration && summedDuration < blockDuration) {
+        availableCommercials.push(...
+            selectUnderDuratonMedia(
+                defaultCommercials,
+                [],
+                duration,
+                blockDuration
+            ) as Commercial[]);
+    }
+    return availableCommercials;
+}
+
+export function selectWeightedCommerical(
+    media: Commercial[],
+): Commercial {
+    // Get the first 10 commercials from media, this is because the incoming
+    // commercials are ordered from most relevant to least relevant in the 
+    // media list. We are selecting 10 commercials because we want to give
+    // a little bit of variety in the commercials that are selected
+    let commercials: Commercial[] = media.slice(0, 10);
+    // Select a random commercial from the first 10 commercials
+    return commercials[Math.floor(Math.random() * commercials.length)];
+
+}
 
 // Define a function to select commercials
-function selectCommercials(
-    filteredCommercials: Commercial[],
+export function selectCommercials(
+    commercials: Commercial[],
     defaultCommercials: Commercial[],
+    usedCommercials: Commercial[],
     remainingDuration: number,
-    usedCommercials: Commercial[]
 ): [Commercial[], number] {
+    let alreadySelectedMedia: Commercial[] = usedCommercials.map((m) => m);
     let selectedCommercials: Commercial[] = [];
 
     // In normal TV broadcast, a single commercial is rarely longer than 120 seconds
@@ -258,88 +320,21 @@ function selectCommercials(
 
     // Remaining duration for the buffer might be less than 120 seconds
     while (remainingDuration > 0) {
-        let availableCommercials: Commercial[] = [];
-
-        // Get the commercials that fit the remaining duration and have not been used
-        availableCommercials =
-            selectFullDurationMedia(
-                filteredCommercials,
-                usedCommercials,
-                selectedCommercials,
-                remainingDuration
-            ) as Commercial[];
-
-        // Get the commercials that are less than or equal to both the remaining duration 
-        // and the commercial block and have not been used
-        if (availableCommercials.length === 0) {
-            availableCommercials =
-                selectUnderDuratonMedia(
-                    filteredCommercials,
-                    usedCommercials,
-                    selectedCommercials,
-                    remainingDuration,
-                    commercialBlock
-                ) as Commercial[];
-        }
-
-
-        // Get the commercials that fit the remaining duration and have already been used
-        if (availableCommercials.length === 0) {
-            availableCommercials =
-                selectFullDurationMedia(
-                    filteredCommercials,
-                    [],
-                    selectedCommercials,
-                    remainingDuration
-                ) as Commercial[];
-        }
-
-        // Get the commercials that are less than or equal to both the remaining duration
-        // and the commercial block and have already been used
-        if (availableCommercials.length === 0) {
-            availableCommercials =
-                selectUnderDuratonMedia(
-                    filteredCommercials,
-                    [],
-                    selectedCommercials,
-                    remainingDuration,
-                    commercialBlock
-                ) as Commercial[];
-        }
-
-        // Get the default commercials that fit the remaining duration
-        if (availableCommercials.length === 0) {
-            availableCommercials =
-                selectFullDurationMedia(
-                    defaultCommercials,
-                    [],
-                    [],
-                    remainingDuration
-                ) as Commercial[];
-        }
-
-        // Get the default commercials that are less than or equal to both the remaining duration 
-        // and the commercial block
-        if (availableCommercials.length === 0) {
-            availableCommercials =
-                selectUnderDuratonMedia(
-                    defaultCommercials,
-                    [],
-                    [],
-                    remainingDuration,
-                    commercialBlock
-                ) as Commercial[];
-        }
-
+        let availableCommercials: Commercial[] = selectAvailableCommercials(
+            commercials,
+            defaultCommercials,
+            alreadySelectedMedia,
+            remainingDuration,
+            commercialBlock
+        )
+        
         if (availableCommercials.length > 0) {
             // Select random commercial from available commercials
-            const selectedCommercial =
-                availableCommercials[
-                    Math.floor(Math.random() * availableCommercials.length)
-                ];
+            const selectedCommercial = selectWeightedCommerical(availableCommercials);
             // Add the selected commercial to the selected commercials list and remove the 
             // duration of the commercial from the remaining duration
             selectedCommercials.push(selectedCommercial);
+            alreadySelectedMedia.push(selectedCommercial);
             remainingDuration -= selectedCommercial.Duration;
             // Add the title of the selected commercial to the used commercial titles list
             commercialBlock -= selectedCommercial.Duration; // Reduce commercialBlock
@@ -442,9 +437,9 @@ export function selectBufferMediaWithinDuration(
 
     // Get media filtered by tags that match using Kaleidoscope Buffer Media Selection Algorithm(tm)
     /*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*/
-    const filteredCommercials = getMediaByAgeGroupHierarchy(media.Commercials, tags, remainingDuration);
-    const filteredMusic = getMediaByAgeGroupHierarchy(media.Music, tags, remainingDuration);
-    const filteredShorts = getMediaByAgeGroupHierarchy(media.Shorts, tags, remainingDuration);
+    const filteredCommercials = getMediaByAgeGroupHierarchy(media.Commercials, usedCommercials, tags, remainingDuration);
+    const filteredMusic = getMediaByAgeGroupHierarchy(media.Music, usedMusic, tags, remainingDuration);
+    const filteredShorts = getMediaByAgeGroupHierarchy(media.Shorts, usedShorts, tags, remainingDuration);
     /*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*/
 
     // Create a list of used commercial, music, and short titles
@@ -456,13 +451,13 @@ export function selectBufferMediaWithinDuration(
         const chosenCommercials = selectCommercials(
             filteredCommercials as Commercial[],
             media.DefaultCommercials,
+            usedCommercials,
             remainingDuration,
-            usedCommercials
         );
-        // Add the selected commercials to the commercial list to be passed back and the 
+        // Add the selected commercials to the commercial list to be passed back and the
         // commercials for the previous buffer
+        usedCommercials.push(...chosenCommercials[0]);
         selectedMedia.push(...chosenCommercials[0]);
-        // Update the remaining duration
         remainingDuration = chosenCommercials[1];
 
         // Get a short or music video

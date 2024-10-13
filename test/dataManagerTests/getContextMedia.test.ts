@@ -217,8 +217,8 @@ describe('getContextMedia', () => {
         const duration: number = 60;
 
         const expectedMedia: BaseMedia[] = [
-            td.beetlejuicetrailer1,
             td.americanwerewolfinlondontrailer1,
+            td.alientrailer1,
         ];
 
         const result: BaseMedia[] =
@@ -250,7 +250,6 @@ describe('getContextMedia', () => {
         const duration: number = 120;
 
         const expectedMedia: BaseMedia[] = [
-            td.beetlejuicetrailer1,
             td.americanwerewolfinlondontrailer1,
             td.alientrailer1,
         ];
