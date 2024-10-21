@@ -6,4 +6,4 @@ Atomic Cinematic Genres refer to distinct categories of film characterized by sp
 
 ## Genres
 
-**[Action](action.md)** | **[Adventure](adventure.md)** | **[Fantasy](fantasy.md)** | **[Horror](horror.md)** - **[Sci-Fi](scifi.md)**
+**[Action](action.md)** | **[Adventure](adventure.md)** | **[Fantasy](fantasy.md)** | **[Horror](horror.md)** | **[Sci-Fi](scifi.md)**
