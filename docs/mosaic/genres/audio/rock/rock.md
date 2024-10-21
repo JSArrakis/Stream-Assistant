@@ -1,3 +1,4 @@
+##### [< BACK](../punk/punk.md) [HOME](../index.md) [NEXT >](../world/world.md)
 # Rock
 
 Rock music is defined by its strong rhythm, emphasis on electric instruments (especially the guitar), and rebellious spirit. It evolved from the earlier genres of blues, jazz, and rhythm & blues but quickly established its own identity. Rock is distinguished by its focus on guitar-driven melodies, powerful drum beats, and a wide emotional range, from anthemic and rebellious to reflective and melancholic. It typically features vocals with strong melodies but also emphasizes instrumental prowess.

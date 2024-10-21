@@ -1,4 +1,4 @@
 # Kaleidoscope Handbook
 
 ## Table of Contents
--[Understanding Mosaic](mosaic/index.md)
+**[Understanding Mosaic](mosaic/index.md)**

@@ -1,3 +1,4 @@
+##### [< BACK](../world/world.md) [HOME](../index.md) [NEXT >](../folk/folk.md)
 # Classical
 
 Classical music refers to the formal, structured music of Western art tradition, composed over several centuries, from the Baroque period to the Romantic era and beyond. It is characterized by its complexity, dynamic range, and the use of orchestras, chamber ensembles, and solo instruments. Classical music often focuses on themes of emotion, storytelling, and grandeur, using a rich harmonic structure and formal compositions like symphonies, concertos, and operas.
@@ -63,3 +64,6 @@ A dreamy, impressionistic piano piece evoking a calm, reflective atmosphere.
 ## Why Classical is Atomic:
 
 Classical music stands as an atomic genre because of its vast historical tradition, intricate musical structures, and cultural significance. It provides the foundation for many subsequent genres while maintaining its distinct identity, rooted in orchestral compositions and formal frameworks. Its emotional and intellectual depth sets it apart from other genres, making it a cornerstone of Western musical art.
+
+## Common Sub-Genres
+**[Cinematic](subgenres/cinematic.md)**

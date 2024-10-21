@@ -1,3 +1,4 @@
+##### [< BACK](../metal/metal.md) [HOME](../index.md) [NEXT >](../punk/punk.md)
 # Pop (Atomic)
 
 Pop, short for “popular music,” refers to a genre characterized by catchy melodies, straightforward song structures, and a focus on mass appeal. It prioritizes accessibility, appealing to a broad audience with memorable hooks, repetitive choruses, and simple, relatable themes (love, relationships, life). While pop draws from various other genres (like rock, hip hop, R&B, and dance), its distinct feature is its polished, mainstream sound aimed at chart success.

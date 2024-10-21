@@ -1,3 +1,4 @@
+##### [< BACK](../hiphop/hiphop.md) [HOME](../index.md) [NEXT >](../pop/pop.md)
 # Metal
 
 Metal music, or heavy metal, is defined by its aggressive sound, highly amplified electric guitars, intense rhythms, and dark thematic content. Metal often pushes the boundaries of volume, speed, and technical proficiency, with a focus on creating a heavier, more intense sonic experience compared to traditional rock. While it shares its roots with rock, Metal differentiates itself by emphasizing extreme dynamics, distortion, and a darker emotional tone, often dealing with themes of power, death, war, mythology, and existentialism.

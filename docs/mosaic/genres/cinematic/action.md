@@ -57,3 +57,7 @@ The Warriors stands as a unique example of (Atomic) Action, focusing on a group 
 Atomic Action is defined by its pure focus on physical confrontation, combat, and movement, where the primary concern is survival, victory, or the completion of a mission through force, speed, and adrenaline. Unlike adventure, which centers on exploration and discovery, or genres like fantasy and sci-fi, which often involve external elements like magic or advanced technology, Atomic Action zeroes in on immediate, visceral conflict.
 
 The plot in Atomic Action serves primarily to set up action sequences, and themes or character development take a back seat to the relentless pace of physical struggle. It's about the thrill of the fight, the chase, or the escape, emphasizing direct confrontation without the need for moral complexity, world-building, or speculative elements. The intensity of movement, combat, and peril defines Atomic Action, making it stand apart from any other genre that might include action as a secondary element.
+
+## Common Action Genre Pairings
+
+**[Action Adventure](pairs/action-adventure.md)**

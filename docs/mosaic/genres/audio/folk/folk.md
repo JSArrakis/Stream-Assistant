@@ -1,3 +1,4 @@
+##### [< BACK](../classical/classical.md) [HOME](../index.md) [NEXT >](../hiphop/hiphop.md)
 # Folk (Atomic)
 
 Folk music is often defined by its roots in traditional, regional music passed down through generations. It typically reflects the cultural, historical, and social traditions of a community or country. While originally associated with acoustic instruments and simple melodies, modern Folk has evolved but retains its focus on storytelling, authenticity, and a connection to the common person.

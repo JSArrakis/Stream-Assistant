@@ -1,4 +1,4 @@
-##### [< BACK](action.md) [HOME](index.md) [NEXT >](fantasysa.md)
+##### [< BACK](action.md) [HOME](index.md) [NEXT >](fantasy.md)
 
 # Adventure
 
@@ -57,3 +57,7 @@ Around the World in 80 Days (2004) offers a lighter take on (Atomic) Action Adve
 Atomic Adventure is fundamentally about the thrill of the journey, the excitement of encountering the unknown, and the personal growth that comes from the experience. While it may share a few elements with genres like action or fantasy, the key difference lies in the emphasis on exploration and discovery rather than combat, magic, or technological spectacle.
 
 Adventure, in its pure form, focuses on pushing boundaries—geographical, personal, or mental—and the excitement of navigating unfamiliar, challenging landscapes, both external and internal.
+
+## Common Action Genre Pairings
+
+**[Action Adventure](pairs/action-adventure.md)**

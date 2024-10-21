@@ -1,3 +1,4 @@
+##### [< BACK](../folk/folk.md) [HOME](../index.md) [NEXT >](../metal/metal.md)
 # Hip Hop
 
 Hip Hop is a genre born from the cultural movements of the 1970s Bronx, encompassing music, art, dance, and lifestyle. Musically, it is defined by rhythmic vocal delivery (rapping), sampling, and DJing. Its lyrics typically reflect urban life, often addressing themes like social issues, identity, struggle, and celebration of street culture.

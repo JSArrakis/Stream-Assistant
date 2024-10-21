@@ -1,3 +1,4 @@
+##### [< BACK](../pop/pop.md) [HOME](../index.md) [NEXT >](../rock/rock.md)
 # Punk (Atomic)
 
 Punk music is defined by its raw, stripped-down sound, fast tempos, and rebellious spirit. Emerging in the mid-1970s, punk was a direct reaction to the excesses of mainstream rock and the socio-political climate of the time. It eschews technical virtuosity in favor of energy, immediacy, and a DIY ethic. Lyrically, punk often focuses on anti-establishment themes, political dissent, and individual empowerment, with a focus on authenticity and social criticism. While it shares its instrumentation with rock (guitars, bass, drums), punk differentiates itself through its simplicity, urgency, and ethos of defiance and independence.
