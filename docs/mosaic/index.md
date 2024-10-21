@@ -8,13 +8,11 @@ Lorem Ipsum
 
 Lorem Ipsum
 
-## Mosaic Atomic Genres
-
-### Atomic Cinematic Genres
--[Cinematic Genres](genres/cinematic/index.md)
-
-### Atomic Musical Genres
--[Musical Genres](genres/audio/index.md)
-
 ## Mosaics
 -[Action](mosaics/action.md)
+
+## Mosaic Atomic Genres
+
+#### [Atomic Cinematic Genres](genres/cinematic/index.md)
+
+#### [Atomic Musical Genres](genres/audio/index.md)
