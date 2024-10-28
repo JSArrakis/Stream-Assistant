@@ -2,7 +2,9 @@ import { Commercial } from "../../src/models/commercial";
 import { AgeGroups } from "../../src/models/const/ageGroups";
 import { Eras } from "../../src/models/const/eras";
 import { MainGenres } from "../../src/models/const/mainGenres";
+import { MusicGenres } from "../../src/models/const/musicGenres";
 import { MediaType } from "../../src/models/enum/mediaTypes";
+import { Mosaic } from "../../src/models/mosaic";
 import { Movie } from "../../src/models/movie";
 import { ProgressionContext, WatchRecord } from "../../src/models/progressionContext";
 import { Episode, Show } from "../../src/models/show";
@@ -121,16 +123,6 @@ export const transformers80s1 = new Commercial('Transformers 80s 1', 'transforme
 export const alienstoys1 = new Commercial('Aliens Toys 1', 'alienstoys1', 30, '/path/alienstoys1.mp4', MediaType.Commercial, ["alien", MainGenres.Horror, MainGenres.Action, MainGenres.SciFi, AgeGroups.Kids, Eras.nnineties]);
 export const jurassicpark3toys = new Commercial('Jurassic Park 3 Toys', 'jurassicpark3toys', 30, '/path/jurassicpark3toys.mp4', MediaType.Commercial, ["jurassicpark", MainGenres.Action, AgeGroups.Kids, Eras.twothousands]);
 
-export const default1 = new Commercial('Default 1', 'default1', 15, '/path/default1.mp4', MediaType.Commercial, [AgeGroups.AllAges]);
-export const default2 = new Commercial('Default 2', 'default2', 16, '/path/default2.mp4', MediaType.Commercial, [AgeGroups.AllAges]);
-export const default3 = new Commercial('Default 3', 'default3', 17, '/path/default3.mp4', MediaType.Commercial, [AgeGroups.AllAges]);
-export const default4 = new Commercial('Default 4', 'default4', 18, '/path/default4.mp4', MediaType.Commercial, [AgeGroups.AllAges]);
-export const default5 = new Commercial('Default 5', 'default5', 19, '/path/default5.mp4', MediaType.Commercial, [AgeGroups.AllAges]);
-export const default6 = new Commercial('Default 6', 'default6', 20, '/path/default6.mp4', MediaType.Commercial, [AgeGroups.AllAges]);
-export const default7 = new Commercial('Default 7', 'default7', 30, '/path/default7.mp4', MediaType.Commercial, [AgeGroups.AllAges]);
-export const default8 = new Commercial('Default 8', 'default8', 60, '/path/default8.mp4', MediaType.Commercial, [AgeGroups.AllAges]);
-export const default9 = new Commercial('Default 9', 'default9', 120, '/path/default9.mp4', MediaType.Commercial, [AgeGroups.AllAges]);
-
 export const commercials = [
     jurassicparktoys1,
     marvelvsstreetfighter98,
@@ -167,6 +159,16 @@ export const commercials = [
     jurassicpark3toys,
 ];
 
+export const default1 = new Commercial('Default 1', 'default1', 15, '/path/default1.mp4', MediaType.Commercial, [AgeGroups.AllAges]);
+export const default2 = new Commercial('Default 2', 'default2', 16, '/path/default2.mp4', MediaType.Commercial, [AgeGroups.AllAges]);
+export const default3 = new Commercial('Default 3', 'default3', 17, '/path/default3.mp4', MediaType.Commercial, [AgeGroups.AllAges]);
+export const default4 = new Commercial('Default 4', 'default4', 18, '/path/default4.mp4', MediaType.Commercial, [AgeGroups.AllAges]);
+export const default5 = new Commercial('Default 5', 'default5', 19, '/path/default5.mp4', MediaType.Commercial, [AgeGroups.AllAges]);
+export const default6 = new Commercial('Default 6', 'default6', 20, '/path/default6.mp4', MediaType.Commercial, [AgeGroups.AllAges]);
+export const default7 = new Commercial('Default 7', 'default7', 30, '/path/default7.mp4', MediaType.Commercial, [AgeGroups.AllAges]);
+export const default8 = new Commercial('Default 8', 'default8', 60, '/path/default8.mp4', MediaType.Commercial, [AgeGroups.AllAges]);
+export const default9 = new Commercial('Default 9', 'default9', 120, '/path/default9.mp4', MediaType.Commercial, [AgeGroups.AllAges]);
+
 export const defaultCommercials = [
     default1,
     default2,
@@ -178,3 +180,14 @@ export const defaultCommercials = [
     default8,
     default9,
 ];
+
+export const actionMosaic: Mosaic = {
+    Key: MainGenres.Action,
+    Genres: [MainGenres.Action],
+    MusicGenres: [MusicGenres.Rock, MusicGenres.Metal, MusicGenres.Punk, MusicGenres.HipHop],
+    MusicSubGenres: [],
+};
+
+export const mosaics: Mosaic[] = [
+    actionMosaic,
+]

@@ -3,7 +3,7 @@ export const MainGenres = {
     Adventure: 'adventure',
     Comedy: 'comedy',
     Crime: 'crime',
-    Documentary: 'documentary',
+    Educational: 'educational',
     Drama: 'drama',
     Fantasy: 'fantasy',
     Horror: 'horror',

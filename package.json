@@ -2,11 +2,13 @@
   "name": "streamassistant",
   "version": "1.0.0",
   "description": "Stream creation and shuffler assistant",
-  "main": "index.js",
+  "main": "src/app.ts",
   "scripts": {
     "test": "jest",
     "test:verbose": "jest --verbose --runInBand --silent=false",
-    "start": "ts-node-dev --respawn --transpile-only app.ts"
+    "start": "ts-node-dev --respawn --transpile-only src/app.ts",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
   "author": "",
   "license": "ISC",
@@ -49,6 +51,7 @@
     "karma-jasmine-html-reporter": "^2.0.0",
     "karma-typescript": "^5.5.3",
     "karma-typescript-es6-transform": "^5.5.3",
+    "prettier": "^3.3.3",
     "ts-jest": "^29.2.3",
     "ts-mocha": "^10.0.0",
     "ts-node-dev": "^2.0.0",

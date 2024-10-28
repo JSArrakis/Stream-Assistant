@@ -1,8 +1,10 @@
 import { Request, Response } from 'express';
-import { body, validationResult } from 'express-validator';
+import { validationResult } from 'express-validator';
 import { MovieModel, Movie } from '../models/movie';
 import { LoadTitleError } from '../models/loadTitleError';
-import { getMediaDuration, createMediaValidation } from './common';
+import { createMediaValidation } from '../middleware/validationMiddleware';
+import { getMediaDuration } from '../utils/utilities';
+
 
 // ===========================================
 //               MOVIE HANDLERS
@@ -196,59 +198,3 @@ async function transformMovieFromRequest(movie: any, loadTitle: string): Promise
 
     return parsedMovie;
 }
-
-// ===========================================
-//             MOVIE VALIDATION
-// ===========================================
-
-export const createMovieValidationRules = [
-    body('title')
-        .isString()
-        .notEmpty(),
-
-    body('tags')
-        .isArray({ min: 1 })
-        .custom((value: string[]) => {
-            for (const item of value) {
-                if (typeof item !== 'string') {
-                    throw new Error('tags must be an array of strings');
-                }
-            }
-            return true;
-        }),
-
-    body('path')
-        .isString()
-        .notEmpty()
-
-];
-
-export const bulkCreateMoviesValidationRules = [
-];
-
-export const updateMovieValidationRules = [
-    body('title')
-        .isString()
-        .notEmpty(),
-
-    body('tags')
-        .isArray({ min: 1 })
-        .custom((value: string[]) => {
-            for (const item of value) {
-                if (typeof item !== 'string') {
-                    throw new Error('tags must be an array of strings');
-                }
-            }
-            return true;
-        }),
-
-    body('path')
-        .isString()
-        .notEmpty()
-];
-
-export const deleteMovieValidationRules = [
-];
-
-export const getMovieValidationRules = [
-];

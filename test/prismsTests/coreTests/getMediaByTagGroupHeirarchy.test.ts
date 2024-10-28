@@ -1,9 +1,9 @@
-import { AgeGroups } from "../../src/models/const/ageGroups";
-import { Eras } from "../../src/models/const/eras";
-import { MainGenres } from "../../src/models/const/mainGenres";
-import { BaseMedia } from "../../src/models/mediaInterface";
-import * as dataMan from "../../src/services/dataManager";
-import * as td from "../testData/testData";
+import { AgeGroups } from "../../../src/models/const/ageGroups";
+import { Eras } from "../../../src/models/const/eras";
+import { MainGenres } from "../../../src/models/const/mainGenres";
+import { BaseMedia } from "../../../src/models/mediaInterface";
+import * as core from "../../../src/prisms/core";
+import * as td from "../../testData/testData";
 
 describe('getMediaByTagGroupHeirarchy', () => {
     it('should return the media that have the tags (scenario 1)', () => {
@@ -17,7 +17,7 @@ describe('getMediaByTagGroupHeirarchy', () => {
         const expectedMedia: BaseMedia[] = [];
 
         const result: BaseMedia[] =
-            dataMan.getMediaByTagGroupHeirarchy(
+            core.getMediaByTagGroupHeirarchy(
                 alreadySelectedMedia,
                 media,
                 tags,
@@ -62,7 +62,7 @@ describe('getMediaByTagGroupHeirarchy', () => {
         ];
 
         const result: BaseMedia[] =
-            dataMan.getMediaByTagGroupHeirarchy(
+            core.getMediaByTagGroupHeirarchy(
                 alreadySelectedMedia,
                 media,
                 tags,
@@ -108,7 +108,7 @@ describe('getMediaByTagGroupHeirarchy', () => {
         ];
 
         const result: BaseMedia[] =
-            dataMan.getMediaByTagGroupHeirarchy(
+            core.getMediaByTagGroupHeirarchy(
                 alreadySelectedMedia,
                 media,
                 tags,
@@ -150,7 +150,7 @@ describe('getMediaByTagGroupHeirarchy', () => {
         ];
 
         const result: BaseMedia[] =
-            dataMan.getMediaByTagGroupHeirarchy(
+            core.getMediaByTagGroupHeirarchy(
                 alreadySelectedMedia,
                 media,
                 tags,
@@ -195,7 +195,7 @@ describe('getMediaByTagGroupHeirarchy', () => {
         ];
 
         const result: BaseMedia[] =
-            dataMan.getMediaByTagGroupHeirarchy(
+            core.getMediaByTagGroupHeirarchy(
                 alreadySelectedMedia,
                 media,
                 tags,
@@ -245,7 +245,7 @@ describe('getMediaByTagGroupHeirarchy', () => {
             td.jurassicpark3toys,
         ];
         const result: BaseMedia[] =
-            dataMan.getMediaByTagGroupHeirarchy(
+            core.getMediaByTagGroupHeirarchy(
                 alreadySelectedMedia,
                 media,
                 tags,

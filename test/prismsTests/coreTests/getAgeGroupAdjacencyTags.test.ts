@@ -1,5 +1,5 @@
-import { AgeGroups } from "../../src/models/const/ageGroups";
-import * as dataMan from "../../src/services/dataManager";
+import { AgeGroups } from "../../../src/models/const/ageGroups";
+import * as core from "../../../src/prisms/core";
 
 describe('getAgeGroupAdjacencyTags', () => {
     it('should return all adjacent tags (scenario 1)', () => {
@@ -7,7 +7,7 @@ describe('getAgeGroupAdjacencyTags', () => {
 
         const expectedTags: string[] = [];
         
-        const result: string[] = dataMan.getAgeGroupAdjacencyTags(ageGroups);
+        const result: string[] = core.getAgeGroupAdjacencyTags(ageGroups);
 
         expect(result).toEqual(expectedTags);
     });
@@ -21,7 +21,7 @@ describe('getAgeGroupAdjacencyTags', () => {
             AgeGroups.Family,
         ];
         
-        const result: string[] = dataMan.getAgeGroupAdjacencyTags(ageGroups);
+        const result: string[] = core.getAgeGroupAdjacencyTags(ageGroups);
 
         expect(result).toEqual(expectedTags);
     });
@@ -36,7 +36,7 @@ describe('getAgeGroupAdjacencyTags', () => {
             AgeGroups.YoungAdult,
         ];
         
-        const result: string[] = dataMan.getAgeGroupAdjacencyTags(ageGroups);
+        const result: string[] = core.getAgeGroupAdjacencyTags(ageGroups);
 
         expect(result).toEqual(expectedTags);
     });
@@ -51,7 +51,7 @@ describe('getAgeGroupAdjacencyTags', () => {
             AgeGroups.Mature,
         ];
         
-        const result: string[] = dataMan.getAgeGroupAdjacencyTags(ageGroups);
+        const result: string[] = core.getAgeGroupAdjacencyTags(ageGroups);
 
         expect(result).toEqual(expectedTags);
     });
@@ -65,7 +65,7 @@ describe('getAgeGroupAdjacencyTags', () => {
             AgeGroups.YoungAdult,
         ];
         
-        const result: string[] = dataMan.getAgeGroupAdjacencyTags(ageGroups);
+        const result: string[] = core.getAgeGroupAdjacencyTags(ageGroups);
 
         expect(result).toEqual(expectedTags);
     });
@@ -80,7 +80,7 @@ describe('getAgeGroupAdjacencyTags', () => {
             AgeGroups.Family,
         ];
         
-        const result: string[] = dataMan.getAgeGroupAdjacencyTags(ageGroups);
+        const result: string[] = core.getAgeGroupAdjacencyTags(ageGroups);
 
         expect(result).toEqual(expectedTags);
     });
@@ -95,7 +95,7 @@ describe('getAgeGroupAdjacencyTags', () => {
             AgeGroups.Kids,
         ];
         
-        const result: string[] = dataMan.getAgeGroupAdjacencyTags(ageGroups);
+        const result: string[] = core.getAgeGroupAdjacencyTags(ageGroups);
 
         expect(result).toEqual(expectedTags);
     });
@@ -111,7 +111,7 @@ describe('getAgeGroupAdjacencyTags', () => {
             AgeGroups.YoungAdult,
         ];
         
-        const result: string[] = dataMan.getAgeGroupAdjacencyTags(ageGroups);
+        const result: string[] = core.getAgeGroupAdjacencyTags(ageGroups);
 
         expect(result).toEqual(expectedTags);
     });
@@ -129,7 +129,7 @@ describe('getAgeGroupAdjacencyTags', () => {
 
         ];
         
-        const result: string[] = dataMan.getAgeGroupAdjacencyTags(ageGroups);
+        const result: string[] = core.getAgeGroupAdjacencyTags(ageGroups);
 
         expect(result).toEqual(expectedTags);
     });
@@ -145,7 +145,7 @@ describe('getAgeGroupAdjacencyTags', () => {
             AgeGroups.Mature,
         ];
         
-        const result: string[] = dataMan.getAgeGroupAdjacencyTags(ageGroups);
+        const result: string[] = core.getAgeGroupAdjacencyTags(ageGroups);
 
         expect(result).toEqual(expectedTags);
     });
@@ -161,7 +161,7 @@ describe('getAgeGroupAdjacencyTags', () => {
             AgeGroups.Family,
         ];
         
-        const result: string[] = dataMan.getAgeGroupAdjacencyTags(ageGroups);
+        const result: string[] = core.getAgeGroupAdjacencyTags(ageGroups);
 
         expect(result).toEqual(expectedTags);
     });

@@ -1,12 +1,12 @@
-import { AgeGroups } from "../../src/models/const/ageGroups";
-import * as dataMan from "../../src/services/dataManager";
+import { AgeGroups } from "../../../src/models/const/ageGroups";
+import * as core from "../../../src/prisms/core";
 
 describe('getHighestAgeGroupTag', () => {
     it('should return the highest age group from tags (scenario 1)', () => {
         const tags: string[] = [];
         const expectedTag: string = AgeGroups.Kids;
 
-        const result: string = dataMan.getHighestAgeGroupTag(tags);
+        const result: string = core.getHighestAgeGroupTag(tags);
 
         expect(result).toEqual(expectedTag);
     });
@@ -14,7 +14,7 @@ describe('getHighestAgeGroupTag', () => {
         const tags: string[] = ['kids'];
         const expectedTag: string = AgeGroups.Kids;
 
-        const result: string = dataMan.getHighestAgeGroupTag(tags);
+        const result: string = core.getHighestAgeGroupTag(tags);
 
         expect(result).toEqual(expectedTag);
     });
@@ -22,7 +22,7 @@ describe('getHighestAgeGroupTag', () => {
         const tags: string[] = ['kids', 'mature'];
         const expectedTag: string = AgeGroups.Mature;
 
-        const result: string = dataMan.getHighestAgeGroupTag(tags);
+        const result: string = core.getHighestAgeGroupTag(tags);
 
         expect(result).toEqual(expectedTag);
     });
@@ -30,7 +30,7 @@ describe('getHighestAgeGroupTag', () => {
         const tags: string[] = ['kids', 'mature', 'youngadult'];
         const expectedTag: string = AgeGroups.Mature;
 
-        const result: string = dataMan.getHighestAgeGroupTag(tags);
+        const result: string = core.getHighestAgeGroupTag(tags);
 
         expect(result).toEqual(expectedTag);
     });

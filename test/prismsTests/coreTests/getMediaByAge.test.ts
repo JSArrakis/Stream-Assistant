@@ -1,7 +1,7 @@
-import { BaseMedia } from "../../src/models/mediaInterface";
-import { AgeGroups } from "../../src/models/const/ageGroups";
-import * as dataMan from "../../src/services/dataManager";
-import * as td from "../testData/testData";
+import { BaseMedia } from "../../../src/models/mediaInterface";
+import { AgeGroups } from "../../../src/models/const/ageGroups";
+import * as core from "../../../src/prisms/core";
+import * as td from "../../testData/testData";
 
 describe('getMediaByAge', () => {
     it('should return the media that are in the era (scenario 1)', () => {
@@ -10,7 +10,7 @@ describe('getMediaByAge', () => {
 
         const expectedMedia: BaseMedia[] = [];
 
-        const result: BaseMedia[] = dataMan.getMediaByAge(media, age);
+        const result: BaseMedia[] = core.getMediaByAge(media, age);
 
         expect(result).toEqual(expectedMedia);
     });
@@ -37,7 +37,7 @@ describe('getMediaByAge', () => {
             td.sharkbitesfruitsnacks,
         ];
 
-        const result: BaseMedia[] = dataMan.getMediaByAge(media, age);
+        const result: BaseMedia[] = core.getMediaByAge(media, age);
 
         expect(result).toEqual(expectedMedia);
     });
@@ -61,7 +61,7 @@ describe('getMediaByAge', () => {
             td.ijustshippedmybed,
         ];
 
-        const result: BaseMedia[] = dataMan.getMediaByAge(media, age);
+        const result: BaseMedia[] = core.getMediaByAge(media, age);
 
         expect(result).toEqual(expectedMedia);
     });

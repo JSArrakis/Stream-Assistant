@@ -1,11 +1,14 @@
-import { GenreMusicMap } from "../genreMusicMap";
+import { Mosaic } from "../mosaic";
 import { Music } from "../music";
 import { MainGenres } from "./mainGenres";
 import { MusicGenres } from "./musicGenres";
 
-export const MusicMap: GenreMusicMap[] = [
-    new GenreMusicMap(
-        MainGenres.Action,
+export const MosaicMap: Mosaic[] = [
+    new Mosaic(
+        "action",
+        [
+            MainGenres.Action
+        ],
         [
             MusicGenres.Rock,
             MusicGenres.Metal,
@@ -15,24 +18,33 @@ export const MusicMap: GenreMusicMap[] = [
         ],
         [],
     ),
-    new GenreMusicMap(
-        MainGenres.Adventure,
+    new Mosaic(
+        "adventure",
+        [
+            MainGenres.Adventure
+        ],
         [
             MusicGenres.Rock,
             MusicGenres.Pop,
         ],
         [],
     ),
-    new GenreMusicMap(
-        MainGenres.Comedy,
+    new Mosaic(
+        "comedy",
+        [
+            MainGenres.Comedy
+        ],
         [
             MusicGenres.Pop,
             MusicGenres.RnB,
         ],
         [],
     ),
-    new GenreMusicMap(
-        MainGenres.Crime,
+    new Mosaic(
+        "crime",
+        [
+            MainGenres.Crime
+        ],
         [
             MusicGenres.Rock,
             MusicGenres.HipHop,
@@ -43,17 +55,11 @@ export const MusicMap: GenreMusicMap[] = [
         ],
         [],
     ),
-    new GenreMusicMap(
-        MainGenres.Documentary,
+    new Mosaic(
+        "drama",
         [
-            MusicGenres.Classical,
-            MusicGenres.EasyListening,
-            MusicGenres.Folk,
+            MainGenres.Drama
         ],
-        [],
-    ),
-    new GenreMusicMap(
-        MainGenres.Drama,
         [
             MusicGenres.EasyListening,
             MusicGenres.Pop,
@@ -63,8 +69,23 @@ export const MusicMap: GenreMusicMap[] = [
         ],
         [],
     ),
-    new GenreMusicMap(
-        MainGenres.Fantasy,
+    new Mosaic(
+        "educational",
+        [
+            MainGenres.Educational
+        ],
+        [
+            MusicGenres.Classical,
+            MusicGenres.EasyListening,
+            MusicGenres.Folk,
+        ],
+        [],
+    ),
+    new Mosaic(
+        "fantasy",
+        [
+            MainGenres.Fantasy
+        ],
         [
             MusicGenres.EasyListening,
             MusicGenres.Folk,
@@ -73,8 +94,11 @@ export const MusicMap: GenreMusicMap[] = [
         ],
         [],
     ),
-    new GenreMusicMap(
-        MainGenres.Horror,
+    new Mosaic(
+        "horror",
+        [
+            MainGenres.Horror
+        ],
         [
             MusicGenres.Rock,
             MusicGenres.Metal,
@@ -82,32 +106,44 @@ export const MusicMap: GenreMusicMap[] = [
         ],
         [],
     ),
-    new GenreMusicMap(
-        MainGenres.Musical,
+    new Mosaic(
+        "musical",
+        [
+            MainGenres.Musical
+        ],
         [
             MusicGenres.Pop,
             MusicGenres.Classical,
         ],
         [],
     ),
-    new GenreMusicMap(
-        MainGenres.Mystery,
+    new Mosaic(
+        "mystery",
+        [
+            MainGenres.Mystery
+        ],
         [
             MusicGenres.Blues,
             MusicGenres.Jazz,
         ],
         [],
     ),
-    new GenreMusicMap(
-        MainGenres.SciFi,
+    new Mosaic(
+        "scifi",
+        [
+            MainGenres.SciFi
+        ],
         [
             MusicGenres.Electronic,
             MusicGenres.Classical,
         ],
         [],
     ),
-    new GenreMusicMap(
-        MainGenres.War,
+    new Mosaic(
+        "war",
+        [
+            MainGenres.War
+        ],
         [
             MusicGenres.Classical,
             MusicGenres.Rock,
@@ -117,8 +153,11 @@ export const MusicMap: GenreMusicMap[] = [
         ],
         [],
     ),
-    new GenreMusicMap(
-        MainGenres.Western,
+    new Mosaic(
+        "western",
+        [
+            MainGenres.Western
+        ],
         [
             MusicGenres.Country,
             MusicGenres.Folk,

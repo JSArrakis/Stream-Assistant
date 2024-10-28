@@ -1,5 +1,5 @@
-import { MainGenres } from "../../src/models/const/mainGenres";
-import * as dataMan from "../../src/services/dataManager";
+import { MainGenres } from "../../../src/models/const/mainGenres";
+import * as core from "../../../src/prisms/core";
 
 describe('createTagGroups', () => {
     it('should return the media that have the tags (scenario 1)', () => {
@@ -8,7 +8,7 @@ describe('createTagGroups', () => {
         const expectedTags: string[][] = [];
 
         const result: string[][] =
-            dataMan.createTagGroups(tags);
+            core.createTagGroups(tags);
         
         expect(result).toEqual(expectedTags);
     });
@@ -35,7 +35,7 @@ describe('createTagGroups', () => {
         ];
 
         const result: string[][] =
-            dataMan.createTagGroups(tags);
+            core.createTagGroups(tags);
         
         expect(result).toEqual(expectedTags);
     });

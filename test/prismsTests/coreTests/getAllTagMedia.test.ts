@@ -1,9 +1,9 @@
-import { BaseMedia } from "../../src/models/mediaInterface";
-import { Eras } from "../../src/models/const/eras";
-import { MainGenres } from "../../src/models/const/mainGenres";
-import { AgeGroups } from "../../src/models/const/ageGroups";
-import * as dataMan from "../../src/services/dataManager";
-import * as td from "../testData/testData";
+import { BaseMedia } from "../../../src/models/mediaInterface";
+import { Eras } from "../../../src/models/const/eras";
+import { MainGenres } from "../../../src/models/const/mainGenres";
+import { AgeGroups } from "../../../src/models/const/ageGroups";
+import * as core from "../../../src/prisms/core";
+import * as td from "../../testData/testData";
 
 describe('getAllTagMedia', () => {
     it('should return the media that have the tags (scenario 1)', () => {
@@ -20,7 +20,7 @@ describe('getAllTagMedia', () => {
         const expecteInEraMedia: BaseMedia[] = [];
         const expecteOutOfEraMedia: BaseMedia[] = [];
 
-        ({ allTagMediaInEra, allTagMediaOutOfEra } = dataMan.getAllTagMedia(media, eraTags, tags));
+        ({ allTagMediaInEra, allTagMediaOutOfEra } = core.getAllTagMedia(media, eraTags, tags));
 
         expect(allTagMediaInEra).toEqual(expecteInEraMedia);
         expect(allTagMediaOutOfEra).toEqual(expecteOutOfEraMedia);
@@ -41,7 +41,7 @@ describe('getAllTagMedia', () => {
         const expecteInEraMedia: BaseMedia[] = [];
         const expecteOutOfEraMedia: BaseMedia[] = [];
 
-        ({ allTagMediaInEra, allTagMediaOutOfEra } = dataMan.getAllTagMedia(media, eraTags, tags));
+        ({ allTagMediaInEra, allTagMediaOutOfEra } = core.getAllTagMedia(media, eraTags, tags));
 
         expect(allTagMediaInEra).toEqual(expecteInEraMedia);
         expect(allTagMediaOutOfEra).toEqual(expecteOutOfEraMedia);
@@ -64,7 +64,7 @@ describe('getAllTagMedia', () => {
         ];
         const expecteOutOfEraMedia: BaseMedia[] = [];
 
-        ({ allTagMediaInEra, allTagMediaOutOfEra } = dataMan.getAllTagMedia(media, eraTags, tags));
+        ({ allTagMediaInEra, allTagMediaOutOfEra } = core.getAllTagMedia(media, eraTags, tags));
 
         expect(allTagMediaInEra).toEqual(expecteInEraMedia);
         expect(allTagMediaOutOfEra).toEqual(expecteOutOfEraMedia);
@@ -88,7 +88,7 @@ describe('getAllTagMedia', () => {
         ];
         const expecteOutOfEraMedia: BaseMedia[] = [];
 
-        ({ allTagMediaInEra, allTagMediaOutOfEra } = dataMan.getAllTagMedia(media, eraTags, tags));
+        ({ allTagMediaInEra, allTagMediaOutOfEra } = core.getAllTagMedia(media, eraTags, tags));
 
         expect(allTagMediaInEra).toEqual(expecteInEraMedia);
         expect(allTagMediaOutOfEra).toEqual(expecteOutOfEraMedia);
@@ -113,7 +113,7 @@ describe('getAllTagMedia', () => {
         ];
         const expecteOutOfEraMedia: BaseMedia[] = [];
 
-        ({ allTagMediaInEra, allTagMediaOutOfEra } = dataMan.getAllTagMedia(media, eraTags, tags));
+        ({ allTagMediaInEra, allTagMediaOutOfEra } = core.getAllTagMedia(media, eraTags, tags));
 
         expect(allTagMediaInEra).toEqual(expecteInEraMedia);
         expect(allTagMediaOutOfEra).toEqual(expecteOutOfEraMedia);
@@ -139,7 +139,7 @@ describe('getAllTagMedia', () => {
             td.alientrailer1
         ];
 
-        ({ allTagMediaInEra, allTagMediaOutOfEra } = dataMan.getAllTagMedia(media, eraTags, tags));
+        ({ allTagMediaInEra, allTagMediaOutOfEra } = core.getAllTagMedia(media, eraTags, tags));
 
         expect(allTagMediaInEra).toEqual(expecteInEraMedia);
         expect(allTagMediaOutOfEra).toEqual(expecteOutOfEraMedia);
@@ -164,7 +164,7 @@ describe('getAllTagMedia', () => {
         const expecteOutOfEraMedia: BaseMedia[] = [
         ];
 
-        ({ allTagMediaInEra, allTagMediaOutOfEra } = dataMan.getAllTagMedia(media, eraTags, tags));
+        ({ allTagMediaInEra, allTagMediaOutOfEra } = core.getAllTagMedia(media, eraTags, tags));
 
         expect(allTagMediaInEra).toEqual(expecteInEraMedia);
         expect(allTagMediaOutOfEra).toEqual(expecteOutOfEraMedia);
@@ -191,7 +191,7 @@ describe('getAllTagMedia', () => {
         const expecteOutOfEraMedia: BaseMedia[] = [
         ];
 
-        ({ allTagMediaInEra, allTagMediaOutOfEra } = dataMan.getAllTagMedia(media, eraTags, tags));
+        ({ allTagMediaInEra, allTagMediaOutOfEra } = core.getAllTagMedia(media, eraTags, tags));
 
         expect(allTagMediaInEra).toEqual(expecteInEraMedia);
         expect(allTagMediaOutOfEra).toEqual(expecteOutOfEraMedia);
@@ -218,7 +218,7 @@ describe('getAllTagMedia', () => {
         const expecteOutOfEraMedia: BaseMedia[] = [
         ];
 
-        ({ allTagMediaInEra, allTagMediaOutOfEra } = dataMan.getAllTagMedia(media, eraTags, tags));
+        ({ allTagMediaInEra, allTagMediaOutOfEra } = core.getAllTagMedia(media, eraTags, tags));
 
         expect(allTagMediaInEra).toEqual(expecteInEraMedia);
         expect(allTagMediaOutOfEra).toEqual(expecteOutOfEraMedia);
@@ -246,7 +246,7 @@ describe('getAllTagMedia', () => {
             td.meninblacktoys97,
         ];
 
-        ({ allTagMediaInEra, allTagMediaOutOfEra } = dataMan.getAllTagMedia(media, eraTags, tags));
+        ({ allTagMediaInEra, allTagMediaOutOfEra } = core.getAllTagMedia(media, eraTags, tags));
 
         expect(allTagMediaInEra).toEqual(expecteInEraMedia);
         expect(allTagMediaOutOfEra).toEqual(expecteOutOfEraMedia);
@@ -274,7 +274,7 @@ describe('getAllTagMedia', () => {
             td.alientrailer1,
         ];
 
-        ({ allTagMediaInEra, allTagMediaOutOfEra } = dataMan.getAllTagMedia(media, eraTags, tags));
+        ({ allTagMediaInEra, allTagMediaOutOfEra } = core.getAllTagMedia(media, eraTags, tags));
 
         expect(allTagMediaInEra).toEqual(expecteInEraMedia);
         expect(allTagMediaOutOfEra).toEqual(expecteOutOfEraMedia);
@@ -302,7 +302,7 @@ describe('getAllTagMedia', () => {
             td.alientrailer1,
         ];
 
-        ({ allTagMediaInEra, allTagMediaOutOfEra } = dataMan.getAllTagMedia(media, eraTags, tags));
+        ({ allTagMediaInEra, allTagMediaOutOfEra } = core.getAllTagMedia(media, eraTags, tags));
 
         expect(allTagMediaInEra).toEqual(expecteInEraMedia);
         expect(allTagMediaOutOfEra).toEqual(expecteOutOfEraMedia);
@@ -329,7 +329,7 @@ describe('getAllTagMedia', () => {
         const expecteOutOfEraMedia: BaseMedia[] = [
         ];
 
-        ({ allTagMediaInEra, allTagMediaOutOfEra } = dataMan.getAllTagMedia(media, eraTags, tags));
+        ({ allTagMediaInEra, allTagMediaOutOfEra } = core.getAllTagMedia(media, eraTags, tags));
 
         expect(allTagMediaInEra).toEqual(expecteInEraMedia);
         expect(allTagMediaOutOfEra).toEqual(expecteOutOfEraMedia);

@@ -1,10 +1,10 @@
-import { AgeGroups } from "../../src/models/const/ageGroups";
-import { Eras } from "../../src/models/const/eras";
-import { MainGenres } from "../../src/models/const/mainGenres";
-import { BaseMedia } from "../../src/models/mediaInterface";
-import { SegmentedTags } from "../../src/models/segmentedTags";
-import * as dataMan from "../../src/services/dataManager";
-import * as td from "../testData/testData";
+import { AgeGroups } from "../../../src/models/const/ageGroups";
+import { Eras } from "../../../src/models/const/eras";
+import { MainGenres } from "../../../src/models/const/mainGenres";
+import { BaseMedia } from "../../../src/models/mediaInterface";
+import { SegmentedTags } from "../../../src/models/segmentedTags";
+import * as spectrum from "../../../src/prisms/spectrum";
+import * as td from "../../testData/testData";
 
 describe('getMediaByTagHeriarchy', () => {
     it('should return the media that have the tags (scenario 1)', () => {
@@ -23,7 +23,7 @@ describe('getMediaByTagHeriarchy', () => {
         const expectedMedia: BaseMedia[] = [];
 
         const result: BaseMedia[] =
-            dataMan.getMediaByTagHeriarchy(
+            spectrum.getMediaByTagHeriarchy(
                 alreadySelectedMedia,
                 age,
                 media,
@@ -66,7 +66,7 @@ describe('getMediaByTagHeriarchy', () => {
         ];
 
         const result: BaseMedia[] =
-            dataMan.getMediaByTagHeriarchy(
+            spectrum.getMediaByTagHeriarchy(
                 alreadySelectedMedia,
                 age,
                 media,
@@ -120,7 +120,7 @@ describe('getMediaByTagHeriarchy', () => {
         ];
 
         const result: BaseMedia[] =
-            dataMan.getMediaByTagHeriarchy(
+            spectrum.getMediaByTagHeriarchy(
                 alreadySelectedMedia,
                 age,
                 media,
@@ -170,7 +170,7 @@ describe('getMediaByTagHeriarchy', () => {
         ];
 
         const result: BaseMedia[] =
-            dataMan.getMediaByTagHeriarchy(
+            spectrum.getMediaByTagHeriarchy(
                 alreadySelectedMedia,
                 age,
                 media,

@@ -1,6 +1,7 @@
 import { MediaProgression, ShowProgression } from "../models/mediaProgression";
 import { SelectedMedia } from "../models/selectedMedia";
 import { Show } from "../models/show";
+import * as ffmpeg from 'fluent-ffmpeg';
 
 export function getRandomMedia(objects: SelectedMedia[]): SelectedMedia {
     const randomIndex = Math.floor(Math.random() * objects.length);
@@ -107,3 +108,19 @@ export function deepCopy<T>(obj: T): T {
     return result as T;
 }
 
+export async function getMediaDuration(filePath: string): Promise<number> {
+    return new Promise((resolve, reject) => {
+        ffmpeg.ffprobe(filePath, (err, metadata) => {
+            if (!err) {
+                const durationInSeconds: number = Math.round(Number(metadata.format.duration)) || 0;
+                resolve(durationInSeconds);
+            } else {
+                reject(err);
+            }
+        });
+    });
+}
+
+export function createMosaicKey(genres: string[]): string {
+    return genres.map(genre => genre.toLowerCase()).sort().join("-");
+}

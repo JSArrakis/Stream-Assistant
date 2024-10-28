@@ -1,6 +1,6 @@
-import { BaseMedia } from "../../src/models/mediaInterface";
-import * as dataMan from "../../src/services/dataManager";
-import * as td from "../testData/testData";
+import { BaseMedia } from "../../../src/models/mediaInterface";
+import * as core from "../../../src/prisms/core";
+import * as td from "../../testData/testData";
 
 describe('fillMediaByEra', () => {
     it('should return the media that have the tags (scenario 1)', () => {
@@ -11,7 +11,7 @@ describe('fillMediaByEra', () => {
 
         const expectedMedia: BaseMedia[] = [];
 
-        const result: BaseMedia[] = dataMan.fillMediaByEra(alreadySelectedMedia, eraMedia, nonEraMedia, duration);
+        const result: BaseMedia[] = core.fillMediaByEra(alreadySelectedMedia, eraMedia, nonEraMedia, duration);
 
         expect(result).toEqual(expectedMedia);
     });
@@ -34,7 +34,7 @@ describe('fillMediaByEra', () => {
             td.americanwerewolfinlondontrailer1,
         ];
 
-        const result: BaseMedia[] = dataMan.fillMediaByEra(alreadySelectedMedia, eraMedia, nonEraMedia, duration);
+        const result: BaseMedia[] = core.fillMediaByEra(alreadySelectedMedia, eraMedia, nonEraMedia, duration);
 
         expect(result).toEqual(expectedMedia);
     });
@@ -58,7 +58,7 @@ describe('fillMediaByEra', () => {
             td.beetlejuicetrailer1,
         ];
 
-        const result: BaseMedia[] = dataMan.fillMediaByEra(alreadySelectedMedia, eraMedia, nonEraMedia, duration);
+        const result: BaseMedia[] = core.fillMediaByEra(alreadySelectedMedia, eraMedia, nonEraMedia, duration);
 
         expect(result).toEqual(expectedMedia);
     });
@@ -81,7 +81,7 @@ describe('fillMediaByEra', () => {
             td.americanwerewolfinlondontrailer1,
         ];
 
-        const result: BaseMedia[] = dataMan.fillMediaByEra(alreadySelectedMedia, eraMedia, nonEraMedia, duration);
+        const result: BaseMedia[] = core.fillMediaByEra(alreadySelectedMedia, eraMedia, nonEraMedia, duration);
 
         expect(result).toEqual(expectedMedia);
     });
@@ -107,7 +107,7 @@ describe('fillMediaByEra', () => {
             td.alientrailer1,
         ];
 
-        const result: BaseMedia[] = dataMan.fillMediaByEra(alreadySelectedMedia, eraMedia, nonEraMedia, duration);
+        const result: BaseMedia[] = core.fillMediaByEra(alreadySelectedMedia, eraMedia, nonEraMedia, duration);
 
         expect(result).toEqual(expectedMedia);
     });
@@ -133,7 +133,7 @@ describe('fillMediaByEra', () => {
             td.alientrailer1,
         ];
 
-        const result: BaseMedia[] = dataMan.fillMediaByEra(alreadySelectedMedia, eraMedia, nonEraMedia, duration);
+        const result: BaseMedia[] = core.fillMediaByEra(alreadySelectedMedia, eraMedia, nonEraMedia, duration);
 
         expect(result).toEqual(expectedMedia);
     });

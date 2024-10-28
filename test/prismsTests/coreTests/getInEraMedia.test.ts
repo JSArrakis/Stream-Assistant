@@ -1,25 +1,32 @@
-import { BaseMedia } from "../../src/models/mediaInterface";
-import { MainGenres } from "../../src/models/const/mainGenres";
-import { AgeGroups } from "../../src/models/const/ageGroups";
-import * as dataMan from "../../src/services/dataManager";
-import * as td from "../testData/testData";
+import { BaseMedia } from "../../../src/models/mediaInterface";
+import { Eras } from "../../../src/models/const/eras";
+import { MainGenres } from "../../../src/models/const/mainGenres";
+import { AgeGroups } from "../../../src/models/const/ageGroups";
+import * as core from "../../../src/prisms/core";
+import * as td from "../../testData/testData";
 
-describe('getMediaByTags', () => {
-    it('should return the media that have the tags (scenario 1)', () => {
+describe('getInEraMedia', () => {
+    it('should return the media that are in the era (scenario 1)', () => {
         const media: BaseMedia[] = [];
+        const eraTags: string[] = [
+            Eras.nnineties
+        ];
         const tags: string[] = [
             "jurrasicpark",
         ];
 
         const expectedMedia: BaseMedia[] = [];
 
-        const result: BaseMedia[] = dataMan.getMediaByTags(media, tags);
+        const result: BaseMedia[] = core.getInEraMedia(media, eraTags, tags);
 
         expect(result).toEqual(expectedMedia);
     });
-    it('should return the media that have the tags (scenario 2)', () => {
+    it('should return the media that are in the era (scenario 2)', () => {
         const media: BaseMedia[] = [
             td.jurassicparktoys1,
+        ];
+        const eraTags: string[] = [
+            Eras.nnineties
         ];
         const tags: string[] = [
             "marvel",
@@ -27,13 +34,16 @@ describe('getMediaByTags', () => {
 
         const expectedMedia: BaseMedia[] = [];
 
-        const result: BaseMedia[] = dataMan.getMediaByTags(media, tags);
+        const result: BaseMedia[] = core.getInEraMedia(media, eraTags, tags);
 
         expect(result).toEqual(expectedMedia);
     });
-    it('should return the media that have the tags (scenario 3)', () => {
+    it('should return the media that are in the era (scenario 3)', () => {
         const media: BaseMedia[] = [
             td.jurassicparktoys1,
+        ];
+        const eraTags: string[] = [
+            Eras.nnineties
         ];
         const tags: string[] = [
             "jurassicpark",
@@ -43,14 +53,17 @@ describe('getMediaByTags', () => {
             td.jurassicparktoys1,
         ];
 
-        const result: BaseMedia[] = dataMan.getMediaByTags(media, tags);
+        const result: BaseMedia[] = core.getInEraMedia(media, eraTags, tags);
 
         expect(result).toEqual(expectedMedia);
     });
-    it('should return the media that have the tags (scenario 4)', () => {
+    it('should return the media that are in the era (scenario 4)', () => {
         const media: BaseMedia[] = [
             td.jurassicparktoys1,
             td.marvelvsstreetfighter98,
+        ];
+        const eraTags: string[] = [
+            Eras.nnineties
         ];
         const tags: string[] = [
             "jurassicpark",
@@ -60,14 +73,17 @@ describe('getMediaByTags', () => {
             td.jurassicparktoys1,
         ];
 
-        const result: BaseMedia[] = dataMan.getMediaByTags(media, tags);
+        const result: BaseMedia[] = core.getInEraMedia(media, eraTags, tags);
 
         expect(result).toEqual(expectedMedia);
     });
-    it('should return the media that have the tags (scenario 5)', () => {
+    it('should return the media that are in the era (scenario 5)', () => {
         const media: BaseMedia[] = [
             td.jurassicparktoys1,
             td.marvelvsstreetfighter98,
+        ];
+        const eraTags: string[] = [
+            Eras.nnineties
         ];
         const tags: string[] = [
             MainGenres.Action,
@@ -78,14 +94,17 @@ describe('getMediaByTags', () => {
             td.marvelvsstreetfighter98,
         ];
 
-        const result: BaseMedia[] = dataMan.getMediaByTags(media, tags);
+        const result: BaseMedia[] = core.getInEraMedia(media, eraTags, tags);
 
         expect(result).toEqual(expectedMedia);
     });
-    it('should return the media that have the tags (scenario 6)', () => {
+    it('should return the media that are in the era (scenario 5)', () => {
         const media: BaseMedia[] = [
             td.beetlejuicetrailer1,
             td.alientrailer1
+        ];
+        const eraTags: string[] = [
+            Eras.neighties
         ];
         const tags: string[] = [
             MainGenres.Horror,
@@ -93,29 +112,29 @@ describe('getMediaByTags', () => {
 
         const expectedMedia: BaseMedia[] = [
             td.beetlejuicetrailer1,
-            td.alientrailer1
         ];
 
-        const result: BaseMedia[] = dataMan.getMediaByTags(media, tags);
+        const result: BaseMedia[] = core.getInEraMedia(media, eraTags, tags);
 
         expect(result).toEqual(expectedMedia);
     });
-    it('should return the media that have the tags (scenario 7)', () => {
+    it('should return the media that are in the era (scenario 6)', () => {
         const media: BaseMedia[] = [
             td.beetlejuicetrailer1,
             td.alientrailer1,
             td.meninblacktoys97,
+        ];
+        const eraTags: string[] = [
+            Eras.neighties
         ];
         const tags: string[] = [
             MainGenres.SciFi,
             AgeGroups.Kids
         ];
 
-        const expectedMedia: BaseMedia[] = [
-            td.meninblacktoys97,
-        ];
+        const expectedMedia: BaseMedia[] = [];
 
-        const result: BaseMedia[] = dataMan.getMediaByTags(media, tags);
+        const result: BaseMedia[] = core.getInEraMedia(media, eraTags, tags);
 
         expect(result).toEqual(expectedMedia);
     });

@@ -1,13 +1,13 @@
-import { BaseMedia } from "../../src/models/mediaInterface";
-import * as dataMan from "../../src/services/dataManager";
-import * as td from "../testData/testData";
+import { BaseMedia } from "../../../src/models/mediaInterface";
+import * as core from "../../../src/prisms/core";
+import * as td from "../../testData/testData";
 
 describe('sumMediaDuration', () => {
     it('should return the sum of all media durations (scenario 1)', () => {
         const media: BaseMedia[] = [];
         const expectedDuration: number = 0;
 
-        const result: number = dataMan.sumMediaDuration(media);
+        const result: number = core.sumMediaDuration(media);
 
         expect(result).toEqual(expectedDuration);
     });
@@ -19,7 +19,7 @@ describe('sumMediaDuration', () => {
         ];
         const expectedDuration: number = 40;
 
-        const result: number = dataMan.sumMediaDuration(media);
+        const result: number = core.sumMediaDuration(media);
 
         expect(result).toEqual(expectedDuration);
     });
@@ -29,7 +29,7 @@ describe('sumMediaDuration', () => {
         ];
         const expectedDuration: number = 10;
 
-        const result: number = dataMan.sumMediaDuration(media);
+        const result: number = core.sumMediaDuration(media);
 
         expect(result).toEqual(expectedDuration);
     });
