@@ -44,9 +44,17 @@ Halloween exemplifies (Atomic) Horror through its minimalist approach to fear. T
 
 The Exorcist stands as a classic in (Atomic) Horror, centering on the possession of a young girl and the attempts to save her through exorcism. The film masterfully blends psychological horror with supernatural elements, creating a profound sense of dread. The unseen forces of evil and the emotional turmoil faced by the characters intensify the narrative, showcasing the psychological and spiritual struggles that accompany the horror experience. The chilling atmosphere and moral clarity further underscore the film's impact, making it a landmark in the genre.
 
-### A Nightmare on Elm Street
+### Night of the Living Dead
 
-A Nightmare on Elm Street redefines (Atomic) Horror by blending dreamscapes with reality, showcasing Freddy Krueger as a vengeful spirit who preys on teenagers in their dreams. The film plays with the concept of the unknown and the idea that there is no escape from one's fears, even in sleep. With its surreal atmosphere and psychological elements, it explores the deep-seated anxieties of the characters while delivering visceral scares. The clear moral divide between the innocent victims and the malevolent force enhances the horror, making it a quintessential example of the genre.
+Night of the Living Dead is a quintessential example of (Atomic) Horror, depicting a group of people trapped in a farmhouse as they are besieged by flesh-eating zombies. The film expertly builds tension through its minimalist setting and the pervasive fear of the unknown, where the characters must confront both external threats and internal conflicts. The stark moral dilemmas faced by the characters amplify the horror experience, highlighting survival and human nature in extreme circumstances.
+
+### The Blair Witch Project
+
+The Blair Witch Project revolutionized (Atomic) Horror with its found-footage style, focusing on the terror of the unknown. A group of filmmakers venture into the woods to document the legend of the Blair Witch, only to encounter inexplicable horrors. The minimalistic approach and reliance on psychological tension create an atmosphere of dread, emphasizing the characters' fears and uncertainties as they grapple with the unseen forces stalking them. The film’s ambiguity and lack of resolution leave a lasting impact, tapping into primal fears of isolation and the unknown.
+
+### The Wicker Man (1973)
+
+The Wicker Man follows a police officer who travels to a remote Scottish island to investigate a disappearance, only to uncover a terrifying pagan cult. The film exemplifies (Atomic) Horror through its slow-building tension and unsettling atmosphere, exploring themes of belief and sacrifice. The protagonist's struggle against the island's inhabitants highlights the clear moral divide between his innocence and their malevolence. The chilling climax serves as a potent reminder of the consequences of blind faith and the horrors that can arise from the unknown.
 
 ## How Atomic Horror Stands Alone:
 

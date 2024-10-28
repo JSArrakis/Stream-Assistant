@@ -10,7 +10,7 @@
 - Tension
 - Explosive movement
 
-## Action-Adventure Genre - Musical Signature and Tone Changes
+## Action Genre - Musical Signature and Tone
 ### High Energy:
 The relentless pace of action films keeps viewers on the edge of their seats. This tone emphasizes an unyielding drive that propels characters into fast-paced sequences, creating an exhilarating atmosphere that mirrors the urgency of their struggles.
 
