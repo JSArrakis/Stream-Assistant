@@ -1,4 +1,4 @@
-##### [< BACK](../world/world.md) [HOME](../index.md) [NEXT >](../folk/folk.md)
+##### [< BACK](../world/world.md) [HOME](../index.md) [NEXT >](../electronic/electronic.md)
 # Classical
 
 Classical music refers to the formal, structured music of Western art tradition, composed over several centuries, from the Baroque period to the Romantic era and beyond. It is characterized by its complexity, dynamic range, and the use of orchestras, chamber ensembles, and solo instruments. Classical music often focuses on themes of emotion, storytelling, and grandeur, using a rich harmonic structure and formal compositions like symphonies, concertos, and operas.

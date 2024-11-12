@@ -14,3 +14,17 @@ export const MusicGenres = {
     RnB: 'rnb',
     Rock: 'rock',
 }
+
+export const MusicSubGenres = {
+    Ambient: 'ambient',
+    AvantGarde: 'avantgarde',
+    Breakcore: 'breakcore',
+    DarkAmbient: 'darkambient',
+    DarkWave: 'darkwave',
+    IndustrialRock: 'industrialrock',
+    Synthwave: 'synthwave',
+    ElectronicMinimalist: 'electronicminimalist',
+    ElectronicAmbient: 'electronicambient',
+    NeoClassical: 'neoclassical',
+    PostRock: 'postrock',
+}

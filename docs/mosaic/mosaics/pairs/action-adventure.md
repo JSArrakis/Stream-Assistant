@@ -16,7 +16,7 @@ Action focuses heavily on high-intensity moments—fast chases, combat scenes, e
 
 Adventure, on the other hand, emphasizes discovery, awe, and a more emotional sense of wonder. The music here (Classical, Folk) is often grand and sweeping, with room for moments of reflection and marvel at the journey itself.
 
-When Action-Adventure combines these two, the music must oscillate between rapid, intense action and more measured moments of discovery and tension. This dynamic range means the music needs to transition fluidly between:
+When Action-Adventure combines these two, the music must oscillate between rapid, intense action and more measured moments of discovery and tension. This dynamic range means the music needs to transition fluidly between.
 
 ### Tension and Awe:
 
@@ -35,8 +35,11 @@ The Action-Adventure genre requires a score that balances fast, dynamic sequence
 ## Core Musical Pairings:
 
 - **[Classical(Cinematic)](../../genres/audio/classical/subgenres/cinematic.md)**: Orchestral music with dramatic crescendos can underscore the emotional peaks of the journey, enhancing the sense of discovery and adventure.
+
 - **[Folk](../../genres/audio/folk/folk.md)**: Incorporating Folk elements can ground the adventure in storytelling, connecting characters’ journeys to their emotional experiences and the environments they explore.
+
 - **[Pop](../../genres/audio/pop/pop.md)**: Catchy, upbeat Pop music can accompany moments of camaraderie and excitement, especially during lighter, adventurous scenes.
+
 - **[World(Global Pulse)](../../genres/audio/world/subgenres/globalpulse.md)**: Global Pulse brings a cross-cultural rhythmic intensity that connects the physicality of the adventure with its diverse, worldly settings.
 
 ### Examples:

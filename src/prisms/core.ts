@@ -1,5 +1,6 @@
 import { BaseMedia } from '../models/mediaInterface';
 import { AgeGroups } from "../models/const/ageGroups";
+import { Holidays } from "../models/const/holidays";
 
 export function getMediaByAgeAndEra(media: BaseMedia[], eras: string[], age: string): BaseMedia[] {
     let selectedMedia: BaseMedia[] = [];
@@ -259,4 +260,20 @@ export function getMediaByTagGroupHeirarchy(
         });
     }
     return selectedMedia;
+}
+
+export function splitMediaByHoliday(
+    media: BaseMedia[],
+    selectedHolidays: string[],
+    holidays: string[]): { holidayMedia: BaseMedia[], nonHolidayMedia: BaseMedia[] } {
+    let inHoliday: BaseMedia[] = [];
+    let notHoliday: BaseMedia[] = [];
+
+    // Get all media that contains any of the holiday tags from selectedHolidays
+    inHoliday.push(...media.filter((m) => selectedHolidays.some((tag) => m.Tags.includes(tag))));
+
+    // Get all media that does not contain any of the holiday tags from Holidays
+    notHoliday.push(...media.filter((m) => !holidays.some((tag) => m.Tags.includes(tag))));
+
+    return { holidayMedia: inHoliday, nonHolidayMedia: notHoliday };
 }

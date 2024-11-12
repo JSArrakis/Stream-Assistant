@@ -1,13 +1,12 @@
 import moment from 'moment';
 import { constructStream } from './streamConstructor';
-import { StreamArgs } from '../models/streamArgs';
 import * as streamMan from './streamManager';
-import * as dataMan from './dataManager';
 import { MediaBlock } from '../models/mediaBlock';
 import * as VLC from 'vlc-client';
-import { getMedia } from './dataManager';
 import { ContStreamRequest } from '../models/streamRequest';
 import { StreamType } from '../models/enum/streamTypes';
+import { getMedia, getStreamType } from './mediaService';
+import { getConfig } from '../config/configService';
 
 const intervalInSeconds: number = 300;
 let vlc: VLC.Client;
@@ -93,7 +92,7 @@ async function cycleCheck() {
         // Sets the new end of day marker to the next instance of 11:30pm (this is important to ensure this operation does not run multiple times in a day)
         setEndOfDayMarker();
         // If the stream is continuous, prepare the next day's stream
-        if (dataMan.getStreamType() === StreamType.Cont) {
+        if (getStreamType() === StreamType.Cont) {
             //
             // Get the current continuous stream arguments from the stream service
             let continuousStreamArgs: ContStreamRequest = streamMan.getContinuousStreamArgs();
@@ -108,7 +107,7 @@ async function cycleCheck() {
             tomorrowsContinuousStreamArgs.Collections = continuousStreamArgs.Collections;
             tomorrowsContinuousStreamArgs.StartTime = tomorrow
             // Constructs the stream for the next day and adds it to the upcoming stream
-            const stream: [MediaBlock[], string] = constructStream(dataMan.getConfig(), tomorrowsContinuousStreamArgs, getMedia(), dataMan.getStreamType());
+            const stream: [MediaBlock[], string] = constructStream(getConfig(), tomorrowsContinuousStreamArgs, getMedia(), getStreamType());
             // TODO - I do not remember why I added this as it looks like it adds the entirety of tomorrow's stream to the on deck stream, this might need to be reworked
             streamMan.addToOnDeckStream(stream[0]);
         }

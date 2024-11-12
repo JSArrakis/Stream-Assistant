@@ -7,9 +7,9 @@ import { IStreamRequest } from "../models/streamRequest";
 import { keyNormalizer } from "../utils/utilities";
 import { SegmentedTags } from "../models/segmentedTags";
 import { segmentTags } from "./dataTransformer";
-import { getMediaByAgeGroupHierarchy } from "./dataManager";
 import { BaseMedia } from "../models/mediaInterface";
-import { sumMediaDuration } from "./dataManager";
+import { sumMediaDuration } from "../prisms/core";
+import { getMediaByAgeGroupHierarchy } from "../prisms/spectrum";
 
 export function createBuffer(
     duration: number,
