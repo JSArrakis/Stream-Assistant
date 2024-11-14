@@ -10,6 +10,7 @@ import { segmentTags } from "./dataTransformer";
 import { BaseMedia } from "../models/mediaInterface";
 import { sumMediaDuration } from "../prisms/core";
 import { getMediaByAgeGroupHierarchy } from "../prisms/spectrum";
+import { getMediaByMosaicTags } from "../prisms/mosaic";
 
 export function createBuffer(
     duration: number,
@@ -299,7 +300,6 @@ export function selectWeightedCommerical(
 
 }
 
-// Define a function to select commercials
 export function selectCommercials(
     commercials: Commercial[],
     defaultCommercials: Commercial[],
@@ -383,20 +383,12 @@ function selectShortOrMusic(
     if (useShort && availableShorts.length > 0) {
         // Select a random short from the available shorts
         const selectedShort = availableShorts[Math.floor(Math.random() * availableShorts.length)]
-        // Update the remaining duration and add the title of the selected short to the 
-        // used short titles list
-        remainingDuration -= selectedShort.Duration;
-        usedShorts.push(selectedShort);
 
         return selectedShort;
 
     } else if (availableMusic.length > 0) {
         // Select a random music video from the available music
         const selectedMusic = availableMusic[Math.floor(Math.random() * availableShorts.length)];
-        // Update the remaining duration and add the title of the selected music to the 
-        // used music titles list
-        remainingDuration -= selectedMusic.Duration;
-        usedMusic.push(selectedMusic);
 
         return selectedMusic;
 
@@ -437,13 +429,12 @@ export function selectBufferMediaWithinDuration(
 
     // Get media filtered by tags that match using Kaleidoscope Buffer Media Selection Algorithm(tm)
     /*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*/
-    const filteredCommercials = getMediaByAgeGroupHierarchy(media.Commercials, usedCommercials, tags, remainingDuration);
-    const filteredMusic = getMediaByAgeGroupHierarchy(media.Music, usedMusic, tags, remainingDuration);
-    const filteredShorts = getMediaByAgeGroupHierarchy(media.Shorts, usedShorts, tags, remainingDuration);
+    const filteredCommercials = getMediaByAgeGroupHierarchy(media.Commercials, usedCommercials, tags, [], remainingDuration);
+    const filteredMusic = getMediaByMosaicTags(media.Music, usedMusic, tags, [], [], remainingDuration);
+    const filteredShorts = getMediaByAgeGroupHierarchy(media.Shorts, usedShorts, tags, [], remainingDuration);
     /*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*/
 
     // Create a list of used commercial, music, and short titles
-
     let selectedMedia: (Commercial | Short | Music)[] = [];
 
     while (remainingDuration > 0) {

@@ -11,6 +11,7 @@ export function getMediaByMosaicTags(
     alreadySelectedMedia: BaseMedia[],
     tags: SegmentedTags,
     mosaics: Mosaic[],
+    requestedHolidayTags: string[],
     duration: number): BaseMedia[] {
     let selectedMedia: BaseMedia[] = [];
     let sumDuration: number = 0;
@@ -21,11 +22,11 @@ export function getMediaByMosaicTags(
     const hasSpecialtyTags = tags.SpecialtyTags.length > 0;
     const hasGenreTags = tags.GenreTags.length > 0;
     const hasEraTags = tags.EraTags.length > 0;
-    const hasHolidayTags = tags.HolidayTags.length > 0;
+    const hasHolidayTags = requestedHolidayTags.length > 0;
     let holidayMedia: BaseMedia[] = [];
     let nonHolidayMedia: BaseMedia[] = [];
 
-    ({ holidayMedia, nonHolidayMedia } = core.splitMediaByHoliday(media, tags.HolidayTags, Object.values(Holidays)));
+    ({ holidayMedia, nonHolidayMedia } = core.splitMediaByHoliday(media, requestedHolidayTags, Object.values(Holidays)));
     
     if (hasAgeGroupTags) {
         let ageGroups = core.getAgeGroupAdjacencyTags(tags.AgeGroupTags);
@@ -47,25 +48,25 @@ export function getMediaByMosaicTags(
                     contextAlreadySelectedMedia.push(...mediaByTags);
                 }
             });
+        } else {
+            ageGroups.forEach((age) => {
+                sumDuration = core.sumMediaDuration(selectedMedia);
+                if (sumDuration < duration) {
+                    const mediaByTags = getMediaByMosaicTagsAndAgeGroup(
+                        nonHolidayMedia,
+                        contextAlreadySelectedMedia,
+                        hasSpecialtyTags,
+                        hasGenreTags,
+                        hasEraTags, 
+                        tags,
+                        age,
+                        mosaics,
+                        duration);
+                    selectedMedia.push(...mediaByTags);
+                    contextAlreadySelectedMedia.push(...mediaByTags);
+                }
+            });
         }
-
-        ageGroups.forEach((age) => {
-            sumDuration = core.sumMediaDuration(selectedMedia);
-            if (sumDuration < duration) {
-                const mediaByTags = getMediaByMosaicTagsAndAgeGroup(
-                    nonHolidayMedia,
-                    contextAlreadySelectedMedia,
-                    hasSpecialtyTags,
-                    hasGenreTags,
-                    hasEraTags, 
-                    tags,
-                    age,
-                    mosaics,
-                    duration);
-                selectedMedia.push(...mediaByTags);
-                contextAlreadySelectedMedia.push(...mediaByTags);
-            }
-        });
     }
 
     if (hasHolidayTags) {
@@ -84,25 +85,24 @@ export function getMediaByMosaicTags(
             selectedMedia.push(...mediaByTags);
             contextAlreadySelectedMedia.push(...mediaByTags);
         }
+    } else {
+        sumDuration = core.sumMediaDuration(selectedMedia);
+        if (sumDuration < duration) {
+            const mediaByTags = getMediaByMosaicTagsAndAgeGroup(
+                nonHolidayMedia,
+                contextAlreadySelectedMedia,
+                hasSpecialtyTags,
+                hasGenreTags,
+                hasEraTags, 
+                tags,
+                AgeGroups.AllAges,
+                mosaics,
+                duration);
+            selectedMedia.push(...mediaByTags);
+            contextAlreadySelectedMedia.push(...mediaByTags);
+        }
     }
-
-
-    sumDuration = core.sumMediaDuration(selectedMedia);
-    if (sumDuration < duration) {
-        const mediaByTags = getMediaByMosaicTagsAndAgeGroup(
-            nonHolidayMedia,
-            contextAlreadySelectedMedia,
-            hasSpecialtyTags,
-            hasGenreTags,
-            hasEraTags, 
-            tags,
-            AgeGroups.AllAges,
-            mosaics,
-            duration);
-        selectedMedia.push(...mediaByTags);
-        contextAlreadySelectedMedia.push(...mediaByTags);
-    }
-
+    
     return selectedMedia;
 }
 
@@ -163,8 +163,7 @@ export function getMediaBySpecialtyOrMosaicHeriarchy(
     // Read more about mosaics here.
     // Link to mosaics docs ../docs/mosaics.md
     if (segmentedTags.SpecialtyTags.length > 0 && segmentedTags.GenreTags.length > 0) {
-        sumDuration = core.sumMediaDuration(selectedMedia);
-        if (sumDuration < duration) {
+
             const tagGroupMedia = getMediaByMosaicCombination(
                 contextAlreadySelectedMedia,
                 media,
@@ -176,7 +175,7 @@ export function getMediaBySpecialtyOrMosaicHeriarchy(
                 duration);
             selectedMedia.push(...tagGroupMedia);
             contextAlreadySelectedMedia.push(...tagGroupMedia);
-        }
+
     }
 
     if (segmentedTags.GenreTags.length > 0) {
@@ -197,15 +196,18 @@ export function getMediaBySpecialtyOrMosaicHeriarchy(
     }
 
     if (segmentedTags.SpecialtyTags.length > 0) {
-        const tagGroupMedia = core.getMediaByTagGroupHeirarchy(
-            contextAlreadySelectedMedia,
-            media,
-            segmentedTags.SpecialtyTags,
-            segmentedTags.EraTags,
-            age,
-            duration);
-        selectedMedia.push(...tagGroupMedia);
-        contextAlreadySelectedMedia.push(...tagGroupMedia);
+        if (sumDuration < duration) {
+            sumDuration = core.sumMediaDuration(selectedMedia);
+            const tagGroupMedia = core.getMediaByTagGroupHeirarchy(
+                contextAlreadySelectedMedia,
+                media,
+                segmentedTags.SpecialtyTags,
+                segmentedTags.EraTags,
+                age,
+                duration);
+            selectedMedia.push(...tagGroupMedia);
+            contextAlreadySelectedMedia.push(...tagGroupMedia);
+        }
     }
 
     return selectedMedia;

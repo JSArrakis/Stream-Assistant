@@ -2,6 +2,7 @@ import { BaseMedia } from '../models/mediaInterface';
 import { SegmentedTags } from '../models/segmentedTags';
 import { AgeGroups } from "../models/const/ageGroups";
 import * as core from './core';
+import { Holidays } from '../models/const/holidays';
 
 // This function is used to select buffer media based on the tags of the adjacent media.
 // Adjacent media is determined by the half way point of the duration of the buffer. The duration associated with
@@ -68,56 +69,84 @@ export function getMediaByAgeGroupHierarchy(
     media: BaseMedia[],
     alreadySelectedMedia: BaseMedia[],
     tags: SegmentedTags,
+    requestedHolidayTags: string[],
     duration: number): BaseMedia[] {
     let selectedMedia: BaseMedia[] = [];
     let sumDuration: number = 0;
 
     let contextAlreadySelectedMedia: BaseMedia[] = alreadySelectedMedia.map((m) => m);
 
-    let hasAgeGroupTags = tags.AgeGroupTags.length > 0;
-    let hasSpecialtyTags = tags.SpecialtyTags.length > 0;
-    let hasGenreTags = tags.GenreTags.length > 0;
-    let hasEraTags = tags.EraTags.length > 0;
+    const hasAgeGroupTags = tags.AgeGroupTags.length > 0;
+    const hasSpecialtyTags = tags.SpecialtyTags.length > 0;
+    const hasGenreTags = tags.GenreTags.length > 0;
+    const hasEraTags = tags.EraTags.length > 0;
+    const hasHolidayTags = requestedHolidayTags.length > 0;
+    let holidayMedia: BaseMedia[] = [];
+    let nonHolidayMedia: BaseMedia[] = [];
+
+    ({ holidayMedia, nonHolidayMedia } = core.splitMediaByHoliday(media, requestedHolidayTags, Object.values(Holidays)));
 
     if (hasAgeGroupTags) {
         let ageGroups = core.getAgeGroupAdjacencyTags(tags.AgeGroupTags);
         ageGroups.forEach((age) => {
             sumDuration = core.sumMediaDuration(selectedMedia);
-            if (sumDuration < duration) {
-                if (hasSpecialtyTags || hasGenreTags) {
-                    const mediaByTags = getMediaByTagHeriarchy(contextAlreadySelectedMedia, age, media, tags, duration);
-                    selectedMedia.push(...mediaByTags);
-                    contextAlreadySelectedMedia.push(...mediaByTags);
-                } else if (hasEraTags) {
-                    const mediaByEra = core.getMediaByAgeAndEra(media, tags.EraTags, age);
-                    selectedMedia.push(...mediaByEra);
-                    contextAlreadySelectedMedia.push(...mediaByEra);
-                } else {
-                    const mediaByAge = core.getMediaByAge(media, age);
-                    selectedMedia.push(...mediaByAge);
-                    contextAlreadySelectedMedia.push(...mediaByAge);
-                }
-            }
+            const mediaByTags = getMediaByTagsAndAgeGroup(
+                nonHolidayMedia,
+                contextAlreadySelectedMedia,
+                hasSpecialtyTags,
+                hasGenreTags,
+                hasEraTags,
+                tags,
+                age,
+                duration);
+            selectedMedia.push(...mediaByTags);
+            contextAlreadySelectedMedia.push(...mediaByTags);
         });
     }
 
     sumDuration = core.sumMediaDuration(selectedMedia);
     if (sumDuration < duration) {
-        if (hasSpecialtyTags || hasGenreTags) {
-            const mediaByTags = getMediaByTagHeriarchy(contextAlreadySelectedMedia, AgeGroups.AllAges, media, tags, duration);
-            selectedMedia.push(...mediaByTags);
-            contextAlreadySelectedMedia.push(...mediaByTags);
-        } else if (hasEraTags) {
-            const mediaByEra = core.getMediaByAgeAndEra(media, tags.EraTags, AgeGroups.AllAges);
-            selectedMedia.push(...mediaByEra);
-            contextAlreadySelectedMedia.push(...mediaByEra);
-        } else {
-            const mediaByAge = core.getMediaByAge(media, AgeGroups.AllAges);
-            selectedMedia.push(...mediaByAge);
-            contextAlreadySelectedMedia.push(...mediaByAge);
-        }
+        const mediaByTags = getMediaByTagsAndAgeGroup(
+            nonHolidayMedia,
+            contextAlreadySelectedMedia,
+            hasSpecialtyTags,
+            hasGenreTags,
+            hasEraTags,
+            tags,
+            AgeGroups.AllAges,
+            duration);
+        selectedMedia.push(...mediaByTags);
+        contextAlreadySelectedMedia.push(...mediaByTags);
     }
 
+    return selectedMedia;
+}
+
+export function getMediaByTagsAndAgeGroup(
+    media: BaseMedia[],
+    alreadySelectedMedia: BaseMedia[],
+    hasSpecialtyTags: boolean,
+    hasGenreTags: boolean,
+    hasEraTags: boolean,
+    tags: SegmentedTags,
+    age: string,
+    duration: number): BaseMedia[] {
+    let selectedMedia: BaseMedia[] = [];
+    let contextAlreadySelectedMedia: BaseMedia[] = alreadySelectedMedia.map((m) => m);
+    
+    if (hasSpecialtyTags || hasGenreTags) {
+        const mediaByTags = getMediaByTagHeriarchy(contextAlreadySelectedMedia, age, media, tags, duration);
+        selectedMedia.push(...mediaByTags);
+        contextAlreadySelectedMedia.push(...mediaByTags);
+    } else if (hasEraTags) {
+        const mediaByEra = core.getMediaByAgeAndEra(media, tags.EraTags, age);
+        selectedMedia.push(...mediaByEra);
+        contextAlreadySelectedMedia.push(...mediaByEra);
+    } else {
+        const mediaByAge = core.getMediaByAge(media, age);
+        selectedMedia.push(...mediaByAge);
+        contextAlreadySelectedMedia.push(...mediaByAge);
+    }
     return selectedMedia;
 }
 

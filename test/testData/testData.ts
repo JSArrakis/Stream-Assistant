@@ -243,7 +243,7 @@ export const mosaics: Mosaic[] = [
 
 export const sweetchildomine = new Music('Sweet Child O Mine - Guns and Roses', 'sweetchildomine-gunsandroses', 293, '/path/sweetchildomine-gunsandroses.mp4', MediaType.Music, [MusicGenres.Rock, AgeGroups.AllAges]);
 export const hotelcalifornia = new Music('Hotel California - Eagles', 'hotelcalifornia-eagles', 369, '/path/hotelcalifornia-eagles.mp4', MediaType.Music, [MusicGenres.Rock, AgeGroups.AllAges]);
-export const backinblack = new Music('Back in Black - ACDC', 'backinblack-acdc', 255, '/path/backinblack-acdc.mp4', MediaType.Music, [MusicGenres.Rock, AgeGroups.AllAges, "ironman"]);
+export const backinblack = new Music('Back in Black - ACDC', 'backinblack-acdc', 255, '/path/backinblack-acdc.mp4', MediaType.Music, [MusicGenres.Rock, AgeGroups.AllAges, "ironman", "marvel"]);
 export const heyjude = new Music('Hey Jude - The Beatles', 'heyjude-thebeatles', 431, '/path/heyjude-thebeatles.mp4', MediaType.Music, [MusicGenres.Rock, AgeGroups.AllAges]);
 export const alive = new Music('Alive - Pearl Jam', 'alive-pearljam', 312, '/path/alive-pearljam.mp4', MediaType.Music, [MusicGenres.Rock, AgeGroups.AllAges]);
 export const paranoid = new Music('Paranoid - Black Sabbath', 'paranoid-blacksabbath', 172, '/path/paranoid-blacksabbath.mp4', MediaType.Music, [MusicGenres.Metal, AgeGroups.AllAges]);
@@ -309,6 +309,8 @@ export const hereitschristmastime = new Music('Here It\'s Christmas Time - Kevin
 export const allIwantforchristmasisyou = new Music('All I Want for Christmas is You - Mariah Carey', 'alliwantforchristmasisyou-mariahcarey', 292, '/path/alliwantforchristmasisyou-mariahcarey.mp4', MediaType.Music, [MusicGenres.Pop, AgeGroups.AllAges, 'christmas']);
 export const kidnapthesandyclaws = new Music('Kidnap the Sandy Claws - Korn', 'kidnapthesandyclaws-korn', 292, '/path/kidnapthesandyclaws-korn.mp4', MediaType.Music, [MusicGenres.Metal, AgeGroups.AllAges, 'christmas', 'halloween']);
 export const monstermash = new Music('Monster Mash - Bobby Pickett', 'monstermash-bobbypickett', 292, '/path/monstermash-bobbypickett.mp4', MediaType.Music, [MusicGenres.Pop, AgeGroups.AllAges, 'halloween']);
+export const comeandgetyourlove = new Music('Come and Get Your Love - Redbone', 'comeandgetyourlove-redbone', 292, '/path/comeandgetyourlove-redbone.mp4', MediaType.Music, [MusicGenres.Rock, AgeGroups.AllAges, "guardiansofthegalaxy", "marvel"]);
+export const ohhchild = new Music('Ohh Child - The Five Stairsteps', 'ohhchild-thefivestairsteps', 292, '/path/ohhchild-thefivestairsteps.mp4', MediaType.Music, [MusicGenres.RnB, AgeGroups.AllAges, "guardiansofthegalaxy", "marvel"]);
 
 export const music = [
     sweetchildomine,
@@ -379,6 +381,8 @@ export const music = [
     allIwantforchristmasisyou,
     kidnapthesandyclaws,
     monstermash,
+    comeandgetyourlove,
+    ohhchild,
 ];
 
 export const nonHolidayMusic = [
@@ -446,4 +450,6 @@ export const nonHolidayMusic = [
     thesoundoftheunderground,
     manicpanic,
     blackacid,
+    comeandgetyourlove,
+    ohhchild,
 ]

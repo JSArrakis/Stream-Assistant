@@ -17,6 +17,7 @@ describe('getMediaByAgeGroupHierarchy', () => {
             AgeGroupTags: [],
             HolidayTags: [],
         };
+        const requestedHolidayTags: string[] = [];
         const duration: number = 0;
 
         const expectedMedia: BaseMedia[] = [];
@@ -26,6 +27,7 @@ describe('getMediaByAgeGroupHierarchy', () => {
                 media,
                 alreadySelectedMedia,
                 segmentedTags,
+                requestedHolidayTags,
                 duration
             );
         
@@ -64,15 +66,21 @@ describe('getMediaByAgeGroupHierarchy', () => {
             ],
             HolidayTags: [],
         };
+        const requestedHolidayTags: string[] = [];
         const duration: number = 0;
 
-        const expectedMedia: BaseMedia[] = [];
+        const expectedMedia: BaseMedia[] = [
+            td.jurassicparktoys1,
+            td.jurassicparktoys2,
+            td.jurassicparktoys3,
+        ];
 
         const result: BaseMedia[] =
             spectrum.getMediaByAgeGroupHierarchy(
                 media,
                 alreadySelectedMedia,
                 segmentedTags,
+                requestedHolidayTags,
                 duration
             );
         
@@ -111,15 +119,22 @@ describe('getMediaByAgeGroupHierarchy', () => {
             ],
             HolidayTags: [],
         };
-        const duration: number = 0;
+        const requestedHolidayTags: string[] = [];
+        const duration: number = 60;
 
-        const expectedMedia: BaseMedia[] = [];
+        const expectedMedia: BaseMedia[] = [
+            td.jurassicparktoys1,
+            td.jurassicparktoys2,
+            td.jurassicparktoys3,
+            td.jurassicpark3toys,
+        ];            
 
         const result: BaseMedia[] =
             spectrum.getMediaByAgeGroupHierarchy(
                 media,
                 alreadySelectedMedia,
                 segmentedTags,
+                requestedHolidayTags,
                 duration
             );
         
@@ -149,58 +164,6 @@ describe('getMediaByAgeGroupHierarchy', () => {
             EraTags: [
                 Eras.nnineties,
             ],
-            GenreTags: [],
-            SpecialtyTags: [
-                "jurassicpark",
-            ],
-            AgeGroupTags: [
-                AgeGroups.Kids,
-            ],
-            HolidayTags: [],
-        };
-        const duration: number = 60;
-
-        const expectedMedia: BaseMedia[] = [
-            td.jurassicparktoys1,
-            td.jurassicparktoys2,
-            td.jurassicparktoys3,
-            td.jurassicpark3toys,
-        ];            
-
-        const result: BaseMedia[] =
-            spectrum.getMediaByAgeGroupHierarchy(
-                media,
-                alreadySelectedMedia,
-                segmentedTags,
-                duration
-            );
-        
-        expect(result).toEqual(expectedMedia);
-    });
-    it('should return the media that have the tags (scenario 5)', () => {
-        const alreadySelectedMedia: BaseMedia[] = [];
-        const media: BaseMedia[] = [
-            td.littleoopsiedaisy,
-            td.jurassicparktoys1,
-            td.superduperdoublelooper,
-            td.transformers80s1,
-            td.alientrailer1,
-            td.jurassicparktoys2,
-            td.meninblacktoys97,
-            td.jurassicparktoys3,
-            td.pizzahutxmen,
-            td.transformersbeastwarstoys,
-            td.alienstoys1,
-            td.jurassicpark3toys,
-            td.halloween711,
-            td.americanwerewolfinlondontrailer1,
-            td.beetlejuicetrailer1,
-            td.ocarinaoftimetrailer1,
-        ]
-        const segmentedTags: SegmentedTags = {
-            EraTags: [
-                Eras.nnineties,
-            ],
             GenreTags: [
                 MainGenres.Action,
                 MainGenres.SciFi,
@@ -212,6 +175,7 @@ describe('getMediaByAgeGroupHierarchy', () => {
             ],
             HolidayTags: [],
         };
+        const requestedHolidayTags: string[] = [];
         const duration: number = 120;
 
         const expectedMedia: BaseMedia[] = [
@@ -231,6 +195,7 @@ describe('getMediaByAgeGroupHierarchy', () => {
                 media,
                 alreadySelectedMedia,
                 segmentedTags,
+                requestedHolidayTags,
                 duration
             );
 
@@ -271,6 +236,7 @@ describe('getMediaByAgeGroupHierarchy', () => {
             ],
             HolidayTags: [],
         };
+        const requestedHolidayTags: string[] = [];
         const duration: number = 500;
 
         const expectedMedia: BaseMedia[] = [
@@ -291,12 +257,13 @@ describe('getMediaByAgeGroupHierarchy', () => {
                 media,
                 alreadySelectedMedia,
                 segmentedTags,
+                requestedHolidayTags,
                 duration
             );
 
         expect(result).toEqual(expectedMedia);
     });
-    it('should return the media that have the tags (scenario 5)', () => {
+    it('should return the media that have the tags (scenario 6)', () => {
         const alreadySelectedMedia: BaseMedia[] = [];
         const media: BaseMedia[] = [
             td.littleoopsiedaisy,
@@ -331,6 +298,7 @@ describe('getMediaByAgeGroupHierarchy', () => {
             ],
             HolidayTags: [],
         };
+        const requestedHolidayTags: string[] = [];
         const duration: number = 500;
 
         const expectedMedia: BaseMedia[] = [
@@ -352,12 +320,13 @@ describe('getMediaByAgeGroupHierarchy', () => {
                 media,
                 alreadySelectedMedia,
                 segmentedTags,
+                requestedHolidayTags,
                 duration
             );
 
         expect(result).toEqual(expectedMedia);
     });
-    it('should return the media that have the tags (scenario 5)', () => {
+    it('should return the media that have the tags (scenario 7)', () => {
         const alreadySelectedMedia: BaseMedia[] = [];
         const media: BaseMedia[] = [
             td.littleoopsiedaisy,
@@ -392,6 +361,7 @@ describe('getMediaByAgeGroupHierarchy', () => {
             ],
             HolidayTags: [],
         };
+        const requestedHolidayTags: string[] = [];
         const duration: number = 500;
 
         const expectedMedia: BaseMedia[] = [
@@ -405,6 +375,7 @@ describe('getMediaByAgeGroupHierarchy', () => {
                 media,
                 alreadySelectedMedia,
                 segmentedTags,
+                requestedHolidayTags,
                 duration
             );
 
