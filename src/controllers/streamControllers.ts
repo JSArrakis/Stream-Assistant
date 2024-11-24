@@ -2,16 +2,16 @@
 
 import { NextFunction, Request, Response } from 'express';
 import { body, validationResult } from 'express-validator';
-import { StreamArgs } from '../models/streamArgs';
 import * as streamMan from '../services/streamManager';
 import { createVLCClient } from '../services/vlcClient';
 import { playVLC, setVLCClient } from '../services/backgroundService';
-import * as dataMan from '../services/dataManager';
 import { StreamType } from '../models/enum/streamTypes';
 import * as envMan from '../services/environmentManager';
-import * as db from '../db/db';
 import { AdhocStreamRequest, ContStreamRequest } from '../models/streamRequest';
 import { keyNormalizer } from '../utils/utilities';
+import { getConfig } from '../config/configService';
+import { getMedia, getMosaics, getStreamType, setStreamType } from '../services/mediaService';
+import { getEnvConfig } from '../db/envConfig';
 
 export async function continuousStreamHandler(req: Request, res: Response): Promise<void> {
     let streamError: string = "";
@@ -26,14 +26,14 @@ export async function continuousStreamHandler(req: Request, res: Response): Prom
     const contRequest = mapRequestToContinuousStreamRequest(req);
 
     // Get environment config from DB and set it in the environment manager
-    let env = await db.GetEnvConfig(keyNormalizer(contRequest.Env));
+    let env = await getEnvConfig(keyNormalizer(contRequest.Env));
     if (env[1] !== "") {
         res.status(400).json({ message: env[1] });
         return;
     }
     envMan.SetEnvConfig(env[0]);
 
-    dataMan.setStreamType(StreamType.Cont)
+    setStreamType(StreamType.Cont)
     // TODO - Check if Continuous stream is already running, if so return error
     // Important until I can rewrite module of vlc client to include the ability to close the client
     // Currently the only way to close the client is to stop the Stream Assistant service
@@ -48,7 +48,7 @@ export async function continuousStreamHandler(req: Request, res: Response): Prom
     setVLCClient(await createVLCClient(streamMan.getContinuousStreamArgs().Password));
 
     // Creates today's span of the stream filling the time until 12:00am using params from config, continuous stream args and available media
-    streamError = streamMan.initializeStream(dataMan.getConfig(), contRequest, dataMan.getMedia(), dataMan.getStreamType());
+    streamError = streamMan.initializeStream(getConfig(), contRequest, getMedia(), getMosaics(), getStreamType());
     if (streamError !== "") {
         console.log("Error initializing stream: " + streamError);
         res.status(400).json({ message: streamError });
@@ -82,7 +82,7 @@ export async function adHocStreamHandler(req: Request, res: Response): Promise<v
     const adhocRequest = mapRequestToAdhocStreamRequest(req);
 
     // Get environment config from DB and set it in the environment manager
-    let env = await db.GetEnvConfig(keyNormalizer(adhocRequest.Env));
+    let env = await getEnvConfig(keyNormalizer(adhocRequest.Env));
     if (env[1] !== "") {
         res.status(400).json({ message: env[1] });
         return;
@@ -90,13 +90,13 @@ export async function adHocStreamHandler(req: Request, res: Response): Promise<v
 
     envMan.SetEnvConfig(env[0]);
 
-    dataMan.setStreamType(StreamType.Adhoc)
+    setStreamType(StreamType.Adhoc)
 
     streamMan.setContinuousStreamArgs(adhocRequest);
 
     setVLCClient(await createVLCClient(streamMan.getContinuousStreamArgs().Password));
 
-    streamMan.initializeStream(dataMan.getConfig(), adhocRequest, dataMan.getMedia(), dataMan.getStreamType());
+    streamMan.initializeStream(getConfig(), adhocRequest, getMedia(), getMosaics(), getStreamType());
     streamMan.initializeOnDeckStream();
 
     await streamMan.addInitialMediaBlocks();

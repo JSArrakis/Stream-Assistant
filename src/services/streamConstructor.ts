@@ -13,11 +13,13 @@ import { MediaBlock } from "../models/mediaBlock";
 import { StreamType } from "../models/enum/streamTypes";
 import { ManageShowProgression } from "./progressionManager";
 import { AdhocStreamRequest, IStreamRequest } from "../models/streamRequest";
+import { Mosaic } from "../models/mosaic";
 
 export function constructStream(
     config: Config,
     args: IStreamRequest,
     media: Media,
+    mosaics: Mosaic[],
     streamType: StreamType,
     // sets the time of the stream to the current time if no start time is provided
     rightNow: number = (args.StartTime === undefined) ? moment().unix() : args.StartTime):
@@ -93,19 +95,21 @@ export function constructStream(
         stagedStream[0].Time - rightNow,
         args,
         media,
+        mosaics,
         [],
         stagedStream[0].Tags,
-        prevBuffer)
+        prevBuffer,
+        [])
 
     // Boolean to be used later to determine if there is an initial buffer to be added to the stream
-    let hasInitialBuffer = initialBuffer[0].length > 0 ? true : false;
+    let hasInitialBuffer = initialBuffer.buffer.length > 0 ? true : false;
 
     // Adds the initial buffer to the prevBuffer object
-    prevBuffer = initialBuffer[2];
+    prevBuffer = initialBuffer.newPrevBuffer;
 
     // If there is any remaining time the initial buffer did not fill, that remaining time is assigned to the remainder variable
     // This variable gets passed to the next buffer to correct the schedule and keep things on time
-    let remainder = initialBuffer[1];
+    let remainder = initialBuffer.remainingDuration;
 
     // Loops through the staged stream of media items and creates a media block for each item
     // A media block is an object that holds the main media item and the buffer media that will be played after the main media item
@@ -135,25 +139,27 @@ export function constructStream(
                 bufferDuration + remainder,
                 args,
                 media,
+                mosaics,
                 stagedStream[index].Tags,
                 lastItem ? [] : stagedStream[index + 1].Tags,
-                prevBuffer);
+                prevBuffer,
+                []);
 
             // The sum of all selected media items in the buffer is added to the total duration of the Media Block
             let totalDuration: number = 0;
-            for (const obj of buffer[0]) {
+            for (const obj of buffer.buffer) {
                 totalDuration += obj.Duration;
             }
             // Replaces the stored previous buffer with the buffer that was just created to prevent these media items from being played during the next buffer
-            prevBuffer = buffer[2];
+            prevBuffer = buffer.newPrevBuffer;
 
             // Adds the buffer media to the media block
-            mediaBlock.Buffer.push(...buffer[0]);
+            mediaBlock.Buffer.push(...buffer.buffer);
             // resets the remainder varliable to the new remainder from the buffer if any to be used in the next iteration of this loop
-            remainder = buffer[1];
+            remainder = buffer.remainingDuration;
             // If this is the first media item in the stream and there is an initial buffer, add the initial buffer to the media block
             if (index === 0 && hasInitialBuffer) {
-                mediaBlock.InitialBuffer.push(...initialBuffer[0]);
+                mediaBlock.InitialBuffer.push(...initialBuffer.buffer);
                 hasInitialBuffer = false;
             }
             // Adds the media block to the stream blocks array, order matters here as this is the order the media will be played in

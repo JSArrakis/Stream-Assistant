@@ -8,12 +8,14 @@ import { Mosaic } from "../../src/models/mosaic";
 import { Movie } from "../../src/models/movie";
 import { Music } from "../../src/models/music";
 import { ProgressionContext, WatchRecord } from "../../src/models/progressionContext";
+import { Short } from "../../src/models/short";
 import { Episode, Show } from "../../src/models/show";
 
 export const inception = new Movie('Inception', 'inception', 'inception', 'tt1375666', ['scifi'], '/path/inception.mp4', 8880, 9000, '', 0);
 export const matrix = new Movie('The Matrix', 'thematrix', 'matrix', 'tt0133093', ['action'], '/path/matrix.mp4', 8160, 9000, '', 1);
 export const interstellar = new Movie('Interstellar', 'interstellar', 'interstellar', 'tt0816692', ['scifi'], '/path/interstellar.mp4', 10140, 10800, '', 0);
 export const dune = new Movie('Dune', 'dune', 'dune', 'tt1160419', ['scifi'], '/path/dune.mp4', 9120, 10800, '', 1);
+export const terminator2 = new Movie('Terminator 2: Judgement Day', 'terminator2', 'terminator2', 'tt0103064', [MainGenres.Action, MainGenres.Horror, MainGenres.SciFi], '/path/terminator2.mp4', 9300, 10800, '', 0);
 
 export const sailor = new Show('Sailor Moon', 'sailormoon', 'sailormoon', 'tt0103369', 1800, false, false, ['fantasy', 'action'], [], 5, [
     new Episode(1, 1, 1, '/path/sailormoon1.mp4', "A Moon Star is Born", "", 1448, 1800, []),
@@ -453,3 +455,27 @@ export const nonHolidayMusic = [
     comeandgetyourlove,
     ohhchild,
 ]
+
+export const code8 = new Short('Code 8', 'code8', 600, '/path/code8.mp4', MediaType.Short, [MainGenres.Action, MainGenres.SciFi, AgeGroups.YoungAdult, Eras.twothousands]);
+export const lightsout = new Short('Lights Out', 'lightsout', 180, '/path/lightsout.mp4', MediaType.Short, [MainGenres.Horror, AgeGroups.Mature, Eras.twothousands]);
+export const rakka = new Short('Rakka', 'rakka', 480, '/path/rakka.mp4', MediaType.Short, [MainGenres.SciFi, AgeGroups.Mature, Eras.twothousands]);
+export const theblackhole = new Short('The Black Hole', 'theblackhole', 180, '/path/theblackhole.mp4', MediaType.Short, [MainGenres.SciFi, MainGenres.Horror, AgeGroups.YoungAdult, Eras.twothousands]);
+export const cargo = new Short('Cargo', 'cargo', 420, '/path/cargo.mp4', MediaType.Short, [MainGenres.Horror, AgeGroups.Mature, Eras.twothousands]);
+export const dust = new Short('Dust', 'dust', 600, '/path/dust.mp4', MediaType.Short, [MainGenres.SciFi, MainGenres.Action, AgeGroups.YoungAdult, Eras.twothousands]);
+export const portal = new Short('Portal', 'portal', 480, '/path/portal.mp4', MediaType.Short, [MainGenres.SciFi, MainGenres.Action, AgeGroups.YoungAdult, Eras.twothousands]);
+export const thegate = new Short('The Gate', 'thegate', 360, '/path/thegate.mp4', MediaType.Short, [MainGenres.Horror, MainGenres.Action, AgeGroups.Mature, Eras.twothousands]);
+export const alienharvest = new Short('Alien: Harvest', 'alienharvest', 540, '/path/alienharvest.mp4', MediaType.Short, [MainGenres.SciFi, MainGenres.Horror, AgeGroups.Mature, Eras.twothousands]);
+export const adam = new Short('Adam', 'adam', 540, '/path/adam.mp4', MediaType.Short, [MainGenres.SciFi, AgeGroups.YoungAdult, Eras.twothousands]);
+
+export const shorts = [
+    code8,
+    lightsout,
+    rakka,
+    theblackhole,
+    cargo,
+    dust,
+    portal,
+    thegate,
+    alienharvest,
+    adam,
+];

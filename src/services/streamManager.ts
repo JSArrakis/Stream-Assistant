@@ -7,6 +7,7 @@ import { Request } from 'express';
 import { addMediaBlock } from './backgroundService';
 import { IStreamRequest } from '../models/streamRequest';
 import { StreamType } from '../models/enum/streamTypes';
+import { Mosaic } from '../models/mosaic';
 
 let upcomingStream: MediaBlock[] = [];
 let onDeckStream: MediaBlock[] = [];
@@ -14,12 +15,17 @@ let continuousStream = false;
 let args: IStreamRequest
 let streamVarianceInSeconds = 0;
 
-function initializeStream(config: Config, streamArgs: IStreamRequest, media: Media, streamType: StreamType): string {
+function initializeStream(
+    config: Config,
+    streamArgs: IStreamRequest,
+    media: Media,
+    mosaics: Mosaic[],
+    streamType: StreamType): string {
     // Constructs the stream based on the config, continuous stream args, and available media
     // The stream is assigned to upcoming stream which the background service will use to populate the on deck stream
     // The stream is constructed to fill the time until 12:00am
     // The background service will run construct stream again 30 minutes before the end of the day to fill the time until 12:00am the next day
-    let upcomingStreamResponse: [MediaBlock[], string] = constructStream(config, streamArgs, media, streamType);
+    let upcomingStreamResponse: [MediaBlock[], string] = constructStream(config, streamArgs, media, mosaics, streamType);
     if (upcomingStreamResponse[1] !== "") {
         return upcomingStreamResponse[1];
     }

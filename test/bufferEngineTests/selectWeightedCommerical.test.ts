@@ -11,7 +11,7 @@ describe('selectWeightedCommerical', () => {
 
         const expectedCommercial: Commercial = td.jurassicparktoys1;
 
-        const result: Commercial = buffEng.selectWeightedCommerical(commercials);
+        const result: Commercial = buffEng.selectWeightedMedia(commercials) as Commercial;
 
         expect(result).toEqual(expectedCommercial);
 
@@ -39,7 +39,7 @@ describe('selectWeightedCommerical', () => {
 
         const expectedCommercial: Commercial = td.alienstoys1;
 
-        const result: Commercial = buffEng.selectWeightedCommerical(commercials);
+        const result: Commercial = buffEng.selectWeightedMedia(commercials) as Commercial;
 
         expect(result).toEqual(expectedCommercial);
 
@@ -67,7 +67,7 @@ describe('selectWeightedCommerical', () => {
 
         const expectedCommercial: Commercial = td.pizzahutxmen;
 
-        const result: Commercial = buffEng.selectWeightedCommerical(commercials);
+        const result: Commercial = buffEng.selectWeightedMedia(commercials) as Commercial;
 
         expect(result).toEqual(expectedCommercial);
 
@@ -88,7 +88,7 @@ describe('selectWeightedCommerical', () => {
 
         const expectedCommercial: Commercial = td.pizzahutxmen;
 
-        const result: Commercial = buffEng.selectWeightedCommerical(commercials);
+        const result: Commercial = buffEng.selectWeightedMedia(commercials) as Commercial;
 
         expect(result).toEqual(expectedCommercial);
 

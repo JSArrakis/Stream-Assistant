@@ -5,7 +5,7 @@ import { MediaBlock } from '../models/mediaBlock';
 import * as VLC from 'vlc-client';
 import { ContStreamRequest } from '../models/streamRequest';
 import { StreamType } from '../models/enum/streamTypes';
-import { getMedia, getStreamType } from './mediaService';
+import { getMedia, getMosaics, getStreamType } from './mediaService';
 import { getConfig } from '../config/configService';
 
 const intervalInSeconds: number = 300;
@@ -107,7 +107,7 @@ async function cycleCheck() {
             tomorrowsContinuousStreamArgs.Collections = continuousStreamArgs.Collections;
             tomorrowsContinuousStreamArgs.StartTime = tomorrow
             // Constructs the stream for the next day and adds it to the upcoming stream
-            const stream: [MediaBlock[], string] = constructStream(getConfig(), tomorrowsContinuousStreamArgs, getMedia(), getStreamType());
+            const stream: [MediaBlock[], string] = constructStream(getConfig(), tomorrowsContinuousStreamArgs, getMedia(), getMosaics(), getStreamType());
             // TODO - I do not remember why I added this as it looks like it adds the entirety of tomorrow's stream to the on deck stream, this might need to be reworked
             streamMan.addToOnDeckStream(stream[0]);
         }

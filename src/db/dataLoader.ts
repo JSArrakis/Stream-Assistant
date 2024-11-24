@@ -7,6 +7,7 @@ import { ShortModel, Short } from '../models/short';
 import { HolidayModel, Holiday } from '../models/holiday';
 import { DefaultCommercialModel } from '../models/defaultCommercial';
 import { DefaultPromoModel } from '../models/defaultPromo';
+import { MosaicModel, Mosaic } from '../models/mosaic';
 
 export async function loadMovies(): Promise<Movie[]> {
     const movies = await MovieModel.find() as Movie[];
@@ -96,4 +97,14 @@ export async function loadHolidays(): Promise<Holiday[]> {
     }
     console.log(holidays.length + " Holidays loaded");
     return holidays;
+}
+
+export async function loadMosaics(): Promise<Mosaic[]> {
+    const mosaics = await MosaicModel.find();
+    if (!mosaics || mosaics.length === 0) {
+        console.log("No Mosaics Found");
+        return [];
+    }
+    console.log(mosaics.length + " Mosaics loaded");
+    return mosaics;
 }

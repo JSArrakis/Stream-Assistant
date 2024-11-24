@@ -73,7 +73,6 @@ export function getMediaByAgeGroupHierarchy(
     duration: number): BaseMedia[] {
     let selectedMedia: BaseMedia[] = [];
     let sumDuration: number = 0;
-
     let contextAlreadySelectedMedia: BaseMedia[] = alreadySelectedMedia.map((m) => m);
 
     const hasAgeGroupTags = tags.AgeGroupTags.length > 0;
@@ -88,6 +87,23 @@ export function getMediaByAgeGroupHierarchy(
 
     if (hasAgeGroupTags) {
         let ageGroups = core.getAgeGroupAdjacencyTags(tags.AgeGroupTags);
+        if (hasHolidayTags) {
+            ageGroups.forEach((age) => {
+                sumDuration = core.sumMediaDuration(selectedMedia);
+                const mediaByTags = getMediaByTagsAndAgeGroup(
+                    holidayMedia,
+                    contextAlreadySelectedMedia,
+                    hasSpecialtyTags,
+                    hasGenreTags,
+                    hasEraTags,
+                    tags,
+                    age,
+                    duration);
+                selectedMedia.push(...mediaByTags);
+                contextAlreadySelectedMedia.push(...mediaByTags);
+            });
+        }
+
         ageGroups.forEach((age) => {
             sumDuration = core.sumMediaDuration(selectedMedia);
             const mediaByTags = getMediaByTagsAndAgeGroup(
@@ -102,6 +118,22 @@ export function getMediaByAgeGroupHierarchy(
             selectedMedia.push(...mediaByTags);
             contextAlreadySelectedMedia.push(...mediaByTags);
         });
+    }
+    if (hasHolidayTags) {
+        sumDuration = core.sumMediaDuration(selectedMedia);
+        if (sumDuration < duration) {
+            const mediaByTags = getMediaByTagsAndAgeGroup(
+                nonHolidayMedia,
+                contextAlreadySelectedMedia,
+                hasSpecialtyTags,
+                hasGenreTags,
+                hasEraTags,
+                tags,
+                AgeGroups.AllAges,
+                duration);
+            selectedMedia.push(...mediaByTags);
+            contextAlreadySelectedMedia.push(...mediaByTags);
+        }
     }
 
     sumDuration = core.sumMediaDuration(selectedMedia);

@@ -5,24 +5,12 @@ import { createDefaultPromo, createDefaultCommercials } from '../db/defaultMedia
 import { loadDefaultEnvConfig } from '../config/configService';
 import { StreamType } from '../models/enum/streamTypes';
 import { IStreamRequest } from '../models/streamRequest';
+import { Mosaic } from "../models/mosaic";
 
-let media = new Media([], [], [], [], [], [], [], [], []);
+let media: Media = new Media([], [], [], [], [], [], [], [], []);
+let mosaics: Mosaic[] = [];
 let streamType: StreamType;
 let args: IStreamRequest;
-
-const categoryMap = new Map<number, string>([
-    [0, "kids"],
-    [1, "family"],
-    [2, "youngadult"],
-    [3, "mature"],
-]);
-
-const categoryIndexMap = new Map<string, number>([
-    ["kids", 0],
-    ["family", 1],
-    ["youngadult", 2],
-    ["mature", 3],
-]);
 
 export function setStreamType(value: StreamType): void {
     streamType = value;
@@ -58,8 +46,14 @@ export async function loadMedia(config: Config): Promise<void> {
     };
 
     await loadDefaultEnvConfig(config.DefaultPromo);
+
+    mosaics = await dataLoader.loadMosaics();
 }
 
 export function getMedia(): Media {
     return media;
+}
+
+export function getMosaics(): Mosaic[] {
+    return mosaics;
 }

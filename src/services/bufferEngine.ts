@@ -11,14 +11,21 @@ import { BaseMedia } from "../models/mediaInterface";
 import { sumMediaDuration } from "../prisms/core";
 import { getMediaByAgeGroupHierarchy } from "../prisms/spectrum";
 import { getMediaByMosaicTags } from "../prisms/mosaic";
+import { Mosaic } from "../models/mosaic";
 
 export function createBuffer(
     duration: number,
-    options: IStreamRequest,
+    args: IStreamRequest,
     media: Media,
+    mosaics: Mosaic[],
     halfATags: string[],
     halfBTags: string[],
-    prevBuff: Media): [(Promo | Music | Short | Commercial)[], number, Media] {
+    prevBuff: Media,
+    holidays: string[]): {
+        buffer: (Promo | Music | Short | Commercial)[],
+        remainingDuration: number,
+        newPrevBuffer: Media
+    } {
     let buffer: (Promo | Music | Short | Commercial)[] = [];
 
     // Get the translated tags for the preceding show or movie and the subsequent 
@@ -37,27 +44,13 @@ export function createBuffer(
     // And we will also need to make sure that other holidays or special events unique to 
     // the user can be themed as such
     // TODO - not sure why Im even checking MainTags here, it might not be necessary
-    if (segmentedPreTags.GenreTags.length > 0) {
-        if (options.Tags.includes("halloween")) {
-            segmentedPreTags.GenreTags = ["halloween"];
-        }
-        if (options.Tags.includes("christmas")) {
-            segmentedPreTags.GenreTags = ["christmas"];
-        }
-    }
-
-    if (segmentedPostTags.GenreTags.length > 0) {
-        if (options.Tags.includes("halloween")) {
-            segmentedPostTags.GenreTags = ["halloween"];
-        }
-        if (options.Tags.includes("christmas")) {
-            segmentedPostTags.GenreTags = ["christmas"];
-        }
-    }
-
+    
+    //Get Holiday Tags from the options
+    let selectedHolidayTags: string[] = getHolidayTags(args.Tags, holidays);
+    
     // Get the promos for the environment
     let envPromos: Promo[] = media.Promos
-        .filter(promo => promo.Tags.includes(keyNormalizer(options.Env)));
+        .filter(promo => promo.Tags.includes(keyNormalizer(args.Env)));
 
     // Get the promos that are less than or equal to the duration of the buffer, the 
     // target duration of a promo is 15 seconds normally, however we need to allow for 
@@ -81,7 +74,10 @@ export function createBuffer(
 
     // Sets the duration of the buffer to be the duration of the buffer minus the duration 
     // of the promo
-    let remDur: number = duration - promo.Duration;
+    let remDur: number = 0;
+    if (promo) {
+        remDur = duration - promo.Duration;
+    }
 
     // variables to hold the duration of the first half of the buffer and the second half 
     // of the buffer
@@ -122,18 +118,24 @@ export function createBuffer(
         let selectedB =
             selectBufferMediaWithinDuration(
                 media,
+                mosaics,
                 segmentedPostTags,
                 remDur,
-                prevBuff
+                prevBuff,
+                selectedHolidayTags
             );
         // Add the selected media to the buffer
         buffer.push(...selectedB.selectedMedia);
         // Add the promo to the buffer
         buffer.push(promo)
         // Set the previous buffer to the chosen media
-        prevBuff = selectedB.chosenMedia;
+        prevBuff = selectedB.segmentedSelectedMedia;
 
-        return [buffer, selectedB.remainingDuration, prevBuff]
+        return {
+            buffer,
+            remainingDuration: selectedB.remainingDuration,
+            newPrevBuffer: prevBuff
+        }
 
     } else if (halfB === 0) {
         // Get list of commercials, music, and shorts that match the tags of the 
@@ -142,18 +144,24 @@ export function createBuffer(
         let selectedA =
             selectBufferMediaWithinDuration(
                 media,
+                mosaics,
                 segmentedPreTags,
                 remDur,
-                prevBuff
+                prevBuff,
+                selectedHolidayTags
             );
         // Add the promo to the buffer
         buffer.push(promo)
         // Add the selected media to the buffer
         buffer.push(...selectedA.selectedMedia);
         // Set the previous buffer to the chosen media
-        prevBuff = selectedA.chosenMedia;
+        prevBuff = selectedA.segmentedSelectedMedia;
 
-        return [buffer, selectedA.remainingDuration, prevBuff]
+        return {
+            buffer,
+            remainingDuration: selectedA.remainingDuration,
+            newPrevBuffer: prevBuff
+        }
 
     } else {
         // Create a new previous buffer to pass to aggregate the buffer items 
@@ -175,9 +183,11 @@ export function createBuffer(
         let selectedA =
             selectBufferMediaWithinDuration(
                 media,
+                mosaics,
                 segmentedPostTags,
                 halfA,
-                prevBuff
+                prevBuff,
+                selectedHolidayTags
             );
         // Add the selected media to the buffer
         buffer.push(...selectedA.selectedMedia);
@@ -186,29 +196,45 @@ export function createBuffer(
         // Populate the new previous buffer with the selected buffer items
         // TODO - It looks like Im being redundant here, I should be able to just 
         // set the newPrevBuff to selectedA.chosenMedia
-        newPrevBuff = selectedA.chosenMedia;
-        prevBuff.Commercials.push(...selectedA.chosenMedia.Commercials);
-        prevBuff.Music.push(...selectedA.chosenMedia.Music);
-        prevBuff.Shorts.push(...selectedA.chosenMedia.Shorts);
+        newPrevBuff = selectedA.segmentedSelectedMedia;
+        prevBuff.Commercials.push(...selectedA.segmentedSelectedMedia.Commercials);
+        prevBuff.Music.push(...selectedA.segmentedSelectedMedia.Music);
+        prevBuff.Shorts.push(...selectedA.segmentedSelectedMedia.Shorts);
         // Get list of commercials, music, and shorts that match the tags of the 
         // subsequent show or movie
         let selectedB =
             selectBufferMediaWithinDuration(
                 media,
+                mosaics,
                 segmentedPostTags,
                 halfB,
-                prevBuff
+                prevBuff,
+                selectedHolidayTags
             );
         // Add the selected media to the buffer
         buffer.push(...selectedB.selectedMedia);
         // Populate the new previous buffer with the selected buffer items
-        newPrevBuff.Commercials.push(...selectedB.chosenMedia.Commercials);
-        newPrevBuff.Music.push(...selectedB.chosenMedia.Music);
-        newPrevBuff.Shorts.push(...selectedB.chosenMedia.Shorts);
+        newPrevBuff.Commercials.push(...selectedB.segmentedSelectedMedia.Commercials);
+        newPrevBuff.Music.push(...selectedB.segmentedSelectedMedia.Music);
+        newPrevBuff.Shorts.push(...selectedB.segmentedSelectedMedia.Shorts);
 
-        return [buffer, selectedB.remainingDuration, newPrevBuff]
+        return {
+            buffer,
+            remainingDuration: selectedB.remainingDuration,
+            newPrevBuffer: newPrevBuff
+        }
 
     }
+}
+
+export function getHolidayTags(tags: string[], holidays: string[]): string[] {
+    let holidayTags: string[] = [];
+    tags.forEach((tag) => {
+        if (holidays.includes(tag)) {
+            holidayTags.push(tag);
+        }
+    });
+    return holidayTags;
 }
 
 export function selectFullDurationMedia(
@@ -287,16 +313,16 @@ export function selectAvailableCommercials(
     return availableCommercials;
 }
 
-export function selectWeightedCommerical(
-    media: Commercial[],
-): Commercial {
+export function selectWeightedMedia(
+    media: BaseMedia[],
+): BaseMedia {
     // Get the first 10 commercials from media, this is because the incoming
     // commercials are ordered from most relevant to least relevant in the 
     // media list. We are selecting 10 commercials because we want to give
     // a little bit of variety in the commercials that are selected
-    let commercials: Commercial[] = media.slice(0, 10);
+    let weightedMedia: BaseMedia[] = media.slice(0, 10);
     // Select a random commercial from the first 10 commercials
-    return commercials[Math.floor(Math.random() * commercials.length)];
+    return weightedMedia[Math.floor(Math.random() * weightedMedia.length)];
 
 }
 
@@ -330,7 +356,7 @@ export function selectCommercials(
         
         if (availableCommercials.length > 0) {
             // Select random commercial from available commercials
-            const selectedCommercial = selectWeightedCommerical(availableCommercials);
+            const selectedCommercial = selectWeightedMedia(availableCommercials) as Commercial;
             // Add the selected commercial to the selected commercials list and remove the 
             // duration of the commercial from the remaining duration
             selectedCommercials.push(selectedCommercial);
@@ -350,7 +376,7 @@ export function selectCommercials(
 }
 
 // Select Shorts or Music
-function selectShortOrMusic(
+export function selectShortOrMusic(
     filteredShorts: Short[],
     filteredMusic: Music[],
     remainingDuration: number,
@@ -382,13 +408,13 @@ function selectShortOrMusic(
 
     if (useShort && availableShorts.length > 0) {
         // Select a random short from the available shorts
-        const selectedShort = availableShorts[Math.floor(Math.random() * availableShorts.length)]
+        const selectedShort = selectWeightedMedia(availableShorts) as Short;
 
         return selectedShort;
 
     } else if (availableMusic.length > 0) {
         // Select a random music video from the available music
-        const selectedMusic = availableMusic[Math.floor(Math.random() * availableShorts.length)];
+        const selectedMusic = selectWeightedMedia(availableMusic) as Music;
 
         return selectedMusic;
 
@@ -400,42 +426,45 @@ function selectShortOrMusic(
 // Define the main function
 export function selectBufferMediaWithinDuration(
     media: Media,
+    mosaics: Mosaic[],
     tags: SegmentedTags,
     duration: number,
-    alreadyUsed: Media // Pass the already used media object
+    alreadyUsedMedia: Media,
+    selectedHolidayTags: string[]
 ): {
     selectedMedia: (Commercial | Short | Music)[];
-    chosenMedia: Media;
-    remainingDuration: number; // Include remaining duration
+    segmentedSelectedMedia: Media;
+    remainingDuration: number;
 } {
     // Set the remaining duration to the total duration
     let remainingDuration = duration;
 
     let usedCommercials: Commercial[] = [];
-    alreadyUsed.Commercials.forEach((commercial) => {
+    alreadyUsedMedia.Commercials.forEach((commercial) => {
         usedCommercials.push(commercial);
     });
 
     let usedMusic: Music[] = [];
-    alreadyUsed.Music.forEach((music) => {
+    alreadyUsedMedia.Music.forEach((music) => {
         usedMusic.push(music);
     });
 
 
     let usedShorts: Short[] = [];
-    alreadyUsed.Shorts.forEach((short) => {
+    alreadyUsedMedia.Shorts.forEach((short) => {
         usedShorts.push(short);
     });
 
     // Get media filtered by tags that match using Kaleidoscope Buffer Media Selection Algorithm(tm)
     /*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*/
     const filteredCommercials = getMediaByAgeGroupHierarchy(media.Commercials, usedCommercials, tags, [], remainingDuration);
-    const filteredMusic = getMediaByMosaicTags(media.Music, usedMusic, tags, [], [], remainingDuration);
+    const filteredMusic = getMediaByMosaicTags(media.Music, usedMusic, tags, mosaics, [], remainingDuration);
     const filteredShorts = getMediaByAgeGroupHierarchy(media.Shorts, usedShorts, tags, [], remainingDuration);
     /*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*/
 
     // Create a list of used commercial, music, and short titles
     let selectedMedia: (Commercial | Short | Music)[] = [];
+    let segmentedSelectedMedia = new Media([], [], [], [], [], [], [], [], []);
 
     while (remainingDuration > 0) {
         // Get ~>= 120 seconds of commercials
@@ -449,6 +478,7 @@ export function selectBufferMediaWithinDuration(
         // commercials for the previous buffer
         usedCommercials.push(...chosenCommercials[0]);
         selectedMedia.push(...chosenCommercials[0]);
+        segmentedSelectedMedia.Commercials.push(...chosenCommercials[0]);
         remainingDuration = chosenCommercials[1];
 
         // Get a short or music video
@@ -466,8 +496,10 @@ export function selectBufferMediaWithinDuration(
             selectedMedia.push(selectedShortOrMusic);
             if (selectedShortOrMusic instanceof Short) {
                 usedShorts.push(selectedShortOrMusic);
+                segmentedSelectedMedia.Shorts.push(selectedShortOrMusic);
             } else {
                 usedMusic.push(selectedShortOrMusic);
+                segmentedSelectedMedia.Music.push(selectedShortOrMusic);
             }
             remainingDuration -= selectedShortOrMusic.Duration;
         }
@@ -479,23 +511,9 @@ export function selectBufferMediaWithinDuration(
         }
     }
 
-    // Create a new Media object with selected commercials, music, and shorts to pass back to the 
-    // previous buffer
-    const mediaWithSelected = new Media(
-        [],
-        [],
-        selectedMedia.filter((media) => media instanceof Short) as Short[],
-        selectedMedia.filter((media) => media instanceof Music) as Music[],
-        [],
-        [],
-        selectedMedia.filter((media) => media instanceof Commercial) as Commercial[],
-        [],
-        []
-    );
-
     return {
         selectedMedia,
-        chosenMedia: mediaWithSelected,
+        segmentedSelectedMedia,
         remainingDuration,
     };
 }

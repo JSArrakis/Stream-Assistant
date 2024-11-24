@@ -1,6 +1,5 @@
 import { BaseMedia } from '../models/mediaInterface';
 import { AgeGroups } from "../models/const/ageGroups";
-import { Holidays } from "../models/const/holidays";
 
 export function getMediaByAgeAndEra(media: BaseMedia[], eras: string[], age: string): BaseMedia[] {
     let selectedMedia: BaseMedia[] = [];
