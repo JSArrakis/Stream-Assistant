@@ -1,23 +1,48 @@
-# Stream Assistant
+# Kaleidoscope
 
-TODO: Template and then format this
+Kaleidoscope is a versatile media streaming assistant that allows you to create and manage playlists of your locally hosted media files. It supports streaming via platforms like Jellyfin or Plex and can create procedural streams using your media library.
 
-Allows you to create playlists of media with your own locally hosted media files and then execute that play list with a local media player on your machine
+## Features
 
-Allows you to stream via Jellyfin or Plex or other platorm with streaming capabilities.
+- **Local Media Playlists**: Create playlists of media with your own locally hosted files and execute them with a local media player.
+- **Streaming Support**: Stream via Jellyfin, Plex, or other platforms with streaming capabilities.
+- **Procedural Streams**: Automatically create streams using your media library, ensuring shows and movies start on the hour or half-hour mark.
+- **Adhoc Scheduling**: Schedule movies and shows to specific time slots, with support for recurring schedules on a daily, weekly, monthly, or yearly basis.
+- **Programming Blocks**: Create programming blocks like movie marathons, music video marathons, show marathons, or mixed programming blocks.
+- **Progression Tracking**: Keep track of show and movie progressions based on different stream types and within specific programming blocks.
 
-Without any user defined input, Stream Assistant will create a stream procedurally using the media on your own machine.
+## Getting Started
 
-Procedural streams by default attempt to ensure show episodes and movies start on the hour or half hour mark of the global clock. It accomplishes this by procedurally selecting and injecting locally hosted commercials, music videos, short videos, and your own promotional videos between episodes and movies.
+To get started with Kaleidoscope, follow these steps:
 
-The procedural stream starts immediately when executed, it assumes that all media in the playlist should play consecutively with no breaks or pauses.
+1. Clone the repository:
+   To get started with Kaleidoscope, follow these steps:
 
-The media selected by the procedural stream can be influenced by users inputting specific genre tags into the stream start request in order to flavor the stream by genre(s) of what the user would want to watch.
+1. Clone the repository:
+   ```sh
+   git clone https://github.com/yourusername/kaleidoscope.git
+   ```
+1. Install dependencies:
+   ```sh
+   npm install
+   ```
+1. Start the application:
+   ```sh
+   npm start
+   ```
 
-The procedural stream by default will play continuously until the end of time or until it is manually stopped. During this time it will populate the stream each day for the entire day, relooping shows from the start or reselecting movies where applicable.
+## Usage
 
-Stream Assistant allows the scheduling of movies and shows to specific time slots in an adhoc manner. It also allows for reoccuring schedules on a daily, weekly, monthly, or yearly time schedule.
+Kaleidoscope allows you to create and manage media streams with ease. For detailed usage instructions and to understand the theory behind Kaleidoscope, please refer to the [Kaleidoscope Handbook](docs/index.md).
 
-Stream Assistant allows for the creation of programming blocks, which can be movie marathons, music video marathons, show marathons, or mixed programming blocks. These blocks can be set so that the order in which the media appears within them is constant (Such as Cartoon Network's Toonami, or UPN's TGIF). The blocks are also subject to the same scheduling system as shows and movies if desired
+## Contributing
 
-Stream Assistant will keep track of the progression of shows based on different stream type executions, and within specific programming blocks respective to their own contexts to keep show episode and movie anthology progressions in order.
+We welcome contributions to Kaleidoscope! Please see our [contributing guidelines](CONTRIBUTING.md) for more information.
+
+## License
+
+This project is licensed under the ISC License. See the [LICENSE](LICENSE) file for details.
+
+## Acknowledgements
+
+Special thanks to all contributors and the open-source community for their support.
