@@ -3,23 +3,24 @@ import * as proMan from '../../src/services/progressionManager';
 import { ContStreamRequest } from '../../src/models/streamRequest';
 import { Show } from '../../src/models/show';
 import { StreamType } from '../../src/models/enum/streamTypes';
-import * as td from '../testData/testData';
+import * as tdProgression from '../testData/progression';
+import * as tdShows from '../testData/shows';
 
 describe('selectShowByDuration', () => {
   beforeEach(() => {
     proMan.SetLocalProgressionContextList(
-      JSON.parse(JSON.stringify([td.continuousProgression])),
+      JSON.parse(JSON.stringify([tdProgression.continuousProgression])),
     );
   });
 
   const args = new ContStreamRequest(
     'securePassword',
-    td.continuousProgression.Title,
-    td.continuousProgression.Environment,
+    tdProgression.continuousProgression.Title,
+    tdProgression.continuousProgression.Environment,
   );
 
   it('should return a show that is under the duration limit (result scenario 1)', () => {
-    let shows: Show[] = [td.reboot, td.startrek, td.farscape];
+    let shows: Show[] = [tdShows.reboot, tdShows.startrek, tdShows.farscape];
     const randomSpy = jest.spyOn(Math, 'random').mockReturnValue(0.99);
 
     let [selectedShow, numberOfEpisodes] = proEng.selectShowByDuration(
@@ -29,13 +30,13 @@ describe('selectShowByDuration', () => {
       StreamType.Cont,
     );
 
-    expect(selectedShow).toEqual(td.reboot);
+    expect(selectedShow).toEqual(tdShows.reboot);
     expect(numberOfEpisodes).toEqual(1);
     randomSpy.mockRestore();
   });
 
   it('should return a show that is under the duration limit (result scenario 2)', () => {
-    let shows: Show[] = [td.reboot, td.farscape, td.startrek];
+    let shows: Show[] = [tdShows.reboot, tdShows.farscape, tdShows.startrek];
     const randomSpy = jest.spyOn(Math, 'random').mockReturnValue(0.99);
 
     let [selectedShow, numberOfEpisodes] = proEng.selectShowByDuration(
@@ -45,13 +46,13 @@ describe('selectShowByDuration', () => {
       StreamType.Cont,
     );
 
-    expect(selectedShow).toEqual(td.farscape);
+    expect(selectedShow).toEqual(tdShows.farscape);
     expect(numberOfEpisodes).toEqual(1);
     randomSpy.mockRestore();
   });
 
   it('should return a show that is under the duration limit (result scenario 3)', () => {
-    let shows: Show[] = [td.reboot, td.farscape, td.startrek];
+    let shows: Show[] = [tdShows.reboot, tdShows.farscape, tdShows.startrek];
     const randomSpy = jest.spyOn(Math, 'random').mockReturnValue(0.99);
 
     let [selectedShow, numberOfEpisodes] = proEng.selectShowByDuration(
@@ -61,13 +62,13 @@ describe('selectShowByDuration', () => {
       StreamType.Cont,
     );
 
-    expect(selectedShow).toEqual(td.startrek);
+    expect(selectedShow).toEqual(tdShows.startrek);
     expect(numberOfEpisodes).toEqual(1);
     randomSpy.mockRestore();
   });
 
   it('should return a show that is under the duration limit (result scenario 4)', () => {
-    let shows: Show[] = [td.reboot, td.farscape, td.startrek];
+    let shows: Show[] = [tdShows.reboot, tdShows.farscape, tdShows.startrek];
     const randomSpy = jest.spyOn(Math, 'random').mockReturnValue(0.01);
 
     let [selectedShow, numberOfEpisodes] = proEng.selectShowByDuration(
@@ -77,13 +78,18 @@ describe('selectShowByDuration', () => {
       StreamType.Cont,
     );
 
-    expect(selectedShow).toEqual(td.reboot);
+    expect(selectedShow).toEqual(tdShows.reboot);
     expect(numberOfEpisodes).toEqual(2);
     randomSpy.mockRestore();
   });
 
   it('should return a show that is under the duration limit (result scenario 5)', () => {
-    let shows: Show[] = [td.farscape, td.reboot, td.dragonballz, td.startrek];
+    let shows: Show[] = [
+      tdShows.farscape,
+      tdShows.reboot,
+      tdShows.dragonballz,
+      tdShows.startrek,
+    ];
     const randomSpy = jest.spyOn(Math, 'random').mockReturnValue(0.01);
 
     let [selectedShow, numberOfEpisodes] = proEng.selectShowByDuration(
@@ -93,13 +99,18 @@ describe('selectShowByDuration', () => {
       StreamType.Cont,
     );
 
-    expect(selectedShow).toEqual(td.reboot);
+    expect(selectedShow).toEqual(tdShows.reboot);
     expect(numberOfEpisodes).toEqual(2);
     randomSpy.mockRestore();
   });
 
   it('should return a show that is under the duration limit (result scenario 5)', () => {
-    let shows: Show[] = [td.farscape, td.dragonballz, td.reboot, td.startrek];
+    let shows: Show[] = [
+      tdShows.farscape,
+      tdShows.dragonballz,
+      tdShows.reboot,
+      tdShows.startrek,
+    ];
     const randomSpy = jest.spyOn(Math, 'random').mockReturnValue(0.01);
 
     let [selectedShow, numberOfEpisodes] = proEng.selectShowByDuration(
@@ -109,13 +120,13 @@ describe('selectShowByDuration', () => {
       StreamType.Cont,
     );
 
-    expect(selectedShow).toEqual(td.dragonballz);
+    expect(selectedShow).toEqual(tdShows.dragonballz);
     expect(numberOfEpisodes).toEqual(2);
     randomSpy.mockRestore();
   });
 
   it('should return a show that is under the duration limit (result scenario 6)', () => {
-    let shows: Show[] = [td.farscape, td.tenchi, td.startrek];
+    let shows: Show[] = [tdShows.farscape, tdShows.tenchi, tdShows.startrek];
     const randomSpy = jest.spyOn(Math, 'random').mockReturnValue(0.01);
 
     let [selectedShow, numberOfEpisodes] = proEng.selectShowByDuration(
@@ -125,13 +136,18 @@ describe('selectShowByDuration', () => {
       StreamType.Cont,
     );
 
-    expect(selectedShow).toEqual(td.tenchi);
+    expect(selectedShow).toEqual(tdShows.tenchi);
     expect(numberOfEpisodes).toEqual(1);
     randomSpy.mockRestore();
   });
 
   it('should return a show that is under the duration limit (result scenario 7)', () => {
-    let shows: Show[] = [td.farscape, td.tenchi, td.reboot, td.startrek];
+    let shows: Show[] = [
+      tdShows.farscape,
+      tdShows.tenchi,
+      tdShows.reboot,
+      tdShows.startrek,
+    ];
     const randomSpy = jest.spyOn(Math, 'random').mockReturnValue(0.01);
 
     let [selectedShow, numberOfEpisodes] = proEng.selectShowByDuration(
@@ -141,19 +157,19 @@ describe('selectShowByDuration', () => {
       StreamType.Cont,
     );
 
-    expect(selectedShow).toEqual(td.reboot);
+    expect(selectedShow).toEqual(tdShows.reboot);
     expect(numberOfEpisodes).toEqual(2);
     randomSpy.mockRestore();
   });
 
   it('should return a show that is under the duration limit (result scenario 8)', () => {
-    let shows: Show[] = [td.farscape, td.tenchi, td.reboot];
+    let shows: Show[] = [tdShows.farscape, tdShows.tenchi, tdShows.reboot];
     const randomSpy = jest.spyOn(Math, 'random').mockReturnValue(0.99);
     proMan.IncrementWatchRecord(
-      td.continuousProgression.LoadTitle,
-      td.tenchiWatchRecord.LoadTitle,
+      tdProgression.continuousProgression.LoadTitle,
+      tdProgression.tenchiWatchRecord.LoadTitle,
       3,
-      td.tenchi,
+      tdShows.tenchi,
     );
     let [selectedShow, numberOfEpisodes] = proEng.selectShowByDuration(
       args,
@@ -162,13 +178,13 @@ describe('selectShowByDuration', () => {
       StreamType.Cont,
     );
 
-    expect(selectedShow).toEqual(td.tenchi);
+    expect(selectedShow).toEqual(tdShows.tenchi);
     expect(numberOfEpisodes).toEqual(1);
     randomSpy.mockRestore();
   });
 
   it('should return a show that is under the duration limit (result scenario 8)', () => {
-    let shows: Show[] = [td.farscape, td.batman];
+    let shows: Show[] = [tdShows.farscape, tdShows.batman];
     const randomSpy = jest.spyOn(Math, 'random').mockReturnValue(0.01);
     let [selectedShow, numberOfEpisodes] = proEng.selectShowByDuration(
       args,
@@ -177,19 +193,19 @@ describe('selectShowByDuration', () => {
       StreamType.Cont,
     );
 
-    expect(selectedShow).toEqual(td.batman);
+    expect(selectedShow).toEqual(tdShows.batman);
     expect(numberOfEpisodes).toEqual(2);
     randomSpy.mockRestore();
   });
 
   it('should return a show that is under the duration limit (result scenario 9)', () => {
-    let shows: Show[] = [td.farscape, td.batman];
+    let shows: Show[] = [tdShows.farscape, tdShows.batman];
     const randomSpy = jest.spyOn(Math, 'random').mockReturnValue(0.01);
     proMan.IncrementWatchRecord(
-      td.continuousProgression.LoadTitle,
-      td.batmanWatchRecord.LoadTitle,
+      tdProgression.continuousProgression.LoadTitle,
+      tdProgression.batmanWatchRecord.LoadTitle,
       4,
-      td.batman,
+      tdShows.batman,
     );
     let [selectedShow, numberOfEpisodes] = proEng.selectShowByDuration(
       args,
@@ -198,7 +214,7 @@ describe('selectShowByDuration', () => {
       StreamType.Cont,
     );
 
-    expect(selectedShow).toEqual(td.batman);
+    expect(selectedShow).toEqual(tdShows.batman);
     expect(numberOfEpisodes).toEqual(2);
     randomSpy.mockRestore();
   });

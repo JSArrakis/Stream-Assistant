@@ -1,7 +1,7 @@
 import { Holidays } from '../../../src/models/const/holidays';
 import { BaseMedia } from '../../../src/models/mediaInterface';
 import * as core from '../../../src/prisms/core';
-import * as td from '../../testData/testData';
+import * as tdMusic from '../../testData/music';
 
 describe('splitMediaByHoliday', () => {
   it('should return the media split by holidays (scenario 1)', () => {
@@ -23,11 +23,11 @@ describe('splitMediaByHoliday', () => {
     expect(nonHolidayMedia).toEqual(expectedNonHolidayMedia);
   });
   it('should return the media split by holidays (scenario 2)', () => {
-    const media: BaseMedia[] = td.music;
+    const media: BaseMedia[] = tdMusic.music;
     const holidays: string[] = [];
 
     const expectedHolidayMedia: BaseMedia[] = [];
-    const expectedNonHolidayMedia: BaseMedia[] = td.nonHolidayMusic;
+    const expectedNonHolidayMedia: BaseMedia[] = tdMusic.nonHolidayMusic;
 
     let holidayMedia: BaseMedia[] = [];
     let nonHolidayMedia: BaseMedia[] = [];
@@ -41,15 +41,15 @@ describe('splitMediaByHoliday', () => {
     expect(nonHolidayMedia).toEqual(expectedNonHolidayMedia);
   });
   it('should return the media split by holidays (scenario 3)', () => {
-    const media: BaseMedia[] = td.music;
+    const media: BaseMedia[] = tdMusic.music;
     const holidays: string[] = ['christmas'];
 
     const expectedHolidayMedia: BaseMedia[] = [
-      td.hereitschristmastime,
-      td.allIwantforchristmasisyou,
-      td.kidnapthesandyclaws,
+      tdMusic.hereitschristmastime,
+      tdMusic.allIwantforchristmasisyou,
+      tdMusic.kidnapthesandyclaws,
     ];
-    const expectedNonHolidayMedia: BaseMedia[] = td.nonHolidayMusic;
+    const expectedNonHolidayMedia: BaseMedia[] = tdMusic.nonHolidayMusic;
 
     let holidayMedia: BaseMedia[] = [];
     let nonHolidayMedia: BaseMedia[] = [];
@@ -63,14 +63,14 @@ describe('splitMediaByHoliday', () => {
     expect(nonHolidayMedia).toEqual(expectedNonHolidayMedia);
   });
   it('should return the media split by holidays (scenario 4)', () => {
-    const media: BaseMedia[] = td.music;
+    const media: BaseMedia[] = tdMusic.music;
     const holidays: string[] = ['halloween'];
 
     const expectedHolidayMedia: BaseMedia[] = [
-      td.kidnapthesandyclaws,
-      td.monstermash,
+      tdMusic.kidnapthesandyclaws,
+      tdMusic.monstermash,
     ];
-    const expectedNonHolidayMedia: BaseMedia[] = td.nonHolidayMusic;
+    const expectedNonHolidayMedia: BaseMedia[] = tdMusic.nonHolidayMusic;
 
     let holidayMedia: BaseMedia[] = [];
     let nonHolidayMedia: BaseMedia[] = [];
@@ -84,11 +84,11 @@ describe('splitMediaByHoliday', () => {
     expect(nonHolidayMedia).toEqual(expectedNonHolidayMedia);
   });
   it('should return the media split by holidays (scenario 5)', () => {
-    const media: BaseMedia[] = td.music;
+    const media: BaseMedia[] = tdMusic.music;
     const holidays: string[] = ['easter'];
 
     const expectedHolidayMedia: BaseMedia[] = [];
-    const expectedNonHolidayMedia: BaseMedia[] = td.nonHolidayMusic;
+    const expectedNonHolidayMedia: BaseMedia[] = tdMusic.nonHolidayMusic;
 
     let holidayMedia: BaseMedia[] = [];
     let nonHolidayMedia: BaseMedia[] = [];

@@ -4,15 +4,17 @@ import * as streamCon from '../../src/services/streamConstructor';
 import { Media } from '../../src/models/media';
 import { ContStreamRequest } from '../../src/models/streamRequest';
 import { StagedMedia } from '../../src/models/stagedMedia';
-import * as td from '../testData/testData';
 import * as proMan from '../../src/services/progressionManager';
 import { Config } from '../../src/models/config';
 import { StreamType } from '../../src/models/enum/streamTypes';
+import * as tdProgression from '../testData/progression';
+import * as tdMovies from '../testData/movies';
+import * as tdShows from '../testData/shows';
 
 describe('getStagedStream', () => {
   beforeEach(() => {
     proMan.SetLocalProgressionContextList(
-      JSON.parse(JSON.stringify([td.continuousProgression])),
+      JSON.parse(JSON.stringify([tdProgression.continuousProgression])),
     );
   });
 
@@ -20,8 +22,8 @@ describe('getStagedStream', () => {
   const config = new Config('', 1800, '', '');
   const args = new ContStreamRequest(
     'securePassword',
-    td.continuousProgression.Title,
-    td.continuousProgression.Environment,
+    tdProgression.continuousProgression.Title,
+    tdProgression.continuousProgression.Environment,
     [],
     ['scifi', 'action'],
   );
@@ -29,13 +31,22 @@ describe('getStagedStream', () => {
   it('should return a list of selected media and an empty error message (scenario 1)', () => {
     let stagedMedia = new StagedMedia(
       [],
-      [new SelectedMedia(td.matrix, '', MediaType.Movie, 0, 9000, ['action'])],
+      [
+        new SelectedMedia(tdMovies.matrix, '', MediaType.Movie, 0, 9000, [
+          'action',
+        ]),
+      ],
       1651753800,
     );
 
     let media = new Media(
-      [td.reboot, td.farscape, td.startrek],
-      [td.inception, td.matrix, td.interstellar, td.dune],
+      [tdShows.reboot, tdShows.farscape, tdShows.startrek],
+      [
+        tdMovies.inception,
+        tdMovies.matrix,
+        tdMovies.interstellar,
+        tdMovies.dune,
+      ],
       [],
       [],
       [],
@@ -56,8 +67,8 @@ describe('getStagedStream', () => {
     );
     let expected = [
       new SelectedMedia(
-        td.reboot.Episodes[1],
-        td.reboot.Title,
+        tdShows.reboot.Episodes[1],
+        tdShows.reboot.Title,
         MediaType.Episode,
         1651752000,
         1800,
@@ -74,12 +85,21 @@ describe('getStagedStream', () => {
   it('should return a list of selected media and an empty error message (scenario 2)', () => {
     let stagedMedia = new StagedMedia(
       [],
-      [new SelectedMedia(td.matrix, '', MediaType.Movie, 0, 9000, ['action'])],
+      [
+        new SelectedMedia(tdMovies.matrix, '', MediaType.Movie, 0, 9000, [
+          'action',
+        ]),
+      ],
       1651761000,
     );
     let media = new Media(
-      [td.reboot, td.farscape, td.startrek],
-      [td.inception, td.matrix, td.interstellar, td.dune],
+      [tdShows.reboot, tdShows.farscape, tdShows.startrek],
+      [
+        tdMovies.inception,
+        tdMovies.matrix,
+        tdMovies.interstellar,
+        tdMovies.dune,
+      ],
       [],
       [],
       [],
@@ -99,7 +119,7 @@ describe('getStagedStream', () => {
       StreamType.Cont,
     );
     let expected = [
-      new SelectedMedia(td.matrix, '', MediaType.Movie, 1651752000, 9000, [
+      new SelectedMedia(tdMovies.matrix, '', MediaType.Movie, 1651752000, 9000, [
         'action',
       ]),
     ];
@@ -113,12 +133,21 @@ describe('getStagedStream', () => {
   it('should return a list of selected media and an empty error message (scenario 3)', () => {
     let stagedMedia = new StagedMedia(
       [],
-      [new SelectedMedia(td.matrix, '', MediaType.Movie, 0, 9000, ['action'])],
+      [
+        new SelectedMedia(tdMovies.matrix, '', MediaType.Movie, 0, 9000, [
+          'action',
+        ]),
+      ],
       1651762800,
     );
     let media = new Media(
-      [td.reboot, td.farscape, td.startrek],
-      [td.inception, td.matrix, td.interstellar, td.dune],
+      [tdShows.reboot, tdShows.farscape, tdShows.startrek],
+      [
+        tdMovies.inception,
+        tdMovies.matrix,
+        tdMovies.interstellar,
+        tdMovies.dune,
+      ],
       [],
       [],
       [],
@@ -138,12 +167,17 @@ describe('getStagedStream', () => {
       StreamType.Cont,
     );
     let expected = [
-      new SelectedMedia(td.matrix, '', MediaType.Movie, 1651752000, 9000, [
-        'action',
-      ]),
       new SelectedMedia(
-        td.reboot.Episodes[1],
-        td.reboot.Title,
+        tdMovies.matrix,
+        '',
+        MediaType.Movie,
+        1651752000,
+        9000,
+        ['action'],
+      ),
+      new SelectedMedia(
+        tdShows.reboot.Episodes[1],
+        tdShows.reboot.Title,
         MediaType.Episode,
         1651761000,
         1800,
@@ -160,16 +194,26 @@ describe('getStagedStream', () => {
   it('should return a list of selected media and an empty error message (scenario 4)', () => {
     let stagedMedia = new StagedMedia(
       [
-        new SelectedMedia(td.matrix, '', MediaType.Movie, 1651753800, 9000, [
-          'action',
-        ]),
+        new SelectedMedia(
+          tdMovies.matrix,
+          '',
+          MediaType.Movie,
+          1651753800,
+          9000,
+          ['action'],
+        ),
       ],
       [],
       1651762800,
     );
     let media = new Media(
-      [td.reboot, td.farscape, td.startrek],
-      [td.inception, td.matrix, td.interstellar, td.dune],
+      [tdShows.reboot, tdShows.farscape, tdShows.startrek],
+      [
+        tdMovies.inception,
+        tdMovies.matrix,
+        tdMovies.interstellar,
+        tdMovies.dune,
+      ],
       [],
       [],
       [],
@@ -190,16 +234,21 @@ describe('getStagedStream', () => {
     );
     let expected = [
       new SelectedMedia(
-        td.reboot.Episodes[1],
-        td.reboot.Title,
+        tdShows.reboot.Episodes[1],
+        tdShows.reboot.Title,
         MediaType.Episode,
         1651752000,
         1800,
         ['scifi', 'adventure'],
       ),
-      new SelectedMedia(td.matrix, '', MediaType.Movie, 1651753800, 9000, [
-        'action',
-      ]),
+      new SelectedMedia(
+        tdMovies.matrix,
+        '',
+        MediaType.Movie,
+        1651753800,
+        9000,
+        ['action'],
+      ),
     ];
 
     expect(selectedMedia).toEqual(expected);
@@ -211,20 +260,30 @@ describe('getStagedStream', () => {
   it('should return a list of selected media and an empty error message (scenario 5)', () => {
     let stagedMedia = new StagedMedia(
       [
-        new SelectedMedia(td.matrix, '', MediaType.Movie, 1651753800, 9000, [
-          'action',
-        ]),
+        new SelectedMedia(
+          tdMovies.matrix,
+          '',
+          MediaType.Movie,
+          1651753800,
+          9000,
+          ['action'],
+        ),
       ],
       [
-        new SelectedMedia(td.inception, '', MediaType.Movie, 0, 9000, [
+        new SelectedMedia(tdMovies.inception, '', MediaType.Movie, 0, 9000, [
           'scifi',
         ]),
       ],
       1651764600,
     );
     let media = new Media(
-      [td.reboot, td.farscape, td.startrek],
-      [td.inception, td.matrix, td.interstellar, td.dune],
+      [tdShows.reboot, tdShows.farscape, tdShows.startrek],
+      [
+        tdMovies.inception,
+        tdMovies.matrix,
+        tdMovies.interstellar,
+        tdMovies.dune,
+      ],
       [],
       [],
       [],
@@ -245,19 +304,24 @@ describe('getStagedStream', () => {
     );
     let expected = [
       new SelectedMedia(
-        td.reboot.Episodes[1],
-        td.reboot.Title,
+        tdShows.reboot.Episodes[1],
+        tdShows.reboot.Title,
         MediaType.Episode,
         1651752000,
         1800,
         ['scifi', 'adventure'],
       ),
-      new SelectedMedia(td.matrix, '', MediaType.Movie, 1651753800, 9000, [
-        'action',
-      ]),
       new SelectedMedia(
-        td.reboot.Episodes[2],
-        td.reboot.Title,
+        tdMovies.matrix,
+        '',
+        MediaType.Movie,
+        1651753800,
+        9000,
+        ['action'],
+      ),
+      new SelectedMedia(
+        tdShows.reboot.Episodes[2],
+        tdShows.reboot.Title,
         MediaType.Episode,
         1651762800,
         1800,
@@ -274,11 +338,16 @@ describe('getStagedStream', () => {
   it('should return a list of selected media and an empty error message (scenario 6)', () => {
     let stagedMedia = new StagedMedia(
       [
-        new SelectedMedia(td.matrix, '', MediaType.Movie, 1651753800, 9000, [
-          'action',
-        ]),
         new SelectedMedia(
-          td.interstellar,
+          tdMovies.matrix,
+          '',
+          MediaType.Movie,
+          1651753800,
+          9000,
+          ['action'],
+        ),
+        new SelectedMedia(
+          tdMovies.interstellar,
           '',
           MediaType.Movie,
           1651766400,
@@ -287,15 +356,20 @@ describe('getStagedStream', () => {
         ),
       ],
       [
-        new SelectedMedia(td.inception, '', MediaType.Movie, 0, 9000, [
+        new SelectedMedia(tdMovies.inception, '', MediaType.Movie, 0, 9000, [
           'scifi',
         ]),
       ],
       1651777200,
     );
     let media = new Media(
-      [td.reboot, td.farscape, td.startrek],
-      [td.inception, td.matrix, td.interstellar, td.dune],
+      [tdShows.reboot, tdShows.farscape, tdShows.startrek],
+      [
+        tdMovies.inception,
+        tdMovies.matrix,
+        tdMovies.interstellar,
+        tdMovies.dune,
+      ],
       [],
       [],
       [],
@@ -317,26 +391,31 @@ describe('getStagedStream', () => {
 
     let expected: SelectedMedia[] = [
       new SelectedMedia(
-        td.reboot.Episodes[1],
-        td.reboot.Title,
+        tdShows.reboot.Episodes[1],
+        tdShows.reboot.Title,
         MediaType.Episode,
         1651752000,
         1800,
         ['scifi', 'adventure'],
       ),
-      new SelectedMedia(td.matrix, '', MediaType.Movie, 1651753800, 9000, [
-        'action',
-      ]),
       new SelectedMedia(
-        td.farscape.Episodes[0],
-        td.farscape.Title,
+        tdMovies.matrix,
+        '',
+        MediaType.Movie,
+        1651753800,
+        9000,
+        ['action'],
+      ),
+      new SelectedMedia(
+        tdShows.farscape.Episodes[0],
+        tdShows.farscape.Title,
         MediaType.Episode,
         1651762800,
         3600,
         ['scifi', 'adventure'],
       ),
       new SelectedMedia(
-        td.interstellar,
+        tdMovies.interstellar,
         '',
         MediaType.Movie,
         1651766400,
@@ -354,11 +433,16 @@ describe('getStagedStream', () => {
   it('should return a list of selected media and an empty error message (scenario 7)', () => {
     let stagedMedia = new StagedMedia(
       [
-        new SelectedMedia(td.matrix, '', MediaType.Movie, 1651753800, 9000, [
-          'action',
-        ]),
         new SelectedMedia(
-          td.interstellar,
+          tdMovies.matrix,
+          '',
+          MediaType.Movie,
+          1651753800,
+          9000,
+          ['action'],
+        ),
+        new SelectedMedia(
+          tdMovies.interstellar,
           '',
           MediaType.Movie,
           1651766400,
@@ -367,15 +451,20 @@ describe('getStagedStream', () => {
         ),
       ],
       [
-        new SelectedMedia(td.inception, '', MediaType.Movie, 0, 9000, [
+        new SelectedMedia(tdMovies.inception, '', MediaType.Movie, 0, 9000, [
           'scifi',
         ]),
       ],
       1651795200,
     );
     let media = new Media(
-      [td.reboot, td.farscape, td.startrek],
-      [td.inception, td.matrix, td.interstellar, td.dune],
+      [tdShows.reboot, tdShows.farscape, tdShows.startrek],
+      [
+        tdMovies.inception,
+        tdMovies.matrix,
+        tdMovies.interstellar,
+        tdMovies.dune,
+      ],
       [],
       [],
       [],
@@ -397,46 +486,56 @@ describe('getStagedStream', () => {
 
     let expected = [
       new SelectedMedia(
-        td.reboot.Episodes[1],
-        td.reboot.Title,
+        tdShows.reboot.Episodes[1],
+        tdShows.reboot.Title,
         MediaType.Episode,
         1651752000,
         1800,
         ['scifi', 'adventure'],
       ),
-      new SelectedMedia(td.matrix, '', MediaType.Movie, 1651753800, 9000, [
-        'action',
-      ]),
       new SelectedMedia(
-        td.farscape.Episodes[0],
-        td.farscape.Title,
+        tdMovies.matrix,
+        '',
+        MediaType.Movie,
+        1651753800,
+        9000,
+        ['action'],
+      ),
+      new SelectedMedia(
+        tdShows.farscape.Episodes[0],
+        tdShows.farscape.Title,
         MediaType.Episode,
         1651762800,
         3600,
         ['scifi', 'adventure'],
       ),
       new SelectedMedia(
-        td.interstellar,
+        tdMovies.interstellar,
         '',
         MediaType.Movie,
         1651766400,
         10800,
         ['scifi'],
       ),
-      new SelectedMedia(td.inception, '', MediaType.Movie, 1651777200, 9000, [
-        'scifi',
-      ]),
       new SelectedMedia(
-        td.startrek.Episodes[0],
-        td.startrek.Title,
+        tdMovies.inception,
+        '',
+        MediaType.Movie,
+        1651777200,
+        9000,
+        ['scifi'],
+      ),
+      new SelectedMedia(
+        tdShows.startrek.Episodes[0],
+        tdShows.startrek.Title,
         MediaType.Episode,
         1651786200,
         7200,
         ['scifi', 'adventure'],
       ),
       new SelectedMedia(
-        td.reboot.Episodes[2],
-        td.reboot.Title,
+        tdShows.reboot.Episodes[2],
+        tdShows.reboot.Title,
         MediaType.Episode,
         1651793400,
         1800,
@@ -453,11 +552,16 @@ describe('getStagedStream', () => {
   it('should return a list of selected media and an empty error message (scenario 8)', () => {
     let stagedMedia = new StagedMedia(
       [
-        new SelectedMedia(td.matrix, '', MediaType.Movie, 1651753800, 9000, [
-          'action',
-        ]),
         new SelectedMedia(
-          td.interstellar,
+          tdMovies.matrix,
+          '',
+          MediaType.Movie,
+          1651753800,
+          9000,
+          ['action'],
+        ),
+        new SelectedMedia(
+          tdMovies.interstellar,
           '',
           MediaType.Movie,
           1651766400,
@@ -466,15 +570,20 @@ describe('getStagedStream', () => {
         ),
       ],
       [
-        new SelectedMedia(td.inception, '', MediaType.Movie, 0, 9000, [
+        new SelectedMedia(tdMovies.inception, '', MediaType.Movie, 0, 9000, [
           'scifi',
         ]),
       ],
       1651750200,
     );
     let media = new Media(
-      [td.reboot, td.farscape, td.startrek],
-      [td.inception, td.matrix, td.interstellar, td.dune],
+      [tdShows.reboot, tdShows.farscape, tdShows.startrek],
+      [
+        tdMovies.inception,
+        tdMovies.matrix,
+        tdMovies.interstellar,
+        tdMovies.dune,
+      ],
       [],
       [],
       [],
@@ -505,11 +614,16 @@ describe('getStagedStream', () => {
   it('should return a list of selected media and an empty error message (scenario 8)', () => {
     let stagedMedia = new StagedMedia(
       [
-        new SelectedMedia(td.matrix, '', MediaType.Movie, 1651753800, 9000, [
-          'action',
-        ]),
         new SelectedMedia(
-          td.interstellar,
+          tdMovies.matrix,
+          '',
+          MediaType.Movie,
+          1651753800,
+          9000,
+          ['action'],
+        ),
+        new SelectedMedia(
+          tdMovies.interstellar,
           '',
           MediaType.Movie,
           1651766400,
@@ -518,15 +632,20 @@ describe('getStagedStream', () => {
         ),
       ],
       [
-        new SelectedMedia(td.inception, '', MediaType.Movie, 0, 9000, [
+        new SelectedMedia(tdMovies.inception, '', MediaType.Movie, 0, 9000, [
           'scifi',
         ]),
       ],
       1651766400,
     );
     let media = new Media(
-      [td.reboot, td.farscape, td.startrek],
-      [td.inception, td.matrix, td.interstellar, td.dune],
+      [tdShows.reboot, tdShows.farscape, tdShows.startrek],
+      [
+        tdMovies.inception,
+        tdMovies.matrix,
+        tdMovies.interstellar,
+        tdMovies.dune,
+      ],
       [],
       [],
       [],

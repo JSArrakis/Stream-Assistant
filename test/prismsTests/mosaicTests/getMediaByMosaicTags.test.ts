@@ -4,14 +4,15 @@ import { MainGenres } from '../../../src/models/const/mainGenres';
 import { Music } from '../../../src/models/music';
 import { SegmentedTags } from '../../../src/models/segmentedTags';
 import { getMediaByMosaicTags } from '../../../src/prisms/mosaic';
-import * as td from '../../testData/testData';
+import * as tdMusic from '../../testData/music';
+import * as tdMosaics from '../../testData/mosaics';
 
 describe('getMediaByMosaicTags', () => {
   it('should return the matching media with the given tags (scenario 1)', () => {
     const media: Music[] = [];
     const alreadySelectedMedia: Music[] = [];
     const tags: SegmentedTags = new SegmentedTags([], [], [], [], []);
-    const mosaics = td.mosaics;
+    const mosaics = tdMosaics.mosaics;
     const requestedHolidayTags: string[] = [];
     const duration: number = 600;
 
@@ -29,17 +30,17 @@ describe('getMediaByMosaicTags', () => {
     expect(result).toEqual(expectedMedia);
   });
   it('should return the matching media with the given tags (scenario 2)', () => {
-    const media: Music[] = td.music;
+    const media: Music[] = tdMusic.music;
     const alreadySelectedMedia: Music[] = [];
     const tags: SegmentedTags = new SegmentedTags([], [], [], [], []);
-    const mosaics = td.mosaics;
+    const mosaics = tdMosaics.mosaics;
     const requestedHolidayTags: string[] = [Holidays.Christmas];
     const duration: number = 600;
 
     const expectedMedia: Music[] = [
-      td.hereitschristmastime,
-      td.allIwantforchristmasisyou,
-      td.kidnapthesandyclaws,
+      tdMusic.hereitschristmastime,
+      tdMusic.allIwantforchristmasisyou,
+      tdMusic.kidnapthesandyclaws,
     ];
 
     const result = getMediaByMosaicTags(
@@ -54,14 +55,14 @@ describe('getMediaByMosaicTags', () => {
     expect(result).toEqual(expectedMedia);
   });
   it('should return the matching media with the given tags (scenario 3)', () => {
-    const media: Music[] = td.music;
+    const media: Music[] = tdMusic.music;
     const alreadySelectedMedia: Music[] = [];
     const tags: SegmentedTags = new SegmentedTags([], [], [], [], []);
-    const mosaics = td.mosaics;
+    const mosaics = tdMosaics.mosaics;
     const requestedHolidayTags: string[] = [];
     const duration: number = 600;
 
-    const expectedMedia: Music[] = td.nonHolidayMusic;
+    const expectedMedia: Music[] = tdMusic.nonHolidayMusic;
 
     const result = getMediaByMosaicTags(
       media,
@@ -75,7 +76,7 @@ describe('getMediaByMosaicTags', () => {
     expect(result).toEqual(expectedMedia);
   });
   it('should return the matching media with the given tags (scenario 4)', () => {
-    const media: Music[] = td.music;
+    const media: Music[] = tdMusic.music;
     const alreadySelectedMedia: Music[] = [];
     const tags: SegmentedTags = new SegmentedTags(
       [],
@@ -84,11 +85,11 @@ describe('getMediaByMosaicTags', () => {
       [],
       [],
     );
-    const mosaics = td.mosaics;
+    const mosaics = tdMosaics.mosaics;
     const requestedHolidayTags: string[] = [Holidays.Christmas];
     const duration: number = 200;
 
-    const expectedMedia: Music[] = [td.kidnapthesandyclaws];
+    const expectedMedia: Music[] = [tdMusic.kidnapthesandyclaws];
 
     const result = getMediaByMosaicTags(
       media,
@@ -102,17 +103,17 @@ describe('getMediaByMosaicTags', () => {
     expect(result).toEqual(expectedMedia);
   });
   it('should return the matching media with the given tags (scenario 5)', () => {
-    const media: Music[] = td.music;
+    const media: Music[] = tdMusic.music;
     const alreadySelectedMedia: Music[] = [];
     const tags: SegmentedTags = new SegmentedTags([], [], ['marvel'], [], []);
-    const mosaics = td.mosaics;
+    const mosaics = tdMosaics.mosaics;
     const requestedHolidayTags: string[] = [];
     const duration: number = 600;
 
     const expectedMedia: Music[] = [
-      td.backinblack,
-      td.comeandgetyourlove,
-      td.ohhchild,
+      tdMusic.backinblack,
+      tdMusic.comeandgetyourlove,
+      tdMusic.ohhchild,
     ];
 
     const result = getMediaByMosaicTags(
@@ -127,7 +128,7 @@ describe('getMediaByMosaicTags', () => {
     expect(result).toEqual(expectedMedia);
   });
   it('should return the matching media with the given tags (scenario 6)', () => {
-    const media: Music[] = td.music;
+    const media: Music[] = tdMusic.music;
     const alreadySelectedMedia: Music[] = [];
     const tags: SegmentedTags = new SegmentedTags(
       [],
@@ -136,36 +137,36 @@ describe('getMediaByMosaicTags', () => {
       [],
       [],
     );
-    const mosaics = td.mosaics;
+    const mosaics = tdMosaics.mosaics;
     const requestedHolidayTags: string[] = [];
     const duration: number = 600;
 
     const expectedMedia: Music[] = [
-      td.paranoid,
-      td.one,
-      td.aceofspades,
-      td.holydiver,
-      td.painkiller,
-      td.headlikeahole,
-      td.stigmata,
-      td.adrugagainstwar,
-      td.dragula,
-      td.thebeautifulpeople,
-      td.thedarkplacesoftheearth,
-      td.endtitles,
-      td.reflectinginshadows,
-      td.hypnagogic,
-      td.twoonefourfive,
-      td.nightcall,
-      td.neotokyo,
-      td.daysofthunder,
-      td.turbokiller,
-      td.technoir,
-      td.hajnal,
-      td.nostep,
-      td.thesoundoftheunderground,
-      td.manicpanic,
-      td.blackacid,
+      tdMusic.paranoid,
+      tdMusic.one,
+      tdMusic.aceofspades,
+      tdMusic.holydiver,
+      tdMusic.painkiller,
+      tdMusic.headlikeahole,
+      tdMusic.stigmata,
+      tdMusic.adrugagainstwar,
+      tdMusic.dragula,
+      tdMusic.thebeautifulpeople,
+      tdMusic.thedarkplacesoftheearth,
+      tdMusic.endtitles,
+      tdMusic.reflectinginshadows,
+      tdMusic.hypnagogic,
+      tdMusic.twoonefourfive,
+      tdMusic.nightcall,
+      tdMusic.neotokyo,
+      tdMusic.daysofthunder,
+      tdMusic.turbokiller,
+      tdMusic.technoir,
+      tdMusic.hajnal,
+      tdMusic.nostep,
+      tdMusic.thesoundoftheunderground,
+      tdMusic.manicpanic,
+      tdMusic.blackacid,
     ];
 
     const result = getMediaByMosaicTags(

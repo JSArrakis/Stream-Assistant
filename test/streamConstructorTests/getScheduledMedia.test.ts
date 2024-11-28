@@ -7,12 +7,12 @@ import {
 } from '../../src/models/streamRequest';
 import { SelectedMedia } from '../../src/models/selectedMedia';
 import * as streamCon from '../../src/services/streamConstructor';
-import * as td from '../testData/testData';
+import * as tdMovies from '../testData/movies';
 
 describe('getScheduledMedia', () => {
   const media = new Media(
     [], // Shows
-    [td.inception, td.matrix, td.interstellar],
+    [tdMovies.inception, tdMovies.matrix, tdMovies.interstellar],
     [], // Shorts
     [], // Music
     [], // Promos
@@ -35,11 +35,16 @@ describe('getScheduledMedia', () => {
     };
 
     const expected = [
-      new SelectedMedia(td.inception, '', MediaType.Movie, 1656547200, 9000, [
-        'scifi',
-      ]),
       new SelectedMedia(
-        td.interstellar,
+        tdMovies.inception,
+        '',
+        MediaType.Movie,
+        1656547200,
+        9000,
+        ['scifi'],
+      ),
+      new SelectedMedia(
+        tdMovies.interstellar,
         '',
         MediaType.Movie,
         1656633600,
@@ -67,9 +72,14 @@ describe('getScheduledMedia', () => {
     };
 
     const expected = [
-      new SelectedMedia(td.inception, '', MediaType.Movie, 1656547200, 9000, [
-        'scifi',
-      ]),
+      new SelectedMedia(
+        tdMovies.inception,
+        '',
+        MediaType.Movie,
+        1656547200,
+        9000,
+        ['scifi'],
+      ),
     ];
 
     const result = streamCon.getScheduledMedia(media, args);
@@ -126,11 +136,16 @@ describe('getScheduledMedia', () => {
     };
 
     const expected = [
-      new SelectedMedia(td.inception, '', MediaType.Movie, 1656547200, 9000, [
-        'scifi',
-      ]),
       new SelectedMedia(
-        td.interstellar,
+        tdMovies.inception,
+        '',
+        MediaType.Movie,
+        1656547200,
+        9000,
+        ['scifi'],
+      ),
+      new SelectedMedia(
+        tdMovies.interstellar,
         '',
         MediaType.Movie,
         1656633600,
@@ -170,20 +185,35 @@ describe('getScheduledMedia', () => {
     );
 
     const contExpected = [
-      new SelectedMedia(td.inception, '', MediaType.Movie, 1656547200, 9000, [
-        'scifi',
-      ]),
-      new SelectedMedia(td.matrix, '', MediaType.Movie, 1656633600, 9000, [
-        'action',
-      ]),
+      new SelectedMedia(
+        tdMovies.inception,
+        '',
+        MediaType.Movie,
+        1656547200,
+        9000,
+        ['scifi'],
+      ),
+      new SelectedMedia(
+        tdMovies.matrix,
+        '',
+        MediaType.Movie,
+        1656633600,
+        9000,
+        ['action'],
+      ),
     ];
 
     const adhocExpected = [
-      new SelectedMedia(td.inception, '', MediaType.Movie, 1656547200, 9000, [
-        'scifi',
-      ]),
       new SelectedMedia(
-        td.interstellar,
+        tdMovies.inception,
+        '',
+        MediaType.Movie,
+        1656547200,
+        9000,
+        ['scifi'],
+      ),
+      new SelectedMedia(
+        tdMovies.interstellar,
         '',
         MediaType.Movie,
         1656633600,

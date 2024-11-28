@@ -1,21 +1,21 @@
 import * as proEng from '../../src/services/proceduralEngine';
 import { Movie } from '../../src/models/movie';
 import { ContStreamRequest } from '../../src/models/streamRequest';
-import * as td from '../testData/testData';
+import * as tdMovies from '../testData/movies';
 
 describe('isMovieSelected', () => {
   it('should return true if the movie is in the list of previous movies', () => {
-    let prevMovies: Movie[] = [td.inception, td.matrix, td.interstellar];
+    let prevMovies: Movie[] = [tdMovies.inception, tdMovies.matrix, tdMovies.interstellar];
 
-    let result = proEng.isMoviePreviouslySelected(td.inception, prevMovies);
+    let result = proEng.isMoviePreviouslySelected(tdMovies.inception, prevMovies);
 
     expect(result).toBeTrue;
   });
 
   it('should return false if the movie is not in the list of previous movies', () => {
-    let prevMovies: Movie[] = [td.inception, td.matrix];
+    let prevMovies: Movie[] = [tdMovies.inception, tdMovies.matrix];
 
-    let result = proEng.isMoviePreviouslySelected(td.interstellar, prevMovies);
+    let result = proEng.isMoviePreviouslySelected(tdMovies.interstellar, prevMovies);
 
     expect(result).toBeFalse;
   });
@@ -23,7 +23,7 @@ describe('isMovieSelected', () => {
 
 describe('selectMovieUnderDuration', () => {
   it('should return a movie that is under the duration limit that has the tags in the request object', () => {
-    let movies: Movie[] = [td.inception, td.matrix, td.interstellar, td.dune];
+    let movies: Movie[] = [tdMovies.inception, tdMovies.matrix, tdMovies.interstellar, tdMovies.dune];
     let prevMovies: Movie[] = [];
     let args: ContStreamRequest = new ContStreamRequest(
       'password',
@@ -40,12 +40,12 @@ describe('selectMovieUnderDuration', () => {
       9000,
     );
 
-    expect(result).toEqual(td.inception);
+    expect(result).toEqual(tdMovies.inception);
   });
 
   it('should return a movie that is under the duration limit that has the tags in the request object and has not been selected before', () => {
-    let movies: Movie[] = [td.inception, td.matrix, td.interstellar, td.dune];
-    let prevMovies: Movie[] = [td.inception, td.matrix, td.dune];
+    let movies: Movie[] = [tdMovies.inception, tdMovies.matrix, tdMovies.interstellar, tdMovies.dune];
+    let prevMovies: Movie[] = [tdMovies.inception, tdMovies.matrix, tdMovies.dune];
     let args: ContStreamRequest = new ContStreamRequest(
       'password',
       'title',
@@ -61,16 +61,16 @@ describe('selectMovieUnderDuration', () => {
       10800,
     );
 
-    expect(result).toEqual(td.interstellar);
+    expect(result).toEqual(tdMovies.interstellar);
   });
 
   it('should return any movie that is under the duration limit that has the correct tags, when all movies with the criteria have been selected before (result scenario 1)', () => {
-    let movies: Movie[] = [td.inception, td.matrix, td.interstellar, td.dune];
+    let movies: Movie[] = [tdMovies.inception, tdMovies.matrix, tdMovies.interstellar, tdMovies.dune];
     let prevMovies: Movie[] = [
-      td.inception,
-      td.matrix,
-      td.interstellar,
-      td.dune,
+      tdMovies.inception,
+      tdMovies.matrix,
+      tdMovies.interstellar,
+      tdMovies.dune,
     ];
     let args: ContStreamRequest = new ContStreamRequest(
       'password',
@@ -88,18 +88,18 @@ describe('selectMovieUnderDuration', () => {
       9000,
     );
 
-    expect(result).toEqual(td.inception);
+    expect(result).toEqual(tdMovies.inception);
 
     randomSpy.mockRestore();
   });
 
   it('should return any movie that is under the duration limit that has the correct tags, when all movies with the criteria have been selected before (result scenario 2)', () => {
-    let movies: Movie[] = [td.inception, td.matrix, td.interstellar, td.dune];
+    let movies: Movie[] = [tdMovies.inception, tdMovies.matrix, tdMovies.interstellar, tdMovies.dune];
     let prevMovies: Movie[] = [
-      td.inception,
-      td.matrix,
-      td.interstellar,
-      td.dune,
+      tdMovies.inception,
+      tdMovies.matrix,
+      tdMovies.interstellar,
+      tdMovies.dune,
     ];
     let args: ContStreamRequest = new ContStreamRequest(
       'password',
@@ -117,7 +117,7 @@ describe('selectMovieUnderDuration', () => {
       9000,
     );
 
-    expect(result).toEqual(td.matrix);
+    expect(result).toEqual(tdMovies.matrix);
 
     randomSpy.mockRestore();
   });

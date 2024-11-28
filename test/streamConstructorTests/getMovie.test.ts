@@ -2,13 +2,13 @@ import { MediaType } from '../../src/models/enum/mediaTypes';
 import { Movie } from '../../src/models/movie';
 import { SelectedMedia } from '../../src/models/selectedMedia';
 import * as streamCon from '../../src/services/streamConstructor';
-import * as td from '../testData/testData';
+import * as tdMovies from '../testData/movies';
 
 describe('getMovie', () => {
   let movieList: Movie[];
 
   beforeEach(() => {
-    movieList = [td.inception, td.matrix];
+    movieList = [tdMovies.inception, tdMovies.matrix];
   });
 
   it('should return an error if the loadTitle is empty', () => {

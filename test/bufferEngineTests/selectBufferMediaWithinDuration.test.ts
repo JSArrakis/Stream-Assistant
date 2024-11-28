@@ -7,7 +7,10 @@ import { Music } from '../../src/models/music';
 import { SegmentedTags } from '../../src/models/segmentedTags';
 import { Short } from '../../src/models/short';
 import * as buffEng from '../../src/services/bufferEngine';
-import * as td from '../testData/testData';
+import * as tdCommercials from '../testData/commercials';
+import * as tdMusic from '../testData/music';
+import * as tdShorts from '../testData/shorts';
+import * as tdMosaics from '../testData/mosaics';
 
 describe('selectBufferMediaWithinDuration', () => {
   it('should return the media within the duration (scenario 1)', () => {
@@ -65,15 +68,15 @@ describe('selectBufferMediaWithinDuration', () => {
     const media: Media = new Media(
       [],
       [],
-      td.shorts,
-      td.music,
+      tdShorts.shorts,
+      tdMusic.music,
       [],
       [],
-      td.commercials,
-      td.defaultCommercials,
+      tdCommercials.commercials,
+      tdCommercials.defaultCommercials,
       [],
     );
-    const mosaics: Mosaic[] = td.mosaics;
+    const mosaics: Mosaic[] = tdMosaics.mosaics;
     const segmentedTags: SegmentedTags = new SegmentedTags([], [], [], [], []);
     const duration: number = 358;
     const alreadyUsedMedia: Media = new Media(
@@ -89,19 +92,19 @@ describe('selectBufferMediaWithinDuration', () => {
     );
 
     const expectedSelectedMedia: (Commercial | Short | Music)[] = [
-      td.default8,
-      td.default8,
-      td.holidayincambodia,
-      td.default6,
+      tdCommercials.default8,
+      tdCommercials.default8,
+      tdMusic.holidayincambodia,
+      tdCommercials.default6,
     ];
     const expectedSegmentedSelectedMedia: Media = new Media(
       [],
       [],
       [],
-      [td.holidayincambodia],
+      [tdMusic.holidayincambodia],
       [],
       [],
-      [td.default8, td.default8, td.default6],
+      [tdCommercials.default8, tdCommercials.default8, tdCommercials.default6],
       [],
       [],
     );
@@ -130,15 +133,15 @@ describe('selectBufferMediaWithinDuration', () => {
     const media: Media = new Media(
       [],
       [],
-      td.shorts,
-      td.music,
+      tdShorts.shorts,
+      tdMusic.music,
       [],
       [],
-      td.commercials,
-      td.defaultCommercials,
+      tdCommercials.commercials,
+      tdCommercials.defaultCommercials,
       [],
     );
-    const mosaics: Mosaic[] = td.mosaics;
+    const mosaics: Mosaic[] = tdMosaics.mosaics;
     const segmentedTags: SegmentedTags = new SegmentedTags(
       [],
       [MainGenres.Action, MainGenres.SciFi],
@@ -160,19 +163,19 @@ describe('selectBufferMediaWithinDuration', () => {
     );
 
     const expectedSelectedMedia: (Commercial | Short | Music)[] = [
-      td.superduperdoublelooper,
-      td.pizzahutxmen,
-      td.jurassicpark3toys,
-      td.starttrektoys,
-      td.jurassicparktoys3,
-      td.jurassicparktoys2,
-      td.wildones,
-      td.marvelvsstreetfighter98,
-      td.jurassicparktoys1,
-      td.alienstoys1,
-      td.transformers80s1,
-      td.default8,
-      td.default8,
+      tdCommercials.superduperdoublelooper,
+      tdCommercials.pizzahutxmen,
+      tdCommercials.jurassicpark3toys,
+      tdCommercials.starttrektoys,
+      tdCommercials.jurassicparktoys3,
+      tdCommercials.jurassicparktoys2,
+      tdCommercials.wildones,
+      tdCommercials.marvelvsstreetfighter98,
+      tdCommercials.jurassicparktoys1,
+      tdCommercials.alienstoys1,
+      tdCommercials.transformers80s1,
+      tdCommercials.default8,
+      tdCommercials.default8,
     ];
     const expectedSegmentedSelectedMedia: Media = new Media(
       [],
@@ -182,19 +185,19 @@ describe('selectBufferMediaWithinDuration', () => {
       [],
       [],
       [
-        td.superduperdoublelooper,
-        td.pizzahutxmen,
-        td.jurassicpark3toys,
-        td.starttrektoys,
-        td.jurassicparktoys3,
-        td.jurassicparktoys2,
-        td.wildones,
-        td.marvelvsstreetfighter98,
-        td.jurassicparktoys1,
-        td.alienstoys1,
-        td.transformers80s1,
-        td.default8,
-        td.default8,
+        tdCommercials.superduperdoublelooper,
+        tdCommercials.pizzahutxmen,
+        tdCommercials.jurassicpark3toys,
+        tdCommercials.starttrektoys,
+        tdCommercials.jurassicparktoys3,
+        tdCommercials.jurassicparktoys2,
+        tdCommercials.wildones,
+        tdCommercials.marvelvsstreetfighter98,
+        tdCommercials.jurassicparktoys1,
+        tdCommercials.alienstoys1,
+        tdCommercials.transformers80s1,
+        tdCommercials.default8,
+        tdCommercials.default8,
       ],
       [],
       [],
@@ -224,15 +227,15 @@ describe('selectBufferMediaWithinDuration', () => {
     const media: Media = new Media(
       [],
       [],
-      td.shorts,
-      td.music,
+      tdShorts.shorts,
+      tdMusic.music,
       [],
       [],
-      td.commercials,
-      td.defaultCommercials,
+      tdCommercials.commercials,
+      tdCommercials.defaultCommercials,
       [],
     );
-    const mosaics: Mosaic[] = td.mosaics;
+    const mosaics: Mosaic[] = tdMosaics.mosaics;
     const segmentedTags: SegmentedTags = new SegmentedTags(
       [],
       [MainGenres.Action, MainGenres.SciFi],
@@ -254,14 +257,14 @@ describe('selectBufferMediaWithinDuration', () => {
     );
 
     const expectedSelectedMedia: (Commercial | Short | Music)[] = [
-      td.superduperdoublelooper,
-      td.pizzahutxmen,
-      td.jurassicpark3toys,
-      td.starttrektoys,
-      td.jurassicparktoys3,
-      td.jurassicparktoys2,
-      td.wildones,
-      td.marvelvsstreetfighter98,
+      tdCommercials.superduperdoublelooper,
+      tdCommercials.pizzahutxmen,
+      tdCommercials.jurassicpark3toys,
+      tdCommercials.starttrektoys,
+      tdCommercials.jurassicparktoys3,
+      tdCommercials.jurassicparktoys2,
+      tdCommercials.wildones,
+      tdCommercials.marvelvsstreetfighter98,
     ];
     const expectedSegmentedSelectedMedia: Media = new Media(
       [],
@@ -271,14 +274,14 @@ describe('selectBufferMediaWithinDuration', () => {
       [],
       [],
       [
-        td.superduperdoublelooper,
-        td.pizzahutxmen,
-        td.jurassicpark3toys,
-        td.starttrektoys,
-        td.jurassicparktoys3,
-        td.jurassicparktoys2,
-        td.wildones,
-        td.marvelvsstreetfighter98,
+        tdCommercials.superduperdoublelooper,
+        tdCommercials.pizzahutxmen,
+        tdCommercials.jurassicpark3toys,
+        tdCommercials.starttrektoys,
+        tdCommercials.jurassicparktoys3,
+        tdCommercials.jurassicparktoys2,
+        tdCommercials.wildones,
+        tdCommercials.marvelvsstreetfighter98,
       ],
       [],
       [],
@@ -308,15 +311,15 @@ describe('selectBufferMediaWithinDuration', () => {
     const media: Media = new Media(
       [],
       [],
-      td.shorts,
-      td.music,
+      tdShorts.shorts,
+      tdMusic.music,
       [],
       [],
-      td.commercials,
-      td.defaultCommercials,
+      tdCommercials.commercials,
+      tdCommercials.defaultCommercials,
       [],
     );
-    const mosaics: Mosaic[] = td.mosaics;
+    const mosaics: Mosaic[] = tdMosaics.mosaics;
     const segmentedTags: SegmentedTags = new SegmentedTags(
       [],
       [MainGenres.Action, MainGenres.Horror, MainGenres.SciFi],
@@ -338,62 +341,62 @@ describe('selectBufferMediaWithinDuration', () => {
     );
 
     const expectedSelectedMedia: (Commercial | Short | Music)[] = [
-      td.superduperdoublelooper,
-      td.pizzahutxmen,
-      td.jurassicpark3toys,
-      td.starttrektoys,
-      td.jurassicparktoys3,
-      td.thebeautifulpeople,
-      td.jurassicparktoys2,
-      td.wildones,
-      td.marvelvsstreetfighter98,
-      td.jurassicparktoys1,
-      td.transformers80s1,
-      td.transformersbeastwarstoys,
-      td.default6,
-      td.thedarkplacesoftheearth,
-      td.default8,
-      td.default8,
-      td.endtitles,
-      td.default8,
-      td.default8,
-      td.aceofspades,
-      td.default8,
-      td.meninblacktoys97,
-      td.default5,
+      tdCommercials.superduperdoublelooper,
+      tdCommercials.pizzahutxmen,
+      tdCommercials.jurassicpark3toys,
+      tdCommercials.starttrektoys,
+      tdCommercials.jurassicparktoys3,
+      tdMusic.thebeautifulpeople,
+      tdCommercials.jurassicparktoys2,
+      tdCommercials.wildones,
+      tdCommercials.marvelvsstreetfighter98,
+      tdCommercials.jurassicparktoys1,
+      tdCommercials.transformers80s1,
+      tdCommercials.transformersbeastwarstoys,
+      tdCommercials.default6,
+      tdMusic.thedarkplacesoftheearth,
+      tdCommercials.default8,
+      tdCommercials.default8,
+      tdMusic.endtitles,
+      tdCommercials.default8,
+      tdCommercials.default8,
+      tdMusic.aceofspades,
+      tdCommercials.default8,
+      tdCommercials.meninblacktoys97,
+      tdCommercials.default5,
     ];
     const expectedSegmentedSelectedMedia: Media = new Media(
       [],
       [],
       [],
       [
-        td.thebeautifulpeople,
-        td.thedarkplacesoftheearth,
-        td.endtitles,
-        td.aceofspades,
+        tdMusic.thebeautifulpeople,
+        tdMusic.thedarkplacesoftheearth,
+        tdMusic.endtitles,
+        tdMusic.aceofspades,
       ],
       [],
       [],
       [
-        td.superduperdoublelooper,
-        td.pizzahutxmen,
-        td.jurassicpark3toys,
-        td.starttrektoys,
-        td.jurassicparktoys3,
-        td.jurassicparktoys2,
-        td.wildones,
-        td.marvelvsstreetfighter98,
-        td.jurassicparktoys1,
-        td.transformers80s1,
-        td.transformersbeastwarstoys,
-        td.default6,
-        td.default8,
-        td.default8,
-        td.default8,
-        td.default8,
-        td.default8,
-        td.meninblacktoys97,
-        td.default5,
+        tdCommercials.superduperdoublelooper,
+        tdCommercials.pizzahutxmen,
+        tdCommercials.jurassicpark3toys,
+        tdCommercials.starttrektoys,
+        tdCommercials.jurassicparktoys3,
+        tdCommercials.jurassicparktoys2,
+        tdCommercials.wildones,
+        tdCommercials.marvelvsstreetfighter98,
+        tdCommercials.jurassicparktoys1,
+        tdCommercials.transformers80s1,
+        tdCommercials.transformersbeastwarstoys,
+        tdCommercials.default6,
+        tdCommercials.default8,
+        tdCommercials.default8,
+        tdCommercials.default8,
+        tdCommercials.default8,
+        tdCommercials.default8,
+        tdCommercials.meninblacktoys97,
+        tdCommercials.default5,
       ],
       [],
       [],

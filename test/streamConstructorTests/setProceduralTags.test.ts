@@ -3,7 +3,7 @@ import { IStreamRequest } from '../../src/models/streamRequest';
 import { SelectedMedia } from '../../src/models/selectedMedia';
 import { StagedMedia } from '../../src/models/stagedMedia';
 import * as streamCon from '../../src/services/streamConstructor';
-import * as td from '../testData/testData';
+import * as tdMovies from '../testData/movies'
 
 describe('setProceduralTags', () => {
   it('should populate the tags array of the args object with the tags of the selected media if the args tags array is empty', () => {
@@ -19,10 +19,10 @@ describe('setProceduralTags', () => {
     };
 
     const selected = [
-      new SelectedMedia(td.inception, '', MediaType.Movie, 1656547200, 9000, [
+      new SelectedMedia(tdMovies.inception, '', MediaType.Movie, 1656547200, 9000, [
         'scifi',
       ]),
-      new SelectedMedia(td.matrix, '', MediaType.Movie, 1656633600, 10800, [
+      new SelectedMedia(tdMovies.matrix, '', MediaType.Movie, 1656633600, 10800, [
         'action',
       ]),
     ];

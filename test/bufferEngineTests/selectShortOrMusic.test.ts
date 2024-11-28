@@ -1,7 +1,8 @@
 import { Music } from '../../src/models/music';
 import { Short } from '../../src/models/short';
 import * as buffEng from '../../src/services/bufferEngine';
-import * as td from '../testData/testData';
+import * as tdMusic from '../testData/music';
+import * as tdShorts from '../testData/shorts';
 
 describe('selectShortOrMusic', () => {
   it('get short from first 10 or less (scenario 1)', () => {
@@ -28,8 +29,8 @@ describe('selectShortOrMusic', () => {
   });
   it('get short from first 10 or less (scenario 2)', () => {
     const randomSpy = jest.spyOn(Math, 'random').mockReturnValue(0.99);
-    const shorts: Short[] = td.shorts;
-    const music: Music[] = td.music;
+    const shorts: Short[] = tdShorts.shorts;
+    const music: Music[] = tdMusic.music;
     const duration: number = 0;
     const usedShorts: Short[] = [];
     const usedMusic: Music[] = [];
@@ -50,13 +51,13 @@ describe('selectShortOrMusic', () => {
   });
   it('get short from first 10 or less (scenario 3)', () => {
     const randomSpy = jest.spyOn(Math, 'random').mockReturnValue(0.99);
-    const shorts: Short[] = td.shorts;
-    const music: Music[] = td.music;
+    const shorts: Short[] = tdShorts.shorts;
+    const music: Music[] = tdMusic.music;
     const duration: number = 600;
     const usedShorts: Short[] = [];
     const usedMusic: Music[] = [];
 
-    const expectedShort = td.painkiller;
+    const expectedShort = tdMusic.painkiller;
 
     const result = buffEng.selectShortOrMusic(
       shorts,
@@ -72,13 +73,13 @@ describe('selectShortOrMusic', () => {
   });
   it('get short from first 10 or less (scenario 4)', () => {
     const randomSpy = jest.spyOn(Math, 'random').mockReturnValue(0.4);
-    const shorts: Short[] = td.shorts;
-    const music: Music[] = td.music;
+    const shorts: Short[] = tdShorts.shorts;
+    const music: Music[] = tdMusic.music;
     const duration: number = 600;
     const usedShorts: Short[] = [];
     const usedMusic: Music[] = [];
 
-    const expectedShort = td.cargo;
+    const expectedShort = tdShorts.cargo;
 
     const result = buffEng.selectShortOrMusic(
       shorts,

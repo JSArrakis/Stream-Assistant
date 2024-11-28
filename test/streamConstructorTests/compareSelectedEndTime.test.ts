@@ -1,16 +1,21 @@
 import { SelectedMedia } from '../../src/models/selectedMedia';
 import { MediaType } from '../../src/models/enum/mediaTypes';
 import * as streamCon from '../../src/services/streamConstructor';
-import * as td from '../testData/testData';
+import * as tdMovies from '../testData/movies';
 
 describe('compareSelectedEndTime', () => {
   it('should not return an error if the end time is greater than the last scheduled media plus its duration', () => {
     const selected = [
-      new SelectedMedia(td.inception, '', MediaType.Movie, 1656547200, 9000, [
-        'scifi',
-      ]),
       new SelectedMedia(
-        td.interstellar,
+        tdMovies.inception,
+        '',
+        MediaType.Movie,
+        1656547200,
+        9000,
+        ['scifi'],
+      ),
+      new SelectedMedia(
+        tdMovies.interstellar,
         '',
         MediaType.Movie,
         1656633600,
@@ -26,11 +31,16 @@ describe('compareSelectedEndTime', () => {
 
   it('should return an error if the end time is less than the last scheduled media plus its duration', () => {
     const selected = [
-      new SelectedMedia(td.inception, '', MediaType.Movie, 1656547200, 9000, [
-        'scifi',
-      ]),
       new SelectedMedia(
-        td.interstellar,
+        tdMovies.inception,
+        '',
+        MediaType.Movie,
+        1656547200,
+        9000,
+        ['scifi'],
+      ),
+      new SelectedMedia(
+        tdMovies.interstellar,
         '',
         MediaType.Movie,
         1656633600,

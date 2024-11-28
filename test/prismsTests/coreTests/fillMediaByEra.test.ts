@@ -1,6 +1,6 @@
 import { BaseMedia } from '../../../src/models/mediaInterface';
 import * as core from '../../../src/prisms/core';
-import * as td from '../../testData/testData';
+import * as tdCommercials from '../../testData/commercials';
 
 describe('fillMediaByEra', () => {
   it('should return the media that have the tags (scenario 1)', () => {
@@ -23,16 +23,16 @@ describe('fillMediaByEra', () => {
   it('should return the media that have the tags (scenario 2)', () => {
     const alreadySelectedMedia: BaseMedia[] = [];
     const eraMedia: BaseMedia[] = [
-      td.beetlejuicetrailer1,
-      td.americanwerewolfinlondontrailer1,
+      tdCommercials.beetlejuicetrailer1,
+      tdCommercials.americanwerewolfinlondontrailer1,
     ];
-    const nonEraMedia: BaseMedia[] = [td.meninblacktoys97, td.alientrailer1];
+    const nonEraMedia: BaseMedia[] = [tdCommercials.meninblacktoys97, tdCommercials.alientrailer1];
 
     const duration: number = 0;
 
     const expectedMedia: BaseMedia[] = [
-      td.beetlejuicetrailer1,
-      td.americanwerewolfinlondontrailer1,
+      tdCommercials.beetlejuicetrailer1,
+      tdCommercials.americanwerewolfinlondontrailer1,
     ];
 
     const result: BaseMedia[] = core.fillMediaByEra(
@@ -46,17 +46,17 @@ describe('fillMediaByEra', () => {
   });
   it('should return the media that have the tags (scenario 3)', () => {
     const alreadySelectedMedia: BaseMedia[] = [
-      td.americanwerewolfinlondontrailer1,
+      tdCommercials.americanwerewolfinlondontrailer1,
     ];
     const eraMedia: BaseMedia[] = [
-      td.beetlejuicetrailer1,
-      td.americanwerewolfinlondontrailer1,
+      tdCommercials.beetlejuicetrailer1,
+      tdCommercials.americanwerewolfinlondontrailer1,
     ];
-    const nonEraMedia: BaseMedia[] = [td.meninblacktoys97, td.alientrailer1];
+    const nonEraMedia: BaseMedia[] = [tdCommercials.meninblacktoys97, tdCommercials.alientrailer1];
 
     const duration: number = 0;
 
-    const expectedMedia: BaseMedia[] = [td.beetlejuicetrailer1];
+    const expectedMedia: BaseMedia[] = [tdCommercials.beetlejuicetrailer1];
 
     const result: BaseMedia[] = core.fillMediaByEra(
       alreadySelectedMedia,
@@ -70,16 +70,16 @@ describe('fillMediaByEra', () => {
   it('should return the media that have the tags (scenario 4)', () => {
     const alreadySelectedMedia: BaseMedia[] = [];
     const eraMedia: BaseMedia[] = [
-      td.beetlejuicetrailer1,
-      td.americanwerewolfinlondontrailer1,
+      tdCommercials.beetlejuicetrailer1,
+      tdCommercials.americanwerewolfinlondontrailer1,
     ];
-    const nonEraMedia: BaseMedia[] = [td.meninblacktoys97, td.alientrailer1];
+    const nonEraMedia: BaseMedia[] = [tdCommercials.meninblacktoys97, tdCommercials.alientrailer1];
 
     const duration: number = 59;
 
     const expectedMedia: BaseMedia[] = [
-      td.beetlejuicetrailer1,
-      td.americanwerewolfinlondontrailer1,
+      tdCommercials.beetlejuicetrailer1,
+      tdCommercials.americanwerewolfinlondontrailer1,
     ];
 
     const result: BaseMedia[] = core.fillMediaByEra(
@@ -93,20 +93,20 @@ describe('fillMediaByEra', () => {
   });
   it('should return the media that have the tags (scenario 4)', () => {
     const alreadySelectedMedia: BaseMedia[] = [
-      td.americanwerewolfinlondontrailer1,
+      tdCommercials.americanwerewolfinlondontrailer1,
     ];
     const eraMedia: BaseMedia[] = [
-      td.beetlejuicetrailer1,
-      td.americanwerewolfinlondontrailer1,
+      tdCommercials.beetlejuicetrailer1,
+      tdCommercials.americanwerewolfinlondontrailer1,
     ];
-    const nonEraMedia: BaseMedia[] = [td.meninblacktoys97, td.alientrailer1];
+    const nonEraMedia: BaseMedia[] = [tdCommercials.meninblacktoys97, tdCommercials.alientrailer1];
 
     const duration: number = 59;
 
     const expectedMedia: BaseMedia[] = [
-      td.beetlejuicetrailer1,
-      td.meninblacktoys97,
-      td.alientrailer1,
+      tdCommercials.beetlejuicetrailer1,
+      tdCommercials.meninblacktoys97,
+      tdCommercials.alientrailer1,
     ];
 
     const result: BaseMedia[] = core.fillMediaByEra(
@@ -120,20 +120,20 @@ describe('fillMediaByEra', () => {
   });
   it('should return the media that have the tags (scenario 6)', () => {
     const alreadySelectedMedia: BaseMedia[] = [
-      td.americanwerewolfinlondontrailer1,
+      tdCommercials.americanwerewolfinlondontrailer1,
     ];
     const eraMedia: BaseMedia[] = [
-      td.beetlejuicetrailer1,
-      td.americanwerewolfinlondontrailer1,
+      tdCommercials.beetlejuicetrailer1,
+      tdCommercials.americanwerewolfinlondontrailer1,
     ];
-    const nonEraMedia: BaseMedia[] = [td.meninblacktoys97, td.alientrailer1];
+    const nonEraMedia: BaseMedia[] = [tdCommercials.meninblacktoys97, tdCommercials.alientrailer1];
 
     const duration: number = 61;
 
     const expectedMedia: BaseMedia[] = [
-      td.beetlejuicetrailer1,
-      td.meninblacktoys97,
-      td.alientrailer1,
+      tdCommercials.beetlejuicetrailer1,
+      tdCommercials.meninblacktoys97,
+      tdCommercials.alientrailer1,
     ];
 
     const result: BaseMedia[] = core.fillMediaByEra(

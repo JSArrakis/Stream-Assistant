@@ -5,7 +5,7 @@ import {
 } from '../../src/models/streamRequest';
 import { SelectedMedia } from '../../src/models/selectedMedia';
 import * as streamCon from '../../src/services/streamConstructor';
-import * as td from '../testData/testData';
+import * as tdMovies from '../testData/movies';
 import moment from 'moment';
 
 describe('evaluateStreamEndTime', () => {
@@ -22,11 +22,16 @@ describe('evaluateStreamEndTime', () => {
       1656647200,
     );
     const selected = [
-      new SelectedMedia(td.inception, '', MediaType.Movie, 1656547200, 9000, [
-        'scifi',
-      ]),
       new SelectedMedia(
-        td.interstellar,
+        tdMovies.inception,
+        '',
+        MediaType.Movie,
+        1656547200,
+        9000,
+        ['scifi'],
+      ),
+      new SelectedMedia(
+        tdMovies.interstellar,
         '',
         MediaType.Movie,
         1656633600,
@@ -53,12 +58,22 @@ describe('evaluateStreamEndTime', () => {
       0,
     );
     const selected = [
-      new SelectedMedia(td.inception, '', MediaType.Movie, 1656547200, 9000, [
-        'scifi',
-      ]),
-      new SelectedMedia(td.matrix, '', MediaType.Movie, 1656633600, 9000, [
-        'action',
-      ]),
+      new SelectedMedia(
+        tdMovies.inception,
+        '',
+        MediaType.Movie,
+        1656547200,
+        9000,
+        ['scifi'],
+      ),
+      new SelectedMedia(
+        tdMovies.matrix,
+        '',
+        MediaType.Movie,
+        1656633600,
+        9000,
+        ['action'],
+      ),
     ];
 
     const result = streamCon.evaluateStreamEndTime(adhocArgs, selected);

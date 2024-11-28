@@ -2,19 +2,29 @@ import { MediaType } from '../../src/models/enum/mediaTypes';
 import { SelectedMedia } from '../../src/models/selectedMedia';
 import * as streamCon from '../../src/services/streamConstructor';
 import { StagedMedia } from '../../src/models/stagedMedia';
-import * as td from '../testData/testData';
+import * as tdMovies from '../testData/movies';
 
 describe('getInitialProceduralTimepoint', () => {
   it('should return the start time of the first scheduled media', () => {
     const rightNow = 1656546397;
 
     const selected = [
-      new SelectedMedia(td.inception, '', MediaType.Movie, 1656547200, 9000, [
-        'scifi',
-      ]),
-      new SelectedMedia(td.matrix, '', MediaType.Movie, 1656633600, 10800, [
-        'action',
-      ]),
+      new SelectedMedia(
+        tdMovies.inception,
+        '',
+        MediaType.Movie,
+        1656547200,
+        9000,
+        ['scifi'],
+      ),
+      new SelectedMedia(
+        tdMovies.matrix,
+        '',
+        MediaType.Movie,
+        1656633600,
+        10800,
+        ['action'],
+      ),
     ];
 
     const stagedMedia = new StagedMedia(selected, [], 1656633600 + 10800);
@@ -48,12 +58,22 @@ describe('getInitialProceduralTimepoint', () => {
     const rightNow = 1656547201;
 
     const selected = [
-      new SelectedMedia(td.inception, '', MediaType.Movie, 1656547200, 9000, [
-        'scifi',
-      ]),
-      new SelectedMedia(td.matrix, '', MediaType.Movie, 1656633600, 10800, [
-        'action',
-      ]),
+      new SelectedMedia(
+        tdMovies.inception,
+        '',
+        MediaType.Movie,
+        1656547200,
+        9000,
+        ['scifi'],
+      ),
+      new SelectedMedia(
+        tdMovies.matrix,
+        '',
+        MediaType.Movie,
+        1656633600,
+        10800,
+        ['action'],
+      ),
     ];
 
     const stagedMedia = new StagedMedia(selected, [], 1656633600 + 10800);

@@ -4,15 +4,16 @@ import { BaseMedia } from '../../../src/models/mediaInterface';
 import { Music } from '../../../src/models/music';
 import { SegmentedTags } from '../../../src/models/segmentedTags';
 import { getMediaBySpecialtyOrMosaicHeriarchy } from '../../../src/prisms/mosaic';
-import * as td from '../../testData/testData';
+import * as tdMusic from '../../testData/music';
+import * as tdMosaics from '../../testData/mosaics';
 
 describe('getMediaBySpecialtyOrMosaicHeriarchy', () => {
   it('should return the media with the given tags (scenario 1)', () => {
     const alreadySelectedMedia: Music[] = [];
     const age = AgeGroups.AllAges;
-    const media: Music[] = td.music;
+    const media: Music[] = tdMusic.music;
     const segmentedTags: SegmentedTags = new SegmentedTags([], [], [], [], []);
-    const mosaics = td.mosaics;
+    const mosaics = tdMosaics.mosaics;
     const duration = 600;
 
     const expectedMedia: BaseMedia[] = [];
@@ -31,7 +32,7 @@ describe('getMediaBySpecialtyOrMosaicHeriarchy', () => {
   it('should return the media with the given tags (scenario 2)', () => {
     const alreadySelectedMedia: Music[] = [];
     const age = AgeGroups.AllAges;
-    const media: Music[] = td.nonHolidayMusic;
+    const media: Music[] = tdMusic.nonHolidayMusic;
     const segmentedTags: SegmentedTags = new SegmentedTags(
       [],
       [MainGenres.Action],
@@ -39,10 +40,10 @@ describe('getMediaBySpecialtyOrMosaicHeriarchy', () => {
       [],
       [],
     );
-    const mosaics = td.mosaics;
+    const mosaics = tdMosaics.mosaics;
     const duration = 500;
 
-    const expectedMedia: BaseMedia[] = [td.backinblack, td.comeandgetyourlove];
+    const expectedMedia: BaseMedia[] = [tdMusic.backinblack, tdMusic.comeandgetyourlove];
 
     const result = getMediaBySpecialtyOrMosaicHeriarchy(
       alreadySelectedMedia,
@@ -58,7 +59,7 @@ describe('getMediaBySpecialtyOrMosaicHeriarchy', () => {
   it('should return the media with the given tags (scenario 3)', () => {
     const alreadySelectedMedia: Music[] = [];
     const age = AgeGroups.AllAges;
-    const media: Music[] = td.nonHolidayMusic;
+    const media: Music[] = tdMusic.nonHolidayMusic;
     const segmentedTags: SegmentedTags = new SegmentedTags(
       [],
       [MainGenres.Action],
@@ -66,13 +67,13 @@ describe('getMediaBySpecialtyOrMosaicHeriarchy', () => {
       [],
       [],
     );
-    const mosaics = td.mosaics;
+    const mosaics = tdMosaics.mosaics;
     const duration = 600;
 
     const expectedMedia: BaseMedia[] = [
-      td.backinblack,
-      td.comeandgetyourlove,
-      td.ohhchild,
+      tdMusic.backinblack,
+      tdMusic.comeandgetyourlove,
+      tdMusic.ohhchild,
     ];
 
     const result = getMediaBySpecialtyOrMosaicHeriarchy(
@@ -89,7 +90,7 @@ describe('getMediaBySpecialtyOrMosaicHeriarchy', () => {
   it('should return the media with the given tags (scenario 4)', () => {
     const alreadySelectedMedia: Music[] = [];
     const age = AgeGroups.AllAges;
-    const media: Music[] = td.nonHolidayMusic;
+    const media: Music[] = tdMusic.nonHolidayMusic;
     const segmentedTags: SegmentedTags = new SegmentedTags(
       [],
       [MainGenres.Action],
@@ -97,10 +98,10 @@ describe('getMediaBySpecialtyOrMosaicHeriarchy', () => {
       [],
       [],
     );
-    const mosaics = td.mosaics;
+    const mosaics = tdMosaics.mosaics;
     const duration = 200;
 
-    const expectedMedia: BaseMedia[] = [td.backinblack];
+    const expectedMedia: BaseMedia[] = [tdMusic.backinblack];
 
     const result = getMediaBySpecialtyOrMosaicHeriarchy(
       alreadySelectedMedia,

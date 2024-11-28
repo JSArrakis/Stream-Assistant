@@ -3,12 +3,12 @@ import { Media } from '../../src/models/media';
 import { IStreamRequest } from '../../src/models/streamRequest';
 import { SelectedMedia } from '../../src/models/selectedMedia';
 import * as streamCon from '../../src/services/streamConstructor';
-import * as td from '../testData/testData';
+import * as tdMovies from '../testData/movies';
 
 describe('getInjectedMovies', () => {
   const media = new Media(
     [], // Shows
-    [td.inception, td.matrix, td.interstellar],
+    [tdMovies.inception, tdMovies.matrix, tdMovies.interstellar],
     [], // Shorts
     [], // Music
     [], // Promos
@@ -84,8 +84,10 @@ describe('getInjectedMovies', () => {
     };
 
     const expected = [
-      new SelectedMedia(td.inception, '', MediaType.Movie, 0, 9000, ['scifi']),
-      new SelectedMedia(td.interstellar, '', MediaType.Movie, 0, 10800, [
+      new SelectedMedia(tdMovies.inception, '', MediaType.Movie, 0, 9000, [
+        'scifi',
+      ]),
+      new SelectedMedia(tdMovies.interstellar, '', MediaType.Movie, 0, 10800, [
         'scifi',
       ]),
     ];

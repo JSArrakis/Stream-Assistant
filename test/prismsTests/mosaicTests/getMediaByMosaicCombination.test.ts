@@ -1,13 +1,14 @@
 import { Music } from '../../../src/models/music';
-import * as td from '../../testData/testData';
 import { BaseMedia } from '../../../src/models/mediaInterface';
 import { getMediaByMosaicCombination } from '../../../src/prisms/mosaic';
 import { AgeGroups } from '../../../src/models/const/ageGroups';
+import * as tdMusic from '../../testData/music';
+import * as tdMosaics from '../../testData/mosaics';
 
 describe('getMediaByMosaicCombination', () => {
   it('should return the media with the given tags (scenario 1)', () => {
     const alreadySelectedMedia: Music[] = [];
-    const media: Music[] = td.music;
+    const media: Music[] = tdMusic.music;
     const specialtyTags: string[] = [];
     const genreTags: string[] = [];
     const eraTags: string[] = [];
@@ -22,7 +23,7 @@ describe('getMediaByMosaicCombination', () => {
       specialtyTags,
       genreTags,
       eraTags,
-      td.mosaics,
+      tdMosaics.mosaics,
       age,
       duration,
     );
@@ -31,7 +32,7 @@ describe('getMediaByMosaicCombination', () => {
   });
   it('should return the media with the given tags (scenario 2)', () => {
     const alreadySelectedMedia: Music[] = [];
-    const media: Music[] = td.music;
+    const media: Music[] = tdMusic.music;
     const specialtyTags: string[] = ['christmas'];
     const genreTags: string[] = [];
     const eraTags: string[] = [];
@@ -46,7 +47,7 @@ describe('getMediaByMosaicCombination', () => {
       specialtyTags,
       genreTags,
       eraTags,
-      td.mosaics,
+      tdMosaics.mosaics,
       age,
       duration,
     );
