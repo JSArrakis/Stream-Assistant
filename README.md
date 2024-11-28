@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/images/kaleidoscope.png" alt="Kaleidoscope Logo" width="200"/>
+</p>
+
 # Kaleidoscope
 
 Kaleidoscope is a versatile media streaming assistant that allows you to create and manage playlists of your locally hosted media files. It supports streaming via platforms like Jellyfin or Plex and can create procedural streams using your media library.
