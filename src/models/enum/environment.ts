@@ -1,4 +1,4 @@
 export enum Env {
-    FC,
-    Default
+  FC,
+  Default,
 }

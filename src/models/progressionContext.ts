@@ -2,111 +2,123 @@ import mongoose, { Document, Model } from 'mongoose';
 import { StreamType } from './enum/streamTypes';
 
 export class ProgressionContext {
-    Title: string;
-    LoadTitle: string;
-    Environment: string;
-    Type: StreamType;
-    WatchRecords: WatchRecord[];
+  Title: string;
+  LoadTitle: string;
+  Environment: string;
+  Type: StreamType;
+  WatchRecords: WatchRecord[];
 
-    constructor(title: string, loadTitle: string, environment: string, type: StreamType, progressions: WatchRecord[]) {
-        this.Title = title;
-        this.LoadTitle = loadTitle;
-        this.Environment = environment;
-        this.Type = type;
-        this.WatchRecords = progressions;
-    }
+  constructor(
+    title: string,
+    loadTitle: string,
+    environment: string,
+    type: StreamType,
+    progressions: WatchRecord[],
+  ) {
+    this.Title = title;
+    this.LoadTitle = loadTitle;
+    this.Environment = environment;
+    this.Type = type;
+    this.WatchRecords = progressions;
+  }
 
-    static fromMongoObject(mongoObject: any): ProgressionContext {
-        return new ProgressionContext(
-            mongoObject.title,
-            mongoObject.loadTitle,
-            mongoObject.environment,
-            mongoObject.type,
-            mongoObject.progressions.map((progression: any) =>
-                WatchRecord.fromMongoObject(progression)
-            )
-        );
-    }
+  static fromMongoObject(mongoObject: any): ProgressionContext {
+    return new ProgressionContext(
+      mongoObject.title,
+      mongoObject.loadTitle,
+      mongoObject.environment,
+      mongoObject.type,
+      mongoObject.progressions.map((progression: any) =>
+        WatchRecord.fromMongoObject(progression),
+      ),
+    );
+  }
 
-    static toMongoObject(mediaProgression: ProgressionContext): any {
-        return {
-            title: mediaProgression.Title,
-            loadTitle: mediaProgression.LoadTitle,
-            environment: mediaProgression.Environment,
-            type: mediaProgression.Type,
-            episodes: mediaProgression.WatchRecords.map((progression: WatchRecord) =>
-                WatchRecord.toMongoObject(progression)
-            )
-        };
-    }
-
+  static toMongoObject(mediaProgression: ProgressionContext): any {
+    return {
+      title: mediaProgression.Title,
+      loadTitle: mediaProgression.LoadTitle,
+      environment: mediaProgression.Environment,
+      type: mediaProgression.Type,
+      episodes: mediaProgression.WatchRecords.map((progression: WatchRecord) =>
+        WatchRecord.toMongoObject(progression),
+      ),
+    };
+  }
 }
 
 export class WatchRecord {
-    Title: string;
-    LoadTitle: string;
-    Episode: number;
-    LastPlayed: number;
-    NextEpisodeDurLimit: number;
+  Title: string;
+  LoadTitle: string;
+  Episode: number;
+  LastPlayed: number;
+  NextEpisodeDurLimit: number;
 
-    constructor(title: string, loadTitle: string, episode: number, lastPlayed: number, nextEpisodeDurLimit: number) {
-        this.Title = title;
-        this.LoadTitle = loadTitle;
-        this.Episode = episode;
-        this.LastPlayed = lastPlayed;
-        this.NextEpisodeDurLimit = nextEpisodeDurLimit;
-    }
+  constructor(
+    title: string,
+    loadTitle: string,
+    episode: number,
+    lastPlayed: number,
+    nextEpisodeDurLimit: number,
+  ) {
+    this.Title = title;
+    this.LoadTitle = loadTitle;
+    this.Episode = episode;
+    this.LastPlayed = lastPlayed;
+    this.NextEpisodeDurLimit = nextEpisodeDurLimit;
+  }
 
-    static fromMongoObject(mongoObject: any): WatchRecord {
-        return new WatchRecord(
-            mongoObject.title,
-            mongoObject.loadTitle,
-            mongoObject.episode,
-            mongoObject.lastPlayed,
-            mongoObject.nextEpisodeDurLimit
-        );
-    }
+  static fromMongoObject(mongoObject: any): WatchRecord {
+    return new WatchRecord(
+      mongoObject.title,
+      mongoObject.loadTitle,
+      mongoObject.episode,
+      mongoObject.lastPlayed,
+      mongoObject.nextEpisodeDurLimit,
+    );
+  }
 
-    static toMongoObject(progression: WatchRecord): any {
-        return {
-            title: progression.Title,
-            loadTitle: progression.LoadTitle,
-            episode: progression.Episode,
-            lastPlayed: progression.LastPlayed,
-            nextEpisodeDurLimit: progression.NextEpisodeDurLimit
-        };
-    }
+  static toMongoObject(progression: WatchRecord): any {
+    return {
+      title: progression.Title,
+      loadTitle: progression.LoadTitle,
+      episode: progression.Episode,
+      lastPlayed: progression.LastPlayed,
+      nextEpisodeDurLimit: progression.NextEpisodeDurLimit,
+    };
+  }
 }
 
 export interface IWatchRecord {
-    Title: string;
-    LoadTitle: string;
-    Episode: number;
-    LastPlayed: number;
+  Title: string;
+  LoadTitle: string;
+  Episode: number;
+  LastPlayed: number;
 }
 
 export interface IProgressionContext extends Document {
-    Title: string;
-    LoadTitle: string;
-    Type: string;
-    Progressions: WatchRecord[]
+  Title: string;
+  LoadTitle: string;
+  Type: string;
+  Progressions: WatchRecord[];
 }
 
 export const WatchRecordSchema = new mongoose.Schema({
-    Title: String,
-    LoadTitle: String,
-    Episode: Number,
-    LastPlayed: Number
+  Title: String,
+  LoadTitle: String,
+  Episode: Number,
+  LastPlayed: Number,
 });
 
 export const ProgressionContextSchema = new mongoose.Schema({
-    Title: String,
-    LoadTitle: {
-        type: String,
-        index: true,
-    },
-    Type: String,
-    Progressions: [WatchRecordSchema]
+  Title: String,
+  LoadTitle: {
+    type: String,
+    index: true,
+  },
+  Type: String,
+  Progressions: [WatchRecordSchema],
 });
 
-export const ProgressionContextModel: Model<IProgressionContext> = mongoose.model<IProgressionContext>('Progression', ProgressionContextSchema);
+export const ProgressionContextModel: Model<IProgressionContext> =
+  mongoose.model<IProgressionContext>('Progression', ProgressionContextSchema);

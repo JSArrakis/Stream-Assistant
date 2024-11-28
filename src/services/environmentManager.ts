@@ -1,16 +1,16 @@
-import { EnvConfiguration } from "../models/envConfiguration";
+import { EnvConfiguration } from '../models/envConfiguration';
 
 let environmentConfiguration: EnvConfiguration;
 let environmentConfigList: EnvConfiguration[];
 
 export function LoadEnvConfigList(envConfigList: EnvConfiguration[]) {
-    environmentConfigList = envConfigList;
+  environmentConfigList = envConfigList;
 }
 
 export function SetEnvConfig(config: EnvConfiguration) {
-    environmentConfiguration = config;
+  environmentConfiguration = config;
 }
 
 export function GetEnvConfig(): EnvConfiguration {
-    return environmentConfiguration;
+  return environmentConfiguration;
 }

@@ -1,10 +1,10 @@
 export enum MediaType {
-    Show,
-    Movie,
-    Short,
-    Music,
-    Promo,
-    Commercial,
-    Collection,
-    Episode
+  Show,
+  Movie,
+  Short,
+  Music,
+  Promo,
+  Commercial,
+  Collection,
+  Episode,
 }
